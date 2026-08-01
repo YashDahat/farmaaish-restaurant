@@ -2,7 +2,8 @@ import { MenuItemDto } from '@/types/menu';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { Edit, Trash2 } from 'lucide-react';
-import { formatCurrency } from '@/lib/utils';
+const formatCurrency = (amount: number) =>
+  amount.toLocaleString('en-IN', { style: 'currency', currency: 'INR' });
 
 interface MenuTableProps {
   menuItems: MenuItemDto[];

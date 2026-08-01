@@ -1,7 +1,8 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { MenuItemDto } from '@/types/menu';
-import { useCart } from '@/hooks/useCart';
+import React from 'react';
+import { useCart } from '@/cart';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@/routes';
 
@@ -13,13 +14,12 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({ item }) => {
   const { addItem } = useCart();
 
   const handleAddToCart = () => {
-    if (item.id && item.name && item.price !== null && item.imageUrl) {
+    if (item.id && item.name && item.price !== null) {
       addItem({
         id: item.id,
         name: item.name,
         unitPrice: item.price,
-        imageUrl: item.imageUrl,
-        quantity: 1,
+        imageUrl: item.imageUrl ?? undefined,
       });
     }
   };

@@ -11,12 +11,6 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { CreateOrderRequest } from '@/types/order';
-
-interface DeliveryAddressFormProps {
-  onSubmit: (data: DeliveryAddressFormData) => void;
-  initialData?: DeliveryAddressFormData;
-}
 
 const deliveryAddressFormSchema = z.object({
   customerName: z.string().min(1, 'Customer name is required'),
@@ -25,10 +19,12 @@ const deliveryAddressFormSchema = z.object({
   deliveryAddress: z.string().min(1, 'Delivery address is required'),
 });
 
-export type DeliveryAddressFormData = Pick<
-  CreateOrderRequest,
-  'customerName' | 'customerEmail' | 'customerPhone' | 'deliveryAddress'
->;
+export type DeliveryAddressFormData = z.infer<typeof deliveryAddressFormSchema>;
+
+interface DeliveryAddressFormProps {
+  onSubmit: (data: DeliveryAddressFormData) => void;
+  initialData?: Partial<DeliveryAddressFormData>;
+}
 
 export function DeliveryAddressForm({
   onSubmit,
@@ -36,11 +32,11 @@ export function DeliveryAddressForm({
 }: DeliveryAddressFormProps) {
   const form = useForm<DeliveryAddressFormData>({
     resolver: zodResolver(deliveryAddressFormSchema),
-    defaultValues: initialData || {
-      customerName: '',
-      customerEmail: '',
-      customerPhone: '',
-      deliveryAddress: '',
+    defaultValues: {
+      customerName: initialData?.customerName ?? '',
+      customerEmail: initialData?.customerEmail ?? '',
+      customerPhone: initialData?.customerPhone ?? '',
+      deliveryAddress: initialData?.deliveryAddress ?? '',
     },
   });
 

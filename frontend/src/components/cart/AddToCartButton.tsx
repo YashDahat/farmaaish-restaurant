@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { MenuItemDto } from "@/types/menu";
-import { useCart } from "@/hooks/useCart";
+import { useCart } from "@/cart";
 import { toast } from "sonner";
 
 interface AddToCartButtonProps {
@@ -23,8 +23,7 @@ export function AddToCartButton({ item, quantity = 1 }: AddToCartButtonProps) {
       name: item.name,
       unitPrice: item.price,
       imageUrl: item.imageUrl ?? undefined,
-      quantity: quantity,
-    });
+    }, quantity);
     toast.success(`${quantity} x ${item.name} added to cart!`);
   };
 

@@ -12,7 +12,6 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useAuth } from '@/hooks/useAuth';
-import { AuthRequest } from '@/types/auth';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/routes';
@@ -22,11 +21,13 @@ const formSchema = z.object({
   password: z.string().min(1, { message: 'Password is required' }),
 });
 
+type FormValues = z.infer<typeof formSchema>;
+
 export const LoginForm = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const form = useForm<AuthRequest>({
+  const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       username: '',
@@ -34,9 +35,9 @@ export const LoginForm = () => {
     },
   });
 
-  const onSubmit = async (values: AuthRequest) => {
+  const onSubmit = async (values: FormValues) => {
     try {
-      await login(values);
+      await login({ username: values.username, password: values.password });
       toast.success('Login successful!');
       navigate(ROUTES.ADMIN_DASHBOARD);
     } catch (error: any) {

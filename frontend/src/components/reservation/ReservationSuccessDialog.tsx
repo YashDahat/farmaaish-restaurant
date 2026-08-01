@@ -9,8 +9,6 @@ import {
 import { Button } from '@/components/ui/button';
 import { ReservationResponse } from '@/types/reservation';
 import { Calendar, Clock, Users, User, Mail, Phone, Tag } from 'lucide-react';
-import { ROUTES } from '@/routes';
-import { Link } from 'react-router-dom';
 
 interface ReservationSuccessDialogProps {
   isOpen: boolean;

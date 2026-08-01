@@ -26,7 +26,7 @@ const PaymentComponent: React.FC<PaymentComponentProps> = ({ onPaymentSuccess })
     }
 
     const orderItems: OrderItemRequest[] = cartItems.map(item => ({
-      menuItemId: item.id,
+      menuItemId: String(item.id),
       quantity: item.quantity,
     }));
 

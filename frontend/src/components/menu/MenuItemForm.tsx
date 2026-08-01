@@ -34,16 +34,18 @@ const formSchema = z.object({
   description: z.string().optional(),
   price: z.coerce.number().min(0.01, 'Price must be greater than 0'),
   imageUrl: z.string().url('Invalid URL').optional().or(z.literal('')),
-  vegetarian: z.boolean().default(false),
-  spicy: z.boolean().default(false),
-  available: z.boolean().default(true),
+  vegetarian: z.boolean(),
+  spicy: z.boolean(),
+  available: z.boolean(),
   categoryId: z.string().min(1, 'Category is required'),
 });
+
+type MenuItemFormValues = z.infer<typeof formSchema>;
 
 export function MenuItemForm({ initialData, onSubmit, onCancel }: MenuItemFormProps) {
   const { categories, isLoading: isLoadingCategories } = useAllMenuItemCategories();
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<MenuItemFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: initialData?.name ?? '',
@@ -57,10 +59,17 @@ export function MenuItemForm({ initialData, onSubmit, onCancel }: MenuItemFormPr
     },
   });
 
-  const handleSubmit = (values: z.infer<typeof formSchema>) => {
+  const handleSubmit = (values: MenuItemFormValues) => {
+    const imageUrl = values.imageUrl === '' || values.imageUrl === undefined ? null : values.imageUrl;
     onSubmit({
-      ...values,
-      imageUrl: values.imageUrl === '' ? null : values.imageUrl,
+      name: values.name,
+      description: values.description ?? null,
+      price: values.price,
+      imageUrl,
+      vegetarian: values.vegetarian ?? false,
+      spicy: values.spicy ?? false,
+      available: values.available ?? true,
+      categoryId: values.categoryId,
     });
   };
 

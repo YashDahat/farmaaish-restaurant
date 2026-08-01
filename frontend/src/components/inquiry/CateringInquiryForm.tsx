@@ -19,6 +19,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
 import { CalendarIcon } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useInquiry } from '@/hooks/useInquiry';
 import type { CreateInquiryRequest } from '@/types/inquiry';
 
@@ -58,6 +59,7 @@ export const CateringInquiryForm = () => {
     const inquiryRequest: CreateInquiryRequest = {
       ...values,
       eventDate: format(values.eventDate, 'yyyy-MM-dd'),
+      specialRequests: values.specialRequests ?? null,
     };
     submitInquiry(inquiryRequest, {
       onSuccess: () => {
@@ -171,7 +173,6 @@ export const CateringInquiryForm = () => {
                         selected={field.value}
                         onSelect={field.onChange}
                         disabled={(date) => date < new Date('1900-01-01')}
-                        initialFocus
                         data-testid="inquiry-eventDate-calendar"
                       />
                     </PopoverContent>

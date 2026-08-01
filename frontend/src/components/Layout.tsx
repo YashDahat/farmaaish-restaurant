@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import WhatsAppCTA from './WhatsAppCTA';
+import WhatsAppCTA from './common/WhatsAppCTA';
 
 interface LayoutProps {
   children: React.ReactNode;

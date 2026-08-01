@@ -1,5 +1,5 @@
 import { PostDto } from '@/types/blog';
-import { PostCard } from './PostCard';
+import PostCard from './PostCard';
 
 interface PostListProps {
   posts: PostDto[];

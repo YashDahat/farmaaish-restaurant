@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout } from '@/components/Layout';
+import Layout from '@/components/Layout';
 import { DeliveryAddressForm, DeliveryAddressFormData } from '@/components/checkout/DeliveryAddressForm';
 import OrderSummary from '@/components/checkout/OrderSummary';
 import PaymentComponent from '@/components/checkout/PaymentComponent';
@@ -86,7 +86,7 @@ const CheckoutPage: React.FC = () => {
 
             {currentStep === 2 && (
               <div className="space-y-8">
-                <OrderSummary cartItems={cartItems} totals={totals} />
+                <OrderSummary cartItems={cartItems} totals={{ subtotal: totals.subtotal, adjustments: totals.adjustments.reduce((s, a) => s + a.amount, 0), total: totals.total }} />
                 <Card className="p-6 shadow-md">
                   <CardHeader>
                     <CardTitle className="text-2xl font-semibold">Delivery Information</CardTitle>

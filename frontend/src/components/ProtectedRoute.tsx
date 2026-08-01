@@ -9,13 +9,13 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute = ({ children, requiredRole }: ProtectedRouteProps) => {
-  const { isAuthenticated, userRole } = useAuth();
+  const { isAuthenticated, user } = useAuth();
 
   if (!isAuthenticated) {
     return <Navigate to={ROUTES.LOGIN} replace />;
   }
 
-  if (requiredRole && userRole !== requiredRole) {
+  if (requiredRole && user?.role !== requiredRole) {
     // Redirect to home or an unauthorized page if role doesn't match
     return <Navigate to={ROUTES.HOME} replace />;
   }

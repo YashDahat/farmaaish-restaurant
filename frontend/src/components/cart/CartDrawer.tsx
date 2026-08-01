@@ -1,12 +1,11 @@
-import { useState } from 'react';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetFooter, SheetClose } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter, SheetClose } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { ShoppingCart, XCircle } from 'lucide-react';
-import { useCart } from '@/context/CartContext';
+import { useCart } from '@/cart';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@/routes';
-import CartItem from './CartItem';
+import { CartItem } from './CartItem';
 
 interface CartDrawerProps {
   isOpen: boolean;

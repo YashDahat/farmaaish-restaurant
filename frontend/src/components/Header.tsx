@@ -3,12 +3,14 @@ import { Menu, X, ShoppingCart } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Separator } from '@/components/ui/separator';
 import { ROUTES } from '@/routes';
 import { useAuth } from '@/hooks/useAuth';
-import { CartDrawer } from './CartDrawer'; // Assuming CartDrawer is in the same components folder
+import CartDrawer from './cart/CartDrawer';
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const { isAuthenticated, logout, user } = useAuth();
 
   const navLinks = [
@@ -46,7 +48,7 @@ const Header = () => {
               {link.name}
             </Link>
           ))}
-          {isAuthenticated && user?.roles?.includes('ADMIN') && (
+          {isAuthenticated && user?.role === 'ADMIN' && (
             <Link to={ROUTES.ADMIN_DASHBOARD} className="hover:text-[#D4AF37] transition-all duration-200" data-testid="nav-admin-dashboard-link">
               Admin
             </Link>
@@ -65,20 +67,16 @@ const Header = () => {
               Login
             </Link>
           )}
-          <CartDrawer>
-            <Button variant="ghost" size="icon" className="text-white hover:text-[#D4AF37]" data-testid="cart-button">
-              <ShoppingCart className="h-6 w-6" />
-            </Button>
-          </CartDrawer>
+          <Button variant="ghost" size="icon" className="text-white hover:text-[#D4AF37]" data-testid="cart-button" onClick={() => setIsCartOpen(true)}>
+            <ShoppingCart className="h-6 w-6" />
+          </Button>
         </nav>
 
         {/* Mobile Navigation */}
         <div className="md:hidden flex items-center space-x-4">
-          <CartDrawer>
-            <Button variant="ghost" size="icon" className="text-white hover:text-[#D4AF37]" data-testid="cart-button-mobile">
-              <ShoppingCart className="h-6 w-6" />
-            </Button>
-          </CartDrawer>
+          <Button variant="ghost" size="icon" className="text-white hover:text-[#D4AF37]" data-testid="cart-button-mobile" onClick={() => setIsCartOpen(true)}>
+            <ShoppingCart className="h-6 w-6" />
+          </Button>
           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="text-white" data-testid="mobile-menu-button">
@@ -98,7 +96,7 @@ const Header = () => {
                     {link.name}
                   </Link>
                 ))}
-                {isAuthenticated && user?.roles?.includes('ADMIN') && (
+                {isAuthenticated && user?.role === 'ADMIN' && (
                   <>
                     <Separator className="bg-gray-600" />
                     <span className="text-gray-400 text-sm">Admin Links</span>
@@ -135,6 +133,8 @@ const Header = () => {
           </Sheet>
         </div>
       </div>
+
+      <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </header>
   );
 };

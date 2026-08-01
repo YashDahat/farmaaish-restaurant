@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -22,7 +21,6 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Calendar } from '@/components/ui/calendar';
 import { useCreateReservation } from '@/hooks/useReservations';
 import { CreateReservationRequest, ReservationResponse } from '@/types/reservation';
-import ReservationSuccessDialog from './ReservationSuccessDialog';
 
 const formSchema = z.object({
   customerName: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
@@ -61,7 +59,7 @@ const ReservationForm = ({ onReservationSuccess }: ReservationFormProps) => {
       reservationDate: format(values.reservationDate, 'yyyy-MM-dd'),
       reservationTime: values.reservationTime,
       partySize: values.partySize,
-      specialRequests: values.specialRequests,
+      specialRequests: values.specialRequests ?? null,
     };
 
     createReservation(request, {
@@ -152,7 +150,6 @@ const ReservationForm = ({ onReservationSuccess }: ReservationFormProps) => {
                     selected={field.value}
                     onSelect={field.onChange}
                     disabled={(date) => date < new Date() || date < new Date('1900-01-01')}
-                    initialFocus
                   />
                 </PopoverContent>
               </Popover>

@@ -7,7 +7,7 @@ import {
   updateInquiryStatus,
 } from '@/services/inquiryService';
 import type { InquiryResponse, InquiryStatus, UpdateInquiryStatusRequest } from '@/types/inquiry';
-import { AdminLayout } from '@/components/AdminLayout';
+import AdminLayout from '@/components/AdminLayout';
 import {
   Table,
   TableHeader,

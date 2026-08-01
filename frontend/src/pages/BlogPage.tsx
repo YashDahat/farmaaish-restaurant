@@ -1,7 +1,8 @@
-import { Layout } from '@/components/Layout';
+import Layout from '@/components/Layout';
 import { PostList } from '@/components/blog/PostList';
 import { useAllPosts } from '@/hooks/useBlog';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Card } from '@/components/ui/card';
 
 const BlogPage = () => {
   const { data: posts, isLoading, isError, error } = useAllPosts();
