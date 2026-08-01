@@ -1316,14 +1316,38 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Represents a blog post, including title, content, author, and publication date.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the blog post. Primary key."
+    }, {
+      "name" : "title",
+      "type" : "String",
+      "description" : "Title of the blog post. Not null, max 255 characters."
+    }, {
+      "name" : "content",
+      "type" : "String",
+      "description" : "Full content of the blog post. Not null, stored as TEXT."
+    }, {
+      "name" : "author",
+      "type" : "String",
+      "description" : "Author of the blog post. Not null, max 100 characters."
+    }, {
+      "name" : "publicationDate",
+      "type" : "LocalDate",
+      "description" : "Date when the blog post was published. Not null."
+    }, {
+      "name" : "imageUrl",
+      "type" : "String",
+      "description" : "URL of the main image for the blog post. Nullable, max 255 characters."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "blog-management",
-    "file_role" : null,
+    "file_role" : "JPA Entity — represents a blog post in the database.",
     "change_required" : null
   }, {
     "file_name" : "BlogPostRepository.java",
@@ -1334,14 +1358,14 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Spring Data JPA repository for CRUD operations on BlogPost entities.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/model/BlogPost.java" ],
     "depends_on" : [ ],
     "feature_name" : "blog-management",
-    "file_role" : null,
+    "file_role" : "Spring Data JPA Repository — provides standard CRUD operations for BlogPost entities.",
     "change_required" : null
   }, {
     "file_name" : "BlogPostService.java",
@@ -1352,14 +1376,39 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Contains business logic for managing blog posts.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "getAllBlogPosts",
+      "parameters" : [ ],
+      "return_type" : "List<BlogPostDto>",
+      "description" : "Retrieves all blog posts, ordered by publication date descending."
+    }, {
+      "name" : "getBlogPostById",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "BlogPostDto",
+      "description" : "Retrieves a single blog post by its ID, throwing ResourceNotFoundException if not found."
+    }, {
+      "name" : "createBlogPost",
+      "parameters" : [ "BlogPostDto blogPostDto" ],
+      "return_type" : "BlogPostDto",
+      "description" : "Creates a new blog post from the provided DTO."
+    }, {
+      "name" : "updateBlogPost",
+      "parameters" : [ "UUID id", "BlogPostDto blogPostDto" ],
+      "return_type" : "BlogPostDto",
+      "description" : "Updates an existing blog post identified by ID with the provided DTO, throwing ResourceNotFoundException if not found."
+    }, {
+      "name" : "deleteBlogPost",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "void",
+      "description" : "Deletes a blog post by its ID, throwing ResourceNotFoundException if not found."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/repository/BlogPostRepository.java", "backend/src/main/java/com/farmaaishrestaurant/dto/BlogPostDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "blog-management",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — implements getAllBlogPosts(): List<BlogPostDto>, getBlogPostById(UUID): BlogPostDto, createBlogPost(BlogPostDto): BlogPostDto, updateBlogPost(UUID, BlogPostDto): BlogPostDto, and deleteBlogPost(UUID): void; delegates persistence to BlogPostRepository.",
     "change_required" : null
   }, {
     "file_name" : "BlogPostDto.java",
@@ -1370,14 +1419,38 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Data Transfer Object for blog posts for API communication.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the blog post."
+    }, {
+      "name" : "title",
+      "type" : "String",
+      "description" : "Title of the blog post. Not null, not empty."
+    }, {
+      "name" : "content",
+      "type" : "String",
+      "description" : "Full content of the blog post. Not null, not empty."
+    }, {
+      "name" : "author",
+      "type" : "String",
+      "description" : "Author of the blog post. Not null, not empty."
+    }, {
+      "name" : "publicationDate",
+      "type" : "LocalDate",
+      "description" : "Date when the blog post was published."
+    }, {
+      "name" : "imageUrl",
+      "type" : "String",
+      "description" : "URL of the main image for the blog post. Nullable."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "blog-management",
-    "file_role" : null,
+    "file_role" : "Data Transfer Object — used for API communication of blog post data.",
     "change_required" : null
   }, {
     "file_name" : "BlogController.java",
@@ -1388,14 +1461,38 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Public REST controller for fetching blog posts.",
-    "public_functions" : null,
-    "public_variables" : null,
-    "api_endpoints" : null,
+    "public_functions" : [ {
+      "name" : "getAllBlogPosts",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<List<BlogPostDto>>",
+      "description" : "Retrieves all blog posts."
+    }, {
+      "name" : "getBlogPostById",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "ResponseEntity<BlogPostDto>",
+      "description" : "Retrieves a single blog post by its ID."
+    } ],
+    "public_variables" : [ ],
+    "api_endpoints" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/blog",
+      "request_body" : null,
+      "response_body" : "List<BlogPostDto>",
+      "description" : "Get all blog posts.",
+      "access" : "public"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/blog/{id}",
+      "request_body" : null,
+      "response_body" : "BlogPostDto",
+      "description" : "Get a blog post by ID.",
+      "access" : "public"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/service/BlogPostService.java" ],
     "depends_on" : [ ],
     "feature_name" : "blog-management",
-    "file_role" : null,
+    "file_role" : "Public REST Controller — exposes endpoints for fetching blog posts for public display.",
     "change_required" : null
   }, {
     "file_name" : "AdminBlogController.java",
@@ -1406,14 +1503,74 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Admin-only REST controller for CRUD operations on blog posts.",
-    "public_functions" : null,
-    "public_variables" : null,
-    "api_endpoints" : null,
+    "public_functions" : [ {
+      "name" : "getAllBlogPosts",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<List<BlogPostDto>>",
+      "description" : "Retrieves all blog posts for admin view."
+    }, {
+      "name" : "getBlogPostById",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "ResponseEntity<BlogPostDto>",
+      "description" : "Retrieves a single blog post by its ID for admin view."
+    }, {
+      "name" : "createBlogPost",
+      "parameters" : [ "BlogPostDto blogPostDto" ],
+      "return_type" : "ResponseEntity<BlogPostDto>",
+      "description" : "Creates a new blog post."
+    }, {
+      "name" : "updateBlogPost",
+      "parameters" : [ "UUID id", "BlogPostDto blogPostDto" ],
+      "return_type" : "ResponseEntity<BlogPostDto>",
+      "description" : "Updates an existing blog post by ID."
+    }, {
+      "name" : "deleteBlogPost",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "ResponseEntity<Void>",
+      "description" : "Deletes a blog post by ID."
+    } ],
+    "public_variables" : [ ],
+    "api_endpoints" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/admin/blog",
+      "request_body" : null,
+      "response_body" : "List<BlogPostDto>",
+      "description" : "Get all blog posts for admin.",
+      "access" : "admin"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/admin/blog/{id}",
+      "request_body" : null,
+      "response_body" : "BlogPostDto",
+      "description" : "Get a blog post by ID for admin.",
+      "access" : "admin"
+    }, {
+      "method" : "POST",
+      "path" : "/api/v1/admin/blog",
+      "request_body" : "BlogPostDto",
+      "response_body" : "BlogPostDto",
+      "description" : "Create a new blog post.",
+      "access" : "admin"
+    }, {
+      "method" : "PUT",
+      "path" : "/api/v1/admin/blog/{id}",
+      "request_body" : "BlogPostDto",
+      "response_body" : "BlogPostDto",
+      "description" : "Update an existing blog post by ID.",
+      "access" : "admin"
+    }, {
+      "method" : "DELETE",
+      "path" : "/api/v1/admin/blog/{id}",
+      "request_body" : null,
+      "response_body" : "void",
+      "description" : "Delete a blog post by ID.",
+      "access" : "admin"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/service/BlogPostService.java" ],
     "depends_on" : [ ],
     "feature_name" : "blog-management",
-    "file_role" : null,
+    "file_role" : "Admin REST Controller — exposes endpoints for CRUD operations on blog posts, requiring admin authentication.",
     "change_required" : null
   }, {
     "file_name" : "CateringInquiry.java",
@@ -3446,8 +3603,8 @@
     "feature_display_name" : "Blog Management (Backend)",
     "feature_type" : "BACKEND",
     "file_paths" : [ "backend/src/main/java/com/farmaaishrestaurant/model/BlogPost.java", "backend/src/main/java/com/farmaaishrestaurant/repository/BlogPostRepository.java", "backend/src/main/java/com/farmaaishrestaurant/service/BlogPostService.java", "backend/src/main/java/com/farmaaishrestaurant/dto/BlogPostDto.java", "backend/src/main/java/com/farmaaishrestaurant/controller/BlogController.java", "backend/src/main/java/com/farmaaishrestaurant/controller/AdminBlogController.java" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "The Blog Management feature provides a complete backend solution for creating, managing, and serving blog posts for Farmaaish Restaurant. It consists of a `BlogPost` entity for persistence, a `BlogPostRepository` for database interactions, a `BlogPostService` for business logic, a `BlogPostDto` for data transfer, and two controllers: `BlogController` for public access to blog posts and `AdminBlogController` for administrative CRUD operations. This feature is designed to be consumed by the `blog-ui` frontend feature.\n\n### Data Model and DTO\n\n- **BlogPost.java**: This JPA entity represents a single blog post. It includes fields for `id` (UUID, primary key), `title` (String, not null, max 255 characters), `content` (String, not null, stored as TEXT), `author` (String, not null, max 100 characters), `publicationDate` (LocalDate, not null), and `imageUrl` (String, nullable, max 255 characters).\n- **BlogPostDto.java**: This DTO mirrors the `BlogPost` entity but is used for all API communication. It contains `id` (UUID), `title` (String), `content` (String), `author` (String), `publicationDate` (LocalDate), and `imageUrl` (String). It includes validation annotations for `title`, `content`, and `author` to ensure they are not null or empty.\n\n### Persistence Layer\n\n- **BlogPostRepository.java**: This interface extends `JpaRepository<BlogPost, UUID>`, providing standard CRUD operations. No custom methods are required as the service layer will handle all necessary queries using the default methods provided by Spring Data JPA.\n\n### Service Layer\n\n- **BlogPostService.java**: This service class encapsulates the core business logic for blog posts. It injects `BlogPostRepository` to interact with the database. All methods in this service operate on `BlogPostDto` objects, converting them to `BlogPost` entities for persistence and back to DTOs for returning to the controllers.\n  - `getAllBlogPosts()`: Returns `List<BlogPostDto>`. Fetches all blog posts from the repository, orders them by `publicationDate` in descending order, and converts them to DTOs.\n  - `getBlogPostById(UUID id)`: Returns `BlogPostDto`. Fetches a single blog post by its ID. If the blog post is not found, it throws a `ResourceNotFoundException`.\n  - `createBlogPost(BlogPostDto blogPostDto)`: Returns `BlogPostDto`. Creates a new blog post. It takes a `BlogPostDto`, converts it to a `BlogPost` entity, sets the `publicationDate` to the current date, saves it via the repository, and returns the saved entity as a DTO.\n  - `updateBlogPost(UUID id, BlogPostDto blogPostDto)`: Returns `BlogPostDto`. Updates an existing blog post. It first retrieves the existing blog post by ID, throws `ResourceNotFoundException` if not found, updates its fields from the provided `blogPostDto`, saves the updated entity, and returns it as a DTO. The `id` and `publicationDate` fields are not updated from the DTO.\n  - `deleteBlogPost(UUID id)`: Returns `void`. Deletes a blog post by its ID. It first checks if the blog post exists, throwing `ResourceNotFoundException` if not found, then deletes it.\n\n### Controller Layer\n\n- **BlogController.java**: This REST controller handles public-facing requests for blog posts. It injects `BlogPostService`.\n  - `getAllBlogPosts()`: `GET /api/v1/blog`. Returns `ResponseEntity<List<BlogPostDto>>`. Calls `blogPostService.getAllBlogPosts()` and returns the list of DTOs with HTTP status 200 OK.\n  - `getBlogPostById(UUID id)`: `GET /api/v1/blog/{id}`. Returns `ResponseEntity<BlogPostDto>`. Calls `blogPostService.getBlogPostById(id)`. If `ResourceNotFoundException` is thrown, it will be handled by the `GlobalExceptionHandler` (from `shared-backend`) which returns a 404 Not Found response. Otherwise, returns the DTO with HTTP status 200 OK.\n\n- **AdminBlogController.java**: This REST controller handles administrative requests for blog posts, requiring authentication and admin privileges. It injects `BlogPostService`.\n  - `getAllBlogPosts()`: `GET /api/v1/admin/blog`. Returns `ResponseEntity<List<BlogPostDto>>`. Calls `blogPostService.getAllBlogPosts()` and returns the list of DTOs with HTTP status 200 OK.\n  - `getBlogPostById(UUID id)`: `GET /api/v1/admin/blog/{id}`. Returns `ResponseEntity<BlogPostDto>`. Calls `blogPostService.getBlogPostById(id)`. Handles `ResourceNotFoundException` via `GlobalExceptionHandler`.\n  - `createBlogPost(BlogPostDto blogPostDto)`: `POST /api/v1/admin/blog`. Returns `ResponseEntity<BlogPostDto>`. Takes a `@Valid` `BlogPostDto` in the request body, calls `blogPostService.createBlogPost()`, and returns the created DTO with HTTP status 201 Created.\n  - `updateBlogPost(UUID id, BlogPostDto blogPostDto)`: `PUT /api/v1/admin/blog/{id}`. Returns `ResponseEntity<BlogPostDto>`. Takes a `@Valid` `BlogPostDto` in the request body, calls `blogPostService.updateBlogPost(id, blogPostDto)`. Handles `ResourceNotFoundException` via `GlobalExceptionHandler`. Returns the updated DTO with HTTP status 200 OK.\n  - `deleteBlogPost(UUID id)`: `DELETE /api/v1/admin/blog/{id}`. Returns `ResponseEntity<Void>`. Calls `blogPostService.deleteBlogPost(id)`. Handles `ResourceNotFoundException` via `GlobalExceptionHandler`. Returns HTTP status 204 No Content on successful deletion.",
+    "depends_on_features" : [ ],
     "change_required" : true,
     "change_instruction" : null
   }, {
