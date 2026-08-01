@@ -1582,13 +1582,61 @@
     "status" : "PLANNED",
     "description" : "Represents a customer inquiry for catering or private events.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the inquiry. Not null."
+    }, {
+      "name" : "customerName",
+      "type" : "String",
+      "description" : "Name of the customer. Not null, max 100 characters."
+    }, {
+      "name" : "customerEmail",
+      "type" : "String",
+      "description" : "Email of the customer. Not null, valid email format, max 100 characters."
+    }, {
+      "name" : "customerPhone",
+      "type" : "String",
+      "description" : "Phone number of the customer. Not null, max 20 characters."
+    }, {
+      "name" : "eventType",
+      "type" : "String",
+      "description" : "Type of event (e.g., 'Wedding', 'Corporate', 'Birthday'). Not null, max 100 characters."
+    }, {
+      "name" : "eventDate",
+      "type" : "LocalDate",
+      "description" : "Date of the event. Not null."
+    }, {
+      "name" : "numberOfGuests",
+      "type" : "Integer",
+      "description" : "Estimated number of guests. Not null, min 1."
+    }, {
+      "name" : "budget",
+      "type" : "BigDecimal",
+      "description" : "Estimated budget for the event. Optional, decimal(10,2)."
+    }, {
+      "name" : "message",
+      "type" : "String",
+      "description" : "Additional message or details from the customer. Optional, max 1000 characters."
+    }, {
+      "name" : "inquiryStatus",
+      "type" : "InquiryStatus",
+      "description" : "Current status of the inquiry (NEW, CONTACTED, CLOSED). Not null."
+    }, {
+      "name" : "createdAt",
+      "type" : "LocalDateTime",
+      "description" : "Timestamp when the inquiry was created. Not null."
+    }, {
+      "name" : "updatedAt",
+      "type" : "LocalDateTime",
+      "description" : "Timestamp when the inquiry was last updated. Not null."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/model/InquiryStatus.java" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-management",
-    "file_role" : null,
+    "file_role" : "MODEL layer — defines the entity structure for catering inquiries, including its status.",
     "change_required" : null
   }, {
     "file_name" : "InquiryStatus.java",
@@ -1600,13 +1648,25 @@
     "status" : "PLANNED",
     "description" : "Enum for the status of an inquiry (e.g., NEW, CONTACTED, CLOSED).",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "NEW",
+      "type" : "InquiryStatus",
+      "description" : "Initial status for a newly submitted inquiry."
+    }, {
+      "name" : "CONTACTED",
+      "type" : "InquiryStatus",
+      "description" : "Status indicating the customer has been contacted."
+    }, {
+      "name" : "CLOSED",
+      "type" : "InquiryStatus",
+      "description" : "Status indicating the inquiry process is complete."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-management",
-    "file_role" : null,
+    "file_role" : "MODEL layer — defines an enum for the possible states of a catering inquiry.",
     "change_required" : null
   }, {
     "file_name" : "CateringInquiryRepository.java",
@@ -1617,14 +1677,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Spring Data JPA repository for CRUD operations on CateringInquiry entities.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "findByInquiryStatus",
+      "parameters" : [ "InquiryStatus status" ],
+      "return_type" : "List<CateringInquiry>",
+      "description" : "Retrieves a list of catering inquiries filtered by their status."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/model/CateringInquiry.java" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-management",
-    "file_role" : null,
+    "file_role" : "REPOSITORY layer — provides data access operations for `CateringInquiry` entities, including `findByInquiryStatus(InquiryStatus status)`.",
     "change_required" : null
   }, {
     "file_name" : "CateringInquiryService.java",
@@ -1635,14 +1700,44 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Handles business logic for managing catering inquiries, including sending email notifications.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "submitInquiry",
+      "parameters" : [ "CateringInquiryDto inquiryDto" ],
+      "return_type" : "CateringInquiryDto",
+      "description" : "Submits a new catering inquiry, sets its initial status to NEW, and persists it."
+    }, {
+      "name" : "getAllInquiries",
+      "parameters" : [ ],
+      "return_type" : "List<CateringInquiryDto>",
+      "description" : "Retrieves all catering inquiries."
+    }, {
+      "name" : "getInquiryById",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "CateringInquiryDto",
+      "description" : "Retrieves a catering inquiry by its unique identifier."
+    }, {
+      "name" : "getInquiriesByStatus",
+      "parameters" : [ "InquiryStatus status" ],
+      "return_type" : "List<CateringInquiryDto>",
+      "description" : "Retrieves catering inquiries filtered by their status."
+    }, {
+      "name" : "updateInquiryStatus",
+      "parameters" : [ "UUID id", "InquiryStatus newStatus" ],
+      "return_type" : "CateringInquiryDto",
+      "description" : "Updates the status of an existing catering inquiry."
+    }, {
+      "name" : "deleteInquiry",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "void",
+      "description" : "Deletes a catering inquiry by its unique identifier."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/repository/CateringInquiryRepository.java", "backend/src/main/java/com/farmaaishrestaurant/dto/CateringInquiryDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-management",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — implements `submitInquiry(CateringInquiryDto)`, `getAllInquiries()`, `getInquiryById(UUID)`, `getInquiriesByStatus(InquiryStatus)`, `updateInquiryStatus(UUID, InquiryStatus)`, and `deleteInquiry(UUID)` for catering inquiries.",
     "change_required" : null
   }, {
     "file_name" : "CateringInquiryDto.java",
@@ -1654,13 +1749,61 @@
     "status" : "PLANNED",
     "description" : "Data Transfer Object for catering inquiries.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the inquiry. Read-only for responses."
+    }, {
+      "name" : "customerName",
+      "type" : "String",
+      "description" : "Name of the customer. @NotNull, @Size(max = 100)."
+    }, {
+      "name" : "customerEmail",
+      "type" : "String",
+      "description" : "Email of the customer. @NotNull, @Email, @Size(max = 100)."
+    }, {
+      "name" : "customerPhone",
+      "type" : "String",
+      "description" : "Phone number of the customer. @NotNull, @Size(max = 20)."
+    }, {
+      "name" : "eventType",
+      "type" : "String",
+      "description" : "Type of event (e.g., 'Wedding', 'Corporate', 'Birthday'). @NotNull, @Size(max = 100)."
+    }, {
+      "name" : "eventDate",
+      "type" : "LocalDate",
+      "description" : "Date of the event. @NotNull, @FutureOrPresent."
+    }, {
+      "name" : "numberOfGuests",
+      "type" : "Integer",
+      "description" : "Estimated number of guests. @NotNull, @Min(1)."
+    }, {
+      "name" : "budget",
+      "type" : "BigDecimal",
+      "description" : "Estimated budget for the event. Optional."
+    }, {
+      "name" : "message",
+      "type" : "String",
+      "description" : "Additional message or details from the customer. @Size(max = 1000)."
+    }, {
+      "name" : "inquiryStatus",
+      "type" : "InquiryStatus",
+      "description" : "Current status of the inquiry (NEW, CONTACTED, CLOSED). Read-only for responses."
+    }, {
+      "name" : "createdAt",
+      "type" : "LocalDateTime",
+      "description" : "Timestamp when the inquiry was created. Read-only for responses."
+    }, {
+      "name" : "updatedAt",
+      "type" : "LocalDateTime",
+      "description" : "Timestamp when the inquiry was last updated. Read-only for responses."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-management",
-    "file_role" : null,
+    "file_role" : "DTO layer — defines the data transfer object for catering inquiries.",
     "change_required" : null
   }, {
     "file_name" : "CateringInquiryController.java",
@@ -1671,14 +1814,26 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Public REST controller for submitting catering inquiries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "submitCateringInquiry",
+      "parameters" : [ "@Valid @RequestBody CateringInquiryDto inquiryDto" ],
+      "return_type" : "ResponseEntity<CateringInquiryDto>",
+      "description" : "Handles POST requests to submit a new catering inquiry."
+    } ],
     "public_variables" : null,
-    "api_endpoints" : null,
+    "api_endpoints" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/inquiries/catering",
+      "request_body" : "CateringInquiryDto",
+      "response_body" : "CateringInquiryDto",
+      "description" : "Submits a new catering inquiry from a customer.",
+      "access" : "public"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/service/CateringInquiryService.java" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-management",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — exposes a public endpoint for customers to submit catering inquiries via `submitCateringInquiry(CateringInquiryDto)`.",
     "change_required" : null
   }, {
     "file_name" : "AdminCateringInquiryController.java",
@@ -1689,14 +1844,74 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Admin-only REST controller for viewing and managing catering inquiries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getAllCateringInquiries",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<List<CateringInquiryDto>>",
+      "description" : "Handles GET requests to retrieve all catering inquiries."
+    }, {
+      "name" : "getCateringInquiryById",
+      "parameters" : [ "@PathVariable UUID id" ],
+      "return_type" : "ResponseEntity<CateringInquiryDto>",
+      "description" : "Handles GET requests to retrieve a specific catering inquiry by ID."
+    }, {
+      "name" : "getCateringInquiriesByStatus",
+      "parameters" : [ "@RequestParam InquiryStatus status" ],
+      "return_type" : "ResponseEntity<List<CateringInquiryDto>>",
+      "description" : "Handles GET requests to retrieve catering inquiries filtered by status."
+    }, {
+      "name" : "updateCateringInquiryStatus",
+      "parameters" : [ "@PathVariable UUID id", "@RequestParam InquiryStatus newStatus" ],
+      "return_type" : "ResponseEntity<CateringInquiryDto>",
+      "description" : "Handles PUT requests to update the status of a catering inquiry."
+    }, {
+      "name" : "deleteCateringInquiry",
+      "parameters" : [ "@PathVariable UUID id" ],
+      "return_type" : "ResponseEntity<Void>",
+      "description" : "Handles DELETE requests to remove a catering inquiry by ID."
+    } ],
     "public_variables" : null,
-    "api_endpoints" : null,
+    "api_endpoints" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/admin/inquiries/catering",
+      "request_body" : null,
+      "response_body" : "List<CateringInquiryDto>",
+      "description" : "Retrieves all catering inquiries for administrative review.",
+      "access" : "admin"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/admin/inquiries/catering/{id}",
+      "request_body" : null,
+      "response_body" : "CateringInquiryDto",
+      "description" : "Retrieves a specific catering inquiry by its ID for administrative review.",
+      "access" : "admin"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/admin/inquiries/catering/status/{status}",
+      "request_body" : null,
+      "response_body" : "List<CateringInquiryDto>",
+      "description" : "Retrieves catering inquiries filtered by their status for administrative review.",
+      "access" : "admin"
+    }, {
+      "method" : "PUT",
+      "path" : "/api/v1/admin/inquiries/catering/{id}/status",
+      "request_body" : null,
+      "response_body" : "CateringInquiryDto",
+      "description" : "Updates the status of a specific catering inquiry.",
+      "access" : "admin"
+    }, {
+      "method" : "DELETE",
+      "path" : "/api/v1/admin/inquiries/catering/{id}",
+      "request_body" : null,
+      "response_body" : "void",
+      "description" : "Deletes a specific catering inquiry by its ID.",
+      "access" : "admin"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/service/CateringInquiryService.java" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-management",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — exposes admin-only endpoints for managing catering inquiries, including `getAllCateringInquiries()`, `getCateringInquiryById(UUID)`, `getCateringInquiriesByStatus(InquiryStatus)`, `updateCateringInquiryStatus(UUID, InquiryStatus)`, and `deleteCateringInquiry(UUID)`.",
     "change_required" : null
   }, {
     "file_name" : "Testimonial.java",
@@ -3612,8 +3827,8 @@
     "feature_display_name" : "Inquiry Management (Backend)",
     "feature_type" : "BACKEND",
     "file_paths" : [ "backend/src/main/java/com/farmaaishrestaurant/model/CateringInquiry.java", "backend/src/main/java/com/farmaaishrestaurant/model/InquiryStatus.java", "backend/src/main/java/com/farmaaishrestaurant/repository/CateringInquiryRepository.java", "backend/src/main/java/com/farmaaishrestaurant/service/CateringInquiryService.java", "backend/src/main/java/com/farmaaishrestaurant/dto/CateringInquiryDto.java", "backend/src/main/java/com/farmaaishrestaurant/controller/CateringInquiryController.java", "backend/src/main/java/com/farmaaishrestaurant/controller/AdminCateringInquiryController.java" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "The Inquiry Management feature provides a backend system for Farmaaish Restaurant to handle customer inquiries for catering and private events. It includes models for storing inquiry details and their status, a repository for data access, a service layer for business logic (including creating inquiries and updating their status), and two controllers: one public-facing for submitting new inquiries and one admin-only for managing existing inquiries.\n\n### Data Models\n- `CateringInquiry.java`: Represents a catering inquiry with fields like `id`, `customerName`, `customerEmail`, `customerPhone`, `eventType`, `eventDate`, `numberOfGuests`, `budget`, `message`, `inquiryStatus`, `createdAt`, and `updatedAt`. The `inquiryStatus` field will be an `InquiryStatus` enum.\n- `InquiryStatus.java`: An enum defining the possible states of a catering inquiry: `NEW`, `CONTACTED`, `CLOSED`.\n\n### Data Transfer Object\n- `CateringInquiryDto.java`: A DTO used for transferring catering inquiry data between the service layer and controllers. It mirrors the fields of `CateringInquiry` but omits `createdAt` and `updatedAt` for creation/update requests, and includes them for responses.\n\n### Persistence Layer\n- `CateringInquiryRepository.java`: Extends `JpaRepository` to provide standard CRUD operations for `CateringInquiry` entities. It will also include custom query methods to find inquiries by status.\n\n### Service Layer\n- `CateringInquiryService.java`: This service orchestrates the business logic for catering inquiries. It injects `CateringInquiryRepository`.\n  - `submitInquiry(CateringInquiryDto inquiryDto)`: \n    1. Validates the incoming `inquiryDto`.\n    2. Maps the `CateringInquiryDto` to a `CateringInquiry` entity.\n    3. Sets the initial `inquiryStatus` to `NEW` and `createdAt`/`updatedAt` timestamps.\n    4. Saves the `CateringInquiry` entity using `CateringInquiryRepository.save()`.\n    5. Maps the saved entity back to a `CateringInquiryDto` and returns it.\n    6. Throws `IllegalArgumentException` if `inquiryDto` is invalid.\n  - `getAllInquiries()`: \n    1. Retrieves all `CateringInquiry` entities from `CateringInquiryRepository.findAll()`.\n    2. Maps the entities to a `List<CateringInquiryDto>` and returns it.\n  - `getInquiryById(UUID id)`: \n    1. Retrieves a `CateringInquiry` entity by `id` from `CateringInquiryRepository.findById(id)`.\n    2. If not found, throws `ResourceNotFoundException`.\n    3. Maps the entity to a `CateringInquiryDto` and returns it.\n  - `getInquiriesByStatus(InquiryStatus status)`: \n    1. Retrieves `CateringInquiry` entities by `status` from `CateringInquiryRepository.findByInquiryStatus(status)`.\n    2. Maps the entities to a `List<CateringInquiryDto>` and returns it.\n  - `updateInquiryStatus(UUID id, InquiryStatus newStatus)`: \n    1. Retrieves the `CateringInquiry` entity by `id` from `CateringInquiryRepository.findById(id)`.\n    2. If not found, throws `ResourceNotFoundException`.\n    3. Updates the `inquiryStatus` to `newStatus` and `updatedAt` timestamp.\n    4. Saves the updated entity using `CateringInquiryRepository.save()`.\n    5. Maps the updated entity back to a `CateringInquiryDto` and returns it.\n    6. Throws `IllegalArgumentException` if `newStatus` is null.\n  - `deleteInquiry(UUID id)`: \n    1. Retrieves the `CateringInquiry` entity by `id` from `CateringInquiryRepository.findById(id)`.\n    2. If not found, throws `ResourceNotFoundException`.\n    3. Deletes the entity using `CateringInquiryRepository.deleteById(id)`.\n\n### Controllers\n- `CateringInquiryController.java`: This public controller handles requests from customers to submit catering inquiries. It injects `CateringInquiryService`.\n  - `submitCateringInquiry(@RequestBody CateringInquiryDto inquiryDto)`: \n    1. Calls `cateringInquiryService.submitInquiry(inquiryDto)`.\n    2. Returns a `201 Created` response with the created `CateringInquiryDto`.\n    3. Handles `IllegalArgumentException` by returning `400 Bad Request`.\n- `AdminCateringInquiryController.java`: This admin-only controller provides endpoints for managing catering inquiries. It injects `CateringInquiryService`.\n  - `getAllCateringInquiries()`: \n    1. Calls `cateringInquiryService.getAllInquiries()`.\n    2. Returns a `200 OK` response with a `List<CateringInquiryDto>`.\n  - `getCateringInquiryById(UUID id)`: \n    1. Calls `cateringInquiryService.getInquiryById(id)`.\n    2. Returns a `200 OK` response with the `CateringInquiryDto`.\n    3. Handles `ResourceNotFoundException` by returning `404 Not Found`.\n  - `getCateringInquiriesByStatus(InquiryStatus status)`: \n    1. Calls `cateringInquiryService.getInquiriesByStatus(status)`.\n    2. Returns a `200 OK` response with a `List<CateringInquiryDto>`.\n  - `updateCateringInquiryStatus(UUID id, InquiryStatus newStatus)`: \n    1. Calls `cateringInquiryService.updateInquiryStatus(id, newStatus)`.\n    2. Returns a `200 OK` response with the updated `CateringInquiryDto`.\n    3. Handles `ResourceNotFoundException` by returning `404 Not Found`.\n    4. Handles `IllegalArgumentException` by returning `400 Bad Request`.\n  - `deleteCateringInquiry(UUID id)`: \n    1. Calls `cateringInquiryService.deleteInquiry(id)`.\n    2. Returns a `204 No Content` response.\n    3. Handles `ResourceNotFoundException` by returning `404 Not Found`.",
+    "depends_on_features" : [ "shared-backend" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
