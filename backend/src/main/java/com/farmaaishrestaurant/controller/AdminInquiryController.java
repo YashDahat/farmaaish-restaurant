@@ -1,6 +1,7 @@
 package com.farmaaishrestaurant.controller;
 
 import com.farmaaishrestaurant.dto.InquiryResponse;
+import com.farmaaishrestaurant.dto.UpdateInquiryStatusRequest;
 import com.farmaaishrestaurant.model.InquiryStatus;
 import com.farmaaishrestaurant.service.InquiryService;
 import org.springframework.http.HttpStatus;
