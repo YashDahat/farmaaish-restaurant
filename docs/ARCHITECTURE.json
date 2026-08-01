@@ -1087,8 +1087,8 @@
     "file_type" : "BACKEND",
     "layer" : "DTO",
     "created_date" : "2024-07-30",
-    "updated_date" : "2024-07-30",
-    "status" : "PLANNED",
+    "updated_date" : "2026-08-01",
+    "status" : "GENERATED",
     "description" : "Record representing a single item within a new order request.",
     "public_functions" : null,
     "public_variables" : [ {
@@ -1167,8 +1167,8 @@
     "file_type" : "BACKEND",
     "layer" : "DTO",
     "created_date" : "2024-07-30",
-    "updated_date" : "2024-07-30",
-    "status" : "PLANNED",
+    "updated_date" : "2026-08-01",
+    "status" : "GENERATED",
     "description" : "Record representing a single item within an order response.",
     "public_functions" : null,
     "public_variables" : [ {
