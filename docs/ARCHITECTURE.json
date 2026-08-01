@@ -1735,14 +1735,62 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Represents a customer inquiry for catering or private events.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the inquiry. Not null."
+    }, {
+      "name" : "customerName",
+      "type" : "String",
+      "description" : "Name of the customer. Not null, max 255 characters."
+    }, {
+      "name" : "customerEmail",
+      "type" : "String",
+      "description" : "Email of the customer. Not null, max 255 characters."
+    }, {
+      "name" : "customerPhone",
+      "type" : "String",
+      "description" : "Phone number of the customer. Not null, max 20 characters."
+    }, {
+      "name" : "eventType",
+      "type" : "String",
+      "description" : "Type of event (e.g., 'Catering', 'Private Dining'). Not null, max 100 characters."
+    }, {
+      "name" : "eventDate",
+      "type" : "LocalDate",
+      "description" : "Date of the event. Not null."
+    }, {
+      "name" : "numberOfGuests",
+      "type" : "Integer",
+      "description" : "Estimated number of guests. Not null, min 1."
+    }, {
+      "name" : "budget",
+      "type" : "BigDecimal",
+      "description" : "Estimated budget for the event. Optional, decimal(10,2)."
+    }, {
+      "name" : "specialRequests",
+      "type" : "String",
+      "description" : "Any special requests or notes from the customer. Optional, max 1000 characters."
+    }, {
+      "name" : "status",
+      "type" : "InquiryStatus",
+      "description" : "Current status of the inquiry (NEW, CONTACTED, CLOSED). Not null."
+    }, {
+      "name" : "createdAt",
+      "type" : "LocalDateTime",
+      "description" : "Timestamp when the inquiry was created. Not null."
+    }, {
+      "name" : "updatedAt",
+      "type" : "LocalDateTime",
+      "description" : "Timestamp when the inquiry was last updated. Not null."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/model/InquiryStatus.java" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-system",
-    "file_role" : null,
+    "file_role" : "MODEL layer — represents a customer inquiry with details for catering or private events, including its current status.",
     "change_required" : null
   }, {
     "file_name" : "InquiryStatus.java",
@@ -1753,14 +1801,26 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Enum defining the possible statuses of an inquiry (e.g., NEW, CONTACTED, CLOSED).",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "NEW",
+      "type" : "InquiryStatus",
+      "description" : "Initial status for a newly submitted inquiry."
+    }, {
+      "name" : "CONTACTED",
+      "type" : "InquiryStatus",
+      "description" : "Status indicating the restaurant has contacted the customer."
+    }, {
+      "name" : "CLOSED",
+      "type" : "InquiryStatus",
+      "description" : "Status indicating the inquiry has been resolved or closed."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-system",
-    "file_role" : null,
+    "file_role" : "MODEL layer — an enum defining the possible lifecycle statuses for a customer inquiry.",
     "change_required" : null
   }, {
     "file_name" : "InquiryRepository.java",
@@ -1771,14 +1831,34 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Spring Data JPA repository for CRUD operations on Inquiry entities.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "findById",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "Optional<Inquiry>",
+      "description" : "Retrieves an inquiry by its unique identifier."
+    }, {
+      "name" : "findAll",
+      "parameters" : [ ],
+      "return_type" : "List<Inquiry>",
+      "description" : "Retrieves all inquiries."
+    }, {
+      "name" : "save",
+      "parameters" : [ "Inquiry inquiry" ],
+      "return_type" : "Inquiry",
+      "description" : "Saves a new inquiry or updates an existing one."
+    }, {
+      "name" : "deleteById",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "void",
+      "description" : "Deletes an inquiry by its unique identifier."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/model/Inquiry.java" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-system",
-    "file_role" : null,
+    "file_role" : "REPOSITORY layer — provides standard CRUD operations for `Inquiry` entities.",
     "change_required" : null
   }, {
     "file_name" : "InquiryService.java",
@@ -1789,14 +1869,34 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Handles business logic for submitting and managing catering inquiries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "createInquiry",
+      "parameters" : [ "CreateInquiryRequest request" ],
+      "return_type" : "InquiryResponse",
+      "description" : "Creates a new inquiry from the provided request, sets its status to NEW, and persists it."
+    }, {
+      "name" : "getAllInquiries",
+      "parameters" : [ ],
+      "return_type" : "List<InquiryResponse>",
+      "description" : "Retrieves all inquiries, ordered by creation date."
+    }, {
+      "name" : "getInquiryById",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "InquiryResponse",
+      "description" : "Retrieves a single inquiry by its ID. Throws ResourceNotFoundException if not found."
+    }, {
+      "name" : "updateInquiryStatus",
+      "parameters" : [ "UUID id", "InquiryStatus newStatus" ],
+      "return_type" : "InquiryResponse",
+      "description" : "Updates the status of an existing inquiry. Throws ResourceNotFoundException if not found."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/repository/InquiryRepository.java" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-system",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — implements business logic for `Inquiry` entities, including `createInquiry(CreateInquiryRequest): InquiryResponse`, `getAllInquiries(): List<InquiryResponse>`, `getInquiryById(UUID): InquiryResponse`, and `updateInquiryStatus(UUID, InquiryStatus): InquiryResponse`.",
     "change_required" : null
   }, {
     "file_name" : "InquiryController.java",
@@ -1807,14 +1907,26 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Public-facing REST API endpoint for submitting a new catering or event inquiry.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "submitInquiry",
+      "parameters" : [ "CreateInquiryRequest request" ],
+      "return_type" : "ResponseEntity<InquiryResponse>",
+      "description" : "Handles POST requests to create a new customer inquiry."
+    } ],
     "public_variables" : null,
-    "api_endpoints" : null,
+    "api_endpoints" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/inquiries",
+      "request_body" : "CreateInquiryRequest",
+      "response_body" : "InquiryResponse",
+      "description" : "Submits a new catering or private event inquiry from a customer.",
+      "access" : "public"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/service/InquiryService.java", "backend/src/main/java/com/farmaaishrestaurant/dto/CreateInquiryRequest.java" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-system",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — exposes a public API endpoint for customers to submit new inquiries.",
     "change_required" : null
   }, {
     "file_name" : "AdminInquiryController.java",
@@ -1825,14 +1937,50 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Admin-only REST API endpoints for viewing and managing all customer inquiries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getAllInquiries",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<List<InquiryResponse>>",
+      "description" : "Handles GET requests to retrieve all customer inquiries."
+    }, {
+      "name" : "getInquiryById",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "ResponseEntity<InquiryResponse>",
+      "description" : "Handles GET requests to retrieve a specific inquiry by ID."
+    }, {
+      "name" : "updateInquiryStatus",
+      "parameters" : [ "UUID id", "UpdateInquiryStatusRequest request" ],
+      "return_type" : "ResponseEntity<InquiryResponse>",
+      "description" : "Handles PUT requests to update the status of an inquiry."
+    } ],
     "public_variables" : null,
-    "api_endpoints" : null,
+    "api_endpoints" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/admin/inquiries",
+      "request_body" : null,
+      "response_body" : "List<InquiryResponse>",
+      "description" : "Retrieves a list of all customer inquiries.",
+      "access" : "admin"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/admin/inquiries/{id}",
+      "request_body" : null,
+      "response_body" : "InquiryResponse",
+      "description" : "Retrieves a specific customer inquiry by its ID.",
+      "access" : "admin"
+    }, {
+      "method" : "PUT",
+      "path" : "/api/v1/admin/inquiries/{id}/status",
+      "request_body" : "UpdateInquiryStatusRequest",
+      "response_body" : "InquiryResponse",
+      "description" : "Updates the status of a specific customer inquiry.",
+      "access" : "admin"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/service/InquiryService.java", "backend/src/main/java/com/farmaaishrestaurant/dto/InquiryResponse.java" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-system",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — exposes admin-only API endpoints for viewing and managing customer inquiries.",
     "change_required" : null
   }, {
     "file_name" : "CreateInquiryRequest.java",
@@ -1843,14 +1991,46 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Data Transfer Object for capturing customer input for a new inquiry.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "customerName",
+      "type" : "String",
+      "description" : "Name of the customer. Not null, min 2, max 255 characters."
+    }, {
+      "name" : "customerEmail",
+      "type" : "String",
+      "description" : "Email of the customer. Not null, valid email format, max 255 characters."
+    }, {
+      "name" : "customerPhone",
+      "type" : "String",
+      "description" : "Phone number of the customer. Not null, min 10, max 20 characters."
+    }, {
+      "name" : "eventType",
+      "type" : "String",
+      "description" : "Type of event (e.g., 'Catering', 'Private Dining'). Not null, min 2, max 100 characters."
+    }, {
+      "name" : "eventDate",
+      "type" : "LocalDate",
+      "description" : "Date of the event. Not null, must be in the future."
+    }, {
+      "name" : "numberOfGuests",
+      "type" : "Integer",
+      "description" : "Estimated number of guests. Not null, min 1, max 1000."
+    }, {
+      "name" : "budget",
+      "type" : "BigDecimal",
+      "description" : "Estimated budget for the event. Optional, min 0."
+    }, {
+      "name" : "specialRequests",
+      "type" : "String",
+      "description" : "Any special requests or notes from the customer. Optional, max 1000 characters."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-system",
-    "file_role" : null,
+    "file_role" : "DTO layer — defines the data structure for incoming requests to create a new inquiry.",
     "change_required" : null
   }, {
     "file_name" : "InquiryResponse.java",
@@ -1861,14 +2041,62 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Data Transfer Object for representing an inquiry in API responses.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the inquiry."
+    }, {
+      "name" : "customerName",
+      "type" : "String",
+      "description" : "Name of the customer."
+    }, {
+      "name" : "customerEmail",
+      "type" : "String",
+      "description" : "Email of the customer."
+    }, {
+      "name" : "customerPhone",
+      "type" : "String",
+      "description" : "Phone number of the customer."
+    }, {
+      "name" : "eventType",
+      "type" : "String",
+      "description" : "Type of event."
+    }, {
+      "name" : "eventDate",
+      "type" : "LocalDate",
+      "description" : "Date of the event."
+    }, {
+      "name" : "numberOfGuests",
+      "type" : "Integer",
+      "description" : "Estimated number of guests."
+    }, {
+      "name" : "budget",
+      "type" : "BigDecimal",
+      "description" : "Estimated budget for the event."
+    }, {
+      "name" : "specialRequests",
+      "type" : "String",
+      "description" : "Any special requests or notes from the customer."
+    }, {
+      "name" : "status",
+      "type" : "InquiryStatus",
+      "description" : "Current status of the inquiry."
+    }, {
+      "name" : "createdAt",
+      "type" : "LocalDateTime",
+      "description" : "Timestamp when the inquiry was created."
+    }, {
+      "name" : "updatedAt",
+      "type" : "LocalDateTime",
+      "description" : "Timestamp when the inquiry was last updated."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-system",
-    "file_role" : null,
+    "file_role" : "DTO layer — defines the data structure for inquiry details returned in API responses.",
     "change_required" : null
   }, {
     "file_name" : "Post.java",
@@ -3514,8 +3742,8 @@
     "feature_display_name" : "Inquiry System (Backend)",
     "feature_type" : "BACKEND",
     "file_paths" : [ "backend/src/main/java/com/farmaaishrestaurant/model/Inquiry.java", "backend/src/main/java/com/farmaaishrestaurant/model/InquiryStatus.java", "backend/src/main/java/com/farmaaishrestaurant/repository/InquiryRepository.java", "backend/src/main/java/com/farmaaishrestaurant/service/InquiryService.java", "backend/src/main/java/com/farmaaishrestaurant/controller/InquiryController.java", "backend/src/main/java/com/farmaaishrestaurant/controller/AdminInquiryController.java", "backend/src/main/java/com/farmaaishrestaurant/dto/CreateInquiryRequest.java", "backend/src/main/java/com/farmaaishrestaurant/dto/InquiryResponse.java" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "The Inquiry System (Backend) feature provides the API and business logic for customers to submit catering or private event inquiries, and for administrators to manage these inquiries. It consists of the `Inquiry` entity and `InquiryStatus` enum, a Spring Data JPA `InquiryRepository`, an `InquiryService` for business logic, and two controllers: `InquiryController` for public inquiry submission and `AdminInquiryController` for administrative management.\n\n### Inquiry Submission Flow\n1.  A customer fills out an inquiry form on the frontend (handled by the `inquiry-form` feature).\n2.  The frontend sends a POST request to `/api/v1/inquiries` with a `CreateInquiryRequest` body.\n3.  `InquiryController.submitInquiry(CreateInquiryRequest request)` receives the request.\n4.  The controller calls `inquiryService.createInquiry(request)`.\n5.  `InquiryService.createInquiry(CreateInquiryRequest request)`:\n    a.  Maps the `CreateInquiryRequest` to an `Inquiry` entity.\n    b.  Sets the `status` of the new `Inquiry` to `InquiryStatus.NEW`.\n    c.  Sets `createdAt` and `updatedAt` timestamps.\n    d.  Calls `inquiryRepository.save(inquiry)` to persist the new inquiry.\n    e.  Maps the saved `Inquiry` entity to an `InquiryResponse` DTO.\n    f.  Returns the `InquiryResponse`.\n6.  The `InquiryController` returns a `ResponseEntity` with `HttpStatus.CREATED` and the `InquiryResponse`.\n\n### Admin Inquiry Management Flow\n1.  An administrator accesses the admin portal (handled by the `admin-portal` feature).\n2.  To view all inquiries, the frontend sends a GET request to `/api/v1/admin/inquiries`.\n3.  `AdminInquiryController.getAllInquiries()`:\n    a.  Calls `inquiryService.getAllInquiries()`.\n    b.  `InquiryService.getAllInquiries()` retrieves all `Inquiry` entities from `inquiryRepository.findAll()`.\n    c.  Maps each `Inquiry` to an `InquiryResponse`.\n    d.  Returns a `List<InquiryResponse>`.\n    e.  The controller returns a `ResponseEntity` with `HttpStatus.OK` and the list of `InquiryResponse` DTOs.\n4.  To view a specific inquiry, the frontend sends a GET request to `/api/v1/admin/inquiries/{id}`.\n5.  `AdminInquiryController.getInquiryById(UUID id)`:\n    a.  Calls `inquiryService.getInquiryById(id)`.\n    b.  `InquiryService.getInquiryById(UUID id)`:\n        i.   Calls `inquiryRepository.findById(id)`.\n        ii.  If the inquiry is not found, throws `ResourceNotFoundException`.\n        iii. Maps the found `Inquiry` to an `InquiryResponse`.\n        iv.  Returns the `InquiryResponse`.\n    c.  The controller returns a `ResponseEntity` with `HttpStatus.OK` and the `InquiryResponse`.\n    d.  If `ResourceNotFoundException` is thrown, the `GlobalExceptionHandler` (from `shared-backend`) will catch it and return `HttpStatus.NOT_FOUND`.\n6.  To update an inquiry's status, the frontend sends a PUT request to `/api/v1/admin/inquiries/{id}/status` with an `UpdateInquiryStatusRequest` body.\n7.  `AdminInquiryController.updateInquiryStatus(UUID id, UpdateInquiryStatusRequest request)`:\n    a.  Calls `inquiryService.updateInquiryStatus(id, request.getStatus())`.\n    b.  `InquiryService.updateInquiryStatus(UUID id, InquiryStatus newStatus)`:\n        i.   Calls `inquiryRepository.findById(id)`.\n        ii.  If the inquiry is not found, throws `ResourceNotFoundException`.\n        iii. Updates the `status` of the found `Inquiry` entity.\n        iv.  Sets the `updatedAt` timestamp.\n        v.   Calls `inquiryRepository.save(inquiry)`.\n        vi.  Maps the updated `Inquiry` to an `InquiryResponse`.\n        vii. Returns the `InquiryResponse`.\n    c.  The controller returns a `ResponseEntity` with `HttpStatus.OK` and the `InquiryResponse`.\n    d.  If `ResourceNotFoundException` is thrown, the `GlobalExceptionHandler` will catch it and return `HttpStatus.NOT_FOUND`.\n\n### Data Models\n-   `Inquiry`: Represents the core entity for an inquiry, storing details like customer name, contact, event details, and status.\n-   `InquiryStatus`: An enum defining the lifecycle states of an inquiry (e.g., NEW, CONTACTED, CLOSED).\n-   `CreateInquiryRequest`: DTO for public inquiry submission, containing all necessary fields for a new inquiry.\n-   `InquiryResponse`: DTO for returning inquiry details in API responses.\n-   `UpdateInquiryStatusRequest`: DTO for updating an inquiry's status by administrators.",
+    "depends_on_features" : [ "shared-backend" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
