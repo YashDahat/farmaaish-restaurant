@@ -5,5 +5,6 @@ public enum MenuItemCategory {
     MAIN_COURSE,
     DESSERT,
     BEVERAGE,
-    SPECIAL
+    SPECIAL,
+    BREAD
 }

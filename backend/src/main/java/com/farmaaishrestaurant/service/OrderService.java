@@ -100,7 +100,7 @@ public class OrderService {
                 .menuItemId(orderItem.getMenuItemId())
                 .name(orderItem.getName())
                 .quantity(orderItem.getQuantity())
-                .price(orderItem.getPrice())
+                .unitPrice(orderItem.getPrice())
                 .build();
     }
 }
