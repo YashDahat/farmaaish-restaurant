@@ -1250,14 +1250,38 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Public-facing REST API endpoints for creating orders and viewing order history.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "createOrder",
+      "parameters" : [ "CreateOrderRequest request" ],
+      "return_type" : "ResponseEntity<OrderResponse>",
+      "description" : "Creates a new order for the authenticated customer. Delegates to OrderService.createOrder(). Returns 201 Created on success."
+    }, {
+      "name" : "getOrdersByCustomerEmail",
+      "parameters" : [ "String customerEmail" ],
+      "return_type" : "ResponseEntity<List<OrderResponse>>",
+      "description" : "Retrieves all orders for a specific customer email. Delegates to OrderService.getOrdersByCustomerEmail(). Returns 200 OK."
+    } ],
     "public_variables" : null,
-    "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/orders",
+      "request_body" : "CreateOrderRequest",
+      "response_body" : "OrderResponse",
+      "description" : "Creates a new order.",
+      "access" : "authenticated"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/orders/customer/{customerEmail}",
+      "request_body" : null,
+      "response_body" : "List<OrderResponse>",
+      "description" : "Retrieves all orders for a specific customer email.",
+      "access" : "authenticated"
+    } ],
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/service/OrderService.java", "backend/src/main/java/com/farmaaishrestaurant/dto/CreateOrderRequest.java", "backend/src/main/java/com/farmaaishrestaurant/dto/OrderResponse.java" ],
     "depends_on" : [ ],
     "feature_name" : "order-api",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — exposes public-facing REST API endpoints for creating orders via `createOrder(CreateOrderRequest)` and retrieving customer order history via `getOrdersByCustomerEmail(String customerEmail)`.",
     "change_required" : null
   }, {
     "file_name" : "AdminOrderController.java",
@@ -1268,14 +1292,50 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Admin-only REST API endpoints for viewing and managing all customer orders.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getAllOrders",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<List<OrderResponse>>",
+      "description" : "Retrieves all orders. Delegates to OrderService.getAllOrders(). Returns 200 OK."
+    }, {
+      "name" : "getOrderById",
+      "parameters" : [ "UUID orderId" ],
+      "return_type" : "ResponseEntity<OrderResponse>",
+      "description" : "Retrieves a specific order by its ID. Delegates to OrderService.getOrderById(). Returns 200 OK or 404 Not Found if the order does not exist."
+    }, {
+      "name" : "updateOrderStatus",
+      "parameters" : [ "UUID orderId", "OrderStatus newStatus" ],
+      "return_type" : "ResponseEntity<OrderResponse>",
+      "description" : "Updates the status of a specific order. Delegates to OrderService.updateOrderStatus(). Returns 200 OK or 404 Not Found if the order does not exist."
+    } ],
     "public_variables" : null,
-    "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/admin/orders",
+      "request_body" : null,
+      "response_body" : "List<OrderResponse>",
+      "description" : "Retrieves all orders.",
+      "access" : "admin"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/admin/orders/{orderId}",
+      "request_body" : null,
+      "response_body" : "OrderResponse",
+      "description" : "Retrieves a specific order by ID.",
+      "access" : "admin"
+    }, {
+      "method" : "PUT",
+      "path" : "/api/v1/admin/orders/{orderId}/status",
+      "request_body" : "OrderStatus",
+      "response_body" : "OrderResponse",
+      "description" : "Updates the status of a specific order.",
+      "access" : "admin"
+    } ],
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/service/OrderService.java", "backend/src/main/java/com/farmaaishrestaurant/dto/OrderResponse.java" ],
     "depends_on" : [ ],
     "feature_name" : "order-api",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — exposes admin-only REST API endpoints for viewing all orders via `getAllOrders()`, retrieving a specific order via `getOrderById(UUID orderId)`, and updating order status via `updateOrderStatus(UUID orderId, OrderStatus newStatus)`.",
     "change_required" : null
   }, {
     "file_name" : "CreateOrderRequest.java",
@@ -1287,13 +1347,33 @@
     "status" : "PLANNED",
     "description" : "Data Transfer Object for creating a new online order.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "customerName",
+      "type" : "String",
+      "description" : "Name of the customer. Not null, max 100 characters."
+    }, {
+      "name" : "customerEmail",
+      "type" : "String",
+      "description" : "Email of the customer. Not null, valid email format, max 100 characters."
+    }, {
+      "name" : "customerPhone",
+      "type" : "String",
+      "description" : "Phone number of the customer. Not null, max 20 characters."
+    }, {
+      "name" : "deliveryAddress",
+      "type" : "String",
+      "description" : "Delivery address for the order. Not null, max 255 characters."
+    }, {
+      "name" : "orderItems",
+      "type" : "List<OrderItemRequest>",
+      "description" : "List of items included in the order. Not null, must contain at least one item."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/dto/OrderItemRequest.java" ],
     "depends_on" : [ ],
     "feature_name" : "order-api",
-    "file_role" : null,
+    "file_role" : "DTO layer — defines the data structure for requests to create a new order, including customer details, delivery information, and a list of `OrderItemRequest` objects.",
     "change_required" : null
   }, {
     "file_name" : "OrderItemRequest.java",
@@ -1305,13 +1385,21 @@
     "status" : "PLANNED",
     "description" : "Data Transfer Object representing a single item within a CreateOrderRequest.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "menuItemId",
+      "type" : "UUID",
+      "description" : "ID of the menu item. Not null."
+    }, {
+      "name" : "quantity",
+      "type" : "Integer",
+      "description" : "Quantity of the menu item. Not null, must be at least 1."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "order-api",
-    "file_role" : null,
+    "file_role" : "DTO layer — defines the data structure for a single item within an order creation request, specifying the menu item and its quantity.",
     "change_required" : null
   }, {
     "file_name" : "OrderResponse.java",
@@ -1323,13 +1411,57 @@
     "status" : "PLANNED",
     "description" : "Data Transfer Object for representing a full order in API responses.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier of the order."
+    }, {
+      "name" : "customerName",
+      "type" : "String",
+      "description" : "Name of the customer."
+    }, {
+      "name" : "customerEmail",
+      "type" : "String",
+      "description" : "Email of the customer."
+    }, {
+      "name" : "customerPhone",
+      "type" : "String",
+      "description" : "Phone number of the customer."
+    }, {
+      "name" : "deliveryAddress",
+      "type" : "String",
+      "description" : "Delivery address for the order."
+    }, {
+      "name" : "totalAmount",
+      "type" : "BigDecimal",
+      "description" : "Total amount of the order."
+    }, {
+      "name" : "orderStatus",
+      "type" : "OrderStatus",
+      "description" : "Current status of the order."
+    }, {
+      "name" : "paymentTransactionId",
+      "type" : "String",
+      "description" : "ID of the associated payment transaction, if any."
+    }, {
+      "name" : "createdAt",
+      "type" : "LocalDateTime",
+      "description" : "Timestamp when the order was created."
+    }, {
+      "name" : "updatedAt",
+      "type" : "LocalDateTime",
+      "description" : "Timestamp when the order was last updated."
+    }, {
+      "name" : "orderItems",
+      "type" : "List<OrderItem>",
+      "description" : "List of items in the order."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "order-api",
-    "file_role" : null,
+    "file_role" : "DTO layer — defines the data structure for representing a complete order in API responses, including all order details, status, and associated items.",
     "change_required" : null
   }, {
     "file_name" : "GalleryItem.java",
@@ -3209,8 +3341,8 @@
     "feature_display_name" : "Order Management API (Backend)",
     "feature_type" : "BACKEND",
     "file_paths" : [ "backend/src/main/java/com/farmaaishrestaurant/controller/OrderController.java", "backend/src/main/java/com/farmaaishrestaurant/controller/AdminOrderController.java", "backend/src/main/java/com/farmaaishrestaurant/dto/CreateOrderRequest.java", "backend/src/main/java/com/farmaaishrestaurant/dto/OrderItemRequest.java", "backend/src/main/java/com/farmaaishrestaurant/dto/OrderResponse.java" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "The Order Management API feature provides backend services for customers to create and view their orders, and for administrators to manage all orders. It consists of two DTOs for order creation (`CreateOrderRequest` and `OrderItemRequest`), one DTO for order responses (`OrderResponse`), and two controllers (`OrderController` and `AdminOrderController`) that expose REST API endpoints.\n\n`CreateOrderRequest` and `OrderItemRequest` define the structure for incoming order data, including customer details, delivery address, and a list of menu items with quantities. `OrderResponse` provides a comprehensive view of an order, including its status, total amount, and individual order items.\n\n`OrderController` handles public-facing API endpoints. It allows authenticated customers to create new orders and retrieve their order history. When creating an order, `OrderController.createOrder` will call `OrderService.createOrder` from the `order-core` feature. When fetching order history, it will call `OrderService.getOrdersByCustomerEmail`.\n\n`AdminOrderController` provides administrative endpoints for managing all orders. It allows authenticated administrators to retrieve all orders, get a specific order by ID, and update an order's status. These operations will delegate to `OrderService.getAllOrders`, `OrderService.getOrderById`, and `OrderService.updateOrderStatus` respectively, all from the `order-core` feature.\n\nAll controllers will handle `ResourceNotFoundException` by returning an HTTP 404 status code with an `ErrorResponse` body, and other general exceptions with an HTTP 500 status code, leveraging the `GlobalExceptionHandler` from the `shared-backend` feature.",
+    "depends_on_features" : [ "order-core", "shared-backend" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
