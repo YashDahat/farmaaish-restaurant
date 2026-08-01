@@ -2500,14 +2500,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Main layout for public-facing pages, including the header, footer, and main content area.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "Layout",
+      "parameters" : [ "React.PropsWithChildren" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the main layout for public pages, including the Header, Footer, and child components."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/Header.tsx", "frontend/src/components/Footer.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "shared-ui",
-    "file_role" : null,
+    "file_role" : "Main layout component for public-facing pages, wrapping content with the Header and Footer components.",
     "change_required" : null
   }, {
     "file_name" : "Header.tsx",
@@ -2518,14 +2523,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Site-wide header with navigation links, logo, and user authentication status.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "Header",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the application header with navigation, logo, authentication status, and cart drawer."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/context/AuthContext.tsx", "frontend/src/components/cart/CartDrawer.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "shared-ui",
-    "file_role" : null,
+    "file_role" : "Site-wide header component, displaying navigation, logo, user authentication status, and the cart drawer.",
     "change_required" : null
   }, {
     "file_name" : "Footer.tsx",
@@ -2536,14 +2546,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Site-wide footer with contact information, social media links, and sitemap.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "Footer",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the application footer with contact details, social media links, and sitemap."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "shared-ui",
-    "file_role" : null,
+    "file_role" : "Site-wide footer component, displaying contact information, social media links, and sitemap.",
     "change_required" : null
   }, {
     "file_name" : "AdminLayout.tsx",
@@ -2554,14 +2569,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Layout for the admin section, including a sidebar for navigation and a main content area.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminLayout",
+      "parameters" : [ "React.PropsWithChildren" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the admin layout with a sidebar for navigation and a main content area for child components."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "shared-ui",
-    "file_role" : null,
+    "file_role" : "Layout component for the admin section, providing a sidebar for navigation and a main content area.",
     "change_required" : null
   }, {
     "file_name" : "ProtectedRoute.tsx",
@@ -4219,8 +4239,8 @@
     "feature_display_name" : "Shared UI Components",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/components/Layout.tsx", "frontend/src/components/Header.tsx", "frontend/src/components/Footer.tsx", "frontend/src/components/AdminLayout.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#800020] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b8942e] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-gray-50 (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-gray-700 leading-relaxed\n\nThis feature provides the foundational UI layouts and shared components for the Farmaaish Restaurant frontend application. It includes `Layout.tsx` for public-facing pages, `AdminLayout.tsx` for the administrative section, and common components like `Header.tsx` and `Footer.tsx`.\n\n### Layout.tsx\nThis component serves as the main wrapper for all public-facing pages. It integrates the `Header` and `Footer` components and provides a consistent structure for content. The `Layout` component accepts `children` as props, which will be rendered within the main content area. It ensures that all public pages have a consistent look and feel, adhering to the brand's visual identity. The header will include navigation links, the restaurant logo, and user authentication status (via `AuthContext`) and a cart drawer (via `CartDrawer`). The footer will display contact information, social media links, and a sitemap.\n\n### Header.tsx\nThis component renders the site-wide header. It includes the Farmaaish Restaurant logo, primary navigation links (Home, Menu, Reservations, Catering, Blog, Gallery, About, Contact), and a user authentication section. The authentication section will display 'Login' or 'My Account'/'Logout' based on the user's authentication status, which is managed by `AuthContext`. It also integrates the `CartDrawer` component from the `order-flow` feature to display the shopping cart. The header will have a deep maroon background (`bg-[#800020]`) and white text, reflecting the regal color palette.\n\n### Footer.tsx\nThis component renders the site-wide footer. It displays essential business information such as the restaurant's address, phone number, and opening hours. It also includes links to social media profiles and a sitemap for easy navigation. The footer will maintain the sophisticated tone and color scheme of the brand, using dark charcoal text on a cream background or similar subtle contrast.\n\n### AdminLayout.tsx\nThis component provides the layout for all administrative pages. It includes a sidebar for admin navigation and a main content area. This layout is distinct from the public-facing `Layout.tsx` to clearly separate the user experience for administrators. It will not include the public-facing header or footer, instead focusing on administrative tools and navigation. The sidebar will provide links to manage menu items, reservations, orders, blog posts, catering inquiries, testimonials, and gallery images. The main content area will render the `children` passed to it.",
+    "depends_on_features" : [ "auth-ui", "order-flow" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
