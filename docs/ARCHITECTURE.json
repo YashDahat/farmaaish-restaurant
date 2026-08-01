@@ -4148,13 +4148,45 @@
     "status" : "PLANNED",
     "description" : "TypeScript types and interfaces for the Testimonial domain.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "string",
+      "description" : "Unique identifier for the testimonial."
+    }, {
+      "name" : "customerName",
+      "type" : "string",
+      "description" : "Name of the customer providing the testimonial."
+    }, {
+      "name" : "reviewText",
+      "type" : "string",
+      "description" : "The actual review text from the customer."
+    }, {
+      "name" : "rating",
+      "type" : "number",
+      "description" : "Rating given by the customer (e.g., 1-5 stars)."
+    }, {
+      "name" : "displayOrder",
+      "type" : "number",
+      "description" : "Order in which the testimonial should be displayed."
+    }, {
+      "name" : "isVisible",
+      "type" : "boolean",
+      "description" : "Flag indicating if the testimonial is visible on the public site."
+    }, {
+      "name" : "createdAt",
+      "type" : "string",
+      "description" : "Timestamp when the testimonial was created."
+    }, {
+      "name" : "updatedAt",
+      "type" : "string",
+      "description" : "Timestamp when the testimonial was last updated."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "testimonial-ui",
-    "file_role" : null,
+    "file_role" : "TypeScript types and interfaces for the Testimonial domain, mirroring the backend's TestimonialDto.",
     "change_required" : null
   }, {
     "file_name" : "testimonialService.ts",
@@ -4165,14 +4197,26 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Provides functions for interacting with the testimonial-related API endpoints.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getAllVisibleTestimonials",
+      "parameters" : [ ],
+      "return_type" : "Promise<Testimonial[]>",
+      "description" : "Fetches all testimonials that are marked as visible and ordered for display from the backend."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/testimonials",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Fetches a list of all visible testimonials from the backend, ordered by display order.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/api/client.ts", "frontend/src/types/testimonial.ts" ],
     "depends_on" : [ ],
     "feature_name" : "testimonial-ui",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — implements getAllVisibleTestimonials(): Promise<Testimonial[]>; calls the testimonial-management backend.",
     "change_required" : null
   }, {
     "file_name" : "useTestimonials.ts",
@@ -4183,14 +4227,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "React Query hook for fetching and managing testimonial data.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "useAllVisibleTestimonials",
+      "parameters" : [ ],
+      "return_type" : "UseQueryResult<Testimonial[], Error>",
+      "description" : "A React Query hook to fetch and manage all visible testimonials. Returns query status and data."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/services/testimonialService.ts", "frontend/src/types/testimonial.ts" ],
     "depends_on" : [ ],
     "feature_name" : "testimonial-ui",
-    "file_role" : null,
+    "file_role" : "React Query hook — implements useAllVisibleTestimonials(): UseQueryResult<Testimonial[], Error>; fetches testimonial data using testimonialService.",
     "change_required" : null
   }, {
     "file_name" : "AdminTestimonialsPage.tsx",
@@ -4657,8 +4706,8 @@
     "feature_display_name" : "Testimonial UI (Frontend)",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/types/testimonial.ts", "frontend/src/services/testimonialService.ts", "frontend/src/hooks/useTestimonials.ts" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "This feature provides the frontend components and logic for displaying customer testimonials for Farmaaish Restaurant. It includes TypeScript types for testimonials, a service to interact with the backend testimonial API, and a React Query hook to manage testimonial data fetching. The `testimonial.ts` file defines the `Testimonial` interface, mirroring the `TestimonialDto` from the `testimonial-management` backend feature. The `testimonialService.ts` file contains asynchronous functions to fetch testimonials from the backend. The `useTestimonials.ts` hook leverages `react-query` to provide a convenient way for React components to fetch and cache testimonial data, specifically `getAllVisibleTestimonials` to retrieve testimonials marked as visible and ordered for display on the public-facing site.\n\n## Design Tokens\n- Navbar: bg-[#800020] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#B8860B] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-[#F5F5DC] (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-[#36454F] leading-relaxed\n\n### `frontend/src/types/testimonial.ts`\nThis file defines the TypeScript interface for a `Testimonial`, which directly corresponds to the `TestimonialDto` exposed by the `testimonial-management` backend feature. It includes fields such as `id`, `customerName`, `reviewText`, `rating`, `displayOrder`, `isVisible`, `createdAt`, and `updatedAt`.\n\n### `frontend/src/services/testimonialService.ts`\nThis service provides functions to interact with the backend's testimonial API. It exports an asynchronous function `getAllVisibleTestimonials()` that makes a GET request to `/api/v1/testimonials` to retrieve all testimonials that are marked as visible and ordered for display. It uses the `apiClient` from `@/api/client` to perform the HTTP request and expects a `List<TestimonialDto>` as the response.\n\n### `frontend/src/hooks/useTestimonials.ts`\nThis React Query hook provides a convenient way to fetch and manage testimonial data within React components. It exports `useAllVisibleTestimonials()` which uses `react-query`'s `useQuery` to call `testimonialService.getAllVisibleTestimonials()`. This hook handles loading states, error handling, and caching of testimonial data, making it easy for UI components to consume this data. The data returned by this hook will be an array of `Testimonial` objects.",
+    "depends_on_features" : [ "testimonial-management" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
