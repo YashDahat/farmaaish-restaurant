@@ -4586,14 +4586,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Customer profile page to view personal details and order history.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ProfilePage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the customer's profile, including personal details and order history."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/components/profile/OrderHistory.tsx", "frontend/src/hooks/useAuth.ts" ],
     "depends_on" : [ ],
     "feature_name" : "customer-portal",
-    "file_role" : null,
+    "file_role" : "PAGE layer — displays the logged-in customer's personal details and integrates the OrderHistory component to show past orders.",
     "change_required" : null
   }, {
     "file_name" : "OrderHistory.tsx",
@@ -4604,14 +4609,26 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Component to display a list of the logged-in customer's past orders.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "OrderHistory",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Displays a list of the authenticated customer's past orders."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/orders",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Fetches the list of orders for the authenticated customer.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/hooks/useOrders.ts" ],
     "depends_on" : [ ],
     "feature_name" : "customer-portal",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — fetches and displays a list of the logged-in customer's past orders using the `useOrders` hook.",
     "change_required" : null
   } ],
   "features" : [ {
@@ -4799,8 +4816,8 @@
     "feature_display_name" : "Customer Portal (Frontend)",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/pages/ProfilePage.tsx", "frontend/src/components/profile/OrderHistory.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#800020] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b89a2e] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-gray-50 (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-gray-700 leading-relaxed\n\nThis feature provides the customer-facing profile page and its associated components for Farmaaish Restaurant. The `ProfilePage.tsx` will display the logged-in customer's personal details and a list of their past orders. It will use the `useAuth` hook from the `auth-ui` feature to retrieve the authenticated user's information and ensure the user is logged in. The `OrderHistory.tsx` component, nested within `ProfilePage.tsx`, will be responsible for fetching and rendering the customer's order history. It will utilize the `useOrders` hook from the `order-flow` feature to retrieve the orders associated with the logged-in customer. All monetary values will be displayed in Indian Rupees (₹) using the `en-IN` locale.\n\n### `ProfilePage.tsx`\nThis page will be wrapped in the `Layout` component from `shared-ui`. It will display a prominent heading \"My Profile\" and two main sections: \"Personal Details\" and \"Order History\".\n\n1.  **Personal Details Section:**\n    *   Display the customer's email (from `useAuth().user.email`).\n    *   Add a placeholder for customer name, which can be updated in a future iteration.\n    *   Add a placeholder for customer phone, which can be updated in a future iteration.\n    *   Add a placeholder for delivery address, which can be updated in a future iteration.\n    *   Include a \"Logout\" button that calls `useAuth().logout()`.\n\n2.  **Order History Section:**\n    *   Render the `OrderHistory` component, passing the customer's ID (from `useAuth().user.id`) as a prop if needed, though `OrderHistory` will internally use the authenticated user's context.\n\n### `OrderHistory.tsx`\nThis component will display a list of the customer's past orders in a visually appealing, card-based layout.\n\n1.  **Data Fetching:**\n    *   Use the `useOrders` hook from `order-flow` to fetch the customer's orders. The `useOrders` hook should internally call the `/api/v1/orders` endpoint from the `order-api` feature, which returns `List<OrderResponse>` for the authenticated user.\n    *   Handle loading states by displaying a loading spinner or message.\n    *   Handle error states by displaying an error message.\n\n2.  **Order Display:**\n    *   If no orders are found, display a message like \"You haven't placed any orders yet. Explore our exquisite menu!\".\n    *   For each `OrderResponse` in the fetched list, render an individual order card.\n    *   Each order card should display:\n        *   Order ID: `order.id`\n        *   Order Date: `order.createdAt` (formatted as `DD/MM/YYYY`)\n        *   Total Amount: `order.totalAmount` (formatted in `en-IN` locale as currency `INR`)\n        *   Status: `order.status`\n        *   A list of `order.orderItems`, showing `orderItem.name` and `orderItem.quantity`.\n    *   The order cards should be styled according to the design tokens for cards, using a clean and elegant presentation.",
+    "depends_on_features" : [ "auth-ui", "shared-ui", "order-flow", "order-api" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
