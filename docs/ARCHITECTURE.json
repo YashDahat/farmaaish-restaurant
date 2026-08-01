@@ -1922,14 +1922,46 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Represents a customer testimonial or review, curated by an admin for display.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the testimonial. Not null."
+    }, {
+      "name" : "customerName",
+      "type" : "String",
+      "description" : "Name of the customer providing the testimonial. Not null, max 100 characters."
+    }, {
+      "name" : "reviewText",
+      "type" : "String",
+      "description" : "The actual text of the testimonial. Not null, max 1000 characters."
+    }, {
+      "name" : "rating",
+      "type" : "Integer",
+      "description" : "Rating given by the customer (e.g., 1-5 stars). Not null, min 1, max 5."
+    }, {
+      "name" : "displayOrder",
+      "type" : "Integer",
+      "description" : "Order in which the testimonial should be displayed on the frontend. Not null."
+    }, {
+      "name" : "isVisible",
+      "type" : "Boolean",
+      "description" : "Flag indicating if the testimonial is publicly visible. Not null."
+    }, {
+      "name" : "createdAt",
+      "type" : "LocalDateTime",
+      "description" : "Timestamp when the testimonial was created. Not null."
+    }, {
+      "name" : "updatedAt",
+      "type" : "LocalDateTime",
+      "description" : "Timestamp when the testimonial was last updated. Not null."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "testimonial-management",
-    "file_role" : null,
+    "file_role" : "JPA Entity — represents a customer testimonial in the database.",
     "change_required" : null
   }, {
     "file_name" : "TestimonialRepository.java",
@@ -1940,14 +1972,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Spring Data JPA repository for CRUD operations on Testimonial entities.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "findAllByIsVisibleTrueOrderByDisplayOrderAsc",
+      "parameters" : [ ],
+      "return_type" : "List<Testimonial>",
+      "description" : "Retrieves all visible testimonials, ordered by their display order."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/model/Testimonial.java" ],
     "depends_on" : [ ],
     "feature_name" : "testimonial-management",
-    "file_role" : null,
+    "file_role" : "Spring Data JPA Repository — provides CRUD operations for `Testimonial` entities.",
     "change_required" : null
   }, {
     "file_name" : "TestimonialService.java",
@@ -1958,14 +1995,44 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Handles business logic for managing customer testimonials.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "getAllVisibleTestimonials",
+      "parameters" : [ ],
+      "return_type" : "List<TestimonialDto>",
+      "description" : "Retrieves all testimonials marked as visible, ordered by display order. Throws `ResourceNotFoundException` if no testimonials are found."
+    }, {
+      "name" : "getAllTestimonials",
+      "parameters" : [ ],
+      "return_type" : "List<TestimonialDto>",
+      "description" : "Retrieves all testimonials, regardless of visibility. Throws `ResourceNotFoundException` if no testimonials are found."
+    }, {
+      "name" : "getTestimonialById",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "TestimonialDto",
+      "description" : "Retrieves a testimonial by its ID. Throws `ResourceNotFoundException` if the testimonial is not found."
+    }, {
+      "name" : "createTestimonial",
+      "parameters" : [ "TestimonialDto testimonialDto" ],
+      "return_type" : "TestimonialDto",
+      "description" : "Creates a new testimonial."
+    }, {
+      "name" : "updateTestimonial",
+      "parameters" : [ "UUID id", "TestimonialDto testimonialDto" ],
+      "return_type" : "TestimonialDto",
+      "description" : "Updates an existing testimonial. Throws `ResourceNotFoundException` if the testimonial to update is not found."
+    }, {
+      "name" : "deleteTestimonial",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "void",
+      "description" : "Deletes a testimonial by its ID. Throws `ResourceNotFoundException` if the testimonial to delete is not found."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/repository/TestimonialRepository.java", "backend/src/main/java/com/farmaaishrestaurant/dto/TestimonialDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "testimonial-management",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — implements `getAllVisibleTestimonials(): List<TestimonialDto>`, `getAllTestimonials(): List<TestimonialDto>`, `getTestimonialById(UUID id): TestimonialDto`, `createTestimonial(TestimonialDto testimonialDto): TestimonialDto`, `updateTestimonial(UUID id, TestimonialDto testimonialDto): TestimonialDto`, and `deleteTestimonial(UUID id): void`; delegates persistence to `TestimonialRepository`.",
     "change_required" : null
   }, {
     "file_name" : "TestimonialDto.java",
@@ -1976,14 +2043,46 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Data Transfer Object for testimonials.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the testimonial."
+    }, {
+      "name" : "customerName",
+      "type" : "String",
+      "description" : "Name of the customer providing the testimonial. Not null, min 2, max 100 characters."
+    }, {
+      "name" : "reviewText",
+      "type" : "String",
+      "description" : "The actual text of the testimonial. Not null, min 10, max 1000 characters."
+    }, {
+      "name" : "rating",
+      "type" : "Integer",
+      "description" : "Rating given by the customer (e.g., 1-5 stars). Not null, min 1, max 5."
+    }, {
+      "name" : "displayOrder",
+      "type" : "Integer",
+      "description" : "Order in which the testimonial should be displayed on the frontend. Not null, min 0."
+    }, {
+      "name" : "isVisible",
+      "type" : "Boolean",
+      "description" : "Flag indicating if the testimonial is publicly visible. Not null."
+    }, {
+      "name" : "createdAt",
+      "type" : "LocalDateTime",
+      "description" : "Timestamp when the testimonial was created."
+    }, {
+      "name" : "updatedAt",
+      "type" : "LocalDateTime",
+      "description" : "Timestamp when the testimonial was last updated."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "testimonial-management",
-    "file_role" : null,
+    "file_role" : "Data Transfer Object — used for transferring testimonial data between layers.",
     "change_required" : null
   }, {
     "file_name" : "TestimonialController.java",
@@ -1994,14 +2093,26 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Public REST controller for fetching testimonials to display on the site.",
-    "public_functions" : null,
-    "public_variables" : null,
-    "api_endpoints" : null,
+    "public_functions" : [ {
+      "name" : "getAllVisibleTestimonials",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<List<TestimonialDto>>",
+      "description" : "Handles GET requests to retrieve all publicly visible testimonials."
+    } ],
+    "public_variables" : [ ],
+    "api_endpoints" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/testimonials",
+      "request_body" : null,
+      "response_body" : "List<TestimonialDto>",
+      "description" : "Retrieves a list of all publicly visible testimonials, ordered by display order. Returns 404 if no testimonials are found.",
+      "access" : "public"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/service/TestimonialService.java" ],
     "depends_on" : [ ],
     "feature_name" : "testimonial-management",
-    "file_role" : null,
+    "file_role" : "Public REST Controller — exposes read-only endpoints for fetching visible testimonials.",
     "change_required" : null
   }, {
     "file_name" : "AdminTestimonialController.java",
@@ -2012,14 +2123,74 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Admin-only REST controller for CRUD operations on testimonials.",
-    "public_functions" : null,
-    "public_variables" : null,
-    "api_endpoints" : null,
+    "public_functions" : [ {
+      "name" : "getAllTestimonials",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<List<TestimonialDto>>",
+      "description" : "Handles GET requests to retrieve all testimonials (admin access)."
+    }, {
+      "name" : "getTestimonialById",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "ResponseEntity<TestimonialDto>",
+      "description" : "Handles GET requests to retrieve a testimonial by ID (admin access)."
+    }, {
+      "name" : "createTestimonial",
+      "parameters" : [ "TestimonialDto testimonialDto" ],
+      "return_type" : "ResponseEntity<TestimonialDto>",
+      "description" : "Handles POST requests to create a new testimonial (admin access)."
+    }, {
+      "name" : "updateTestimonial",
+      "parameters" : [ "UUID id", "TestimonialDto testimonialDto" ],
+      "return_type" : "ResponseEntity<TestimonialDto>",
+      "description" : "Handles PUT requests to update an existing testimonial (admin access)."
+    }, {
+      "name" : "deleteTestimonial",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "ResponseEntity<Void>",
+      "description" : "Handles DELETE requests to remove a testimonial (admin access)."
+    } ],
+    "public_variables" : [ ],
+    "api_endpoints" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/admin/testimonials",
+      "request_body" : null,
+      "response_body" : "List<TestimonialDto>",
+      "description" : "Retrieves a list of all testimonials, including invisible ones. Returns 404 if no testimonials are found.",
+      "access" : "admin"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/admin/testimonials/{id}",
+      "request_body" : null,
+      "response_body" : "TestimonialDto",
+      "description" : "Retrieves a specific testimonial by its ID. Returns 404 if not found.",
+      "access" : "admin"
+    }, {
+      "method" : "POST",
+      "path" : "/api/v1/admin/testimonials",
+      "request_body" : "TestimonialDto",
+      "response_body" : "TestimonialDto",
+      "description" : "Creates a new testimonial.",
+      "access" : "admin"
+    }, {
+      "method" : "PUT",
+      "path" : "/api/v1/admin/testimonials/{id}",
+      "request_body" : "TestimonialDto",
+      "response_body" : "TestimonialDto",
+      "description" : "Updates an existing testimonial. Returns 404 if the testimonial to update is not found.",
+      "access" : "admin"
+    }, {
+      "method" : "DELETE",
+      "path" : "/api/v1/admin/testimonials/{id}",
+      "request_body" : null,
+      "response_body" : "void",
+      "description" : "Deletes a testimonial by its ID. Returns 404 if the testimonial to delete is not found.",
+      "access" : "admin"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/service/TestimonialService.java" ],
     "depends_on" : [ ],
     "feature_name" : "testimonial-management",
-    "file_role" : null,
+    "file_role" : "Admin REST Controller — exposes CRUD endpoints for managing testimonials, accessible only to authenticated administrators.",
     "change_required" : null
   }, {
     "file_name" : "GalleryImage.java",
@@ -3836,8 +4007,8 @@
     "feature_display_name" : "Testimonial Management (Backend)",
     "feature_type" : "BACKEND",
     "file_paths" : [ "backend/src/main/java/com/farmaaishrestaurant/model/Testimonial.java", "backend/src/main/java/com/farmaaishrestaurant/repository/TestimonialRepository.java", "backend/src/main/java/com/farmaaishrestaurant/service/TestimonialService.java", "backend/src/main/java/com/farmaaishrestaurant/dto/TestimonialDto.java", "backend/src/main/java/com/farmaaishrestaurant/controller/TestimonialController.java", "backend/src/main/java/com/farmaaishrestaurant/controller/AdminTestimonialController.java" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "The Testimonial Management feature provides a backend API for managing customer testimonials. It includes a `Testimonial` entity to store testimonial data, a `TestimonialRepository` for database interactions, a `TestimonialService` for business logic, and `TestimonialDto` for data transfer. Two controllers expose API endpoints: `TestimonialController` provides public read-only access to testimonials, while `AdminTestimonialController` provides authenticated admin-only CRUD operations. The `TestimonialService` handles mapping between `Testimonial` entities and `TestimonialDto` objects, and interacts with `TestimonialRepository` to persist and retrieve data. When a testimonial is not found, a `ResourceNotFoundException` (from the `shared-backend` feature) is thrown, which `GlobalExceptionHandler` (also from `shared-backend`) will catch and convert into an appropriate HTTP 404 response.",
+    "depends_on_features" : [ "shared-backend" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
