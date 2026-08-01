@@ -2361,14 +2361,14 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Configures the global Axios instance with base URL and interceptors for auth tokens.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — configures the global Axios instance for API requests, including authentication token injection and error handling.",
     "change_required" : null
   }, {
     "file_name" : "App.tsx",
@@ -2379,14 +2379,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Root component that sets up the application context providers and router.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "App",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the main application, including context providers and router configuration."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/context/AuthContext.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Root component — sets up the application's context providers and defines the main routing structure using `react-router-dom`.",
     "change_required" : null
   }, {
     "file_name" : "Layout.tsx",
@@ -2397,14 +2402,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Main layout for public-facing pages, including the header, main content area, and footer.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "Layout",
+      "parameters" : [ "{ children: React.ReactNode }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the public page layout with header, footer, and content."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/components/Header.tsx", "frontend/src/components/Footer.tsx", "frontend/src/components/common/WhatsAppCTA.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "COMPONENT — provides the main layout structure for public-facing pages, composing `Header`, `Footer`, and `WhatsAppCTA`.",
     "change_required" : null
   }, {
     "file_name" : "Header.tsx",
@@ -2415,14 +2425,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Site-wide header with logo, navigation links, and cart access.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "Header",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the application header with navigation and cart icon."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/components/cart/CartDrawer.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "COMPONENT — displays the site-wide header with navigation links, logo, and cart access.",
     "change_required" : null
   }, {
     "file_name" : "Footer.tsx",
@@ -2433,14 +2448,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Site-wide footer with contact information, social media links, and quick navigation.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "Footer",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the application footer with business details and navigation."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "COMPONENT — displays the site-wide footer with contact information, quick links, and social media.",
     "change_required" : null
   }, {
     "file_name" : "AdminLayout.tsx",
@@ -2451,14 +2471,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Layout for the admin section, including a sidebar for navigation and a main content area.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "AdminLayout",
+      "parameters" : [ "{ children: React.ReactNode }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the admin page layout with a sidebar and content area."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "COMPONENT — provides the layout for the admin section, including a sidebar for navigation and a main content area.",
     "change_required" : null
   }, {
     "file_name" : "ProtectedRoute.tsx",
@@ -2469,14 +2494,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A route guard that redirects unauthenticated users or users without required roles.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "ProtectedRoute",
+      "parameters" : [ "{ children: React.ReactNode, roles?: string[] }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Protects routes by checking authentication status and user roles."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useAuth.ts" ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "COMPONENT — a route guard that redirects unauthenticated users or users without required roles, consuming `useAuth`.",
     "change_required" : null
   }, {
     "file_name" : "WhatsAppCTA.tsx",
@@ -2487,14 +2517,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A floating action button that opens a WhatsApp chat with the restaurant.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "WhatsAppCTA",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a floating WhatsApp call-to-action button."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "COMPONENT — a floating action button that opens a WhatsApp chat with the restaurant.",
     "change_required" : null
   }, {
     "file_name" : "AdminDashboardPage.tsx",
@@ -2505,14 +2540,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "The main landing page for the admin portal, showing key metrics and navigation.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "AdminDashboardPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the admin dashboard page."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "PAGE — the main landing page for the admin portal, displaying a welcome message.",
     "change_required" : null
   }, {
     "file_name" : "NotFoundPage.tsx",
@@ -2523,14 +2563,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A user-friendly 404 page that helps users navigate back to the main site.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "NotFoundPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the 404 Not Found page."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "PAGE — a user-friendly 404 page that helps users navigate back to the main site.",
     "change_required" : null
   }, {
     "file_name" : "AuthContext.tsx",
@@ -3906,8 +3951,8 @@
     "feature_display_name" : "Core UI & Layout",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/api/client.ts", "frontend/src/App.tsx", "frontend/src/components/Layout.tsx", "frontend/src/components/Header.tsx", "frontend/src/components/Footer.tsx", "frontend/src/components/AdminLayout.tsx", "frontend/src/components/ProtectedRoute.tsx", "frontend/src/components/common/WhatsAppCTA.tsx", "frontend/src/pages/AdminDashboardPage.tsx", "frontend/src/pages/NotFoundPage.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "This feature establishes the foundational UI structure and global configurations for the Farmaaish Restaurant frontend application. It includes the main application entry point (`App.tsx`), global Axios client setup (`client.ts`), public-facing layout components (`Layout.tsx`, `Header.tsx`, `Footer.tsx`, `WhatsAppCTA.tsx`), admin-specific layout (`AdminLayout.tsx`), and core routing components like `ProtectedRoute.tsx` and error pages (`NotFoundPage.tsx`, `AdminDashboardPage.tsx`).\n\n## Design Tokens\n- Navbar: bg-[#800020] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b89a2e] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-[#F5F5DC] (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-[#36454F] leading-relaxed\n\n`client.ts` configures the Axios instance used throughout the application for API calls. It sets the `baseURL` to `/api/v1` and includes an interceptor to attach the JWT token from `localStorage` (key: 'token') to every outgoing request's `Authorization` header. This ensures all authenticated API calls are made with the necessary credentials. It also includes an interceptor to handle 401 Unauthorized responses by clearing the token and redirecting to the login page.\n\n`App.tsx` is the root component. It wraps the entire application with necessary context providers, including `AuthContext` (from `auth-ui` feature) and `BrowserRouter` from `react-router-dom`. It defines the main routing structure, including public routes, protected routes using `ProtectedRoute.tsx`, and the admin dashboard route.\n\n`Layout.tsx` provides the common structure for all public-facing pages. It includes the `Header.tsx` at the top, a main content area where `children` are rendered, and the `Footer.tsx` at the bottom. It also integrates `WhatsAppCTA.tsx` for easy customer communication. The layout ensures a consistent look and feel across the public storefront.\n\n`Header.tsx` displays the Farmaaish Restaurant logo, primary navigation links (Home, Menu, Reservations, Gallery, Catering, Blog, About, Contact), and a cart icon that opens the `CartDrawer` (from `order-flow` feature). Navigation links should use `react-router-dom`'s `Link` component. The logo should be a prominent brand element.\n\n`Footer.tsx` contains essential business information: Farmaaish Restaurant's address (Kundan Garden, Baner Rd, Near Veritas Software, Baner, Pune, Maharashtra 411069), phone number (020 2729 1111), and opening hours. It also includes quick navigation links and placeholder social media icons. All monetary values (if any were displayed here) would use the 'en-IN' locale for currency formatting.\n\n`AdminLayout.tsx` provides the layout for all administrative pages. It features a sidebar for admin navigation (e.g., Dashboard, Menu Management, Reservations, Orders, Gallery, Inquiries, Blog) and a main content area for rendering admin-specific views. This layout is distinct from the public `Layout.tsx`.\n\n`ProtectedRoute.tsx` is a higher-order component that guards routes requiring authentication or specific roles. It consumes the `useAuth` hook (from `auth-ui` feature) to check the user's authentication status and roles. If the user is not authenticated, they are redirected to `/login`. If they are authenticated but lack the required role (e.g., 'ADMIN' for admin routes), they are redirected to `/` or an unauthorized page.\n\n`WhatsAppCTA.tsx` renders a floating WhatsApp icon that, when clicked, opens a WhatsApp chat with the restaurant's phone number (+91 020 2729 1111). It should be positioned fixed on the bottom right of the screen on public pages.\n\n`AdminDashboardPage.tsx` serves as the landing page for the admin portal. It should display a welcoming message and potentially links to key admin sections. This page is protected by `ProtectedRoute.tsx` and requires an 'ADMIN' role.\n\n`NotFoundPage.tsx` is displayed when a user navigates to an invalid URL. It provides a user-friendly message and a link back to the home page.\n\nInteractions:\n- `App.tsx` renders `Layout.tsx` for public routes and `AdminLayout.tsx` for admin routes, wrapping them with `AuthContext.Provider`.\n- `Layout.tsx` composes `Header.tsx`, `Footer.tsx`, and `WhatsAppCTA.tsx`.\n- `Header.tsx` imports and renders `CartDrawer` from the `order-flow` feature.\n- `ProtectedRoute.tsx` uses `useAuth` from the `auth-ui` feature to determine access.\n- `client.ts` interacts with `localStorage` to store and retrieve the 'token' for authentication, which is managed by the `auth-ui` feature.",
+    "depends_on_features" : [ "auth-ui", "order-flow" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
