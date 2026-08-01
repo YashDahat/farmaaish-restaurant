@@ -3336,13 +3336,41 @@
     "status" : "PLANNED",
     "description" : "TypeScript types and interfaces for the Order domain.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "Order",
+      "type" : "{ id: string; orderItems: OrderItemResponse[]; totalAmount: number; status: OrderStatus; customerName: string; customerPhone: string; deliveryAddress: string; createdAt: string; updatedAt: string; }",
+      "description" : "Represents a complete order."
+    }, {
+      "name" : "OrderItem",
+      "type" : "{ id: string; menuItemId: string; name: string; quantity: number; unitPrice: number; }",
+      "description" : "Represents an item within an order."
+    }, {
+      "name" : "CreateOrderRequest",
+      "type" : "{ orderItems: OrderItemRequest[]; customerName: string; customerPhone: string; deliveryAddress: string; }",
+      "description" : "Request body for creating a new order."
+    }, {
+      "name" : "OrderItemRequest",
+      "type" : "{ menuItemId: string; quantity: number; }",
+      "description" : "Request body for an item within a new order."
+    }, {
+      "name" : "OrderResponse",
+      "type" : "{ id: string; orderItems: OrderItemResponse[]; totalAmount: number; status: OrderStatus; customerName: string; customerPhone: string; deliveryAddress: string; createdAt: string; updatedAt: string; }",
+      "description" : "Response body for a created or fetched order."
+    }, {
+      "name" : "OrderItemResponse",
+      "type" : "{ id: string; menuItemId: string; name: string; quantity: number; unitPrice: number; }",
+      "description" : "Response body for an item within an order."
+    }, {
+      "name" : "OrderStatus",
+      "type" : "enum",
+      "description" : "Possible statuses for an order: PENDING_PAYMENT, RECEIVED, PREPARING, OUT_FOR_DELIVERY, DELIVERED, CANCELLED."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "order-flow",
-    "file_role" : null,
+    "file_role" : "Generated from the backend API contract — TypeScript types and interfaces for the Order domain, mirroring the backend DTOs.",
     "change_required" : null
   }, {
     "file_name" : "orderService.ts",
@@ -3353,14 +3381,38 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Provides functions for interacting with the order-related API endpoints.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "createOrder",
+      "parameters" : [ "CreateOrderRequest request" ],
+      "return_type" : "Promise<OrderResponse>",
+      "description" : "Sends a POST request to create a new order with the provided details."
+    }, {
+      "name" : "getOrderById",
+      "parameters" : [ "string orderId" ],
+      "return_type" : "Promise<OrderResponse>",
+      "description" : "Sends a GET request to fetch a specific order by its ID."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/orders",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Creates a new order.",
+      "access" : null
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/orders/{orderId}",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Fetches a specific order by ID.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/api/client.ts", "frontend/src/types/order.ts" ],
     "depends_on" : [ ],
     "feature_name" : "order-flow",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — provides asynchronous functions to interact with the backend order-api, specifically createOrder(CreateOrderRequest): Promise<OrderResponse> and getOrderById(string): Promise<OrderResponse>.",
     "change_required" : null
   }, {
     "file_name" : "useOrders.ts",
@@ -3371,14 +3423,24 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "React Query hook for creating and managing order data.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "useCreateOrder",
+      "parameters" : [ "options?: UseMutationOptions<OrderResponse, Error, CreateOrderRequest>" ],
+      "return_type" : "UseMutationResult<OrderResponse, Error, CreateOrderRequest>",
+      "description" : "React Query mutation hook for creating a new order."
+    }, {
+      "name" : "useOrderById",
+      "parameters" : [ "string orderId" ],
+      "return_type" : "UseQueryResult<OrderResponse, Error>",
+      "description" : "React Query hook for fetching a specific order by its ID."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/services/orderService.ts", "frontend/src/types/order.ts" ],
     "depends_on" : [ ],
     "feature_name" : "order-flow",
-    "file_role" : null,
+    "file_role" : "HOOK layer — provides React Query hooks for creating and fetching order data: useCreateOrder and useOrderById(string).",
     "change_required" : null
   }, {
     "file_name" : "CheckoutPage.tsx",
@@ -3389,14 +3451,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Multi-step checkout page including delivery address, order summary, and payment.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "CheckoutPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the multi-step checkout flow, coordinating between delivery address, order summary, and payment sections."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/checkout/DeliveryAddressForm.tsx", "frontend/src/components/checkout/OrderSummary.tsx", "frontend/src/components/checkout/PaymentSection.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "order-flow",
-    "file_role" : null,
+    "file_role" : "PAGE layer — orchestrates the multi-step checkout process, managing state and rendering child components for delivery address, order summary, and payment.",
     "change_required" : null
   }, {
     "file_name" : "OrderConfirmationPage.tsx",
@@ -3407,14 +3474,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Displays a summary of the completed order and confirms successful payment.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "OrderConfirmationPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the order confirmation details after a successful order placement, displaying order ID, items, total, and delivery information. All monetary values are formatted in Indian Rupees (₹)."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useOrders.ts" ],
     "depends_on" : [ ],
     "feature_name" : "order-flow",
-    "file_role" : null,
+    "file_role" : "PAGE layer — displays a summary of a completed order, fetching details using the useOrderById hook.",
     "change_required" : null
   }, {
     "file_name" : "CartDrawer.tsx",
@@ -3425,14 +3497,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A slide-out drawer component that displays the current contents of the shopping cart.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "CartDrawer",
+      "parameters" : [ "{ isOpen: boolean; onClose: () => void }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a slide-out drawer showing cart items, quantities, and totals. Allows users to modify quantities, remove items, and proceed to checkout. All monetary values are formatted in Indian Rupees (₹)."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "order-flow",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — a slide-out drawer that displays and manages the contents of the shopping cart using useCart() from the cart framework.",
     "change_required" : null
   }, {
     "file_name" : "AddToCartButton.tsx",
@@ -3443,14 +3520,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A reusable button component to add a specific menu item to the cart.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AddToCartButton",
+      "parameters" : [ "{ item: MenuItemDto }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a button that, when clicked, adds the provided MenuItemDto to the shopping cart and shows a toast notification."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/types/menu.ts" ],
     "depends_on" : [ ],
     "feature_name" : "order-flow",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — a reusable button to add a MenuItem to the cart via useCart().addItem().",
     "change_required" : null
   }, {
     "file_name" : "DeliveryAddressForm.tsx",
@@ -3461,14 +3543,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Form for users to enter their delivery address during checkout.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "DeliveryAddressForm",
+      "parameters" : [ "{ onNext: (data: { customerName: string; customerPhone: string; deliveryAddress: string }) => void; initialData?: { customerName: string; customerPhone: string; deliveryAddress: string } }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a form for collecting customer name, phone, and delivery address, with validation. On submission, calls onNext with the form data."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "order-flow",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — a form for users to input their delivery address details, validating inputs and passing them to the parent component.",
     "change_required" : null
   }, {
     "file_name" : "OrderSummary.tsx",
@@ -3479,14 +3566,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Component that displays the items in the cart, calculates totals, and allows proceeding to payment.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "OrderSummary",
+      "parameters" : [ "{ deliveryDetails: { customerName: string; customerPhone: string; deliveryAddress: string }; onNext: () => void; onBack: () => void }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Displays a summary of the current cart items, calculated totals, and the provided delivery details. Includes navigation buttons. All monetary values are formatted in Indian Rupees (₹)."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "order-flow",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — displays a read-only summary of cart items, totals, and delivery information, allowing users to review before payment.",
     "change_required" : null
   }, {
     "file_name" : "PaymentSection.tsx",
@@ -3497,14 +3589,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Component that integrates with the payment gateway to handle the payment process.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "PaymentSection",
+      "parameters" : [ "{ orderDetails: { customerName: string; customerPhone: string; deliveryAddress: string; cartItems: CartItem[] }; onPaymentSuccess: (orderId: string) => void; onBack: () => void }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the payment interface. On 'Place Order', it calls the useCreateOrder mutation with the provided order details. On success, it calls onPaymentSuccess and clears the cart. All monetary values are formatted in Indian Rupees (₹)."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useOrders.ts" ],
     "depends_on" : [ ],
     "feature_name" : "order-flow",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — handles the final step of checkout, integrating with the order creation API and managing payment submission.",
     "change_required" : null
   }, {
     "file_name" : "AdminOrdersPage.tsx",
@@ -4430,8 +4527,8 @@
     "feature_display_name" : "Ordering and Checkout Flow (Frontend)",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/types/order.ts", "frontend/src/services/orderService.ts", "frontend/src/hooks/useOrders.ts", "frontend/src/pages/CheckoutPage.tsx", "frontend/src/pages/OrderConfirmationPage.tsx", "frontend/src/components/cart/CartDrawer.tsx", "frontend/src/components/cart/AddToCartButton.tsx", "frontend/src/components/checkout/DeliveryAddressForm.tsx", "frontend/src/components/checkout/OrderSummary.tsx", "frontend/src/components/checkout/PaymentSection.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#800020] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b89a2e] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-gray-50 (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-gray-700 leading-relaxed\n\nThis feature implements the complete customer ordering and checkout flow for Farmaaish Restaurant, from adding items to the cart to placing an order and viewing confirmation. It leverages the pre-scaffolded headless cart framework (`@/cart`) for managing cart state and pricing, and interacts with the `order-api` backend feature to create and retrieve orders. The UI is designed to be warm, sophisticated, and inviting, reflecting the Mughlai heritage of the restaurant.\n\n### Core Components and Flow:\n\n1.  **Adding to Cart (`AddToCartButton.tsx`, `CartDrawer.tsx`):**\n    -   `AddToCartButton.tsx` is a reusable component that will be integrated into `MenuItemCard.tsx` (from `menu-display` feature) or any other product display. When clicked, it calls `useCart().addItem()` with the `MenuItem` details (id, name, unitPrice, imageUrl). It should display a toast notification on success using `sonner`.\n    -   `CartDrawer.tsx` provides a slide-out UI for viewing and managing cart contents. It uses `useCart()` to display `cartItems`, `totals.subtotal`, `totals.adjustments`, and `totals.total`. Users can adjust item quantities using `useCart().setItemQuantity()` or remove items using `useCart().removeItem()`. All monetary values must be formatted in Indian Rupees (₹) using `toLocaleString('en-IN', { style: 'currency', currency: 'INR' })`.\n\n2.  **Checkout Process (`CheckoutPage.tsx`, `DeliveryAddressForm.tsx`, `OrderSummary.tsx`, `PaymentSection.tsx`):**\n    -   `CheckoutPage.tsx` orchestrates a multi-step checkout process. It uses `useCheckout()` from `@/cart` to manage the steps. The steps will include:\n        1.  **Delivery Address:** Rendered by `DeliveryAddressForm.tsx`. This component collects `customerName`, `customerPhone`, and `deliveryAddress`. It uses `react-hook-form` and `zod` for validation. The collected data is passed up to `CheckoutPage.tsx`.\n        2.  **Order Summary:** Rendered by `OrderSummary.tsx`. This component displays the `cartItems` and `totals` from `useCart()`, along with the delivery address provided in the previous step. It allows users to review their order before proceeding to payment. All monetary values must be formatted in Indian Rupees (₹).\n        3.  **Payment:** Rendered by `PaymentSection.tsx`. This component is responsible for initiating the payment process. It will use the `useCreateOrder` hook to call the backend `order-api` to create an order. The `createOrder` mutation expects a `CreateOrderRequest` which includes `orderItems` (mapped from `cartItems`), `customerName`, `customerPhone`, and `deliveryAddress`. Upon successful order creation, it should clear the cart using `useCart().clearCart()` and navigate the user to the `OrderConfirmationPage.tsx` with the `orderId`.\n\n3.  **Order Service and Hooks (`order.ts`, `orderService.ts`, `useOrders.ts`):**\n    -   `order.ts` defines the TypeScript interfaces for `Order`, `OrderItem`, `CreateOrderRequest`, `OrderItemRequest`, `OrderResponse`, and `OrderItemResponse`, mirroring the backend `order-api` DTOs.\n    -   `orderService.ts` provides asynchronous functions to interact with the backend `order-api` endpoints. It will have `createOrder(request: CreateOrderRequest): Promise<OrderResponse>` and `getOrderById(orderId: string): Promise<OrderResponse>`. It uses `apiClient` from `frontend/src/api/client.ts`.\n    -   `useOrders.ts` provides React Query hooks for `orderService.ts`. It will include `useCreateOrder` for creating new orders and `useOrderById` for fetching a specific order by its ID.\n\n4.  **Order Confirmation (`OrderConfirmationPage.tsx`):**\n    -   `OrderConfirmationPage.tsx` displays a detailed summary of the successfully placed order. It retrieves the `orderId` from the URL parameters and uses `useOrders().useOrderById(orderId)` to fetch the order details. It should display the order ID, status, items, total amount, and delivery details. All monetary values must be formatted in Indian Rupees (₹).\n\n### Inter-file Wiring:\n-   `AddToCartButton.tsx` and `CartDrawer.tsx` directly interact with the `@/cart` framework's `useCart()` hook.\n-   `CheckoutPage.tsx` uses `useCheckout()` from `@/cart` to manage steps and passes data between its child components.\n-   `DeliveryAddressForm.tsx` and `OrderSummary.tsx` are presentational components that receive data and callbacks as props from `CheckoutPage.tsx`.\n-   `PaymentSection.tsx` uses the `useCreateOrder` mutation from `useOrders.ts` to submit the order to the backend. It also calls `useCart().clearCart()` after a successful order.\n-   `OrderConfirmationPage.tsx` uses the `useOrderById` query from `useOrders.ts` to fetch order details.\n-   `useOrders.ts` depends on `orderService.ts` for actual API calls.\n-   `orderService.ts` depends on `frontend/src/api/client.ts` for making HTTP requests and `frontend/src/types/order.ts` for type definitions.\n\n### Error Handling:\n-   All API calls should include appropriate error handling, typically displaying a toast notification using `sonner` for user feedback.\n-   If an order creation fails, `PaymentSection.tsx` should display an error message and allow the user to retry or go back.\n-   If an order cannot be found on `OrderConfirmationPage.tsx`, it should display a user-friendly error message.\n",
+    "depends_on_features" : [ "order-api", "menu-management" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
