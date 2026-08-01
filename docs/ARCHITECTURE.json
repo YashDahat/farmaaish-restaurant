@@ -4323,13 +4323,37 @@
     "status" : "PLANNED",
     "description" : "TypeScript types and interfaces for the Gallery domain.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "string",
+      "description" : "Unique identifier for the gallery image (UUID)."
+    }, {
+      "name" : "imageUrl",
+      "type" : "string",
+      "description" : "URL of the gallery image."
+    }, {
+      "name" : "caption",
+      "type" : "string",
+      "description" : "Descriptive caption for the image, max 255 characters."
+    }, {
+      "name" : "displayOrder",
+      "type" : "number",
+      "description" : "Order in which the image should be displayed."
+    }, {
+      "name" : "createdAt",
+      "type" : "string",
+      "description" : "Timestamp when the image was created (ISO 8601 string)."
+    }, {
+      "name" : "updatedAt",
+      "type" : "string",
+      "description" : "Timestamp when the image was last updated (ISO 8601 string)."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "gallery-ui",
-    "file_role" : null,
+    "file_role" : "Generated from the backend API contract — defines the TypeScript interface for a gallery image.",
     "change_required" : null
   }, {
     "file_name" : "galleryService.ts",
@@ -4340,14 +4364,26 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Provides functions for interacting with the gallery-related API endpoints.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getAllGalleryImages",
+      "parameters" : [ ],
+      "return_type" : "Promise<GalleryImage[]>",
+      "description" : "Fetches all gallery images from the backend, ordered by display order."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/gallery",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Fetches a list of all gallery images.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/api/client.ts", "frontend/src/types/gallery.ts" ],
     "depends_on" : [ ],
     "feature_name" : "gallery-ui",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — provides functions for interacting with the gallery-related API endpoints, specifically getAllGalleryImages(): Promise<GalleryImage[]>",
     "change_required" : null
   }, {
     "file_name" : "useGallery.ts",
@@ -4358,14 +4394,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "React Query hook for fetching and managing gallery data.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "useAllGalleryImages",
+      "parameters" : [ ],
+      "return_type" : "UseQueryResult<GalleryImage[], Error>",
+      "description" : "A React Query hook to fetch and manage all gallery images. Returns query status and data."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/services/galleryService.ts", "frontend/src/types/gallery.ts" ],
     "depends_on" : [ ],
     "feature_name" : "gallery-ui",
-    "file_role" : null,
+    "file_role" : "HOOK layer — provides a React Query hook useAllGalleryImages(): UseQueryResult<GalleryImage[], Error> for fetching and managing gallery data.",
     "change_required" : null
   }, {
     "file_name" : "GalleryPage.tsx",
@@ -4376,14 +4417,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Displays a gallery of high-quality photos of the restaurant's ambiance and events.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "GalleryPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the main gallery page with a hero section, heading, and a grid of images."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useGallery.ts", "frontend/src/components/gallery/ImageGrid.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "gallery-ui",
-    "file_role" : null,
+    "file_role" : "PAGE layer — displays a gallery of high-quality photos of the restaurant's ambiance and events, using the useAllGalleryImages hook and ImageGrid component.",
     "change_required" : null
   }, {
     "file_name" : "ImageGrid.tsx",
@@ -4394,14 +4440,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A responsive grid component for displaying gallery images.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ImageGrid",
+      "parameters" : [ "{ images: GalleryImage[] }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a responsive grid of gallery images, each with its caption."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/types/gallery.ts" ],
     "depends_on" : [ ],
     "feature_name" : "gallery-ui",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — a responsive grid component for displaying gallery images, accepting an array of GalleryImage as props.",
     "change_required" : null
   }, {
     "file_name" : "AdminGalleryPage.tsx",
@@ -4715,8 +4766,8 @@
     "feature_display_name" : "Gallery UI (Frontend)",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/types/gallery.ts", "frontend/src/services/galleryService.ts", "frontend/src/hooks/useGallery.ts", "frontend/src/pages/GalleryPage.tsx", "frontend/src/components/gallery/ImageGrid.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#800020] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b89a2f] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-gray-50 (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-gray-700 leading-relaxed\n\nThis feature provides a frontend gallery for Farmaaish Restaurant, showcasing high-quality images of its ambiance, dishes, and events. It consists of TypeScript types, a service for API interaction, a React Query hook for data fetching, a page to display the gallery, and a responsive image grid component.\n\n1.  **`gallery.ts`**: Defines the `GalleryImage` interface, which mirrors the `GalleryImageDto` from the `gallery-management` backend feature. This ensures type safety across the frontend.\n\n2.  **`galleryService.ts`**: This service acts as an intermediary between the React components and the backend API. It exports an asynchronous function `getAllGalleryImages()` that makes a GET request to the `/api/v1/gallery` endpoint provided by the `gallery-management` feature. It uses the `apiClient` from `@/api/client` for making HTTP requests and returns a `Promise<GalleryImage[]>`. Error handling should log the error and re-throw it.\n\n3.  **`useGallery.ts`**: This React Query hook (`useAllGalleryImages()`) leverages the `galleryService.ts` to fetch gallery images. It uses `react-query`'s `useQuery` to manage the fetching, caching, and re-fetching of gallery data. The hook should return the query result, including `data` (list of `GalleryImage`), `isLoading`, and `isError` states. It should call `galleryService.getAllGalleryImages` as its query function.\n\n4.  **`GalleryPage.tsx`**: This page component is responsible for rendering the main gallery view. It will use the `Layout` component from `shared-ui` for consistent navigation and footer. The page will fetch gallery images using the `useAllGalleryImages` hook. It should display a prominent heading like \"Our Culinary Journey\" or \"A Glimpse into Farmaaish\" in `text-4xl md:text-6xl font-bold text-[#36454F]` and a sub-heading in `text-xl text-gray-600`. If data is loading, it should show a loading indicator. If there's an error, it should display an error message. Once data is successfully fetched, it will pass the `GalleryImage[]` data to the `ImageGrid` component for display. The page should incorporate a hero section with a relevant Unsplash image (e.g., a restaurant interior or food spread) and an overlay.\n\n5.  **`ImageGrid.tsx`**: This component receives an array of `GalleryImage` objects as props and renders them in a responsive grid layout. Each image should be displayed within a card-like structure, showing the `imageUrl` and `caption`. The grid should be responsive, adapting to different screen sizes, and images should be styled to maintain aspect ratio and provide a visually appealing presentation. Use `object-cover` for images and ensure a consistent height for each image within the grid. The caption should be displayed clearly, perhaps on hover or below the image. The component should use the `Card` design token for individual image containers.\n\n**Inter-file Wiring:**\n- `GalleryPage.tsx` imports and uses the `useAllGalleryImages` hook from `useGallery.ts`.\n- `GalleryPage.tsx` imports and uses the `ImageGrid` component from `ImageGrid.tsx`.\n- `useGallery.ts` imports and calls `galleryService.getAllGalleryImages()` from `galleryService.ts`.\n- `galleryService.ts` uses `apiClient` to make HTTP requests to the `/api/v1/gallery` endpoint of the `gallery-management` backend feature.\n- `galleryService.ts` and `useGallery.ts` import types from `gallery.ts`.\n- `ImageGrid.tsx` imports types from `gallery.ts`.\n- `GalleryPage.tsx` wraps its content in `<Layout>` from `shared-ui`.\n",
+    "depends_on_features" : [ "gallery-management", "shared-ui" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
