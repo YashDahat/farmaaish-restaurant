@@ -2459,14 +2459,14 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Configures the global Axios instance with base URL and interceptors for auth tokens.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-app",
-    "file_role" : null,
+    "file_role" : "Axios client configuration — sets base URL and adds an interceptor to attach the 'token' from localStorage to all outgoing requests.",
     "change_required" : null
   }, {
     "file_name" : "App.tsx",
@@ -2477,14 +2477,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Root component that sets up the React Router and global context providers.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "App",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the main application structure, including routing and context providers."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-app",
-    "file_role" : null,
+    "file_role" : "Root React component — sets up React Router for navigation and provides global contexts like authentication and React Query.",
     "change_required" : null
   }, {
     "file_name" : "Layout.tsx",
@@ -2657,14 +2662,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Landing page with a regal hero section, featured dishes, testimonials, and calls-to-action for booking and ordering.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "HomePage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the main homepage content by composing several section components."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/components/home/HeroSection.tsx", "frontend/src/components/home/FeaturedDishesSection.tsx", "frontend/src/components/home/TestimonialsSection.tsx", "frontend/src/components/home/BookingCtaSection.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "core-app",
-    "file_role" : null,
+    "file_role" : "Public-facing landing page — composes various sections to showcase the restaurant's offerings and drive user engagement.",
     "change_required" : null
   }, {
     "file_name" : "HeroSection.tsx",
@@ -2675,14 +2685,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Full-bleed hero component for the homepage with stunning food photography and branding.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "HeroSection",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the hero section with a background image, overlay, title, subtitle, and a booking CTA."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-app",
-    "file_role" : null,
+    "file_role" : "Homepage hero component — displays a full-bleed image, a branded headline, and a call-to-action for reservations.",
     "change_required" : null
   }, {
     "file_name" : "FeaturedDishesSection.tsx",
@@ -2693,14 +2708,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Homepage section showcasing a curated grid of signature dishes.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "FeaturedDishesSection",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Fetches and displays a grid of featured dishes, showing name, description, price (in ₹), and image."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useMenu.ts" ],
     "depends_on" : [ ],
     "feature_name" : "core-app",
-    "file_role" : null,
+    "file_role" : "Homepage section — displays a grid of signature menu items fetched using `useMenu`.",
     "change_required" : null
   }, {
     "file_name" : "TestimonialsSection.tsx",
@@ -2711,14 +2731,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Homepage section displaying a rotating carousel of customer testimonials.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "TestimonialsSection",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Fetches and displays customer testimonials in a carousel, showing customer name and review text."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useTestimonials.ts" ],
     "depends_on" : [ ],
     "feature_name" : "core-app",
-    "file_role" : null,
+    "file_role" : "Homepage section — displays a rotating carousel of customer testimonials fetched using `useTestimonials`.",
     "change_required" : null
   }, {
     "file_name" : "BookingCtaSection.tsx",
@@ -2729,14 +2754,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A prominent call-to-action section on the homepage to drive users to book a table.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "BookingCtaSection",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a call-to-action section with a message and a button to navigate to the reservation page."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-app",
-    "file_role" : null,
+    "file_role" : "Homepage call-to-action component — prompts users to book a table with a prominent button.",
     "change_required" : null
   }, {
     "file_name" : "NotFoundPage.tsx",
@@ -2747,14 +2777,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A 404 page shown for any routes that do not match.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "NotFoundPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a 404 error message and a link to return to the homepage."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-app",
-    "file_role" : null,
+    "file_role" : "Error page — displays a 404 message for unmatched routes and provides navigation back to the homepage.",
     "change_required" : null
   }, {
     "file_name" : "menu.ts",
@@ -4175,8 +4210,8 @@
     "feature_display_name" : "Core Application (Frontend)",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/api/client.ts", "frontend/src/App.tsx", "frontend/src/pages/HomePage.tsx", "frontend/src/components/home/HeroSection.tsx", "frontend/src/components/home/FeaturedDishesSection.tsx", "frontend/src/components/home/TestimonialsSection.tsx", "frontend/src/components/home/BookingCtaSection.tsx", "frontend/src/pages/NotFoundPage.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#800020] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b89a2e] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-gray-50 (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-gray-700 leading-relaxed\n\nThis `core-app` feature provides the foundational frontend structure, including the global Axios client configuration, the root `App.tsx` component for routing and context providers, and the main public-facing pages like the `HomePage.tsx` and `NotFoundPage.tsx`. It also includes the core components that make up the homepage: `HeroSection.tsx`, `FeaturedDishesSection.tsx`, `TestimonialsSection.tsx`, and `BookingCtaSection.tsx`. All monetary values displayed should be formatted in Indian Rupees (₹) using the `en-IN` locale.\n\n### `frontend/src/api/client.ts`\nThis file configures the global Axios instance. It sets the `baseURL` to `/api/v1` and includes an interceptor to attach the authentication token to outgoing requests. The token is retrieved from `localStorage` using the key 'token'.\n\n### `frontend/src/App.tsx`\nThis is the root component of the application. It sets up the `BrowserRouter` from `react-router-dom` to define the application's routes. It wraps the entire application with necessary context providers, including `AuthContext` from `auth-ui` and `QueryClientProvider` for React Query. It defines the main routes for the `HomePage`, `NotFoundPage`, and other feature pages, ensuring that all public pages are wrapped with the `Layout` component from `shared-ui`.\n\n### `frontend/src/pages/HomePage.tsx`\nThis page serves as the landing page for Farmaaish Restaurant. It composes several section components to present a rich and inviting experience. It includes a `HeroSection` at the top, followed by `FeaturedDishesSection` to showcase signature items, `TestimonialsSection` for social proof, and a `BookingCtaSection` to encourage table reservations. All content is designed to evoke the regality and richness of Mughlai heritage.\n\n### `frontend/src/components/home/HeroSection.tsx`\nThis component renders a full-bleed hero section for the homepage. It features a stunning background image of Mughlai cuisine (using `https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1920&q=80`) with a dark overlay (`bg-black bg-opacity-50`). The headline should be \"Experience the Grandeur of Farmaaish Restaurant\" and the subheadline \"A Culinary Journey Through Royal Mughlai Flavors.\" It includes a primary call-to-action button, styled with the `Primary CTA` design token, that navigates to the reservation booking page (`/reservations`).\n\n### `frontend/src/components/home/FeaturedDishesSection.tsx`\nThis section displays a curated grid of signature dishes. It utilizes the `useMenu` hook from the `menu-display` feature to fetch a list of `MenuItemDto` objects. The section title should be \"Our Signature Creations\" and the description \"Savor the rich and aromatic flavors of our most beloved Mughlai dishes, crafted with tradition and passion.\" Each dish card will display the `name`, `description`, `price`, and `imageUrl` of the `MenuItemDto`. Prices must be formatted in Indian Rupees (₹) using `toLocaleString('en-IN', { style: 'currency', currency: 'INR' })`.\n\n### `frontend/src/components/home/TestimonialsSection.tsx`\nThis component renders a rotating carousel of customer testimonials. It uses the `useTestimonials` hook from the `testimonial-ui` feature to fetch `TestimonialDto` objects. The section title should be \"What Our Guests Say\" and the description \"Hear from those who have experienced the unparalleled taste and hospitality of Farmaaish Restaurant.\" Each testimonial card will display the `customerName` and `reviewText` from the `TestimonialDto`.\n\n### `frontend/src/components/home/BookingCtaSection.tsx`\nThis prominent call-to-action section encourages users to book a table. It features a background image (e.g., a luxurious dining setting) and a clear message: \"Reserve Your Table at Farmaaish Restaurant.\" The subheadline should be \"Indulge in an unforgettable dining experience. Book your table now.\" It includes a primary call-to-action button, styled with the `Primary CTA` design token, that navigates to the reservation booking page (`/reservations`).\n\n### `frontend/src/pages/NotFoundPage.tsx`\nThis page is displayed for any routes that do not match. It should present a clear \"404 - Page Not Found\" message with a friendly subtext like \"The culinary journey you sought seems to have taken a detour. Please return to the homepage to discover our exquisite offerings.\" It includes a button to navigate back to the homepage, styled with the `Primary CTA` design token.\n",
+    "depends_on_features" : [ "auth-ui", "shared-ui", "menu-display", "testimonial-ui", "reservation-booking" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
