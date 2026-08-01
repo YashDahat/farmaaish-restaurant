@@ -3667,13 +3667,17 @@
     "status" : "PLANNED",
     "description" : "TypeScript types and interfaces for the Blog domain.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "BlogPost",
+      "type" : "{ id: string; title: string; content: string; author: string; publicationDate: string; imageUrl: string; }",
+      "description" : "Interface representing a blog post, derived from backend's BlogPostDto."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "blog-ui",
-    "file_role" : null,
+    "file_role" : "TypeScript types and interfaces for the Blog domain, mirroring the backend's BlogPostDto.",
     "change_required" : null
   }, {
     "file_name" : "blogService.ts",
@@ -3684,14 +3688,38 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Provides functions for interacting with the blog-related API endpoints.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getAllBlogPosts",
+      "parameters" : [ ],
+      "return_type" : "Promise<BlogPost[]>",
+      "description" : "Fetches all blog posts from the backend."
+    }, {
+      "name" : "getBlogPostById",
+      "parameters" : [ "string id" ],
+      "return_type" : "Promise<BlogPost>",
+      "description" : "Fetches a single blog post by its ID from the backend."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/blog",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Fetches a list of all blog posts.",
+      "access" : null
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/blog/{id}",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Fetches a single blog post by its ID.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/api/client.ts", "frontend/src/types/blog.ts" ],
     "depends_on" : [ ],
     "feature_name" : "blog-ui",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — provides functions for interacting with the blog-related API endpoints: getAllBlogPosts(): Promise<BlogPost[]> and getBlogPostById(id: string): Promise<BlogPost>.",
     "change_required" : null
   }, {
     "file_name" : "useBlog.ts",
@@ -3702,14 +3730,24 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "React Query hook for fetching and managing blog data.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "useAllBlogPosts",
+      "parameters" : [ ],
+      "return_type" : "UseQueryResult<BlogPost[], Error>",
+      "description" : "React Query hook to fetch all blog posts."
+    }, {
+      "name" : "useBlogPost",
+      "parameters" : [ "string id" ],
+      "return_type" : "UseQueryResult<BlogPost, Error>",
+      "description" : "React Query hook to fetch a single blog post by ID."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/services/blogService.ts", "frontend/src/types/blog.ts" ],
     "depends_on" : [ ],
     "feature_name" : "blog-ui",
-    "file_role" : null,
+    "file_role" : "HOOK layer — provides React Query hooks for fetching and managing blog data: useAllBlogPosts(): UseQueryResult<BlogPost[]> and useBlogPost(id: string): UseQueryResult<BlogPost>.",
     "change_required" : null
   }, {
     "file_name" : "BlogPage.tsx",
@@ -3720,14 +3758,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Displays a list of all blog posts in a grid format.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "BlogPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the blog listing page with a grid of blog post cards."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useBlog.ts", "frontend/src/components/blog/BlogPostGrid.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "blog-ui",
-    "file_role" : null,
+    "file_role" : "PAGE layer — displays a list of all blog posts in a grid format, using the useAllBlogPosts hook and BlogPostGrid component.",
     "change_required" : null
   }, {
     "file_name" : "BlogPostDetailPage.tsx",
@@ -3738,14 +3781,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Displays the full content of a single blog post.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "BlogPostDetailPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the detailed view of a single blog post."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useBlog.ts", "frontend/src/components/blog/BlogPostContent.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "blog-ui",
-    "file_role" : null,
+    "file_role" : "PAGE layer — displays the full content of a single blog post, using the useBlogPost hook and BlogPostContent component.",
     "change_required" : null
   }, {
     "file_name" : "BlogPostGrid.tsx",
@@ -3756,14 +3804,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A grid layout for displaying multiple blog post cards.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "BlogPostGrid",
+      "parameters" : [ "{ posts: BlogPost[] }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a responsive grid of blog post cards."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/blog/BlogPostCard.tsx", "frontend/src/types/blog.ts" ],
     "depends_on" : [ ],
     "feature_name" : "blog-ui",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — a grid layout for displaying multiple blog post cards, consuming a List<BlogPost> and rendering BlogPostCard for each.",
     "change_required" : null
   }, {
     "file_name" : "BlogPostCard.tsx",
@@ -3774,14 +3827,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A card component to display a summary of a single blog post.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "BlogPostCard",
+      "parameters" : [ "{ post: BlogPost }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Displays a summary card for a single blog post, linking to its detail page."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/types/blog.ts" ],
     "depends_on" : [ ],
     "feature_name" : "blog-ui",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — a card component to display a summary of a single blog post, consuming a BlogPost object.",
     "change_required" : null
   }, {
     "file_name" : "BlogPostContent.tsx",
@@ -3792,14 +3850,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Component to render the main content of a blog post, including title, metadata, and body.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "BlogPostContent",
+      "parameters" : [ "{ post: BlogPost }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the full content of a blog post."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/types/blog.ts" ],
     "depends_on" : [ ],
     "feature_name" : "blog-ui",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — renders the main content of a blog post, including title, metadata, and body, consuming a BlogPost object.",
     "change_required" : null
   }, {
     "file_name" : "AdminBlogPage.tsx",
@@ -4536,8 +4599,8 @@
     "feature_display_name" : "Blog UI (Frontend)",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/types/blog.ts", "frontend/src/services/blogService.ts", "frontend/src/hooks/useBlog.ts", "frontend/src/pages/BlogPage.tsx", "frontend/src/pages/BlogPostDetailPage.tsx", "frontend/src/components/blog/BlogPostGrid.tsx", "frontend/src/components/blog/BlogPostCard.tsx", "frontend/src/components/blog/BlogPostContent.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#800020] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b8942e] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-gray-50 (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-[#36454F] leading-relaxed\n\nThis feature provides the frontend UI for displaying blog posts from Farmaaish Restaurant. It consists of TypeScript types, a service for API interaction, a React Query hook for data fetching, and React components for rendering blog posts in a list and detail view.\n\n### Data Flow and Interaction:\n1.  **`blog.ts`**: Defines the `BlogPost` interface, mirroring the `BlogPostDto` from the `blog-management` backend feature. This ensures type safety across the frontend.\n2.  **`blogService.ts`**: Contains asynchronous functions `getAllBlogPosts()` and `getBlogPostById(id: string)`. These functions use the shared `apiClient` to make HTTP GET requests to the `/api/v1/blog` and `/api/v1/blog/{id}` endpoints exposed by the `blog-management` backend feature. They return `Promise<BlogPost[]>` and `Promise<BlogPost>` respectively.\n3.  **`useBlog.ts`**: Provides two React Query hooks:\n    *   `useAllBlogPosts()`: Fetches all blog posts using `blogService.getAllBlogPosts()`. It manages loading, error, and data states for displaying a list of posts.\n    *   `useBlogPost(id: string)`: Fetches a single blog post by its ID using `blogService.getBlogPostById(id)`. It also handles loading, error, and data states for the detail view.\n4.  **`BlogPage.tsx`**: This page component is responsible for displaying a grid of all blog posts. It uses the `useAllBlogPosts()` hook to fetch data. While loading, it should display a loading indicator. If an error occurs, it should display an error message. Once data is successfully fetched, it renders the `BlogPostGrid` component, passing the fetched `BlogPost[]` as props.\n5.  **`BlogPostGrid.tsx`**: A presentational component that receives an array of `BlogPost` objects. It maps over this array and renders a `BlogPostCard` for each blog post in a responsive grid layout. The grid should have 3 columns on large screens, 2 on medium, and 1 on small.\n6.  **`BlogPostCard.tsx`**: A presentational component that receives a single `BlogPost` object. It displays a summary of the blog post, including its `imageUrl`, `title`, `author`, `publicationDate`, and a brief excerpt of its `content`. The card should be clickable, navigating to the `BlogPostDetailPage` for the specific post using `react-router-dom`'s `Link` component, with the URL path `/blog/:id`.\n7.  **`BlogPostDetailPage.tsx`**: This page component displays the full content of a single blog post. It extracts the blog post `id` from the URL parameters using `react-router-dom`'s `useParams()` hook. It then uses the `useBlogPost(id)` hook to fetch the specific blog post data. Similar to `BlogPage.tsx`, it handles loading and error states. Upon successful data fetch, it renders the `BlogPostContent` component, passing the fetched `BlogPost` as props.\n8.  **`BlogPostContent.tsx`**: A presentational component that receives a single `BlogPost` object. It renders the full `title`, `author`, `publicationDate`, `imageUrl`, and `content` of the blog post. The `content` should be rendered as rich text, assuming it's HTML or Markdown that can be safely injected (e.g., using `dangerouslySetInnerHTML` or a Markdown renderer library if applicable).\n\n### Styling and Design:\nAll components will adhere to the design tokens defined above. The `BlogPage` will use the `Layout` component from `shared-ui`. Blog post images should be high-quality and cover the card/header area. Dates should be formatted using the `en-IN` locale.\n\n### Error Handling:\nBoth `BlogPage.tsx` and `BlogPostDetailPage.tsx` should display user-friendly error messages if the blog posts fail to load or if a specific blog post is not found (e.g., a 404 message).\n",
+    "depends_on_features" : [ "blog-management", "shared-ui" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
