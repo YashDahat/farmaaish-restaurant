@@ -2758,14 +2758,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Landing page with a full-bleed hero image, featured dishes, customer testimonials, and a reservation CTA.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "HomePage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the main landing page, integrating HeroSection, FeaturedMenuItems, TestimonialsSection, and CallToActionSection."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/home/HeroSection.tsx", "frontend/src/components/home/FeaturedMenuItems.tsx", "frontend/src/components/home/TestimonialsSection.tsx", "frontend/src/components/home/CallToActionSection.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "static-pages",
-    "file_role" : null,
+    "file_role" : "PAGE layer — orchestrates the display of various home page components including hero, featured menu items, testimonials, and calls to action.",
     "change_required" : null
   }, {
     "file_name" : "HeroSection.tsx",
@@ -2776,14 +2781,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Displays a large, high-quality image or video with the restaurant's value proposition.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "HeroSection",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the hero section with a background image, title, tagline, and a 'Book a Table' button."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "static-pages",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — displays a prominent hero banner with the restaurant's branding and a call to action.",
     "change_required" : null
   }, {
     "file_name" : "FeaturedMenuItems.tsx",
@@ -2794,14 +2804,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A curated grid of signature dishes to entice visitors.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "FeaturedMenuItems",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Fetches featured menu items using `useMenu().getAllMenuItems()` and displays them in a grid, formatting prices in INR."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useMenu.ts" ],
     "depends_on" : [ ],
     "feature_name" : "static-pages",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — fetches and displays a curated selection of menu items.",
     "change_required" : null
   }, {
     "file_name" : "TestimonialsSection.tsx",
@@ -2812,14 +2827,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Showcases glowing customer reviews to build social proof.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "TestimonialsSection",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a section with hardcoded customer testimonials."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "static-pages",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — showcases hardcoded customer testimonials.",
     "change_required" : null
   }, {
     "file_name" : "CallToActionSection.tsx",
@@ -2830,14 +2850,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A prominent section encouraging users to book a table or order online.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "CallToActionSection",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a call-to-action section with buttons for booking a table and viewing the menu."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "static-pages",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — provides prominent calls to action for reservations and menu browsing.",
     "change_required" : null
   }, {
     "file_name" : "AboutPage.tsx",
@@ -2848,14 +2873,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Page detailing the restaurant's history, culinary philosophy, and chef profiles.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AboutPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the About Us page, integrating OurStory and ChefProfile components."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/about/OurStory.tsx", "frontend/src/components/about/ChefProfile.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "static-pages",
-    "file_role" : null,
+    "file_role" : "PAGE layer — presents information about the restaurant's history and culinary team.",
     "change_required" : null
   }, {
     "file_name" : "OurStory.tsx",
@@ -2866,14 +2896,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A content block telling the story and heritage of Farmaaish Restaurant.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "OurStory",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a section detailing the restaurant's story and heritage with placeholder text."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "static-pages",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — displays the restaurant's historical narrative.",
     "change_required" : null
   }, {
     "file_name" : "ChefProfile.tsx",
@@ -2884,14 +2919,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A section introducing the head chef and their culinary background.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ChefProfile",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a section introducing the head chef with a placeholder image, name, and biography."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "static-pages",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — introduces the head chef with their background.",
     "change_required" : null
   }, {
     "file_name" : "ContactPage.tsx",
@@ -2902,14 +2942,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Provides contact details, a contact form, and an interactive map.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ContactPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the Contact Us page, integrating the ContactInfoMap component."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/contact/ContactInfoMap.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "static-pages",
-    "file_role" : null,
+    "file_role" : "PAGE layer — provides contact details and an interactive map.",
     "change_required" : null
   }, {
     "file_name" : "ContactInfoMap.tsx",
@@ -2920,14 +2965,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Displays address, phone number, hours, and an embedded Google Map.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ContactInfoMap",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the restaurant's contact information and an embedded Google Map."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "static-pages",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — displays the restaurant's address, phone, hours, and an embedded Google Map.",
     "change_required" : null
   }, {
     "file_name" : "menuService.ts",
@@ -4033,8 +4083,8 @@
     "feature_display_name" : "Static Pages",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/pages/HomePage.tsx", "frontend/src/components/home/HeroSection.tsx", "frontend/src/components/home/FeaturedMenuItems.tsx", "frontend/src/components/home/TestimonialsSection.tsx", "frontend/src/components/home/CallToActionSection.tsx", "frontend/src/pages/AboutPage.tsx", "frontend/src/components/about/OurStory.tsx", "frontend/src/components/about/ChefProfile.tsx", "frontend/src/pages/ContactPage.tsx", "frontend/src/components/contact/ContactInfoMap.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "This feature implements the static public-facing pages of the Farmaaish Restaurant website, including the Home, About, and Contact pages. These pages are designed to showcase the restaurant's ambiance, culinary offerings, heritage, and contact information, adhering to a sophisticated Mughlai aesthetic.\n\n## Design Tokens\n- Navbar: bg-[#800020] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b08d23] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-[#F5F5DC] (odd sections) / bg-white (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-[#36454F] leading-relaxed\n\n### HomePage.tsx\nThis page serves as the landing page for Farmaaish Restaurant. It is composed of several distinct sections:\n1.  **HeroSection**: Displays a full-bleed hero image with the restaurant's name and a compelling tagline, along with a primary call to action for reservations.\n2.  **FeaturedMenuItems**: Presents a curated selection of signature dishes. This section will fetch menu items from the backend using the `useMenu` hook from the `menu-display` feature. It will display the `name`, `description`, `price`, and `imageUrl` for each `MenuItemDto`. Prices should be formatted in Indian Rupees (₹) using `toLocaleString('en-IN', { style: 'currency', currency: 'INR' })`.\n3.  **TestimonialsSection**: Showcases customer reviews to build trust and social proof.\n4.  **CallToActionSection**: A prominent section encouraging users to book a table or order online.\n\nAll sections on the HomePage will use the defined design tokens for colors, typography, and spacing to maintain a consistent and luxurious feel.\n\n### HeroSection.tsx\nThis component receives no props. It renders a full-width hero banner with a background image, an overlay, and centered text. The main heading will be \"Farmaaish Restaurant\" and the sub-headline will be a warm, sophisticated tagline like \"Experience the Grandeur of Mughlai Cuisine\". It includes a primary CTA button styled with `bg-[#D4AF37]` that navigates to the `/reservations` page.\n\n### FeaturedMenuItems.tsx\nThis component fetches a list of `MenuItemDto` objects using the `useMenu().getAllMenuItems()` hook. It then renders a grid of these items, displaying their `name`, `description`, `price`, and `imageUrl`. Each menu item card will be styled according to the 'Card' design token. Prices will be displayed in Indian Rupees (₹).\n\n### TestimonialsSection.tsx\nThis component renders a section showcasing customer testimonials. It will contain hardcoded placeholder testimonials that align with the warm and inviting tone, emphasizing culinary excellence and a special dining experience. Each testimonial will include a customer name and their review.\n\n### CallToActionSection.tsx\nThis component provides a prominent call to action. It will feature a heading like \"Reserve Your Table\" or \"Order Online Now\" and two buttons: one for navigating to `/reservations` (styled as Primary CTA) and another for `/menu` or `/order-online` (styled as a secondary CTA, e.g., `border-[#D4AF37] text-[#D4AF37]`).\n\n### AboutPage.tsx\nThis page provides information about Farmaaish Restaurant's history and culinary philosophy. It is composed of:\n1.  **OurStory**: Details the restaurant's heritage and journey.\n2.  **ChefProfile**: Introduces the head chef and their culinary background.\n\nContent on this page will use the defined design tokens for text and background colors.\n\n### OurStory.tsx\nThis component renders a content block detailing the story and heritage of Farmaaish Restaurant. It will include placeholder text that conveys authenticity and a passion for culinary excellence, using the defined body text color.\n\n### ChefProfile.tsx\nThis component introduces the head chef of Farmaaish Restaurant. It will include a placeholder image of a chef, their name, and a brief biography highlighting their culinary background and philosophy, aligning with the sophisticated tone.\n\n### ContactPage.tsx\nThis page provides essential contact information for Farmaaish Restaurant. It includes:\n1.  **ContactInfoMap**: Displays the restaurant's address, phone number, opening hours, and an embedded Google Map.\n\n### ContactInfoMap.tsx\nThis component displays the restaurant's contact details: address (Kundan Garden, Baner Rd, Near Veritas Software, Baner, Pune, Maharashtra 411069), phone number (020 2729 1111), and opening hours (placeholder: \"Mon-Sun: 12:00 PM - 11:00 PM\"). It also embeds an iframe for a Google Map centered at the provided coordinates (18.55557, 73.77492). The map iframe will use the `src=\"https://www.google.com/maps/embed/v1/place?q=18.55557,73.77492&key=YOUR_GOOGLE_MAPS_API_KEY\"` (API key needs to be replaced with an actual key).",
+    "depends_on_features" : [ "menu-display", "core-ui", "reservation-booking" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
