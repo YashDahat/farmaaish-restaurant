@@ -17,8 +17,7 @@ export function AddToCartButton({ item }: AddToCartButtonProps) {
         name: item.name,
         unitPrice: item.price,
         imageUrl: item.imageUrl ?? undefined,
-        quantity: 1,
-      });
+      }, 1);
       toast.success(`${item.name} added to cart!`);
     } else {
       toast.error('Cannot add item to cart: missing item details.');

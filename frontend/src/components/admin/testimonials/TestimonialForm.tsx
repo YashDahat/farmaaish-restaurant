@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { TestimonialDto } from '@/types/testimonial';
+import type { TestimonialDto } from '@/types/testimonial';
 import {
   Form,
   FormControl,
@@ -20,8 +20,10 @@ const testimonialFormSchema = z.object({
   reviewText: z.string().min(1, 'Review text is required'),
   rating: z.coerce.number().min(1).max(5, 'Rating must be between 1 and 5'),
   displayOrder: z.coerce.number().min(0, 'Display order must be a positive number').optional(),
-  isVisible: z.boolean().default(true),
+  isVisible: z.boolean(),
 });
+
+type TestimonialFormValues = z.infer<typeof testimonialFormSchema>;
 
 interface TestimonialFormProps {
   initialData?: TestimonialDto;
@@ -29,7 +31,7 @@ interface TestimonialFormProps {
 }
 
 export function TestimonialForm({ initialData, onSubmit }: TestimonialFormProps) {
-  const form = useForm<z.infer<typeof testimonialFormSchema>>({
+  const form = useForm<TestimonialFormValues>({
     resolver: zodResolver(testimonialFormSchema),
     defaultValues: {
       customerName: initialData?.customerName ?? '',
@@ -40,13 +42,15 @@ export function TestimonialForm({ initialData, onSubmit }: TestimonialFormProps)
     },
   });
 
-  function handleSubmit(values: z.infer<typeof testimonialFormSchema>) {
+  function handleSubmit(values: TestimonialFormValues) {
     onSubmit({
-      ...initialData,
+      id: initialData?.id ?? null,
+      createdAt: initialData?.createdAt ?? null,
+      updatedAt: initialData?.updatedAt ?? null,
       customerName: values.customerName,
       reviewText: values.reviewText,
       rating: values.rating,
-      displayOrder: values.displayOrder,
+      displayOrder: values.displayOrder ?? null,
       isVisible: values.isVisible,
     });
   }

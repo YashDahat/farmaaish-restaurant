@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AdminLayout } from '@/components/AdminLayout';
+import AdminLayout from '@/components/AdminLayout';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { BlogPostDto } from '@/types/blog';
@@ -7,7 +7,7 @@ import { useAdminAllBlogPosts, useDeleteBlogPost } from '@/hooks/useBlog';
 import { BlogPostsTable } from '@/components/admin/blog/BlogPostsTable';
 import { BlogPostForm } from '@/components/admin/blog/BlogPostForm';
 import { toast } from 'sonner';
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { PlusCircleIcon } from 'lucide-react';
 
 export default function AdminBlogPage() {

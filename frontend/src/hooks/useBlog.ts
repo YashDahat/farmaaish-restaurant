@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import { adminGetAllBlogPosts, adminGetBlogPostById, createBlogPost, deleteBlogPost, getAllBlogPosts, getBlogPostById, updateBlogPost } from '@/services/blogService';
 import type { BlogPostDto } from '@/types/blog';
 
@@ -33,23 +33,19 @@ export const useAdminBlogPost = (id: string) => {
 };
 
 export const useCreateBlogPost = () => {
-  return useQuery<BlogPostDto, Error, BlogPostDto, (request: BlogPostDto) => Promise<BlogPostDto>>({
-    queryKey: ['createBlogPost'],
-    queryFn: createBlogPost,
+  return useMutation<BlogPostDto, Error, BlogPostDto>({
+    mutationFn: (request: BlogPostDto) => createBlogPost(request),
   });
 };
 
 export const useUpdateBlogPost = (id: string) => {
-  return useQuery<BlogPostDto, Error, BlogPostDto, (request: BlogPostDto) => Promise<BlogPostDto>>({
-    queryKey: ['updateBlogPost', id],
-    queryFn: (request: BlogPostDto) => updateBlogPost(id, request),
-    enabled: !!id,
+  return useMutation<BlogPostDto, Error, BlogPostDto>({
+    mutationFn: (request: BlogPostDto) => updateBlogPost(id, request),
   });
 };
 
 export const useDeleteBlogPost = () => {
-  return useQuery<void, Error, void, (id: string) => Promise<void>>({
-    queryKey: ['deleteBlogPost'],
-    queryFn: deleteBlogPost,
+  return useMutation<void, Error, string>({
+    mutationFn: (id: string) => deleteBlogPost(id),
   });
 };

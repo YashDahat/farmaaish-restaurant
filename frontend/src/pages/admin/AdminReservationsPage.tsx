@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import AdminLayout from '@/components/AdminLayout';
-import { Button } from '@/components/ui/button';
 import { useQuery } from '@tanstack/react-query';
 import { getAllReservations } from '@/services/reservationService';
 import ReservationsTable from '@/components/admin/reservations/ReservationsTable';

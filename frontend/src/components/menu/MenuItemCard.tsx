@@ -17,8 +17,7 @@ export function MenuItemCard({ item }: MenuItemCardProps) {
         name: item.name,
         unitPrice: item.price,
         imageUrl: item.imageUrl ?? undefined,
-        quantity: 1,
-      });
+      }, 1);
     }
   };
 

@@ -1,3 +1,4 @@
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -19,14 +20,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import type { MenuItemCategory, MenuItemDto } from '@/types/menu';
+import type { MenuItemDto } from '@/types/menu';
+
+const MENU_ITEM_CATEGORIES = ['APPETIZER', 'MAIN_COURSE', 'DESSERT', 'BEVERAGE', 'SPECIAL', 'BREAD'] as const;
 
 const formSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   description: z.string().min(1, 'Description is required'),
   price: z.coerce.number().min(0.01, 'Price must be greater than 0'),
   imageUrl: z.string().url('Invalid URL').optional().or(z.literal('')),
-  category: z.nativeEnum(MenuItemCategory, {
+  category: z.enum(MENU_ITEM_CATEGORIES, {
     message: 'Category is required',
   }),
 });
@@ -116,7 +119,7 @@ const MenuItemForm: React.FC<MenuItemFormProps> = ({ initialData, onSubmit }) =>
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  {Object.values(MenuItemCategory).map((category) => (
+                  {MENU_ITEM_CATEGORIES.map((category) => (
                     <SelectItem key={category} value={category}>
                       {category.replace(/_/g, ' ')}
                     </SelectItem>

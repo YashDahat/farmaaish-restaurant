@@ -25,7 +25,7 @@ export const PaymentSection = ({ customerName, customerPhone, deliveryAddress }:
     }
 
     const orderItems: OrderItemRequest[] = cartItems.map(item => ({
-      menuItemId: item.id,
+      menuItemId: String(item.id),
       quantity: item.quantity,
     }));
 

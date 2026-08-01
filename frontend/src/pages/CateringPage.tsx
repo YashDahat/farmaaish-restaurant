@@ -1,5 +1,5 @@
 import { CateringInquiryForm } from '@/components/catering/CateringInquiryForm';
-import { Layout } from '@/components/Layout';
+import Layout from '@/components/Layout';
 
 const CateringPage = () => {
   return (

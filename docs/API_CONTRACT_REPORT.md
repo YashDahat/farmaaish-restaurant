@@ -1,0 +1,104 @@
+# API Contract Report
+
+Effective client baseURL: `(empty)`
+
+## Mismatches (0)
+_None — every resolvable frontend call maps to a backend route._
+
+## Backend routes (49)
+- DELETE /api/admin/catering-inquiries/*
+- DELETE /api/admin/reservations/*
+- DELETE /api/admin/testimonials/*
+- DELETE /api/v1/admin/blog/*
+- DELETE /api/v1/admin/gallery/*
+- DELETE /api/v1/admin/menu/*
+- GET /api/admin/catering-inquiries
+- GET /api/admin/catering-inquiries/*
+- GET /api/admin/catering-inquiries/status/*
+- GET /api/admin/reservations
+- GET /api/admin/reservations/*
+- GET /api/admin/reservations/status/*
+- GET /api/admin/testimonials
+- GET /api/admin/testimonials/*
+- GET /api/testimonials
+- GET /api/testimonials/*
+- GET /api/v1/admin/blog
+- GET /api/v1/admin/blog/*
+- GET /api/v1/admin/gallery
+- GET /api/v1/admin/gallery/*
+- GET /api/v1/admin/menu
+- GET /api/v1/admin/menu/*
+- GET /api/v1/admin/orders
+- GET /api/v1/admin/orders/*
+- GET /api/v1/blog
+- GET /api/v1/blog/*
+- GET /api/v1/gallery
+- GET /api/v1/menu
+- GET /api/v1/menu/*
+- GET /api/v1/menu/category/*
+- GET /api/v1/orders/*
+- POST /api/admin/testimonials
+- POST /api/public/catering-inquiries
+- POST /api/public/reservations
+- POST /api/v1/admin/blog
+- POST /api/v1/admin/gallery
+- POST /api/v1/admin/menu
+- POST /api/v1/auth/login
+- POST /api/v1/orders
+- POST /api/v1/payments/create-order
+- POST /api/v1/payments/verify
+- POST /api/v1/payments/webhook
+- PUT /api/admin/catering-inquiries/*/status
+- PUT /api/admin/reservations/*/status
+- PUT /api/admin/testimonials/*
+- PUT /api/v1/admin/blog/*
+- PUT /api/v1/admin/gallery/*
+- PUT /api/v1/admin/menu/*
+- PUT /api/v1/admin/orders/*/status
+
+## Frontend calls (45)
+- DELETE /api/admin/catering-inquiries/${id}
+- DELETE /api/admin/reservations/${id}
+- DELETE /api/admin/testimonials/${id}
+- GET /api/v1/menu
+- GET /api/v1/menu/category/${category}
+- GET /api/v1/menu/${id}
+- GET /api/v1/admin/menu
+- GET /api/v1/admin/menu/${id}
+- POST /api/v1/admin/menu
+- PUT /api/v1/admin/menu/${id}
+- DELETE /api/v1/admin/menu/${id}
+- GET /api/testimonials
+- GET /api/testimonials/${id}
+- GET /api/admin/testimonials
+- GET /api/admin/testimonials/${id}
+- POST /api/admin/testimonials
+- PUT /api/admin/testimonials/${id}
+- GET /api/v1/gallery
+- GET /api/v1/admin/gallery
+- GET /api/v1/admin/gallery/${id}
+- POST /api/v1/admin/gallery
+- PUT /api/v1/admin/gallery/${id}
+- DELETE /api/v1/admin/gallery/${id}
+- POST /api/v1/orders
+- GET /api/v1/orders/${orderId}
+- GET /api/v1/admin/orders
+- GET /api/v1/admin/orders/${orderId}
+- PUT /api/v1/admin/orders/${orderId}/status
+- GET /api/v1/blog
+- GET /api/v1/blog/${id}
+- GET /api/v1/admin/blog
+- GET /api/v1/admin/blog/${id}
+- POST /api/v1/admin/blog
+- PUT /api/v1/admin/blog/${id}
+- DELETE /api/v1/admin/blog/${id}
+- POST /api/public/catering-inquiries
+- GET /api/admin/catering-inquiries
+- GET /api/admin/catering-inquiries/${id}
+- GET /api/admin/catering-inquiries/status/${status}
+- PUT /api/admin/catering-inquiries/${id}/status
+- POST /api/public/reservations
+- GET /api/admin/reservations
+- GET /api/admin/reservations/${id}
+- GET /api/admin/reservations/status/${status}
+- PUT /api/admin/reservations/${id}/status

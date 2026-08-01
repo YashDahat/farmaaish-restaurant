@@ -1,7 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { useCart } from '@/cart/CartContext';
-import { CartTotals } from '@/cart/types';
 
 interface OrderSummaryProps {
   customerName: string;
@@ -63,7 +62,7 @@ export function OrderSummary({ customerName, customerPhone, deliveryAddress }: O
               </div>
               {totals.adjustments.map((adj, index) => (
                 <div key={index} className="flex justify-between text-sm text-gray-600">
-                  <span>{adj.description}:</span>
+                  <span>{adj.label}:</span>
                   <span>{formatCurrency(adj.amount)}</span>
                 </div>
               ))}

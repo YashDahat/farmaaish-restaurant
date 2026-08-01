@@ -2,157 +2,19 @@
 
 This file tracks each generation attempt.
 
-## Attempt 1 — 2026-08-01 [IN PROGRESS]
+## Attempt 1 — 2026-08-01 [COMPLETED]
 
 **Business:** Farmaaish Restaurant
-**Planned Files (148):**
-- backend/src/main/java/com/farmaaishrestaurant/exception/GlobalExceptionHandler.java
-- backend/src/main/java/com/farmaaishrestaurant/exception/ResourceNotFoundException.java
-- backend/src/main/java/com/farmaaishrestaurant/dto/ErrorResponse.java
-- backend/src/main/java/com/farmaaishrestaurant/controller/SpaController.java
-- backend/src/main/java/com/farmaaishrestaurant/config/DataSeeder.java
-- backend/src/main/java/com/farmaaishrestaurant/model/MenuItem.java
-- backend/src/main/java/com/farmaaishrestaurant/model/MenuItemCategory.java
-- backend/src/main/java/com/farmaaishrestaurant/repository/MenuItemRepository.java
-- backend/src/main/java/com/farmaaishrestaurant/service/MenuService.java
-- backend/src/main/java/com/farmaaishrestaurant/dto/MenuItemDto.java
-- backend/src/main/java/com/farmaaishrestaurant/controller/MenuController.java
-- backend/src/main/java/com/farmaaishrestaurant/controller/AdminMenuController.java
-- backend/src/main/java/com/farmaaishrestaurant/model/Reservation.java
-- backend/src/main/java/com/farmaaishrestaurant/model/ReservationStatus.java
-- backend/src/main/java/com/farmaaishrestaurant/repository/ReservationRepository.java
-- backend/src/main/java/com/farmaaishrestaurant/service/ReservationService.java
-- backend/src/main/java/com/farmaaishrestaurant/dto/CreateReservationRequest.java
-- backend/src/main/java/com/farmaaishrestaurant/dto/ReservationResponse.java
-- backend/src/main/java/com/farmaaishrestaurant/controller/ReservationController.java
-- backend/src/main/java/com/farmaaishrestaurant/controller/AdminReservationController.java
-- backend/src/main/java/com/farmaaishrestaurant/model/Order.java
-- backend/src/main/java/com/farmaaishrestaurant/model/OrderItem.java
-- backend/src/main/java/com/farmaaishrestaurant/model/OrderStatus.java
-- backend/src/main/java/com/farmaaishrestaurant/repository/OrderRepository.java
-- backend/src/main/java/com/farmaaishrestaurant/repository/OrderItemRepository.java
-- backend/src/main/java/com/farmaaishrestaurant/service/OrderService.java
-- backend/src/main/java/com/farmaaishrestaurant/dto/CreateOrderRequest.java
-- backend/src/main/java/com/farmaaishrestaurant/dto/OrderItemRequest.java
-- backend/src/main/java/com/farmaaishrestaurant/dto/OrderResponse.java
-- backend/src/main/java/com/farmaaishrestaurant/dto/OrderItemResponse.java
-- backend/src/main/java/com/farmaaishrestaurant/controller/OrderController.java
-- backend/src/main/java/com/farmaaishrestaurant/controller/AdminOrderController.java
-- backend/src/main/java/com/farmaaishrestaurant/model/BlogPost.java
-- backend/src/main/java/com/farmaaishrestaurant/repository/BlogPostRepository.java
-- backend/src/main/java/com/farmaaishrestaurant/service/BlogPostService.java
-- backend/src/main/java/com/farmaaishrestaurant/dto/BlogPostDto.java
-- backend/src/main/java/com/farmaaishrestaurant/controller/BlogController.java
-- backend/src/main/java/com/farmaaishrestaurant/controller/AdminBlogController.java
-- backend/src/main/java/com/farmaaishrestaurant/model/CateringInquiry.java
-- backend/src/main/java/com/farmaaishrestaurant/model/InquiryStatus.java
-- backend/src/main/java/com/farmaaishrestaurant/repository/CateringInquiryRepository.java
-- backend/src/main/java/com/farmaaishrestaurant/service/CateringInquiryService.java
-- backend/src/main/java/com/farmaaishrestaurant/dto/CateringInquiryDto.java
-- backend/src/main/java/com/farmaaishrestaurant/controller/CateringInquiryController.java
-- backend/src/main/java/com/farmaaishrestaurant/controller/AdminCateringInquiryController.java
-- backend/src/main/java/com/farmaaishrestaurant/model/Testimonial.java
-- backend/src/main/java/com/farmaaishrestaurant/repository/TestimonialRepository.java
-- backend/src/main/java/com/farmaaishrestaurant/service/TestimonialService.java
-- backend/src/main/java/com/farmaaishrestaurant/dto/TestimonialDto.java
-- backend/src/main/java/com/farmaaishrestaurant/controller/TestimonialController.java
-- backend/src/main/java/com/farmaaishrestaurant/controller/AdminTestimonialController.java
-- backend/src/main/java/com/farmaaishrestaurant/model/GalleryImage.java
-- backend/src/main/java/com/farmaaishrestaurant/repository/GalleryImageRepository.java
-- backend/src/main/java/com/farmaaishrestaurant/service/GalleryImageService.java
-- backend/src/main/java/com/farmaaishrestaurant/dto/GalleryImageDto.java
-- backend/src/main/java/com/farmaaishrestaurant/controller/GalleryController.java
-- backend/src/main/java/com/farmaaishrestaurant/controller/AdminGalleryController.java
-- frontend/src/api/client.ts
-- frontend/src/App.tsx
-- frontend/src/components/Layout.tsx
-- frontend/src/components/Header.tsx
-- frontend/src/components/Footer.tsx
-- frontend/src/components/AdminLayout.tsx
-- frontend/src/components/ProtectedRoute.tsx
-- frontend/src/context/AuthContext.tsx
-- frontend/src/hooks/useAuth.ts
-- frontend/src/pages/LoginPage.tsx
-- frontend/src/pages/admin/AdminDashboardPage.tsx
-- frontend/src/pages/HomePage.tsx
-- frontend/src/components/home/HeroSection.tsx
-- frontend/src/components/home/FeaturedDishesSection.tsx
-- frontend/src/components/home/TestimonialsSection.tsx
-- frontend/src/components/home/BookingCtaSection.tsx
-- frontend/src/pages/NotFoundPage.tsx
-- frontend/src/types/menu.ts
-- frontend/src/services/menuService.ts
-- frontend/src/hooks/useMenu.ts
-- frontend/src/pages/MenuPage.tsx
-- frontend/src/components/menu/MenuCategoryTabs.tsx
-- frontend/src/components/menu/MenuItemGrid.tsx
-- frontend/src/components/menu/MenuItemCard.tsx
-- frontend/src/pages/admin/AdminMenuPage.tsx
-- frontend/src/components/admin/menu/MenuTable.tsx
-- frontend/src/components/admin/menu/MenuItemForm.tsx
-- frontend/src/components/admin/menu/DeleteMenuItemDialog.tsx
-- frontend/src/types/reservation.ts
-- frontend/src/services/reservationService.ts
-- frontend/src/hooks/useReservations.ts
-- frontend/src/pages/ReservationPage.tsx
-- frontend/src/components/reservations/ReservationForm.tsx
-- frontend/src/components/reservations/ReservationSuccessDialog.tsx
-- frontend/src/pages/admin/AdminReservationsPage.tsx
-- frontend/src/components/admin/reservations/ReservationsTable.tsx
-- frontend/src/components/admin/reservations/ReservationDetailModal.tsx
-- frontend/src/types/order.ts
-- frontend/src/services/orderService.ts
-- frontend/src/hooks/useOrders.ts
-- frontend/src/pages/CheckoutPage.tsx
-- frontend/src/pages/OrderConfirmationPage.tsx
-- frontend/src/components/cart/CartDrawer.tsx
-- frontend/src/components/cart/AddToCartButton.tsx
-- frontend/src/components/checkout/DeliveryAddressForm.tsx
-- frontend/src/components/checkout/OrderSummary.tsx
-- frontend/src/components/checkout/PaymentSection.tsx
-- frontend/src/pages/admin/AdminOrdersPage.tsx
-- frontend/src/components/admin/orders/OrdersTable.tsx
-- frontend/src/components/admin/orders/OrderDetailView.tsx
-- frontend/src/types/blog.ts
-- frontend/src/services/blogService.ts
-- frontend/src/hooks/useBlog.ts
-- frontend/src/pages/BlogPage.tsx
-- frontend/src/pages/BlogPostDetailPage.tsx
-- frontend/src/components/blog/BlogPostGrid.tsx
-- frontend/src/components/blog/BlogPostCard.tsx
-- frontend/src/components/blog/BlogPostContent.tsx
-- frontend/src/pages/admin/AdminBlogPage.tsx
-- frontend/src/components/admin/blog/BlogPostsTable.tsx
-- frontend/src/components/admin/blog/BlogPostForm.tsx
-- frontend/src/components/admin/blog/DeleteBlogPostDialog.tsx
-- frontend/src/types/inquiry.ts
-- frontend/src/services/inquiryService.ts
-- frontend/src/hooks/useInquiries.ts
-- frontend/src/pages/CateringPage.tsx
-- frontend/src/components/catering/CateringInquiryForm.tsx
-- frontend/src/components/catering/InquirySuccessMessage.tsx
-- frontend/src/pages/admin/AdminCateringInquiriesPage.tsx
-- frontend/src/components/admin/inquiries/InquiriesTable.tsx
-- frontend/src/components/admin/inquiries/InquiryDetailModal.tsx
-- frontend/src/types/testimonial.ts
-- frontend/src/services/testimonialService.ts
-- frontend/src/hooks/useTestimonials.ts
-- frontend/src/pages/admin/AdminTestimonialsPage.tsx
-- frontend/src/components/admin/testimonials/TestimonialsTable.tsx
-- frontend/src/components/admin/testimonials/TestimonialForm.tsx
-- frontend/src/components/admin/testimonials/DeleteTestimonialDialog.tsx
-- frontend/src/types/gallery.ts
-- frontend/src/services/galleryService.ts
-- frontend/src/hooks/useGallery.ts
-- frontend/src/pages/GalleryPage.tsx
-- frontend/src/components/gallery/ImageGrid.tsx
-- frontend/src/pages/admin/AdminGalleryPage.tsx
-- frontend/src/components/admin/gallery/GalleryImageTable.tsx
-- frontend/src/components/admin/gallery/GalleryImageForm.tsx
-- frontend/src/pages/AboutPage.tsx
-- frontend/src/pages/ContactPage.tsx
-- frontend/src/components/contact/MapEmbed.tsx
-- frontend/src/pages/ProfilePage.tsx
-- frontend/src/components/profile/OrderHistory.tsx
+**Category:** Mughlai restaurant
+**Website Type:** FULL_PLATFORM
+
+**Must-Have Features:**
+- Integrated Online Reservation System (e.g., via Resy, OpenTable, or SevenRooms API)
+- Integrated Online Ordering System with payment gateway
+- High-quality, professional food photography
+- Mobile-first, responsive design
+- Schema markup for recipes, menus, and local business
+- Click-to-call and interactive map integration
+- Google Business Profile synchronization for hours and reviews
 
 ---

@@ -36,7 +36,9 @@ export const GalleryImageForm = ({ initialData, onSubmit }: GalleryImageFormProp
 
   const handleSubmit = (values: z.infer<typeof formSchema>) => {
     onSubmit({
-      ...initialData,
+      id: initialData?.id ?? null,
+      createdAt: initialData?.createdAt ?? null,
+      updatedAt: initialData?.updatedAt ?? null,
       imageUrl: values.imageUrl,
       caption: values.caption,
       displayOrder: values.displayOrder,

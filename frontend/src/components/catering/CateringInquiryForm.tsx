@@ -56,8 +56,8 @@ export const CateringInquiryForm = () => {
         eventType: values.eventType,
         eventDate: format(values.eventDate, 'yyyy-MM-dd'),
         numberOfGuests: values.numberOfGuests,
-        budget: values.budget,
-        message: values.message,
+        budget: values.budget ?? null,
+        message: values.message ?? null,
         inquiryStatus: 'NEW',
         createdAt: null,
         updatedAt: null,
@@ -73,7 +73,7 @@ export const CateringInquiryForm = () => {
   };
 
   if (isSubmitted) {
-    return <InquirySuccessMessage />;
+    return <InquirySuccessMessage onReset={() => setIsSubmitted(false)} />;
   }
 
   return (
@@ -163,7 +163,6 @@ export const CateringInquiryForm = () => {
                     selected={field.value}
                     onSelect={field.onChange}
                     disabled={(date) => date < new Date()}
-                    initialFocus
                   />
                 </PopoverContent>
               </Popover>

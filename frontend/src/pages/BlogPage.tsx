@@ -3,6 +3,7 @@ import Layout from '@/components/Layout';
 import { useAllBlogPosts } from '@/hooks/useBlog';
 import BlogPostGrid from '@/components/blog/BlogPostGrid';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Card, CardHeader, CardContent } from '@/components/ui/card';
 
 const BlogPage: React.FC = () => {
   const { data: blogPosts, isLoading, isError, error } = useAllBlogPosts();

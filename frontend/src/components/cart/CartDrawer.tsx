@@ -15,12 +15,12 @@ export function CartDrawer() {
     return amount.toLocaleString('en-IN', { style: 'currency', currency: 'INR' });
   };
 
-  const handleRemoveItem = (itemId: string) => {
+  const handleRemoveItem = (itemId: string | number) => {
     removeItem(itemId);
     toast.info('Item removed from cart.');
   };
 
-  const handleUpdateQuantity = (itemId: string, newQuantity: number) => {
+  const handleUpdateQuantity = (itemId: string | number, newQuantity: number) => {
     if (newQuantity < 1) {
       handleRemoveItem(itemId);
     } else {
@@ -121,7 +121,7 @@ export function CartDrawer() {
                 <div className="space-y-1">
                   {totals.adjustments.map((adj, index) => (
                     <div key={index} className="flex justify-between text-sm text-gray-600">
-                      <span>{adj.description}:</span>
+                      <span>{adj.label}:</span>
                       <span>{formatCurrency(adj.amount ?? 0)}</span>
                     </div>
                   ))}

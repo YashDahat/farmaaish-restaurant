@@ -49,10 +49,10 @@ export function BlogPostForm({ initialData, onSubmit }: BlogPostFormProps) {
   const handleSubmit = async (values: BlogPostFormValues) => {
     try {
       if (initialData?.id) {
-        await updateMutation.queryFn(values);
+        await updateMutation.mutateAsync({ ...values, id: initialData.id, imageUrl: values.imageUrl ?? null });
         toast.success('Blog post updated successfully!');
       } else {
-        await createMutation.queryFn(values);
+        await createMutation.mutateAsync({ ...values, id: null, imageUrl: values.imageUrl ?? null });
         toast.success('Blog post created successfully!');
       }
       onSubmit();

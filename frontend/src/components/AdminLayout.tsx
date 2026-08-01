@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ROUTES, routeTable } from '@/routes';
-import { useAuth } from '@/hooks/useAuth';
+import { routeTable } from '@/routes';
+import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { LogOut, LayoutDashboard, Utensils, CalendarCheck, ScrollText, Image, MessageSquare, BookOpen, Users } from 'lucide-react';

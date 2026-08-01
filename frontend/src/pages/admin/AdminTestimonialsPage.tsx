@@ -1,3 +1,4 @@
+import { deleteTestimonial } from '@/services/apiService';
 "use client";
 
 import { useState } from "react";
@@ -10,7 +11,7 @@ import { TestimonialForm } from "@/components/admin/testimonials/TestimonialForm
 import { DeleteTestimonialDialog } from "@/components/admin/testimonials/DeleteTestimonialDialog";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { getAllTestimonials, createTestimonial, updateTestimonial, deleteTestimonial } from '@/services/testimonialService';
+import { getAllTestimonials, createTestimonial, updateTestimonial } from '@/services/testimonialService';
 import { toast } from 'sonner';
 import { Skeleton } from "@/components/ui/skeleton";
 
