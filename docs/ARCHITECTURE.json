@@ -4517,14 +4517,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Static page telling the story of the restaurant, its heritage, and its culinary philosophy.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AboutPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the About Us page with sections on the restaurant's story, culinary philosophy, and ambiance."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "static-pages",
-    "file_role" : null,
+    "file_role" : "PAGE layer — displays static information about the restaurant's heritage and culinary philosophy; consumes the `Layout` component from `shared-ui`.",
     "change_required" : null
   }, {
     "file_name" : "ContactPage.tsx",
@@ -4535,14 +4540,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Contact page with address, phone number, hours, a contact form, and an embedded map.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ContactPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the Contact Us page with business details, a contact form, and an embedded map."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/components/contact/MapEmbed.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "static-pages",
-    "file_role" : null,
+    "file_role" : "PAGE layer — displays contact information, a contact form, and an embedded map; consumes the `Layout` component from `shared-ui` and the `MapEmbed` component from this feature.",
     "change_required" : null
   }, {
     "file_name" : "MapEmbed.tsx",
@@ -4553,14 +4563,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Component to embed an interactive Google Map showing the restaurant's location.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "MapEmbed",
+      "parameters" : [ "{ latitude: number; longitude: number; restaurantName: string }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders an embedded Google Map centered on the provided coordinates with a marker for the restaurant."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "static-pages",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — renders an interactive Google Map embedded in an iframe; consumed by `ContactPage.tsx`.",
     "change_required" : null
   }, {
     "file_name" : "ProfilePage.tsx",
@@ -4775,8 +4790,8 @@
     "feature_display_name" : "Static Pages (Frontend)",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/pages/AboutPage.tsx", "frontend/src/pages/ContactPage.tsx", "frontend/src/components/contact/MapEmbed.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#800020] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b89a2f] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-[#F5F5DC] (odd sections) / bg-white (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-[#36454F] leading-relaxed\n\nThis feature provides static informational pages for Farmaaish Restaurant: an About Us page and a Contact Us page, along with a reusable map embed component. All pages will be wrapped in the `Layout` component from the `shared-ui` feature to ensure consistent navigation and footer.\n\n### AboutPage.tsx\nThis page will present the story of Farmaaish Restaurant, its rich Mughlai heritage, and its culinary philosophy. It will be structured into several sections, each with a heading and descriptive text, using the defined design tokens for styling. The content should evoke a warm, sophisticated, and inviting tone, emphasizing authenticity and passion for culinary excellence.\n\n**Sections:**\n1.  **Hero Section:** A full-width hero image (Unsplash URL for restaurant) with an overlay, featuring a prominent headline \"Experience the Legacy of Farmaaish Restaurant\" and a subheadline \"Where Every Dish Tells a Story of Mughlai Grandeur.\"\n2.  **Our Story:** A section detailing the restaurant's origins, history, and commitment to traditional Mughlai cuisine. Use a two-column layout with text on one side and an image on the other.\n3.  **Culinary Philosophy:** Describe the restaurant's approach to food, ingredients, and the art of Mughlai cooking. This section can highlight key values like authenticity, quality, and innovation within tradition.\n4.  **The Ambiance:** A section showcasing the restaurant's interior design and atmosphere, inviting guests to dine in a regal setting. Include high-fidelity images.\n\n### ContactPage.tsx\nThis page will provide all necessary contact information for Farmaaish Restaurant, including its address, phone number, opening hours, a contact form for general inquiries, and an embedded Google Map. The page will be structured to be easily navigable and user-friendly.\n\n**Sections:**\n1.  **Hero Section:** A full-width hero image (Unsplash URL for restaurant) with an overlay, featuring a prominent headline \"Connect With Farmaaish Restaurant\" and a subheadline \"Your Gateway to Exquisite Mughlai Dining.\"\n2.  **Contact Details:** Display the restaurant's address, phone number, and opening hours clearly. Use the exact business context details provided.\n    - Address: Kundan Garden, Baner Rd, Near Veritas Software, Baner, Pune, Maharashtra 411069\n    - Phone: 020 2729 1111\n    - Opening hours: Not provided, use placeholder \"Daily: 12:00 PM - 3:00 PM, 7:00 PM - 11:00 PM\"\n3.  **Send Us a Message (Contact Form):** A simple contact form with fields for `name`, `email`, `subject`, and `message`. This form will be a client-side component and will not submit to a backend endpoint in this feature. The form should include a primary CTA button \"Send Message\" styled with the design tokens.\n4.  **Our Location (MapEmbed):** This section will integrate the `MapEmbed` component to display an interactive Google Map centered on the restaurant's coordinates. The map should be clearly labeled with the restaurant's name.\n\n### MapEmbed.tsx\nThis component will render an embedded Google Map. It will accept `latitude`, `longitude`, and `restaurantName` as props. It will use an `iframe` to embed the Google Maps URL, ensuring the map is interactive and centered on the provided coordinates with a marker for the restaurant. The `restaurantName` will be used in the map's title for accessibility and context. The component should have a responsive design to fit various screen sizes.\n\n**Interaction with other features:**\n- Both `AboutPage.tsx` and `ContactPage.tsx` will import and use the `Layout` component from the `shared-ui` feature to provide a consistent header and footer.\n- `ContactPage.tsx` will import and use the `MapEmbed` component from within this feature.\n- No backend API calls are made by any files in this feature.",
+    "depends_on_features" : [ "shared-ui" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
