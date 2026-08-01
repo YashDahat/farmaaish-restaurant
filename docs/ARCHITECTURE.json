@@ -3130,13 +3130,25 @@
     "status" : "PLANNED",
     "description" : "TypeScript types and interfaces for the Reservation domain.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "CreateReservationRequest",
+      "type" : "{ customerName: string; customerEmail: string; customerPhone: string; reservationDate: string; reservationTime: string; partySize: number; }",
+      "description" : "Request body for creating a new reservation. reservationDate and reservationTime are ISO date/time strings."
+    }, {
+      "name" : "ReservationResponse",
+      "type" : "{ id: string; customerName: string; customerEmail: string; customerPhone: string; reservationDate: string; reservationTime: string; partySize: number; status: ReservationStatus; createdAt: string; updatedAt: string; }",
+      "description" : "Response body for a reservation. reservationDate, reservationTime, createdAt, and updatedAt are ISO date/time strings."
+    }, {
+      "name" : "ReservationStatus",
+      "type" : "enum",
+      "description" : "Enum for reservation statuses: PENDING, CONFIRMED, CANCELLED, COMPLETED."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "reservation-booking",
-    "file_role" : null,
+    "file_role" : "TypeScript types and interfaces for the Reservation domain, derived from the backend API contract.",
     "change_required" : null
   }, {
     "file_name" : "reservationService.ts",
@@ -3147,14 +3159,26 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Provides functions for interacting with the reservation-related API endpoints.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "createReservation",
+      "parameters" : [ "CreateReservationRequest request" ],
+      "return_type" : "Promise<ReservationResponse>",
+      "description" : "Submits a new reservation request to the backend."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/reservations",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Endpoint to create a new reservation.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/api/client.ts", "frontend/src/types/reservation.ts" ],
     "depends_on" : [ ],
     "feature_name" : "reservation-booking",
-    "file_role" : null,
+    "file_role" : "Provides functions for interacting with the reservation-related API endpoints, specifically createReservation(CreateReservationRequest): Promise<ReservationResponse>.",
     "change_required" : null
   }, {
     "file_name" : "useReservations.ts",
@@ -3165,14 +3189,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "React Query hook for creating and managing reservation data.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "useCreateReservation",
+      "parameters" : [ "options?: UseMutationOptions<ReservationResponse, Error, CreateReservationRequest>" ],
+      "return_type" : "UseMutationResult<ReservationResponse, Error, CreateReservationRequest>",
+      "description" : "A React Query mutation hook for creating a new reservation."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/services/reservationService.ts", "frontend/src/types/reservation.ts" ],
     "depends_on" : [ ],
     "feature_name" : "reservation-booking",
-    "file_role" : null,
+    "file_role" : "React Query hook for creating reservation data, exposing useCreateReservation(options?): UseMutationResult.",
     "change_required" : null
   }, {
     "file_name" : "ReservationPage.tsx",
@@ -3183,14 +3212,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Page for customers to book a table, featuring an interactive reservation form.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ReservationPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the reservation booking page with a hero section and the reservation form."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/reservations/ReservationForm.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "reservation-booking",
-    "file_role" : null,
+    "file_role" : "Page for customers to book a table, featuring an interactive reservation form.",
     "change_required" : null
   }, {
     "file_name" : "ReservationForm.tsx",
@@ -3201,14 +3235,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A form for customers to select date, time, party size, and enter contact details for a reservation.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ReservationForm",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the reservation form and handles submission logic."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useReservations.ts", "frontend/src/components/reservations/ReservationSuccessDialog.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "reservation-booking",
-    "file_role" : null,
+    "file_role" : "A form for customers to select date, time, party size, and enter contact details for a reservation, using useCreateReservation for submission.",
     "change_required" : null
   }, {
     "file_name" : "ReservationSuccessDialog.tsx",
@@ -3219,14 +3258,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A dialog to confirm that a reservation has been successfully submitted.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ReservationSuccessDialog",
+      "parameters" : [ "{ isOpen: boolean; onClose: () => void }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Displays a confirmation message after a successful reservation."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "reservation-booking",
-    "file_role" : null,
+    "file_role" : "A dialog to confirm that a reservation has been successfully submitted, exposing ReservationSuccessDialog({ isOpen: boolean, onClose: () => void }).",
     "change_required" : null
   }, {
     "file_name" : "AdminReservationsPage.tsx",
@@ -4377,8 +4421,8 @@
     "feature_display_name" : "Reservation Booking (Frontend)",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/types/reservation.ts", "frontend/src/services/reservationService.ts", "frontend/src/hooks/useReservations.ts", "frontend/src/pages/ReservationPage.tsx", "frontend/src/components/reservations/ReservationForm.tsx", "frontend/src/components/reservations/ReservationSuccessDialog.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#36454F] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#C2A032] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-[#F5F5DC] (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-[#36454F] leading-relaxed\n\nThis feature enables customers to book a table at Farmaaish Restaurant through an interactive frontend form. It consists of TypeScript types, a service for API interaction, a React Query hook for state management, a page to host the form, the reservation form component itself, and a success dialog. The `ReservationPage.tsx` will serve as the main entry point for customers to initiate a reservation. It will utilize the `ReservationForm.tsx` component, which handles user input for date, time, party size, and contact details. Upon successful submission, a `ReservationSuccessDialog.tsx` will confirm the booking. The `reservationService.ts` will communicate with the backend `reservation-system` feature's API endpoints, specifically `POST /api/v1/reservations` to create new reservations. The `useReservations.ts` hook will abstract the data fetching and mutation logic using React Query, providing a clean interface for components to interact with reservation data. All monetary values, if any, will be displayed in Indian Rupees (₹) using the `en-IN` locale.\n\n### `reservation.ts`\nThis file defines the TypeScript interfaces for `CreateReservationRequest` and `ReservationResponse`, mirroring the backend DTOs from the `reservation-system` feature. It also defines `ReservationStatus` enum.\n\n### `reservationService.ts`\nThis service provides an asynchronous function `createReservation` that takes a `CreateReservationRequest` object and sends it to the `POST /api/v1/reservations` endpoint. It returns a `Promise<ReservationResponse>` upon successful creation or throws an error.\n\n### `useReservations.ts`\nThis React Query hook exports a `useCreateReservation` mutation. This mutation takes a `CreateReservationRequest` as input and calls `reservationService.createReservation`. It should handle loading states, success, and error scenarios, providing appropriate callbacks for UI updates (e.g., showing a success dialog or error message).\n\n### `ReservationPage.tsx`\nThis page component renders the `Layout` from `shared-ui` and contains a prominent heading \"Book Your Table at Farmaaish\" followed by the `ReservationForm` component. The background should alternate between white and cream sections, and the text should use the dark charcoal color token. The hero section should feature a relevant Unsplash image for a restaurant.\n\n### `ReservationForm.tsx`\nThis component is responsible for collecting reservation details. It will include input fields for `customerName`, `customerEmail`, `customerPhone`, `reservationDate`, `reservationTime`, and `partySize`. It will use the `useCreateReservation` hook to submit the form data to the backend. Upon successful submission, it will open the `ReservationSuccessDialog`. The form should include validation for all fields (e.g., required fields, valid email format, future date/time). The submit button should use the primary CTA design token.\n\n### `ReservationSuccessDialog.tsx`\nThis dialog component is displayed after a successful reservation. It should confirm the reservation and thank the customer. It should include a message like \"Your reservation at Farmaaish Restaurant has been successfully placed! We look forward to welcoming you.\" and a button to close the dialog or navigate back to the home page.",
+    "depends_on_features" : [ "reservation-system", "shared-ui" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
