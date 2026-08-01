@@ -3946,13 +3946,21 @@
     "status" : "PLANNED",
     "description" : "TypeScript types and interfaces for the Catering Inquiry domain.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "CateringInquiryDto",
+      "type" : "{ id?: string; customerName: string; customerEmail: string; customerPhone: string; eventType: string; eventDate: string; numberOfGuests: number; budget?: number; message?: string; inquiryStatus?: 'NEW' | 'CONTACTED' | 'CLOSED'; createdAt?: string; updatedAt?: string; }",
+      "description" : "DTO for catering inquiry data. `id`, `inquiryStatus`, `createdAt`, `updatedAt` are optional for creation."
+    }, {
+      "name" : "SubmitCateringInquiryRequest",
+      "type" : "{ customerName: string; customerEmail: string; customerPhone: string; eventType: string; eventDate: string; numberOfGuests: number; budget?: number; message?: string; }",
+      "description" : "Request DTO for submitting a new catering inquiry."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-ui",
-    "file_role" : null,
+    "file_role" : "TypeScript types and interfaces for the Catering Inquiry domain, mirroring the backend DTO.",
     "change_required" : null
   }, {
     "file_name" : "inquiryService.ts",
@@ -3963,14 +3971,26 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Provides functions for interacting with the inquiry-related API endpoints.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "submitInquiry",
+      "parameters" : [ "request: SubmitCateringInquiryRequest" ],
+      "return_type" : "Promise<CateringInquiryDto>",
+      "description" : "Submits a new catering inquiry to the backend."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/inquiries/catering",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Submits a new catering inquiry.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/api/client.ts", "frontend/src/types/inquiry.ts" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-ui",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — provides `submitInquiry(request: SubmitCateringInquiryRequest): Promise<CateringInquiryDto>` for interacting with the inquiry-management backend.",
     "change_required" : null
   }, {
     "file_name" : "useInquiries.ts",
@@ -3981,14 +4001,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "React Query hook for submitting and managing catering inquiries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "useSubmitInquiry",
+      "parameters" : [ "options?: UseMutationOptions<CateringInquiryDto, Error, SubmitCateringInquiryRequest>" ],
+      "return_type" : "UseMutationResult<CateringInquiryDto, Error, SubmitCateringInquiryRequest>",
+      "description" : "React Query mutation hook for submitting a new catering inquiry."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/services/inquiryService.ts", "frontend/src/types/inquiry.ts" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-ui",
-    "file_role" : null,
+    "file_role" : "HOOK layer — provides `useSubmitInquiry()` for submitting catering inquiries using React Query.",
     "change_required" : null
   }, {
     "file_name" : "CateringPage.tsx",
@@ -3999,14 +4024,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Page with information about catering services and a form for inquiries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "CateringPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the catering services page with an inquiry form."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/catering/CateringInquiryForm.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-ui",
-    "file_role" : null,
+    "file_role" : "PAGE layer — displays information about Farmaaish Restaurant's catering services and embeds the `CateringInquiryForm` component.",
     "change_required" : null
   }, {
     "file_name" : "CateringInquiryForm.tsx",
@@ -4017,14 +4047,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A form for customers to submit inquiries about catering and private events.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "CateringInquiryForm",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a form for submitting catering inquiries."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useInquiries.ts", "frontend/src/components/catering/InquirySuccessMessage.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-ui",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — provides a form for customers to submit catering inquiries, using `useSubmitInquiry` hook.",
     "change_required" : null
   }, {
     "file_name" : "InquirySuccessMessage.tsx",
@@ -4035,14 +4070,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A confirmation message shown after a catering inquiry has been successfully submitted.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "InquirySuccessMessage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a success message for a submitted inquiry."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-ui",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — displays a confirmation message after a successful catering inquiry submission.",
     "change_required" : null
   }, {
     "file_name" : "AdminCateringInquiriesPage.tsx",
@@ -4608,8 +4648,8 @@
     "feature_display_name" : "Inquiry UI (Frontend)",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/types/inquiry.ts", "frontend/src/services/inquiryService.ts", "frontend/src/hooks/useInquiries.ts", "frontend/src/pages/CateringPage.tsx", "frontend/src/components/catering/CateringInquiryForm.tsx", "frontend/src/components/catering/InquirySuccessMessage.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#800020] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b8952b] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-gray-50 (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-[#36454F] leading-relaxed\n\nThis feature provides a frontend interface for customers to submit catering and private event inquiries to Farmaaish Restaurant. It consists of a dedicated `CateringPage.tsx` that presents information about catering services and hosts the `CateringInquiryForm.tsx`. The form collects customer details, event specifics, and a message. Upon successful submission, an `InquirySuccessMessage.tsx` is displayed.\n\nThe `inquiry.ts` file defines the TypeScript types for the inquiry data, mirroring the `CateringInquiryDto` from the `inquiry-management` backend feature. The `inquiryService.ts` handles the API communication, specifically calling the `POST /api/v1/inquiries/catering` endpoint to submit new inquiries. The `useInquiries.ts` React Query hook wraps `inquiryService.ts` to provide a convenient way for components to interact with the inquiry submission logic, handling loading and error states.\n\n### `CateringPage.tsx`\nThis page serves as the entry point for catering inquiries. It will display a hero section with a relevant image and compelling text about Farmaaish's catering services, followed by detailed information about the offerings. The `CateringInquiryForm.tsx` component will be embedded within this page. The page will use the `Layout` component from `shared-ui`.\n\n**Sections:**\n1.  **Hero Section:**\n    -   Background Image: `https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1920&q=80` with a `bg-black bg-opacity-50` overlay.\n    -   Headline (`h1`): \"Experience Farmaaish Catering: Royal Flavors for Your Special Occasions\"\n    -   Subheadline (`p`): \"From intimate gatherings to grand celebrations, Farmaaish brings the authentic taste of Mughlai cuisine to your event, crafted with passion and served with elegance.\"\n2.  **Catering Services Overview:**\n    -   Heading (`h2`): \"Our Catering Services\"\n    -   Content: Detailed description of catering options, event types (weddings, corporate, private parties), menu customization, and service philosophy. Emphasize quality ingredients and experienced chefs.\n3.  **Inquiry Form Section:**\n    -   Heading (`h2`): \"Inquire About Your Event\"\n    -   Description: \"Tell us about your event, and our team will get back to you to craft a memorable culinary experience.\"\n    -   Includes the `CateringInquiryForm` component.\n\n### `CateringInquiryForm.tsx`\nThis component is a form for submitting catering inquiries. It will use `react-hook-form` for form management and `zod` for validation. Upon successful submission, it will display the `InquirySuccessMessage.tsx` and reset the form. It will use the `useInquiries` hook to submit the data.\n\n**Form Fields:**\n-   `customerName`: Text input, required.\n-   `customerEmail`: Email input, required, valid email format.\n-   `customerPhone`: Text input, required, valid Indian phone number format.\n-   `eventType`: Text input (e.g., \"Wedding\", \"Corporate Event\", \"Birthday Party\"), required.\n-   `eventDate`: Date picker, required, must be in the future.\n-   `numberOfGuests`: Number input, required, minimum 10.\n-   `budget`: Number input, optional, displayed in INR.\n-   `message`: Textarea, optional.\n\n**Submission Logic:**\n1.  On form submission, call `useInquiries().mutateAsync(formData)`.\n2.  If successful, set a state variable to `true` to display `InquirySuccessMessage` and reset the form fields.\n3.  Handle loading states by disabling the submit button and showing a spinner.\n4.  Display error messages using `react-toastify` (ensure `<Toaster/>` is in `Layout.tsx` from `shared-ui`).\n\n### `InquirySuccessMessage.tsx`\nThis component displays a confirmation message after a successful inquiry submission. It should be visually appealing and reassuring, reinforcing the brand's sophisticated tone.\n\n**Content:**\n-   Headline (`h3`): \"Thank You for Your Inquiry!\"\n-   Message: \"Your catering inquiry has been successfully submitted. Our team will review your request and get in touch with you shortly to discuss the exquisite details of your event. We look forward to crafting a memorable experience for you.\"\n-   Optional: A button to \"Return to Home\" or \"Explore Menu\".\n\n### Data Flow and Interactions\n-   `CateringPage.tsx` renders `CateringInquiryForm.tsx`.\n-   `CateringInquiryForm.tsx` uses the `useInquiries` hook.\n-   `useInquiries` hook calls `inquiryService.submitInquiry`.\n-   `inquiryService.submitInquiry` makes an API call to `POST /api/v1/inquiries/catering` (from `inquiry-management` feature) with `CateringInquiryDto`.\n-   Upon successful API response, `CateringInquiryForm.tsx` displays `InquirySuccessMessage.tsx`.\n",
+    "depends_on_features" : [ "inquiry-management", "shared-ui" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
