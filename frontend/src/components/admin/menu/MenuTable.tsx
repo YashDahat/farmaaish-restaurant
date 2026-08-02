@@ -21,7 +21,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { MenuItemDto } from '@/types/menu';
 import { deleteMenuItem } from '@/services/apiService';
 import { useMenu } from '@/hooks/useMenu';
-import { MenuItemForm } from './MenuItemForm';
+import MenuItemForm from './MenuItemForm';
 import DeleteMenuItemDialog from './DeleteMenuItemDialog';
 import { Dialog, DialogTrigger, DialogContent } from '@/components/ui/dialog';
 import { PencilIcon, Trash2Icon } from 'lucide-react';
@@ -100,7 +100,7 @@ export default function MenuTable() {
           </DialogTrigger>
           <DialogContent className="sm:max-w-[600px]">
             <MenuItemForm
-              menuItem={selectedMenuItem}
+              initialData={selectedMenuItem ?? undefined}
               onSuccess={() => setIsFormOpen(false)}
             />
           </DialogContent>
@@ -165,11 +165,9 @@ export default function MenuTable() {
       </Table>
 
       <DeleteMenuItemDialog
-        open={isDeleteDialogOpen}
-        onOpenChange={setIsDeleteDialogOpen}
-        onConfirm={confirmDelete}
-        itemName={selectedMenuItem?.name ?? ''}
-        isDeleting={deleteMutation.isPending}
+        menuItemId={selectedMenuItem?.id ?? ''}
+        isOpen={isDeleteDialogOpen}
+        onClose={() => setIsDeleteDialogOpen(false)}
       />
     </div>
   );

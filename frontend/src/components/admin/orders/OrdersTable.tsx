@@ -1,5 +1,5 @@
 import { useOrders } from '@/hooks/useOrders';
-import { Order, OrderStatus } from '@/types/order';
+import { OrderStatus } from '@/types/order';
 import {
   Table,
   TableBody,

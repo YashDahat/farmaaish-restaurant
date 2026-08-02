@@ -32,8 +32,8 @@ const formSchema = z.object({
   description: z.string().optional(),
   price: z.coerce.number().min(0.01, { message: 'Price must be a positive number.' }),
   imageUrl: z.string().url({ message: 'Invalid URL for image.' }).optional().or(z.literal('')),
-  vegetarian: z.boolean().default(false),
-  spicy: z.boolean().default(false),
+  vegetarian: z.boolean(),
+  spicy: z.boolean(),
   categoryId: z.string().min(1, { message: 'Category is required.' }),
 });
 
@@ -105,9 +105,9 @@ export default function MenuItemForm({ initialData, onSuccess }: MenuItemFormPro
     const menuItemDto: MenuItemDto = {
       id: initialData?.id ?? null,
       name: values.name,
-      description: values.description,
+      description: values.description ?? null,
       price: values.price,
-      imageUrl: values.imageUrl,
+      imageUrl: values.imageUrl ?? null,
       vegetarian: values.vegetarian,
       spicy: values.spicy,
       categoryId: values.categoryId,

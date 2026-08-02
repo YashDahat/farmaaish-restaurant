@@ -38,7 +38,7 @@ const eventFormSchema = z.object({
   eventType: z.enum(['EVENT', 'GALLERY'], {
     required_error: 'Event type is required',
   }),
-  active: z.boolean().default(true),
+  active: z.boolean(),
 });
 
 type EventFormValues = z.infer<typeof eventFormSchema>;
@@ -81,8 +81,8 @@ const EventForm: React.FC<EventFormProps> = ({ initialData, onSuccess }) => {
       const eventData: EventDto = {
         id: initialData?.id ?? null,
         title: values.title,
-        description: values.description,
-        imageUrl: values.imageUrl,
+        description: values.description ?? null,
+        imageUrl: values.imageUrl ?? null,
         eventDate: values.eventDate ? format(values.eventDate, 'yyyy-MM-dd') : null,
         eventType: values.eventType,
         active: values.active,
@@ -175,7 +175,6 @@ const EventForm: React.FC<EventFormProps> = ({ initialData, onSuccess }) => {
                     mode="single"
                     selected={field.value ?? undefined}
                     onSelect={field.onChange}
-                    initialFocus
                   />
                 </PopoverContent>
               </Popover>
