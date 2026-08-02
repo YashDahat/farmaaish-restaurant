@@ -1902,13 +1902,41 @@
     "status" : "PLANNED",
     "description" : "Represents customer-specific profile data, linked to a User account.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the customer. Primary key."
+    }, {
+      "name" : "userId",
+      "type" : "UUID",
+      "description" : "Unique identifier of the associated user account. Not null, unique."
+    }, {
+      "name" : "firstName",
+      "type" : "String",
+      "description" : "Customer's first name. Not null, max 100 characters."
+    }, {
+      "name" : "lastName",
+      "type" : "String",
+      "description" : "Customer's last name. Not null, max 100 characters."
+    }, {
+      "name" : "email",
+      "type" : "String",
+      "description" : "Customer's email address. Not null, unique, max 255 characters."
+    }, {
+      "name" : "phone",
+      "type" : "String",
+      "description" : "Customer's phone number. Nullable, max 20 characters."
+    }, {
+      "name" : "address",
+      "type" : "String",
+      "description" : "Customer's delivery address. Nullable, max 500 characters."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "customer-management",
-    "file_role" : null,
+    "file_role" : "JPA Entity — defines the schema for customer profile data in the database.",
     "change_required" : null
   }, {
     "file_name" : "CustomerRepository.java",
@@ -1919,14 +1947,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Spring Data JPA repository for CRUD operations on Customer entities.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "findByUserId",
+      "parameters" : [ "UUID userId" ],
+      "return_type" : "Optional<Customer>",
+      "description" : "Retrieves a customer by their associated user ID."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/model/Customer.java" ],
     "depends_on" : [ ],
     "feature_name" : "customer-management",
-    "file_role" : null,
+    "file_role" : "REPOSITORY layer — provides data access operations for Customer entities, including findByUserId(UUID userId).",
     "change_required" : null
   }, {
     "file_name" : "CustomerService.java",
@@ -1937,14 +1970,34 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Handles business logic for managing customer profiles.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "createCustomer",
+      "parameters" : [ "CustomerDto customerDto" ],
+      "return_type" : "CustomerDto",
+      "description" : "Creates a new customer profile."
+    }, {
+      "name" : "getCustomerById",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "CustomerDto",
+      "description" : "Retrieves a customer profile by its ID."
+    }, {
+      "name" : "getCustomerByUserId",
+      "parameters" : [ "UUID userId" ],
+      "return_type" : "CustomerDto",
+      "description" : "Retrieves a customer profile by the associated user ID."
+    }, {
+      "name" : "updateCustomer",
+      "parameters" : [ "UUID id", "CustomerDto customerDto" ],
+      "return_type" : "CustomerDto",
+      "description" : "Updates an existing customer profile."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/repository/CustomerRepository.java", "backend/src/main/java/com/farmaaishrestaurant/dto/CustomerDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "customer-management",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — implements createCustomer(CustomerDto), getCustomerById(UUID), getCustomerByUserId(UUID), and updateCustomer(UUID, CustomerDto) for managing customer profiles.",
     "change_required" : null
   }, {
     "file_name" : "CustomerController.java",
@@ -1955,14 +2008,50 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "REST controller for authenticated customers to manage their profile and view order history.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getCustomerProfile",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<CustomerDto>",
+      "description" : "Retrieves the authenticated customer's profile."
+    }, {
+      "name" : "updateCustomerProfile",
+      "parameters" : [ "CustomerDto customerDto" ],
+      "return_type" : "ResponseEntity<CustomerDto>",
+      "description" : "Updates the authenticated customer's profile."
+    }, {
+      "name" : "getCustomerOrders",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<List<Order>>",
+      "description" : "Retrieves the authenticated customer's order history."
+    } ],
     "public_variables" : null,
-    "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/customers/profile",
+      "request_body" : null,
+      "response_body" : "CustomerDto",
+      "description" : "Retrieves the profile of the authenticated customer.",
+      "access" : "authenticated"
+    }, {
+      "method" : "PUT",
+      "path" : "/api/v1/customers/profile",
+      "request_body" : "CustomerDto",
+      "response_body" : "CustomerDto",
+      "description" : "Updates the profile of the authenticated customer.",
+      "access" : "authenticated"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/customers/profile/orders",
+      "request_body" : null,
+      "response_body" : "List<Order>",
+      "description" : "Retrieves the order history for the authenticated customer.",
+      "access" : "authenticated"
+    } ],
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/service/CustomerService.java", "backend/src/main/java/com/farmaaishrestaurant/service/OrderService.java" ],
     "depends_on" : [ ],
     "feature_name" : "customer-management",
-    "file_role" : null,
+    "file_role" : "REST CONTROLLER — exposes API endpoints for authenticated customers to manage their profile and view order history.",
     "change_required" : null
   }, {
     "file_name" : "CustomerDto.java",
@@ -1974,13 +2063,41 @@
     "status" : "PLANNED",
     "description" : "Data Transfer Object for customer profile data.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the customer. Nullable for creation."
+    }, {
+      "name" : "userId",
+      "type" : "UUID",
+      "description" : "Unique identifier of the associated user account. Not null."
+    }, {
+      "name" : "firstName",
+      "type" : "String",
+      "description" : "Customer's first name. Not null, max 100 characters."
+    }, {
+      "name" : "lastName",
+      "type" : "String",
+      "description" : "Customer's last name. Not null, max 100 characters."
+    }, {
+      "name" : "email",
+      "type" : "String",
+      "description" : "Customer's email address. Not null, unique, max 255 characters."
+    }, {
+      "name" : "phone",
+      "type" : "String",
+      "description" : "Customer's phone number. Nullable, max 20 characters."
+    }, {
+      "name" : "address",
+      "type" : "String",
+      "description" : "Customer's delivery address. Nullable, max 500 characters."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "customer-management",
-    "file_role" : null,
+    "file_role" : "Data Transfer Object — defines the structure for customer profile data exchanged between layers.",
     "change_required" : null
   }, {
     "file_name" : "App.tsx",
@@ -3176,8 +3293,8 @@
     "feature_display_name" : "Customer Management (Backend)",
     "feature_type" : "BACKEND",
     "file_paths" : [ "backend/src/main/java/com/farmaaishrestaurant/model/Customer.java", "backend/src/main/java/com/farmaaishrestaurant/repository/CustomerRepository.java", "backend/src/main/java/com/farmaaishrestaurant/service/CustomerService.java", "backend/src/main/java/com/farmaaishrestaurant/controller/CustomerController.java", "backend/src/main/java/com/farmaaishrestaurant/dto/CustomerDto.java" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "The Customer Management feature provides backend services for managing customer profiles and linking them to user accounts. It allows authenticated users to view and update their personal details. This feature integrates with the `order-management` feature to allow customers to view their past orders.\n\n### Customer.java\nThis JPA entity represents a customer's profile. It contains fields such as `id`, `userId` (linking to an authentication user), `firstName`, `lastName`, `email`, `phone`, and `address`. The `id` is a UUID and serves as the primary key. `userId` is also a UUID and must be unique. `firstName`, `lastName`, `email`, `phone`, and `address` are String fields with appropriate length constraints. `email` must be unique.\n\n### CustomerRepository.java\nThis is a Spring Data JPA repository for the `Customer` entity. It extends `JpaRepository<Customer, UUID>` and provides standard CRUD operations. It will also include a custom query method `findByUserId(UUID userId)` to retrieve a customer profile based on their associated user ID.\n\n### CustomerDto.java\nThis DTO is used for transferring customer profile data between the service layer and the controller. It includes fields `id`, `userId`, `firstName`, `lastName`, `email`, `phone`, and `address`. All fields are nullable except `userId`, `firstName`, `lastName`, and `email` for creation/update requests. For updates, `id` is also required.\n\n### CustomerService.java\nThis service class handles the business logic for customer profiles. It injects `CustomerRepository` for data persistence. It exposes the following public methods:\n\n1.  `createCustomer(CustomerDto customerDto): CustomerDto`\n    -   **Logic:**\n        1.  Validates the `customerDto` (e.g., `userId` and `email` are not null and unique).\n        2.  Maps the `customerDto` to a `Customer` entity.\n        3.  Saves the `Customer` entity using `customerRepository.save()`.\n        4.  Maps the saved `Customer` entity back to a `CustomerDto` and returns it.\n    -   **Error Cases:** Throws `IllegalArgumentException` if `userId` or `email` already exists, or if required fields are missing.\n\n2.  `getCustomerById(UUID id): CustomerDto`\n    -   **Logic:**\n        1.  Retrieves a `Customer` entity by its `id` using `customerRepository.findById(id)`.\n        2.  If the customer is not found, throws `ResourceNotFoundException`.\n        3.  Maps the `Customer` entity to a `CustomerDto` and returns it.\n    -   **Error Cases:** Throws `ResourceNotFoundException` if no customer with the given `id` is found.\n\n3.  `getCustomerByUserId(UUID userId): CustomerDto`\n    -   **Logic:**\n        1.  Retrieves a `Customer` entity by its `userId` using `customerRepository.findByUserId(userId)`.\n        2.  If the customer is not found, throws `ResourceNotFoundException`.\n        3.  Maps the `Customer` entity to a `CustomerDto` and returns it.\n    -   **Error Cases:** Throws `ResourceNotFoundException` if no customer with the given `userId` is found.\n\n4.  `updateCustomer(UUID id, CustomerDto customerDto): CustomerDto`\n    -   **Logic:**\n        1.  Retrieves the existing `Customer` entity by `id` using `customerRepository.findById(id)`. If not found, throws `ResourceNotFoundException`.\n        2.  Updates the fields of the existing `Customer` entity with non-null values from `customerDto` (e.g., `firstName`, `lastName`, `email`, `phone`, `address`). The `userId` cannot be changed.\n        3.  If `email` is updated, ensure it remains unique.\n        4.  Saves the updated `Customer` entity using `customerRepository.save()`.\n        5.  Maps the updated `Customer` entity back to a `CustomerDto` and returns it.\n    -   **Error Cases:** Throws `ResourceNotFoundException` if no customer with the given `id` is found. Throws `IllegalArgumentException` if the updated `email` already exists.\n\n### CustomerController.java\nThis REST controller exposes endpoints for authenticated customers to manage their profiles and view order history. It injects `CustomerService` and `OrderService`.\n\n1.  `GET /api/v1/customers/profile`\n    -   **Access:** Authenticated\n    -   **Logic:**\n        1.  Retrieves the `userId` from the authenticated user's security context.\n        2.  Calls `customerService.getCustomerByUserId(userId)` to get the customer profile.\n        3.  Returns the `CustomerDto` with HTTP status 200 OK.\n    -   **Error Cases:** Returns 404 NOT FOUND if the customer profile is not found (from `ResourceNotFoundException`). Returns 401 UNAUTHORIZED if no user is authenticated.\n\n2.  `PUT /api/v1/customers/profile`\n    -   **Access:** Authenticated\n    -   **Request Body:** `CustomerDto` (containing fields to update, `id` is not needed in the request body as it's derived from the authenticated user)\n    -   **Logic:**\n        1.  Retrieves the `userId` from the authenticated user's security context.\n        2.  Calls `customerService.getCustomerByUserId(userId)` to get the customer's existing ID.\n        3.  Calls `customerService.updateCustomer(customerId, customerDto)` with the retrieved ID and the request body.\n        4.  Returns the updated `CustomerDto` with HTTP status 200 OK.\n    -   **Error Cases:** Returns 404 NOT FOUND if the customer profile is not found. Returns 400 BAD REQUEST if validation fails (from `IllegalArgumentException`). Returns 401 UNAUTHORIZED if no user is authenticated.\n\n3.  `GET /api/v1/customers/profile/orders`\n    -   **Access:** Authenticated\n    -   **Logic:**\n        1.  Retrieves the `userId` from the authenticated user's security context.\n        2.  Calls `customerService.getCustomerByUserId(userId)` to get the customer's ID.\n        3.  Calls `orderService.getOrdersByCustomerId(customerId)` to retrieve the customer's order history.\n        4.  Returns a `List<Order>` with HTTP status 200 OK.\n    -   **Error Cases:** Returns 404 NOT FOUND if the customer profile is not found. Returns 401 UNAUTHORIZED if no user is authenticated. Returns 500 INTERNAL SERVER ERROR for other issues from `OrderService`.\n",
+    "depends_on_features" : [ "order-management" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
