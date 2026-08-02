@@ -2108,14 +2108,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "The root component of the React application, responsible for routing and global context providers.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "App",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the main application structure, including routing and context providers."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/context/AuthContext.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "The root component of the React application, responsible for setting up routing and integrating global context providers like AuthContext.",
     "change_required" : null
   }, {
     "file_name" : "client.ts",
@@ -2126,14 +2131,14 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Configures the global Axios instance with base URL and interceptors for auth tokens.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Configures the global Axios instance with base URL and an interceptor for attaching authentication tokens from localStorage.",
     "change_required" : null
   }, {
     "file_name" : "siteConfig.ts",
@@ -2144,14 +2149,18 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Central configuration for site-wide content like brand name, navigation links, and contact info, using the Farmaaish maroon and gold palette.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "siteConfig",
+      "type" : "{ businessName: string; tagline: string; contactInfo: { address: string; phone: string; email: string; coordinates: { lat: number; lng: number; }; openingHours: string; }; socialLinks: { facebook: string; instagram: string; twitter: string; }; navLinks: { path: string; name: string; requiresAuth: boolean; requiredRole?: string; }[]; adminNavLinks: { path: string; name: string; requiresAuth: boolean; requiredRole: string; }[]; }",
+      "description" : "Global configuration object containing business details, navigation links, and social media links."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Central configuration for site-wide content like brand name, navigation links, and contact info, using the Farmaaish maroon and gold palette.",
     "change_required" : null
   }, {
     "file_name" : "ProtectedRoute.tsx",
@@ -2162,14 +2171,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A wrapper component that restricts access to routes based on user authentication status and role.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ProtectedRoute",
+      "parameters" : [ "React.PropsWithChildren<{ requiredRole?: string }>" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders children only if the user is authenticated and has the required role; otherwise, redirects."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useAuth.ts" ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "A wrapper component that restricts access to routes based on user authentication status and an optional required role, redirecting unauthenticated users to the login page.",
     "change_required" : null
   }, {
     "file_name" : "AuthContext.tsx",
@@ -3302,8 +3316,8 @@
     "feature_display_name" : "Core UI & Configuration",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/App.tsx", "frontend/src/api/client.ts", "frontend/src/config/siteConfig.ts", "frontend/src/components/ProtectedRoute.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "The Core UI & Configuration feature establishes the foundational structure and global settings for the Farmaaish Restaurant frontend application. It defines the main application component (`App.tsx`) responsible for routing and integrating global context providers like `AuthContext`. It also configures the global Axios instance (`client.ts`) to handle API requests, including attaching authentication tokens from `localStorage` and setting the base URL. Site-wide configuration, including brand name, navigation links, and contact information, is centralized in `siteConfig.ts`, adhering to the Farmaaish maroon and gold color palette. Finally, `ProtectedRoute.tsx` provides a reusable component to secure routes, ensuring only authenticated users with appropriate roles can access specific parts of the application by checking the authentication status via `useAuth`.\n\n## Design Tokens\n- Navbar: bg-[#800020] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b89a2f] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-[#F5F5DC] (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-[#36454F] leading-relaxed\n\n### `App.tsx`\nThis file serves as the root component, setting up the main routing structure using `react-router-dom`. It wraps the application with necessary context providers, including `AuthContext`, to make authentication state globally available. The routes should include public pages (Home, Menu, Reservations, About, Contact, Catering, Events), authenticated customer pages (Profile, Orders), and admin pages (Dashboard, Menu Management, Reservations Management, Orders Management, Events Management, Inquiries Management). Admin routes must be wrapped with `ProtectedRoute` to enforce authentication and role-based access. All public pages should be wrapped in the `<Layout>` component, and all admin pages in `<AdminLayout>`.\n\n### `client.ts`\nThis file configures the Axios HTTP client. It sets the `baseURL` for all API requests to `/api/v1`. An Axios interceptor must be implemented to automatically include the JWT authentication token in the `Authorization` header for every outgoing request. The token is retrieved from `localStorage` using the key 'token'. If no token is found, the request proceeds without the header. The interceptor should also handle `401 Unauthorized` responses by clearing the token from `localStorage` and redirecting the user to the login page.\n\n### `siteConfig.ts`\nThis file exports a constant object, `siteConfig`, containing global configuration details. This includes `businessName` ('Farmaaish Restaurant'), `tagline` ('Experience the Royal Flavors of Mughlai Cuisine'), `contactInfo` (address, phone, email, coordinates, opening hours), and `socialLinks`. It also defines the main navigation links for both public and admin sections, specifying their `path`, `name`, and `requiresAuth` (boolean) and `requiredRole` (string, e.g., 'ADMIN') properties. The color palette defined in the design context should be reflected in any color-related variables or utility functions exported from this file.\n\n### `ProtectedRoute.tsx`\nThis component takes `children` (the components to protect) and an optional `requiredRole` prop (string, e.g., 'ADMIN'). It uses the `useAuth` hook to check the current authentication status and user role. If the user is not authenticated, it redirects them to the `/login` page. If `requiredRole` is provided and the authenticated user does not have that role, it should redirect them to a `/` or `/unauthorized` page (the latter can be a simple placeholder for now). Otherwise, it renders the `children`.",
+    "depends_on_features" : [ "auth-ui" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
