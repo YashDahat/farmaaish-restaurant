@@ -2330,14 +2330,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "The main landing page featuring a regal hero section, featured dishes, customer testimonials, and a summary of the Farmaaish story.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "HomePage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the main landing page of the restaurant website."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/home/HeroSection.tsx", "frontend/src/components/home/FeaturedDishes.tsx", "frontend/src/components/home/Testimonials.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "static-pages",
-    "file_role" : null,
+    "file_role" : "PAGE layer — orchestrates the display of the main landing page by composing `HeroSection`, `FeaturedDishes`, and `Testimonials` components.",
     "change_required" : null
   }, {
     "file_name" : "HeroSection.tsx",
@@ -2348,14 +2353,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A full-bleed hero component with high-quality imagery, the restaurant's name in elegant typography, and primary CTAs.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "HeroSection",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the hero section of the home page with a background image, title, subtitle, and navigation buttons."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "static-pages",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — displays a full-bleed hero section with the restaurant's branding and calls to action.",
     "change_required" : null
   }, {
     "file_name" : "FeaturedDishes.tsx",
@@ -2366,14 +2376,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A visually appealing grid or carousel showcasing signature Mughlai dishes.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "FeaturedDishes",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Fetches and displays a selection of featured dishes from the menu, with options to add to cart."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useMenu.ts" ],
     "depends_on" : [ ],
     "feature_name" : "static-pages",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — displays a curated selection of menu items, allowing users to add them to the cart by calling `useCart().addItem()`.",
     "change_required" : null
   }, {
     "file_name" : "Testimonials.tsx",
@@ -2384,14 +2399,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Displays a selection of glowing customer reviews, potentially sourced from Google.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "Testimonials",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a section showcasing customer testimonials."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "static-pages",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — displays a selection of customer testimonials.",
     "change_required" : null
   }, {
     "file_name" : "AboutPage.tsx",
@@ -2402,14 +2422,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A page detailing the history, culinary philosophy, and heritage of Farmaaish Restaurant.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AboutPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the About Us page with information about the restaurant's history and philosophy."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "static-pages",
-    "file_role" : null,
+    "file_role" : "PAGE layer — presents detailed information about the restaurant's history and culinary philosophy.",
     "change_required" : null
   }, {
     "file_name" : "ContactPage.tsx",
@@ -2420,14 +2445,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Provides contact information, an interactive Google Map, opening hours, and a contact form.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ContactPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the Contact Us page with contact details, a map, and an inquiry form."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/components/contact/LocationMap.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "static-pages",
-    "file_role" : null,
+    "file_role" : "PAGE layer — provides contact information, an embedded map, and a general inquiry form that calls `useInquiries().createInquiry()`.",
     "change_required" : null
   }, {
     "file_name" : "LocationMap.tsx",
@@ -2438,14 +2468,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Embeds an interactive Google Map pointing to the restaurant's location.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "LocationMap",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a Google Map with the restaurant's location marked."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "static-pages",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — embeds an interactive Google Map centered on the restaurant's location.",
     "change_required" : null
   }, {
     "file_name" : "CateringPage.tsx",
@@ -2456,14 +2491,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Showcases catering services and provides a detailed inquiry form for private events.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "CateringPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the Catering Services page with information and an inquiry form."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/catering/CateringInquiryForm.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "static-pages",
-    "file_role" : null,
+    "file_role" : "PAGE layer — showcases catering services and includes a detailed inquiry form that calls `useInquiries().createInquiry()`.",
     "change_required" : null
   }, {
     "file_name" : "CateringInquiryForm.tsx",
@@ -2474,14 +2514,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A form for customers to submit inquiries about catering and private events.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "CateringInquiryForm",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a form for submitting catering and private event inquiries."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useInquiries.ts" ],
     "depends_on" : [ ],
     "feature_name" : "static-pages",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — provides a form for customers to submit catering inquiries, calling `useInquiries().createInquiry()` on submission.",
     "change_required" : null
   }, {
     "file_name" : "useMenu.ts",
@@ -3380,8 +3425,8 @@
     "feature_display_name" : "Static Pages & Components",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/pages/HomePage.tsx", "frontend/src/components/home/HeroSection.tsx", "frontend/src/components/home/FeaturedDishes.tsx", "frontend/src/components/home/Testimonials.tsx", "frontend/src/pages/AboutPage.tsx", "frontend/src/pages/ContactPage.tsx", "frontend/src/components/contact/LocationMap.tsx", "frontend/src/pages/CateringPage.tsx", "frontend/src/components/catering/CateringInquiryForm.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "This feature provides the static pages and core components for the Farmaaish Restaurant frontend, including the home page, about page, contact page, and catering page. It establishes the visual identity and user experience through a regal design, high-fidelity imagery, and elegant typography, consistent with the Mughlai heritage. All monetary values will be displayed in Indian Rupees (₹) using the `en-IN` locale.\n\n## Design Tokens\n- Navbar: bg-[#800020] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b8942e] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Secondary CTA: border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-[#F5F5DC] (odd sections) / bg-white (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-[#36454F] leading-relaxed\n\n### HomePage.tsx\nThis page serves as the main landing page, composed of several key sections:\n1.  **HeroSection**: Displays a full-bleed hero image with the restaurant's name and primary calls to action for 'View Menu' and 'Book a Table'.\n2.  **FeaturedDishes**: Showcases a selection of signature Mughlai dishes. This component will fetch menu items using `useMenu().getAllMenuItems()` from the `menu-display` feature and filter them to display a curated selection. Each dish card will include a button to add the item to the cart, calling `useCart().addItem()`.\n3.  **Testimonials**: Presents glowing customer reviews.\n4.  **About Farmaaish Story**: A brief section summarizing the restaurant's heritage and culinary philosophy.\n5.  **Call to Action for Reservations**: A prominent section encouraging users to book a table.\n\n### HeroSection.tsx\nThis component will render a visually striking hero section. It will feature a background image relevant to a restaurant (e.g., https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1920&q=80) with a dark overlay. The main headline will be \"Farmaaish Restaurant\" with a sub-headline like \"Experience the Royal Flavors of Mughlai Cuisine\". It will include two call-to-action buttons: one for \"View Our Menu\" (linking to `/menu`) and another for \"Book a Table\" (linking to `/reservations`).\n\n### FeaturedDishes.tsx\nThis component will display a grid of 3-4 featured dishes. It will use the `useMenu` hook from the `menu-display` feature to fetch all menu items. It will then filter and display a selection of these items. Each dish card will show the `name`, `description`, `price` (formatted in INR), and `imageUrl`. A button on each card, labeled \"Add to Cart\" or \"Order Now\", will call `useCart().addItem({ id: menuItem.id, name: menuItem.name, unitPrice: menuItem.price, imageUrl: menuItem.imageUrl })` from the pre-scaffolded cart framework. Prices will be formatted using `toLocaleString('en-IN', { style: 'currency', currency: 'INR' })`.\n\n### Testimonials.tsx\nThis component will render a section showcasing customer testimonials. It will include placeholder text for reviews, emphasizing the warm, sophisticated, and inviting tone of the restaurant.\n\n### AboutPage.tsx\nThis page will detail the history, culinary philosophy, and heritage of Farmaaish Restaurant. It will include sections like \"Our Story\", \"Culinary Philosophy\", and \"The Farmaaish Experience\", using rich descriptive text and relevant imagery.\n\n### ContactPage.tsx\nThis page will provide comprehensive contact information for Farmaaish Restaurant. It will include:\n1.  **Contact Details**: Displaying the address \"Kundan Garden, Baner Rd, Near Veritas Software, Baner, Pune, Maharashtra 411069\" and phone number \"020 2729 1111\".\n2.  **Opening Hours**: Placeholder text for daily opening hours.\n3.  **LocationMap**: An embedded Google Map pointing to the restaurant's coordinates (18.55557, 73.77665).\n4.  **Contact Form**: A simple form for general inquiries (not catering). This form will submit data to the `/api/v1/inquiries` endpoint via `useInquiries().createInquiry()` from the `inquiry-form` feature. The form fields will include `customerName`, `customerEmail`, `customerPhone`, and `message`.\n\n### LocationMap.tsx\nThis component will embed an interactive Google Map. It will use an iframe or a React Google Maps library to display a map centered at the restaurant's coordinates (18.55557, 73.77665) with a marker at the exact location.\n\n### CateringPage.tsx\nThis page will showcase the catering services offered by Farmaaish Restaurant. It will include:\n1.  **Hero Section**: A brief introduction to the catering services.\n2.  **Service Offerings**: Details about different catering packages and types of events.\n3.  **CateringInquiryForm**: A detailed form for customers to submit inquiries about catering and private events.\n\n### CateringInquiryForm.tsx\nThis component will provide a form for catering inquiries. It will collect `customerName`, `customerEmail`, `customerPhone`, `eventType`, `eventDate`, `numberOfGuests`, and `message`. Upon submission, it will call `useInquiries().createInquiry()` from the `inquiry-form` feature, sending the form data to the `/api/v1/inquiries` endpoint. The `eventDate` field will be a date picker, and `numberOfGuests` will be a number input.",
+    "depends_on_features" : [ "menu-display", "inquiry-form" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
