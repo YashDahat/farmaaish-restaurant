@@ -3328,14 +3328,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "The main landing page for the admin panel, showing summary stats and links to management sections.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminDashboardPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the admin dashboard with summary information and navigation."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Admin page — the main landing page for the admin panel, showing summary stats and links to management sections.",
     "change_required" : null
   }, {
     "file_name" : "AdminMenuPage.tsx",
@@ -3346,14 +3351,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Admin page for managing the restaurant menu, composed of a menu item table and creation/edit forms.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminMenuPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the menu management interface, including a table of menu items and forms for creation/editing."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/components/admin/menu/MenuTable.tsx", "frontend/src/components/admin/menu/MenuItemForm.tsx", "frontend/src/components/admin/menu/DeleteMenuItemDialog.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Admin page — manages the restaurant menu, composed of a menu item table and creation/edit forms.",
     "change_required" : null
   }, {
     "file_name" : "MenuTable.tsx",
@@ -3364,14 +3374,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A data table for displaying and managing all menu items.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "MenuTable",
+      "parameters" : [ "{ onEdit: (item: MenuItemDto) => void, onDelete: (id: UUID) => void }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a table of menu items with edit and delete actions. Monetary values are displayed in Indian Rupees (₹)."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useMenu.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — displays a data table for managing all menu items, consuming data from the `useMenu` hook.",
     "change_required" : null
   }, {
     "file_name" : "MenuItemForm.tsx",
@@ -3382,14 +3397,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A form (likely in a dialog) for creating or editing a menu item.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "MenuItemForm",
+      "parameters" : [ "{ initialData?: MenuItemDto, onSubmit: (item: MenuItemDto) => void, onCancel: () => void }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a form for menu item creation or editing. Price input is handled as a number and formatted to Indian Rupees (₹) for display."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useMenu.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — provides a form for creating or editing a menu item, interacting with the `useMenu` hook.",
     "change_required" : null
   }, {
     "file_name" : "DeleteMenuItemDialog.tsx",
@@ -3400,14 +3420,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A confirmation dialog for deleting a menu item.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "DeleteMenuItemDialog",
+      "parameters" : [ "{ itemId: UUID, isOpen: boolean, onClose: () => void, onConfirm: (id: UUID) => void }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a confirmation dialog for deleting a menu item."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useMenu.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — a confirmation dialog for deleting a menu item, interacting with the `useMenu` hook.",
     "change_required" : null
   }, {
     "file_name" : "AdminReservationsPage.tsx",
@@ -3418,14 +3443,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Admin page for viewing and managing customer reservations.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminReservationsPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the reservation management interface, including a table of reservations."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/components/admin/reservations/ReservationsTable.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Admin page — views and manages customer reservations.",
     "change_required" : null
   }, {
     "file_name" : "ReservationsTable.tsx",
@@ -3436,14 +3466,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A data table for displaying and managing all reservations.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ReservationsTable",
+      "parameters" : [ "{ onUpdateStatus: (id: UUID, status: ReservationStatus) => void, onDelete: (id: UUID) => void }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a table of reservations with actions to update status or delete. Dates and times are formatted according to Indian conventions."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useReservations.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — displays a data table for managing all reservations, consuming data from the `useReservations` hook.",
     "change_required" : null
   }, {
     "file_name" : "AdminOrdersPage.tsx",
@@ -3454,14 +3489,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Admin page for viewing and managing customer orders.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminOrdersPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the order management interface, including a table of orders."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/components/admin/orders/OrdersTable.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Admin page — views and manages customer orders.",
     "change_required" : null
   }, {
     "file_name" : "OrdersTable.tsx",
@@ -3472,14 +3512,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A data table for displaying and managing all online orders.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "OrdersTable",
+      "parameters" : [ "{ onUpdateStatus: (id: UUID, status: OrderStatus) => void }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a table of orders with actions to update status. Monetary values are displayed in Indian Rupees (₹). Dates are formatted according to Indian conventions."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useOrders.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — displays a data table for managing all online orders, consuming data from the `useOrders` hook.",
     "change_required" : null
   }, {
     "file_name" : "AdminEventsPage.tsx",
@@ -3490,14 +3535,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Admin page for managing events and gallery content.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminEventsPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the event management interface, including a table of events and forms for creation/editing."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/components/admin/events/EventsTable.tsx", "frontend/src/components/admin/events/EventForm.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Admin page — manages events and gallery content.",
     "change_required" : null
   }, {
     "file_name" : "EventsTable.tsx",
@@ -3508,14 +3558,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A data table for displaying and managing all events.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "EventsTable",
+      "parameters" : [ "{ onEdit: (event: EventDto) => void, onDelete: (id: UUID) => void }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a table of events with edit and delete actions. Dates are formatted according to Indian conventions."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useEvents.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — displays a data table for managing all events, consuming data from the `useEvents` hook.",
     "change_required" : null
   }, {
     "file_name" : "EventForm.tsx",
@@ -3526,14 +3581,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A form for creating or editing an event or gallery item.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "EventForm",
+      "parameters" : [ "{ initialData?: EventDto, onSubmit: (event: EventDto) => void, onCancel: () => void }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a form for event creation or editing. Dates are handled as date pickers and formatted according to Indian conventions."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useEvents.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — provides a form for creating or editing an event or gallery item, interacting with the `useEvents` hook.",
     "change_required" : null
   }, {
     "file_name" : "AdminInquiriesPage.tsx",
@@ -3544,14 +3604,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Admin page for viewing and managing catering and event inquiries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminInquiriesPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the inquiry management interface, including a table of inquiries."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/components/admin/inquiries/InquiriesTable.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Admin page — views and manages catering and event inquiries.",
     "change_required" : null
   }, {
     "file_name" : "InquiriesTable.tsx",
@@ -3562,14 +3627,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A data table for displaying and managing all customer inquiries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "InquiriesTable",
+      "parameters" : [ "{ onUpdateStatus: (id: UUID, status: InquiryStatus) => void, onDelete: (id: UUID) => void }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a table of inquiries with actions to update status or delete. Dates are formatted according to Indian conventions."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useInquiries.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — displays a data table for managing all customer inquiries, consuming data from the `useInquiries` hook.",
     "change_required" : null
   } ],
   "features" : [ {
@@ -3721,8 +3791,8 @@
     "feature_display_name" : "Admin Portal",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/pages/AdminDashboardPage.tsx", "frontend/src/pages/AdminMenuPage.tsx", "frontend/src/components/admin/menu/MenuTable.tsx", "frontend/src/components/admin/menu/MenuItemForm.tsx", "frontend/src/components/admin/menu/DeleteMenuItemDialog.tsx", "frontend/src/pages/AdminReservationsPage.tsx", "frontend/src/components/admin/reservations/ReservationsTable.tsx", "frontend/src/pages/AdminOrdersPage.tsx", "frontend/src/components/admin/orders/OrdersTable.tsx", "frontend/src/pages/AdminEventsPage.tsx", "frontend/src/components/admin/events/EventsTable.tsx", "frontend/src/components/admin/events/EventForm.tsx", "frontend/src/pages/AdminInquiriesPage.tsx", "frontend/src/components/admin/inquiries/InquiriesTable.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#800020] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b89a30] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-gray-50 (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-gray-700 leading-relaxed\n\nThis feature provides the administrative interface for Farmaaish Restaurant, allowing staff to manage menu items, reservations, orders, events, and customer inquiries. It consists of several pages, each dedicated to a specific management area, and reusable components for data display (tables) and data entry (forms/dialogs). All pages are wrapped in the `<AdminLayout>` component from `@/components/AdminLayout` to ensure consistent navigation and authentication enforcement for administrative users. All API calls are made to the `/api/v1/admin/**` endpoints and require authentication with an 'admin' role.\n\n### AdminDashboardPage.tsx\nThis page serves as the main entry point for the admin portal. It will display a welcome message, summary statistics (e.g., total reservations, pending orders, new inquiries – these will be placeholder values as no specific API for dashboard stats is available), and navigation links to other admin sections. It uses the `<AdminLayout>` for overall structure.\n\n### AdminMenuPage.tsx\nThis page is responsible for managing the restaurant's menu. It integrates the `MenuTable` component to display existing menu items, and `MenuItemForm` (likely within a dialog) for creating and editing menu items. The `DeleteMenuItemDialog` will handle confirmation for item deletion. This page orchestrates the data flow between these components using the `useMenu` hook.\n\n### MenuTable.tsx\nThis component renders a data table displaying all menu items. It fetches menu items using the `useMenu` hook, which in turn calls the `getAllMenuItems()` function from the generated menu service. The table will include columns for `name`, `categoryName`, `price`, `vegetarian`, `spicy`, and `imageUrl`. It will provide actions to edit or delete a menu item, triggering the `MenuItemForm` or `DeleteMenuItemDialog` respectively. Monetary values (price) will be displayed in Indian Rupees (₹) using `toLocaleString('en-IN', { style: 'currency', currency: 'INR' })`.\n\n### MenuItemForm.tsx\nThis component provides a form for creating or updating a menu item. It will accept an optional `MenuItemDto` prop for pre-filling the form in edit mode. The form will include fields for `name`, `description`, `price`, `imageUrl`, `vegetarian` (checkbox), `spicy` (checkbox), and `categoryId` (dropdown populated by `getAllMenuItemCategories()` from `useMenu`). Upon submission, it will call either `createMenuItem()` or `updateMenuItem()` from the `useMenu` hook. Price input should be handled as a number and formatted to Indian Rupees (₹) for display.\n\n### DeleteMenuItemDialog.tsx\nThis component is a confirmation dialog for deleting a menu item. It will receive the `id` of the menu item to be deleted as a prop. Upon confirmation, it will call the `deleteMenuItem()` function from the `useMenu` hook.\n\n### AdminReservationsPage.tsx\nThis page manages customer reservations. It uses the `ReservationsTable` component to display all reservations and allows for actions like updating reservation status or deleting a reservation. It orchestrates data flow using the `useReservations` hook.\n\n### ReservationsTable.tsx\nThis component displays a table of all reservations. It fetches reservations using the `useReservations` hook, which calls the generated service function `getAllReservations()`. The table will show `customerName`, `reservationDate`, `reservationTime`, `numberOfGuests`, `status`, and `specialRequests`. It will provide actions to update the status of a reservation (e.g., CONFIRMED, CANCELLED, COMPLETED) or delete a reservation, calling `updateReservation()` or `deleteReservation()` from the `useReservations` hook respectively. Dates and times will be formatted according to Indian conventions.\n\n### AdminOrdersPage.tsx\nThis page manages customer orders. It uses the `OrdersTable` component to display all orders and allows for updating order statuses. It orchestrates data flow using the `useOrders` hook.\n\n### OrdersTable.tsx\nThis component displays a table of all online orders. It fetches orders using the `useOrders` hook, which calls the generated service function `getAllOrders()`. The table will include `id`, `customerName` (placeholder, as `Order` DTO does not have `customerName` directly; this will require a lookup or a backend DTO enrichment), `orderDate`, `totalAmount`, and `status`. It will provide actions to update the order status (e.g., PREPARING, OUT_FOR_DELIVERY, DELIVERED), calling `updateOrderStatus()` from the `useOrders` hook. Monetary values (totalAmount) will be displayed in Indian Rupees (₹) using `toLocaleString('en-IN', { style: 'currency', currency: 'INR' })`. Dates will be formatted according to Indian conventions.\n\n### AdminEventsPage.tsx\nThis page manages restaurant events and gallery content. It integrates the `EventsTable` component to display existing events and `EventForm` (likely within a dialog) for creating and editing events. This page orchestrates the data flow between these components using the `useEvents` hook.\n\n### EventsTable.tsx\nThis component renders a data table displaying all events. It fetches events using the `useEvents` hook, which calls the generated service function `getAllEvents()`. The table will include columns for `title`, `eventType`, `eventDate`, and `active`. It will provide actions to edit or delete an event, triggering the `EventForm` or a confirmation dialog respectively. Dates will be formatted according to Indian conventions.\n\n### EventForm.tsx\nThis component provides a form for creating or updating an event. It will accept an optional `EventDto` prop for pre-filling the form in edit mode. The form will include fields for `title`, `description`, `imageUrl`, `eventDate`, `eventType`, and `active` (checkbox). Upon submission, it will call either `createEvent()` or `updateEvent()` from the `useEvents` hook. Dates will be handled as date pickers and formatted according to Indian conventions.\n\n### AdminInquiriesPage.tsx\nThis page manages customer inquiries, such as catering or event inquiries. It uses the `InquiriesTable` component to display all inquiries and allows for updating inquiry statuses. It orchestrates data flow using the `useInquiries` hook.\n\n### InquiriesTable.tsx\nThis component displays a table of all customer inquiries. It fetches inquiries using the `useInquiries` hook, which calls the generated service function `getAllInquiries()`. The table will show `customerName`, `eventType`, `eventDate`, `inquiryDate`, `status`, and `message`. It will provide actions to update the status of an inquiry (e.g., CONTACTED, CLOSED) or delete an inquiry, calling `updateInquiryStatus()` or `deleteInquiry()` from the `useInquiries` hook respectively. Dates will be formatted according to Indian conventions.\n",
+    "depends_on_features" : [ "menu-management", "reservation-system", "order-management", "inquiry-management", "content-management", "core-ui", "auth-ui", "menu-display", "reservation-booking", "order-flow", "inquiry-form", "content-display" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
