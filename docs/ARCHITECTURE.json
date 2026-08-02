@@ -170,8 +170,8 @@
     "file_type" : "BACKEND",
     "layer" : "MODEL",
     "created_date" : "2024-07-30",
-    "updated_date" : "2024-07-30",
-    "status" : "PLANNED",
+    "updated_date" : "2026-08-02",
+    "status" : "GENERATED",
     "description" : "Represents a category for menu items, such as 'Appetizers', 'Main Course', or 'Desserts'.",
     "public_functions" : [ ],
     "public_variables" : [ {
@@ -603,8 +603,8 @@
     "file_type" : "BACKEND",
     "layer" : "MODEL",
     "created_date" : "2024-07-30",
-    "updated_date" : "2024-07-30",
-    "status" : "PLANNED",
+    "updated_date" : "2026-08-02",
+    "status" : "GENERATED",
     "description" : "Enum for the status of a reservation (e.g., PENDING, CONFIRMED, CANCELLED).",
     "public_functions" : null,
     "public_variables" : [ {
@@ -973,8 +973,8 @@
     "file_type" : "BACKEND",
     "layer" : "MODEL",
     "created_date" : "2024-07-30",
-    "updated_date" : "2024-07-30",
-    "status" : "PLANNED",
+    "updated_date" : "2026-08-02",
+    "status" : "GENERATED",
     "description" : "Enum for the status of an order (e.g., PENDING_PAYMENT, RECEIVED, PREPARING, OUT_FOR_DELIVERY, DELIVERED).",
     "public_functions" : [ ],
     "public_variables" : [ {
@@ -1323,8 +1323,8 @@
     "file_type" : "BACKEND",
     "layer" : "MODEL",
     "created_date" : "2024-07-30",
-    "updated_date" : "2024-07-30",
-    "status" : "PLANNED",
+    "updated_date" : "2026-08-02",
+    "status" : "GENERATED",
     "description" : "Enum for the status of an inquiry (e.g., NEW, CONTACTED, CLOSED).",
     "public_functions" : null,
     "public_variables" : [ {
