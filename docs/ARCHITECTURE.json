@@ -2146,8 +2146,8 @@
     "file_type" : "FRONTEND",
     "layer" : "CONFIG",
     "created_date" : "2024-07-30",
-    "updated_date" : "2024-07-30",
-    "status" : "PLANNED",
+    "updated_date" : "2026-08-02",
+    "status" : "GENERATED",
     "description" : "Central configuration for site-wide content like brand name, navigation links, and contact info, using the Farmaaish maroon and gold palette.",
     "public_functions" : [ ],
     "public_variables" : [ {
