@@ -3021,14 +3021,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Custom hook to manage inquiry data, including submitting new inquiries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "useInquiries",
+      "parameters" : [ ],
+      "return_type" : "{ submitInquiry: (inquiry: InquiryRequest) => Promise<void>, isLoading: boolean, error: Error | null }",
+      "description" : "Provides a function to submit an inquiry and tracks the loading and error states."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/services/inquiryService.ts", "frontend/src/types/inquiry.ts" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-form",
-    "file_role" : null,
+    "file_role" : "Custom React hook for managing the submission of customer inquiries, exposing `submitInquiry(inquiry: InquiryRequest): Promise<void>` along with loading and error states.",
     "change_required" : null
   }, {
     "file_name" : "inquiryService.ts",
@@ -3039,14 +3044,26 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Provides functions for interacting with the inquiry-related API endpoints.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "submitInquiry",
+      "parameters" : [ "InquiryRequest request" ],
+      "return_type" : "Promise<InquiryDto>",
+      "description" : "Submits a new inquiry to the backend API."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/inquiries",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Submits a new inquiry to the backend.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/api/client.ts", "frontend/src/types/inquiry.ts" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-form",
-    "file_role" : null,
+    "file_role" : "Frontend service layer — implements `submitInquiry(request: InquiryRequest): Promise<InquiryDto>` by calling the backend inquiry API.",
     "change_required" : null
   }, {
     "file_name" : "inquiry.ts",
@@ -3058,13 +3075,21 @@
     "status" : "PLANNED",
     "description" : "TypeScript types and interfaces for inquiry data.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "InquiryDto",
+      "type" : "{ id: string; customerName: string; customerEmail: string; customerPhone: string; eventType: string; eventDate: string; numberOfGuests: number; message: string; inquiryDate: string; status: 'NEW' | 'CONTACTED' | 'CLOSED' }",
+      "description" : "Represents an inquiry data transfer object received from the backend."
+    }, {
+      "name" : "InquiryRequest",
+      "type" : "{ customerName: string; customerEmail: string; customerPhone: string; eventType: string; eventDate: string; numberOfGuests: number; message: string }",
+      "description" : "Represents the data structure for submitting a new inquiry."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-form",
-    "file_role" : null,
+    "file_role" : "Generated from the backend API contract — defines TypeScript types for inquiry data.",
     "change_required" : null
   }, {
     "file_name" : "useEvents.ts",
@@ -3621,8 +3646,8 @@
     "feature_display_name" : "Inquiry Form (Frontend)",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/hooks/useInquiries.ts", "frontend/src/services/inquiryService.ts", "frontend/src/types/inquiry.ts" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "This feature provides the frontend logic for submitting customer inquiries to the Farmaaish Restaurant backend. It consists of a TypeScript type definition for inquiry data, a service for making API calls, and a custom React hook to manage the inquiry submission process. The `Inquiry` type in `frontend/src/types/inquiry.ts` defines the structure of an inquiry, mirroring the `InquiryDto` from the `inquiry-management` backend feature. The `inquiryService.ts` file in `frontend/src/services/inquiryService.ts` exports an asynchronous function `submitInquiry` that takes an `InquiryRequest` object and sends it to the backend's `/api/v1/inquiries` endpoint using the shared `apiClient`. The `useInquiries.ts` custom hook in `frontend/src/hooks/useInquiries.ts` provides a `submitInquiry` function that components can call to send inquiry data. This hook manages loading and error states, and internally calls `inquiryService.submitInquiry`. The `static-pages` feature, specifically `CateringInquiryForm.tsx`, will consume this hook to allow users to submit inquiries for catering or other events. Upon successful submission, the UI should provide appropriate feedback to the user, such as a success message. Error handling should gracefully inform the user of any issues during submission.",
+    "depends_on_features" : [ "inquiry-management" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
