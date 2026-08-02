@@ -1239,8 +1239,8 @@
     "file_type" : "BACKEND",
     "layer" : "DTO",
     "created_date" : "2024-07-30",
-    "updated_date" : "2024-07-30",
-    "status" : "PLANNED",
+    "updated_date" : "2026-08-02",
+    "status" : "GENERATED",
     "description" : "Data Transfer Object representing a single item within a new order request.",
     "public_functions" : [ ],
     "public_variables" : [ {
