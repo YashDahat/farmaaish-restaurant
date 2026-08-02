@@ -3172,14 +3172,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Custom hook for fetching and updating the logged-in customer's profile information.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "useCustomer",
+      "parameters" : [ ],
+      "return_type" : "{ customer: CustomerDto | null, isLoading: boolean, error: Error | null, updateCustomerProfile: (customer: CustomerDto) => Promise<void>, refetchCustomer: () => void }",
+      "description" : "Provides customer profile data, loading state, error state, and functions to update or refetch the profile."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/services/customerService.ts", "frontend/src/types/customer.ts" ],
     "depends_on" : [ ],
     "feature_name" : "customer-portal",
-    "file_role" : null,
+    "file_role" : "Custom React hook for fetching and updating the logged-in customer's profile information; it exposes `customer`, `isLoading`, `error`, `updateCustomerProfile(customer: CustomerDto)`, and `refetchCustomer()`.",
     "change_required" : null
   }, {
     "file_name" : "customerService.ts",
@@ -3190,14 +3195,38 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Service for making API calls to customer-related endpoints.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getCustomerProfile",
+      "parameters" : [ ],
+      "return_type" : "Promise<CustomerDto>",
+      "description" : "Fetches the profile of the currently logged-in customer."
+    }, {
+      "name" : "updateCustomerProfile",
+      "parameters" : [ "CustomerDto customer" ],
+      "return_type" : "Promise<CustomerDto>",
+      "description" : "Updates the profile of the currently logged-in customer."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/customers/profile",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Fetches the logged-in customer's profile.",
+      "access" : null
+    }, {
+      "method" : "PUT",
+      "path" : "/api/v1/customers/profile",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Updates the logged-in customer's profile.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/api/client.ts", "frontend/src/types/customer.ts" ],
     "depends_on" : [ ],
     "feature_name" : "customer-portal",
-    "file_role" : null,
+    "file_role" : "Frontend service for making API calls to customer-related endpoints; it provides `getCustomerProfile(): Promise<CustomerDto>` and `updateCustomerProfile(customer: CustomerDto): Promise<CustomerDto>`.",
     "change_required" : null
   }, {
     "file_name" : "customer.ts",
@@ -3209,13 +3238,17 @@
     "status" : "PLANNED",
     "description" : "TypeScript types for customer profile and related data.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "CustomerDto",
+      "type" : "{ id: string; userId: string; firstName: string; lastName: string; email: string; phone: string; address: string; }",
+      "description" : "Represents the customer profile data received from the backend."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "customer-portal",
-    "file_role" : null,
+    "file_role" : "TypeScript types for customer profile and related data.",
     "change_required" : null
   }, {
     "file_name" : "ProfilePage.tsx",
@@ -3226,14 +3259,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Customer profile page for viewing order history and managing personal details.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ProfilePage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the customer's profile and order history."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/profile/UserProfileForm.tsx", "frontend/src/components/profile/OrderHistoryList.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "customer-portal",
-    "file_role" : null,
+    "file_role" : "Customer profile page for viewing order history and managing personal details, composed of `UserProfileForm` and `OrderHistoryList`.",
     "change_required" : null
   }, {
     "file_name" : "UserProfileForm.tsx",
@@ -3244,14 +3282,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A form for customers to update their personal information.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "UserProfileForm",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a form to display and update customer profile details."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useCustomer.ts" ],
     "depends_on" : [ ],
     "feature_name" : "customer-portal",
-    "file_role" : null,
+    "file_role" : "A form component for customers to update their personal information, consuming the `useCustomer` hook.",
     "change_required" : null
   }, {
     "file_name" : "OrderHistoryList.tsx",
@@ -3262,14 +3305,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Displays a list of the customer's past orders.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "OrderHistoryList",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a list of past orders for the logged-in customer, formatting monetary values in Indian Rupees."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useOrders.ts" ],
     "depends_on" : [ ],
     "feature_name" : "customer-portal",
-    "file_role" : null,
+    "file_role" : "Displays a list of the customer's past orders, consuming the `useOrders` hook from the `order-flow` feature.",
     "change_required" : null
   }, {
     "file_name" : "AdminDashboardPage.tsx",
@@ -3664,8 +3712,8 @@
     "feature_display_name" : "Customer Portal",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/hooks/useCustomer.ts", "frontend/src/services/customerService.ts", "frontend/src/types/customer.ts", "frontend/src/pages/ProfilePage.tsx", "frontend/src/components/profile/UserProfileForm.tsx", "frontend/src/components/profile/OrderHistoryList.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#800020] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b8902e] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-gray-50 (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-[#36454F] leading-relaxed\n\nThe Customer Portal feature provides a personalized experience for logged-in users of Farmaaish Restaurant, allowing them to view and update their profile information and review their past orders. This feature consists of a `ProfilePage.tsx` which acts as the main entry point, displaying a `UserProfileForm.tsx` for managing personal details and an `OrderHistoryList.tsx` for showcasing past orders. \n\nThe `ProfilePage.tsx` will be a protected route, accessible only to authenticated users, and will utilize the shared `<Layout>` component from `core-ui`. It will fetch the customer's profile data and order history using custom hooks.\n\n`useCustomer.ts` is a custom React hook responsible for fetching and updating the logged-in customer's profile. It uses `customerService.ts` to interact with the backend API. It exposes `customer` (the current profile data), `isLoading`, `error`, `updateCustomerProfile` (a function to update the profile), and `refetchCustomer` (to re-fetch the profile data). The `updateCustomerProfile` function takes a `CustomerDto` as input and calls `customerService.updateCustomerProfile`.\n\n`customerService.ts` handles the direct API communication for customer-related operations. It exports `getCustomerProfile()` to fetch the current user's profile and `updateCustomerProfile(customer: CustomerDto)` to send updated profile data to the backend. Both functions use the `apiClient` from `@/api/client.ts` and handle authentication by including the JWT token from `localStorage` (key: 'token').\n\n`customer.ts` defines the TypeScript interfaces for `CustomerDto` and `UpdateCustomerRequest` to ensure type safety across the frontend application when dealing with customer data. These types mirror the backend `CustomerDto` data shape from the `customer-management` feature.\n\n`UserProfileForm.tsx` is a presentational component that renders a form for the customer to view and edit their `firstName`, `lastName`, `email`, `phone`, and `address`. It consumes the `useCustomer` hook to get the initial data and to submit updates. The form will include input fields pre-populated with the current customer data and a submit button. Upon successful update, it should provide user feedback (e.g., a toast notification).\n\n`OrderHistoryList.tsx` is a presentational component that displays a list of the customer's past orders. It consumes the `useOrders` hook from the `order-flow` feature to fetch the order history. Each order in the list should display key details such as `orderDate`, `totalAmount`, `status`, and a list of `orderItems`. Monetary values (e.g., `totalAmount`, `unitPrice`, `subTotal`) must be formatted in Indian Rupees (₹) using `toLocaleString('en-IN', { style: 'currency', currency: 'INR' })`.\n\n**Inter-file Wiring:**\n- `ProfilePage.tsx` imports and uses `UserProfileForm.tsx` and `OrderHistoryList.tsx`.\n- `UserProfileForm.tsx` imports and uses `useCustomer.ts`.\n- `useCustomer.ts` imports `customerService.ts` and `CustomerDto` from `customer.ts`.\n- `customerService.ts` imports `apiClient` from `frontend/src/api/client.ts` and `CustomerDto` from `customer.ts`.\n- `OrderHistoryList.tsx` imports and uses `useOrders.ts` from the `order-flow` feature.\n\n**Cross-Feature Contracts:**\n- `customerService.ts` calls the `customer-management` backend feature's API endpoints:\n    - `GET /api/v1/customers/profile` to fetch the customer's profile.\n    - `PUT /api/v1/customers/profile` to update the customer's profile.\n- `OrderHistoryList.tsx` uses the `useOrders` hook from the `order-flow` feature, which in turn calls the `order-management` backend feature's API endpoint:\n    - `GET /api/v1/customers/profile/orders` to fetch the customer's order history.\n- `ProfilePage.tsx` will be wrapped in the `<Layout>` component from `core-ui`.\n- Authentication is handled by `auth-ui`. The JWT token is stored in `localStorage` with the key 'token'.",
+    "depends_on_features" : [ "customer-management", "order-management", "core-ui", "auth-ui", "order-flow" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
