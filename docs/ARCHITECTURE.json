@@ -1596,14 +1596,42 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Represents a special event, promotion, or gallery item.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the event. Not null."
+    }, {
+      "name" : "title",
+      "type" : "String",
+      "description" : "Title of the event or gallery item. Not null, max 255 characters."
+    }, {
+      "name" : "description",
+      "type" : "String",
+      "description" : "Detailed description of the event or gallery item. Not null."
+    }, {
+      "name" : "imageUrl",
+      "type" : "String",
+      "description" : "URL of the image associated with the event or gallery item. Not null, max 1024 characters."
+    }, {
+      "name" : "eventDate",
+      "type" : "LocalDate",
+      "description" : "Date of the event. Nullable for gallery items."
+    }, {
+      "name" : "eventType",
+      "type" : "String",
+      "description" : "Type of content, e.g., 'event', 'gallery'. Not null, max 50 characters."
+    }, {
+      "name" : "active",
+      "type" : "boolean",
+      "description" : "Indicates if the event or gallery item is currently active/visible. Not null."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "content-management",
-    "file_role" : null,
+    "file_role" : "MODEL layer — defines the `Event` entity with fields for title, description, image URL, event date, type, and active status.",
     "change_required" : null
   }, {
     "file_name" : "EventRepository.java",
@@ -1614,14 +1642,24 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Spring Data JPA repository for CRUD operations on Event entities.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "findByActiveTrue",
+      "parameters" : [ ],
+      "return_type" : "List<Event>",
+      "description" : "Retrieves all active events or gallery items."
+    }, {
+      "name" : "findByEventTypeAndActiveTrue",
+      "parameters" : [ "String eventType" ],
+      "return_type" : "List<Event>",
+      "description" : "Retrieves all active events or gallery items of a specific type."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/model/Event.java" ],
     "depends_on" : [ ],
     "feature_name" : "content-management",
-    "file_role" : null,
+    "file_role" : "REPOSITORY layer — provides data access operations for `Event` entities, including custom queries for active events and events by type.",
     "change_required" : null
   }, {
     "file_name" : "EventService.java",
@@ -1632,14 +1670,49 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Handles business logic for managing events and gallery items.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "createEvent",
+      "parameters" : [ "EventDto eventDto" ],
+      "return_type" : "EventDto",
+      "description" : "Creates a new event or gallery item."
+    }, {
+      "name" : "getEventById",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "EventDto",
+      "description" : "Retrieves an event or gallery item by its ID."
+    }, {
+      "name" : "getAllEvents",
+      "parameters" : [ ],
+      "return_type" : "List<EventDto>",
+      "description" : "Retrieves all events and gallery items, regardless of active status."
+    }, {
+      "name" : "getActiveEvents",
+      "parameters" : [ ],
+      "return_type" : "List<EventDto>",
+      "description" : "Retrieves all active events and gallery items."
+    }, {
+      "name" : "getEventsByType",
+      "parameters" : [ "String eventType" ],
+      "return_type" : "List<EventDto>",
+      "description" : "Retrieves all active events or gallery items of a specific type."
+    }, {
+      "name" : "updateEvent",
+      "parameters" : [ "UUID id", "EventDto eventDto" ],
+      "return_type" : "EventDto",
+      "description" : "Updates an existing event or gallery item."
+    }, {
+      "name" : "deleteEvent",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "void",
+      "description" : "Deletes an event or gallery item by its ID."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/repository/EventRepository.java", "backend/src/main/java/com/farmaaishrestaurant/dto/EventDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "content-management",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — implements business logic for managing events and gallery items, including CRUD operations and retrieval of active/typed content.",
     "change_required" : null
   }, {
     "file_name" : "EventController.java",
@@ -1650,14 +1723,50 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Public-facing REST controller for fetching events and gallery items.",
-    "public_functions" : null,
-    "public_variables" : null,
-    "api_endpoints" : null,
+    "public_functions" : [ {
+      "name" : "getAllActiveEvents",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<List<EventDto>>",
+      "description" : "Retrieves all active events and gallery items."
+    }, {
+      "name" : "getEventsByType",
+      "parameters" : [ "String eventType" ],
+      "return_type" : "ResponseEntity<List<EventDto>>",
+      "description" : "Retrieves all active events or gallery items of a specific type."
+    }, {
+      "name" : "getEventById",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "ResponseEntity<EventDto>",
+      "description" : "Retrieves an event or gallery item by its ID."
+    } ],
+    "public_variables" : [ ],
+    "api_endpoints" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/events",
+      "request_body" : null,
+      "response_body" : "List<EventDto>",
+      "description" : "Retrieves all active events and gallery items.",
+      "access" : "public"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/events/type/{eventType}",
+      "request_body" : null,
+      "response_body" : "List<EventDto>",
+      "description" : "Retrieves all active events or gallery items of a specific type.",
+      "access" : "public"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/events/{id}",
+      "request_body" : null,
+      "response_body" : "EventDto",
+      "description" : "Retrieves an event or gallery item by its ID.",
+      "access" : "public"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/service/EventService.java" ],
     "depends_on" : [ ],
     "feature_name" : "content-management",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — exposes public REST API endpoints for fetching active events and gallery items by ID or type.",
     "change_required" : null
   }, {
     "file_name" : "AdminEventController.java",
@@ -1668,14 +1777,74 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Admin-only REST controller for CRUD operations on events.",
-    "public_functions" : null,
-    "public_variables" : null,
-    "api_endpoints" : null,
+    "public_functions" : [ {
+      "name" : "createEvent",
+      "parameters" : [ "EventDto eventDto" ],
+      "return_type" : "ResponseEntity<EventDto>",
+      "description" : "Creates a new event or gallery item."
+    }, {
+      "name" : "getAllEvents",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<List<EventDto>>",
+      "description" : "Retrieves all events and gallery items."
+    }, {
+      "name" : "getEventById",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "ResponseEntity<EventDto>",
+      "description" : "Retrieves an event or gallery item by its ID."
+    }, {
+      "name" : "updateEvent",
+      "parameters" : [ "UUID id", "EventDto eventDto" ],
+      "return_type" : "ResponseEntity<EventDto>",
+      "description" : "Updates an existing event or gallery item."
+    }, {
+      "name" : "deleteEvent",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "ResponseEntity<Void>",
+      "description" : "Deletes an event or gallery item by its ID."
+    } ],
+    "public_variables" : [ ],
+    "api_endpoints" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/admin/events",
+      "request_body" : "EventDto",
+      "response_body" : "EventDto",
+      "description" : "Creates a new event or gallery item.",
+      "access" : "admin"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/admin/events",
+      "request_body" : null,
+      "response_body" : "List<EventDto>",
+      "description" : "Retrieves all events and gallery items.",
+      "access" : "admin"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/admin/events/{id}",
+      "request_body" : null,
+      "response_body" : "EventDto",
+      "description" : "Retrieves an event or gallery item by its ID.",
+      "access" : "admin"
+    }, {
+      "method" : "PUT",
+      "path" : "/api/v1/admin/events/{id}",
+      "request_body" : "EventDto",
+      "response_body" : "EventDto",
+      "description" : "Updates an existing event or gallery item.",
+      "access" : "admin"
+    }, {
+      "method" : "DELETE",
+      "path" : "/api/v1/admin/events/{id}",
+      "request_body" : null,
+      "response_body" : "void",
+      "description" : "Deletes an event or gallery item by its ID.",
+      "access" : "admin"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/service/EventService.java" ],
     "depends_on" : [ ],
     "feature_name" : "content-management",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — exposes admin-only REST API endpoints for full CRUD operations on events and gallery items.",
     "change_required" : null
   }, {
     "file_name" : "EventDto.java",
@@ -1686,14 +1855,42 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Data Transfer Object for event data.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the event. Nullable for creation requests."
+    }, {
+      "name" : "title",
+      "type" : "String",
+      "description" : "Title of the event or gallery item. Not null, max 255 characters."
+    }, {
+      "name" : "description",
+      "type" : "String",
+      "description" : "Detailed description of the event or gallery item. Not null."
+    }, {
+      "name" : "imageUrl",
+      "type" : "String",
+      "description" : "URL of the image associated with the event or gallery item. Not null, max 1024 characters."
+    }, {
+      "name" : "eventDate",
+      "type" : "LocalDate",
+      "description" : "Date of the event. Nullable for gallery items."
+    }, {
+      "name" : "eventType",
+      "type" : "String",
+      "description" : "Type of content, e.g., 'event', 'gallery'. Not null, max 50 characters."
+    }, {
+      "name" : "active",
+      "type" : "boolean",
+      "description" : "Indicates if the event or gallery item is currently active/visible. Not null."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "content-management",
-    "file_role" : null,
+    "file_role" : "DTO layer — Data Transfer Object for event data, used for requests and responses.",
     "change_required" : null
   }, {
     "file_name" : "Customer.java",
@@ -2970,8 +3167,8 @@
     "feature_display_name" : "Content Management (Backend)",
     "feature_type" : "BACKEND",
     "file_paths" : [ "backend/src/main/java/com/farmaaishrestaurant/model/Event.java", "backend/src/main/java/com/farmaaishrestaurant/repository/EventRepository.java", "backend/src/main/java/com/farmaaishrestaurant/service/EventService.java", "backend/src/main/java/com/farmaaishrestaurant/controller/EventController.java", "backend/src/main/java/com/farmaaishrestaurant/controller/AdminEventController.java", "backend/src/main/java/com/farmaaishrestaurant/dto/EventDto.java" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "This feature, Content Management, provides the backend infrastructure for managing events and gallery items for Farmaaish Restaurant. It includes an `Event` entity, a Spring Data JPA `EventRepository` for persistence, an `EventService` for business logic, and two controllers: `EventController` for public access to view events and `AdminEventController` for authenticated administrators to perform CRUD operations. The `EventDto` serves as the Data Transfer Object for transferring event data between the service and controller layers.\n\n### Event Entity (`Event.java`)\nRepresents a special event, promotion, or gallery item. It includes fields such as `id` (UUID), `title` (String), `description` (String), `imageUrl` (String), `eventDate` (LocalDate, nullable for gallery items), `eventType` (String, e.g., \"event\", \"gallery\"), and `active` (boolean).\n\n### Event Repository (`EventRepository.java`)\nExtends `JpaRepository` to provide standard CRUD operations for `Event` entities. It will include custom query methods to find active events and gallery items, and to find events by type.\n\n### Event DTO (`EventDto.java`)\nThis DTO is used for data transfer, ensuring that only necessary information is exposed and received. It mirrors the `Event` entity fields but is used for API requests and responses.\n\n### Event Service (`EventService.java`)\nThis service handles the core business logic for events. It injects `EventRepository` to interact with the database. All methods should validate input and handle `ResourceNotFoundException` where appropriate.\n\n**Public Functions:**\n\n1.  `EventDto createEvent(EventDto eventDto)`\n    *   **Logic:**\n        1.  Validate `eventDto`.\n        2.  Convert `eventDto` to an `Event` entity.\n        3.  Save the `Event` entity using `eventRepository.save()`.\n        4.  Convert the saved `Event` entity back to `EventDto`.\n        5.  Return the `EventDto`.\n    *   **Error Cases:** `IllegalArgumentException` if `eventDto` is invalid.\n\n2.  `EventDto getEventById(UUID id)`\n    *   **Logic:**\n        1.  Retrieve the `Event` by `id` using `eventRepository.findById()`.\n        2.  If not found, throw `ResourceNotFoundException`.\n        3.  Convert the `Event` entity to `EventDto`.\n        4.  Return the `EventDto`.\n    *   **Error Cases:** `ResourceNotFoundException` if no event with the given ID exists.\n\n3.  `List<EventDto> getAllEvents()`\n    *   **Logic:**\n        1.  Retrieve all `Event` entities using `eventRepository.findAll()`.\n        2.  Convert the list of `Event` entities to a list of `EventDto`.\n        3.  Return the list of `EventDto`s.\n\n4.  `List<EventDto> getActiveEvents()`\n    *   **Logic:**\n        1.  Retrieve all active `Event` entities using `eventRepository.findByActiveTrue()`.\n        2.  Convert the list of `Event` entities to a list of `EventDto`.\n        3.  Return the list of `EventDto`s.\n\n5.  `List<EventDto> getEventsByType(String eventType)`\n    *   **Logic:**\n        1.  Retrieve `Event` entities by `eventType` using `eventRepository.findByEventTypeAndActiveTrue(eventType)`.\n        2.  Convert the list of `Event` entities to a list of `EventDto`.\n        3.  Return the list of `EventDto`s.\n\n6.  `EventDto updateEvent(UUID id, EventDto eventDto)`\n    *   **Logic:**\n        1.  Check if an `Event` with the given `id` exists using `eventRepository.existsById()`.\n        2.  If not found, throw `ResourceNotFoundException`.\n        3.  Validate `eventDto`.\n        4.  Convert `eventDto` to an `Event` entity, setting its ID to the provided `id`.\n        5.  Save the updated `Event` entity using `eventRepository.save()`.\n        6.  Convert the saved `Event` entity back to `EventDto`.\n        7.  Return the `EventDto`.\n    *   **Error Cases:** `ResourceNotFoundException` if no event with the given ID exists, `IllegalArgumentException` if `eventDto` is invalid.\n\n7.  `void deleteEvent(UUID id)`\n    *   **Logic:**\n        1.  Check if an `Event` with the given `id` exists using `eventRepository.existsById()`.\n        2.  If not found, throw `ResourceNotFoundException`.\n        3.  Delete the `Event` by `id` using `eventRepository.deleteById()`.\n    *   **Error Cases:** `ResourceNotFoundException` if no event with the given ID exists.\n\n### Event Controller (`EventController.java`)\nThis controller exposes public API endpoints for fetching events and gallery items. It injects `EventService`.\n\n**Public Functions:**\n\n1.  `ResponseEntity<List<EventDto>> getAllActiveEvents()`\n    *   **Logic:** Calls `eventService.getActiveEvents()` and returns the result with HTTP status 200 OK.\n\n2.  `ResponseEntity<List<EventDto>> getEventsByType(@PathVariable String eventType)`\n    *   **Logic:** Calls `eventService.getEventsByType(eventType)` and returns the result with HTTP status 200 OK.\n\n3.  `ResponseEntity<EventDto> getEventById(@PathVariable UUID id)`\n    *   **Logic:** Calls `eventService.getEventById(id)` and returns the result with HTTP status 200 OK. Handles `ResourceNotFoundException` by returning 404 NOT FOUND.\n\n### Admin Event Controller (`AdminEventController.java`)\nThis controller exposes admin-only API endpoints for CRUD operations on events. It injects `EventService`.\n\n**Public Functions:**\n\n1.  `ResponseEntity<EventDto> createEvent(@RequestBody EventDto eventDto)`\n    *   **Logic:** Calls `eventService.createEvent(eventDto)` and returns the result with HTTP status 201 CREATED. Handles `IllegalArgumentException` by returning 400 BAD REQUEST.\n\n2.  `ResponseEntity<List<EventDto>> getAllEvents()`\n    *   **Logic:** Calls `eventService.getAllEvents()` and returns the result with HTTP status 200 OK.\n\n3.  `ResponseEntity<EventDto> getEventById(@PathVariable UUID id)`\n    *   **Logic:** Calls `eventService.getEventById(id)` and returns the result with HTTP status 200 OK. Handles `ResourceNotFoundException` by returning 404 NOT FOUND.\n\n4.  `ResponseEntity<EventDto> updateEvent(@PathVariable UUID id, @RequestBody EventDto eventDto)`\n    *   **Logic:** Calls `eventService.updateEvent(id, eventDto)` and returns the result with HTTP status 200 OK. Handles `ResourceNotFoundException` by returning 404 NOT FOUND and `IllegalArgumentException` by returning 400 BAD REQUEST.\n\n5.  `ResponseEntity<Void> deleteEvent(@PathVariable UUID id)`\n    *   **Logic:** Calls `eventService.deleteEvent(id)` and returns HTTP status 204 NO CONTENT. Handles `ResourceNotFoundException` by returning 404 NOT FOUND.\n\n**Cross-Feature Interactions:**\nThis feature does not directly call any services or endpoints from other features. It is a self-contained backend feature for content management. The `shared-backend` feature's `GlobalExceptionHandler` will handle exceptions thrown by this feature's services and controllers.",
+    "depends_on_features" : [ ],
     "change_required" : true,
     "change_instruction" : null
   }, {
