@@ -872,14 +872,54 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Represents a customer's food order for delivery or pickup.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the order. Not null."
+    }, {
+      "name" : "customerId",
+      "type" : "UUID",
+      "description" : "ID of the customer who placed the order. Not null."
+    }, {
+      "name" : "orderDate",
+      "type" : "LocalDateTime",
+      "description" : "Timestamp when the order was placed. Not null."
+    }, {
+      "name" : "totalAmount",
+      "type" : "BigDecimal",
+      "description" : "Total monetary value of the order. Not null, decimal(10,2)."
+    }, {
+      "name" : "status",
+      "type" : "OrderStatus",
+      "description" : "Current status of the order (e.g., PENDING_PAYMENT, DELIVERED). Not null."
+    }, {
+      "name" : "deliveryAddress",
+      "type" : "String",
+      "description" : "Full delivery address for the order. Not null, max 255 characters."
+    }, {
+      "name" : "contactPhone",
+      "type" : "String",
+      "description" : "Contact phone number for delivery. Not null, max 15 characters."
+    }, {
+      "name" : "paymentOrderId",
+      "type" : "String",
+      "description" : "ID returned by the payment gateway for this order. Nullable."
+    }, {
+      "name" : "paymentLink",
+      "type" : "String",
+      "description" : "URL for the customer to complete payment. Nullable."
+    }, {
+      "name" : "orderItems",
+      "type" : "List<OrderItem>",
+      "description" : "List of items included in this order. One-to-many relationship, eagerly fetched."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/model/OrderItem.java", "backend/src/main/java/com/farmaaishrestaurant/model/OrderStatus.java" ],
     "depends_on" : [ ],
     "feature_name" : "order-management",
-    "file_role" : null,
+    "file_role" : "MODEL layer — Represents a customer's food order, containing details like customer information, total amount, status, and a list of order items.",
     "change_required" : null
   }, {
     "file_name" : "OrderItem.java",
@@ -890,14 +930,42 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Represents a single item within a customer's order.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the order item. Not null."
+    }, {
+      "name" : "order",
+      "type" : "Order",
+      "description" : "The parent order this item belongs to. Many-to-one relationship. Not null."
+    }, {
+      "name" : "menuItemId",
+      "type" : "UUID",
+      "description" : "ID of the menu item from the menu-management feature. Not null."
+    }, {
+      "name" : "menuItemName",
+      "type" : "String",
+      "description" : "Name of the menu item at the time of order. Not null, max 100 characters."
+    }, {
+      "name" : "quantity",
+      "type" : "Integer",
+      "description" : "Quantity of the menu item ordered. Not null, min 1."
+    }, {
+      "name" : "unitPrice",
+      "type" : "BigDecimal",
+      "description" : "Price of a single unit of the menu item at the time of order. Not null, decimal(10,2)."
+    }, {
+      "name" : "subTotal",
+      "type" : "BigDecimal",
+      "description" : "Calculated subtotal for this order item (quantity * unitPrice). Not null, decimal(10,2)."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/model/Order.java", "backend/src/main/java/com/farmaaishrestaurant/model/MenuItem.java" ],
     "depends_on" : [ ],
     "feature_name" : "order-management",
-    "file_role" : null,
+    "file_role" : "MODEL layer — Represents a single menu item within an order, detailing its quantity, price, and subtotal.",
     "change_required" : null
   }, {
     "file_name" : "OrderStatus.java",
@@ -908,14 +976,38 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Enum for the status of an order (e.g., PENDING_PAYMENT, RECEIVED, PREPARING, OUT_FOR_DELIVERY, DELIVERED).",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "PENDING_PAYMENT",
+      "type" : "OrderStatus",
+      "description" : "Order created, awaiting payment."
+    }, {
+      "name" : "RECEIVED",
+      "type" : "OrderStatus",
+      "description" : "Payment successful, order received by restaurant."
+    }, {
+      "name" : "PREPARING",
+      "type" : "OrderStatus",
+      "description" : "Order is being prepared in the kitchen."
+    }, {
+      "name" : "OUT_FOR_DELIVERY",
+      "type" : "OrderStatus",
+      "description" : "Order has left the restaurant for delivery."
+    }, {
+      "name" : "DELIVERED",
+      "type" : "OrderStatus",
+      "description" : "Order has been successfully delivered to the customer."
+    }, {
+      "name" : "CANCELLED",
+      "type" : "OrderStatus",
+      "description" : "Order was cancelled."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "order-management",
-    "file_role" : null,
+    "file_role" : "MODEL layer — An enum defining the possible states an order can be in.",
     "change_required" : null
   }, {
     "file_name" : "OrderRepository.java",
@@ -926,14 +1018,24 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Spring Data JPA repository for CRUD operations on Order entities.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "findByCustomerId",
+      "parameters" : [ "UUID customerId" ],
+      "return_type" : "List<Order>",
+      "description" : "Retrieves a list of orders placed by a specific customer."
+    }, {
+      "name" : "findByStatus",
+      "parameters" : [ "OrderStatus status" ],
+      "return_type" : "List<Order>",
+      "description" : "Retrieves a list of orders with a specific status."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/model/Order.java" ],
     "depends_on" : [ ],
     "feature_name" : "order-management",
-    "file_role" : null,
+    "file_role" : "REPOSITORY layer — Provides data access operations for `Order` entities, including custom queries to find orders by customer ID or status.",
     "change_required" : null
   }, {
     "file_name" : "OrderItemRepository.java",
@@ -944,14 +1046,14 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Spring Data JPA repository for CRUD operations on OrderItem entities.",
-    "public_functions" : null,
+    "public_functions" : [ ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/model/OrderItem.java" ],
     "depends_on" : [ ],
     "feature_name" : "order-management",
-    "file_role" : null,
+    "file_role" : "REPOSITORY layer — Provides data access operations for `OrderItem` entities.",
     "change_required" : null
   }, {
     "file_name" : "OrderService.java",
@@ -962,14 +1064,44 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Handles business logic for creating and managing food orders, including payment integration.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "createOrder",
+      "parameters" : [ "CreateOrderRequest request" ],
+      "return_type" : "Order",
+      "description" : "Creates a new order, validates menu items, initiates payment, and persists the order."
+    }, {
+      "name" : "getOrderById",
+      "parameters" : [ "UUID orderId" ],
+      "return_type" : "Order",
+      "description" : "Retrieves a single order by its unique identifier. Throws ResourceNotFoundException if not found."
+    }, {
+      "name" : "getAllOrders",
+      "parameters" : [ ],
+      "return_type" : "List<Order>",
+      "description" : "Retrieves all orders in the system."
+    }, {
+      "name" : "updateOrderStatus",
+      "parameters" : [ "UUID orderId", "OrderStatus newStatus" ],
+      "return_type" : "Order",
+      "description" : "Updates the status of an existing order. Throws ResourceNotFoundException if order not found."
+    }, {
+      "name" : "getOrdersByCustomerId",
+      "parameters" : [ "UUID customerId" ],
+      "return_type" : "List<Order>",
+      "description" : "Retrieves all orders placed by a specific customer."
+    }, {
+      "name" : "getOrdersByStatus",
+      "parameters" : [ "OrderStatus status" ],
+      "return_type" : "List<Order>",
+      "description" : "Retrieves all orders with a specific status."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/repository/OrderRepository.java", "backend/src/main/java/com/farmaaishrestaurant/repository/MenuItemRepository.java", "backend/src/main/java/com/farmaaishrestaurant/dto/CreateOrderRequest.java" ],
     "depends_on" : [ ],
     "feature_name" : "order-management",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — Implements business logic for `createOrder(CreateOrderRequest request): Order`, `getOrderById(UUID orderId): Order`, `getAllOrders(): List<Order>`, `updateOrderStatus(UUID orderId, OrderStatus newStatus): Order`, `getOrdersByCustomerId(UUID customerId): List<Order>`, and `getOrdersByStatus(OrderStatus status): List<Order>`. It orchestrates order persistence, menu item validation via `MenuService`, and payment initiation via `PaymentService`.",
     "change_required" : null
   }, {
     "file_name" : "OrderController.java",
@@ -980,14 +1112,38 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Public-facing REST controller for creating new orders and checking status.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "createOrder",
+      "parameters" : [ "CreateOrderRequest request" ],
+      "return_type" : "ResponseEntity<Order>",
+      "description" : "Handles POST requests to create a new order."
+    }, {
+      "name" : "getOrderById",
+      "parameters" : [ "UUID orderId" ],
+      "return_type" : "ResponseEntity<Order>",
+      "description" : "Handles GET requests to retrieve a specific order by ID."
+    } ],
     "public_variables" : null,
-    "api_endpoints" : null,
+    "api_endpoints" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/orders",
+      "request_body" : "CreateOrderRequest",
+      "response_body" : "Order",
+      "description" : "Creates a new food order and initiates payment.",
+      "access" : "authenticated"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/orders/{orderId}",
+      "request_body" : null,
+      "response_body" : "Order",
+      "description" : "Retrieves details of a specific order.",
+      "access" : "authenticated"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/service/OrderService.java" ],
     "depends_on" : [ ],
     "feature_name" : "order-management",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — Exposes public REST endpoints for customers to create new orders and check the status of their orders.",
     "change_required" : null
   }, {
     "file_name" : "AdminOrderController.java",
@@ -998,14 +1154,50 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Admin-only REST controller for viewing and managing all customer orders.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getAllOrders",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<List<Order>>",
+      "description" : "Handles GET requests to retrieve all orders."
+    }, {
+      "name" : "getOrderById",
+      "parameters" : [ "UUID orderId" ],
+      "return_type" : "ResponseEntity<Order>",
+      "description" : "Handles GET requests to retrieve a specific order by ID for admin."
+    }, {
+      "name" : "updateOrderStatus",
+      "parameters" : [ "UUID orderId", "OrderStatus newStatus" ],
+      "return_type" : "ResponseEntity<Order>",
+      "description" : "Handles PUT requests to update the status of an order."
+    } ],
     "public_variables" : null,
-    "api_endpoints" : null,
+    "api_endpoints" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/admin/orders",
+      "request_body" : null,
+      "response_body" : "List<Order>",
+      "description" : "Retrieves a list of all customer orders.",
+      "access" : "admin"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/admin/orders/{orderId}",
+      "request_body" : null,
+      "response_body" : "Order",
+      "description" : "Retrieves details of a specific order for administration.",
+      "access" : "admin"
+    }, {
+      "method" : "PUT",
+      "path" : "/api/v1/admin/orders/{orderId}/status",
+      "request_body" : "OrderStatus",
+      "response_body" : "Order",
+      "description" : "Updates the status of a specific order.",
+      "access" : "admin"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/service/OrderService.java" ],
     "depends_on" : [ ],
     "feature_name" : "order-management",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — Exposes admin-only REST endpoints for viewing and managing all customer orders, including updating their status.",
     "change_required" : null
   }, {
     "file_name" : "CreateOrderRequest.java",
@@ -1016,14 +1208,30 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Data Transfer Object for creating a new food order.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "customerId",
+      "type" : "UUID",
+      "description" : "ID of the customer placing the order. Not null."
+    }, {
+      "name" : "deliveryAddress",
+      "type" : "String",
+      "description" : "Delivery address for the order. Not null, max 255 characters."
+    }, {
+      "name" : "contactPhone",
+      "type" : "String",
+      "description" : "Contact phone number for delivery. Not null, max 15 characters."
+    }, {
+      "name" : "orderItems",
+      "type" : "List<OrderItemRequest>",
+      "description" : "List of menu items and their quantities for the order. Not empty."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/dto/OrderItemRequest.java" ],
     "depends_on" : [ ],
     "feature_name" : "order-management",
-    "file_role" : null,
+    "file_role" : "DTO layer — Used to encapsulate the data required to create a new order, including customer details and a list of requested menu items.",
     "change_required" : null
   }, {
     "file_name" : "OrderItemRequest.java",
@@ -1034,14 +1242,22 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Data Transfer Object representing a single item within a new order request.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "menuItemId",
+      "type" : "UUID",
+      "description" : "ID of the menu item. Not null."
+    }, {
+      "name" : "quantity",
+      "type" : "Integer",
+      "description" : "Quantity of the menu item. Not null, min 1."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "order-management",
-    "file_role" : null,
+    "file_role" : "DTO layer — Used within `CreateOrderRequest` to specify a menu item and its quantity for an order.",
     "change_required" : null
   }, {
     "file_name" : "Inquiry.java",
@@ -2534,8 +2750,8 @@
     "feature_display_name" : "Order Management (Backend)",
     "feature_type" : "BACKEND",
     "file_paths" : [ "backend/src/main/java/com/farmaaishrestaurant/model/Order.java", "backend/src/main/java/com/farmaaishrestaurant/model/OrderItem.java", "backend/src/main/java/com/farmaaishrestaurant/model/OrderStatus.java", "backend/src/main/java/com/farmaaishrestaurant/repository/OrderRepository.java", "backend/src/main/java/com/farmaaishrestaurant/repository/OrderItemRepository.java", "backend/src/main/java/com/farmaaishrestaurant/service/OrderService.java", "backend/src/main/java/com/farmaaishrestaurant/controller/OrderController.java", "backend/src/main/java/com/farmaaishrestaurant/controller/AdminOrderController.java", "backend/src/main/java/com/farmaaishrestaurant/dto/CreateOrderRequest.java", "backend/src/main/java/com/farmaaishrestaurant/dto/OrderItemRequest.java" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "This feature handles the complete lifecycle of a customer's food order, from creation and payment initiation to status tracking and administration. It integrates with the `menu-management` feature to retrieve menu item details and with a pre-scaffolded `PaymentService` for payment processing.\n\n## Order Creation Flow\n1.  A `CreateOrderRequest` DTO is received by `OrderController.createOrder()`.\n2.  `OrderController` delegates to `OrderService.createOrder(CreateOrderRequest request)`.\n3.  `OrderService` performs the following steps:\n    a.  Validates the `CreateOrderRequest` to ensure all required fields are present and `orderItems` are not empty.\n    b.  For each `OrderItemRequest` in `CreateOrderRequest.orderItems`:\n        i.  Calls `menuService.getMenuItemById(item.menuItemId)` to retrieve the `MenuItemDto` from the `menu-management` feature. If any `MenuItem` is not found, throw `ResourceNotFoundException`.\n        ii. Calculates the `subTotal` for the `OrderItem` (item.quantity * menuItem.price).\n        iii. Creates an `OrderItem` entity.\n    c.  Calculates the total amount of the order by summing up all `orderItems`' `subTotal`s.\n    d.  Creates an `Order` entity with `OrderStatus.PENDING_PAYMENT`.\n    e.  Saves the `Order` and its `OrderItems` using `OrderRepository.save()` and `OrderItemRepository.saveAll()`.\n    f.  Constructs a `CreatePaymentRequest` using the order ID and total amount.\n    g.  Calls `paymentService.createOrder(createPaymentRequest)` to initiate payment. The `PaymentService` is pre-scaffolded and its methods are `createOrder(CreatePaymentRequest)` which returns `PaymentOrderResponse` and `verify(VerifyPaymentRequest)` which returns `PaymentVerificationResponse`. Do not invent other payment methods.\n    h.  Updates the `Order` entity with the `paymentOrderId` and `paymentLink` from the `PaymentOrderResponse`.\n    i.  Saves the updated `Order`.\n    j.  Returns the `Order` entity.\n4.  `OrderController` returns the created `Order` with payment details.\n\n## Order Status Updates\n-   `OrderService.updateOrderStatus(UUID orderId, OrderStatus newStatus)`: Updates the status of an existing order. Throws `ResourceNotFoundException` if the order does not exist.\n\n## Order Retrieval\n-   `OrderService.getOrderById(UUID orderId)`: Retrieves a single order by its ID. Throws `ResourceNotFoundException` if the order does not exist.\n-   `OrderService.getAllOrders()`: Retrieves all orders.\n-   `OrderService.getOrdersByStatus(OrderStatus status)`: Retrieves orders filtered by status.\n-   `OrderService.getOrdersByCustomerId(UUID customerId)`: Retrieves orders for a specific customer.\n\n## Admin Functionality\n-   `AdminOrderController` provides endpoints for administrators to view all orders, view a specific order, and update an order's status.\n-   All admin endpoints require `ADMIN` role authentication.\n\n## Error Handling\n-   `ResourceNotFoundException` should be thrown when an order or menu item is not found. This should be handled by a global exception handler to return a 404 Not Found status.\n-   `PaymentGatewayException` should be thrown if there's an issue with the payment gateway interaction. This should be handled by a global exception handler to return a 500 Internal Server Error status.\n\n## Data Shapes\n-   `Order`: Represents the main order entity with fields like `id`, `customerId`, `orderDate`, `totalAmount`, `status`, `deliveryAddress`, `contactPhone`, `paymentOrderId`, `paymentLink`, `orderItems`.\n-   `OrderItem`: Represents a single item in an order with fields like `id`, `order`, `menuItemId`, `menuItemName`, `quantity`, `unitPrice`, `subTotal`.\n-   `OrderStatus`: An enum defining possible states of an order.\n-   `CreateOrderRequest`: DTO for creating an order, containing `customerId`, `deliveryAddress`, `contactPhone`, and a list of `OrderItemRequest`.\n-   `OrderItemRequest`: DTO for an item within `CreateOrderRequest`, containing `menuItemId` and `quantity`.\n\n## Inter-feature Wiring\n-   `OrderService` injects `OrderRepository`, `OrderItemRepository`, `MenuService` (from `menu-management`), and `PaymentService` (pre-scaffolded).\n-   `OrderController` injects `OrderService`.\n-   `AdminOrderController` injects `OrderService`.",
+    "depends_on_features" : [ "menu-management" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
