@@ -80,15 +80,15 @@ public class OrderService {
         Order savedOrder = orderRepository.save(order);
 
         CreatePaymentRequest createPaymentRequest = CreatePaymentRequest.builder()
-                .orderId(savedOrder.getId())
+                .referenceId(savedOrder.getId().toString())
                 .amount(savedOrder.getTotalAmount())
                 .currency("USD")
                 .build();
 
         PaymentOrderResponse paymentResponse = paymentService.createOrder(createPaymentRequest);
 
-        savedOrder.setPaymentOrderId(paymentResponse.getPaymentOrderId());
-        savedOrder.setPaymentLink(paymentResponse.getPaymentLink());
+        savedOrder.setPaymentOrderId(paymentResponse.getGatewayOrderId());
+        savedOrder.setPaymentLink(null);
 
         return orderRepository.save(savedOrder);
     }

@@ -14,7 +14,7 @@
     "layer" : "EXCEPTION",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Handles all uncaught exceptions and maps them to standardized ErrorResponse DTOs.",
     "public_functions" : [ {
       "name" : "handleResourceNotFoundException",
@@ -42,7 +42,7 @@
     "layer" : "EXCEPTION",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Custom exception for cases where a requested resource is not found in the database.",
     "public_functions" : [ ],
     "public_variables" : null,
@@ -60,7 +60,7 @@
     "layer" : "DTO",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Standardized DTO for returning error details to the client.",
     "public_functions" : null,
     "public_variables" : [ {
@@ -98,7 +98,7 @@
     "layer" : "CONFIG",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Populates the database with initial menu items and events on application startup.",
     "public_functions" : [ {
       "name" : "run",
@@ -121,7 +121,7 @@
     "layer" : "MODEL",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Represents a single dish or beverage on the restaurant menu.",
     "public_functions" : [ ],
     "public_variables" : [ {
@@ -171,7 +171,7 @@
     "layer" : "MODEL",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Represents a category for menu items, such as 'Appetizers', 'Main Course', or 'Desserts'.",
     "public_functions" : [ ],
     "public_variables" : [ {
@@ -201,7 +201,7 @@
     "layer" : "REPOSITORY",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Spring Data JPA repository for CRUD operations on MenuItem entities.",
     "public_functions" : [ {
       "name" : "findByCategoryId",
@@ -224,7 +224,7 @@
     "layer" : "REPOSITORY",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Spring Data JPA repository for CRUD operations on MenuItemCategory entities.",
     "public_functions" : [ {
       "name" : "findByName",
@@ -247,7 +247,7 @@
     "layer" : "SERVICE",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Handles business logic for managing menu items and categories.",
     "public_functions" : [ {
       "name" : "getAllMenuItems",
@@ -320,7 +320,7 @@
     "layer" : "CONTROLLER",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Public-facing REST controller for fetching menu information.",
     "public_functions" : [ {
       "name" : "getAllMenuItems",
@@ -398,7 +398,7 @@
     "layer" : "CONTROLLER",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Admin-only REST controller for CRUD operations on menu items and categories.",
     "public_functions" : [ {
       "name" : "createMenuItem",
@@ -488,7 +488,7 @@
     "layer" : "DTO",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Data Transfer Object for menu item data, used in API requests and responses.",
     "public_functions" : [ ],
     "public_variables" : [ {
@@ -542,7 +542,7 @@
     "layer" : "MODEL",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Represents a customer's table reservation.",
     "public_functions" : null,
     "public_variables" : [ {
@@ -604,7 +604,7 @@
     "layer" : "MODEL",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Enum for the status of a reservation (e.g., PENDING, CONFIRMED, CANCELLED).",
     "public_functions" : null,
     "public_variables" : [ {
@@ -642,7 +642,7 @@
     "layer" : "REPOSITORY",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Spring Data JPA repository for CRUD operations on Reservation entities.",
     "public_functions" : [ {
       "name" : "findById",
@@ -685,7 +685,7 @@
     "layer" : "SERVICE",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Handles business logic for creating and managing table reservations, including sending confirmations.",
     "public_functions" : [ {
       "name" : "createReservation",
@@ -728,7 +728,7 @@
     "layer" : "CONTROLLER",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Public-facing REST controller for creating new reservations.",
     "public_functions" : [ {
       "name" : "createReservation",
@@ -758,7 +758,7 @@
     "layer" : "CONTROLLER",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Admin-only REST controller for viewing and managing all reservations.",
     "public_functions" : [ {
       "name" : "getAllReservations",
@@ -824,7 +824,7 @@
     "layer" : "DTO",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Data Transfer Object for creating a new reservation.",
     "public_functions" : null,
     "public_variables" : [ {
@@ -870,7 +870,7 @@
     "layer" : "MODEL",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Represents a customer's food order for delivery or pickup.",
     "public_functions" : [ ],
     "public_variables" : [ {
@@ -928,7 +928,7 @@
     "layer" : "MODEL",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Represents a single item within a customer's order.",
     "public_functions" : [ ],
     "public_variables" : [ {
@@ -974,7 +974,7 @@
     "layer" : "MODEL",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Enum for the status of an order (e.g., PENDING_PAYMENT, RECEIVED, PREPARING, OUT_FOR_DELIVERY, DELIVERED).",
     "public_functions" : [ ],
     "public_variables" : [ {
@@ -1016,7 +1016,7 @@
     "layer" : "REPOSITORY",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Spring Data JPA repository for CRUD operations on Order entities.",
     "public_functions" : [ {
       "name" : "findByCustomerId",
@@ -1044,7 +1044,7 @@
     "layer" : "REPOSITORY",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Spring Data JPA repository for CRUD operations on OrderItem entities.",
     "public_functions" : [ ],
     "public_variables" : null,
@@ -1062,7 +1062,7 @@
     "layer" : "SERVICE",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Handles business logic for creating and managing food orders, including payment integration.",
     "public_functions" : [ {
       "name" : "createOrder",
@@ -1110,7 +1110,7 @@
     "layer" : "CONTROLLER",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Public-facing REST controller for creating new orders and checking status.",
     "public_functions" : [ {
       "name" : "createOrder",
@@ -1152,7 +1152,7 @@
     "layer" : "CONTROLLER",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Admin-only REST controller for viewing and managing all customer orders.",
     "public_functions" : [ {
       "name" : "getAllOrders",
@@ -1206,7 +1206,7 @@
     "layer" : "DTO",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Data Transfer Object for creating a new food order.",
     "public_functions" : [ ],
     "public_variables" : [ {
@@ -1240,7 +1240,7 @@
     "layer" : "DTO",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Data Transfer Object representing a single item within a new order request.",
     "public_functions" : [ ],
     "public_variables" : [ {
@@ -1266,7 +1266,7 @@
     "layer" : "MODEL",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Represents a customer inquiry for catering or private events.",
     "public_functions" : null,
     "public_variables" : [ {
@@ -1324,7 +1324,7 @@
     "layer" : "MODEL",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Enum for the status of an inquiry (e.g., NEW, CONTACTED, CLOSED).",
     "public_functions" : null,
     "public_variables" : [ {
@@ -1354,7 +1354,7 @@
     "layer" : "REPOSITORY",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Spring Data JPA repository for CRUD operations on Inquiry entities.",
     "public_functions" : [ {
       "name" : "save",
@@ -1397,7 +1397,7 @@
     "layer" : "SERVICE",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Handles business logic for managing catering and event inquiries.",
     "public_functions" : [ {
       "name" : "createInquiry",
@@ -1440,7 +1440,7 @@
     "layer" : "CONTROLLER",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Public-facing REST controller for submitting new inquiries.",
     "public_functions" : [ {
       "name" : "createInquiry",
@@ -1470,7 +1470,7 @@
     "layer" : "CONTROLLER",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Admin-only REST controller for viewing and managing all inquiries.",
     "public_functions" : [ {
       "name" : "getAllInquiries",
@@ -1536,7 +1536,7 @@
     "layer" : "DTO",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Data Transfer Object for inquiry data.",
     "public_functions" : null,
     "public_variables" : [ {
@@ -1594,7 +1594,7 @@
     "layer" : "MODEL",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Represents a special event, promotion, or gallery item.",
     "public_functions" : [ ],
     "public_variables" : [ {
@@ -1640,7 +1640,7 @@
     "layer" : "REPOSITORY",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Spring Data JPA repository for CRUD operations on Event entities.",
     "public_functions" : [ {
       "name" : "findByActiveTrue",
@@ -1668,7 +1668,7 @@
     "layer" : "SERVICE",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Handles business logic for managing events and gallery items.",
     "public_functions" : [ {
       "name" : "createEvent",
@@ -1721,7 +1721,7 @@
     "layer" : "CONTROLLER",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Public-facing REST controller for fetching events and gallery items.",
     "public_functions" : [ {
       "name" : "getAllActiveEvents",
@@ -1775,7 +1775,7 @@
     "layer" : "CONTROLLER",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Admin-only REST controller for CRUD operations on events.",
     "public_functions" : [ {
       "name" : "createEvent",
@@ -1853,7 +1853,7 @@
     "layer" : "DTO",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Data Transfer Object for event data.",
     "public_functions" : [ ],
     "public_variables" : [ {
@@ -1899,7 +1899,7 @@
     "layer" : "MODEL",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Represents customer-specific profile data, linked to a User account.",
     "public_functions" : null,
     "public_variables" : [ {
@@ -1945,7 +1945,7 @@
     "layer" : "REPOSITORY",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Spring Data JPA repository for CRUD operations on Customer entities.",
     "public_functions" : [ {
       "name" : "findByUserId",
@@ -1968,7 +1968,7 @@
     "layer" : "SERVICE",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Handles business logic for managing customer profiles.",
     "public_functions" : [ {
       "name" : "createCustomer",
@@ -2006,7 +2006,7 @@
     "layer" : "CONTROLLER",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "REST controller for authenticated customers to manage their profile and view order history.",
     "public_functions" : [ {
       "name" : "getCustomerProfile",
@@ -2060,7 +2060,7 @@
     "layer" : "DTO",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-08-02",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Data Transfer Object for customer profile data.",
     "public_functions" : null,
     "public_variables" : [ {
@@ -2105,8 +2105,8 @@
     "file_type" : "FRONTEND",
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
-    "updated_date" : "2024-07-30",
-    "status" : "PLANNED",
+    "updated_date" : "2026-08-02",
+    "status" : "VALIDATED",
     "description" : "The root component of the React application, responsible for routing and global context providers.",
     "public_functions" : [ {
       "name" : "App",
@@ -2128,8 +2128,8 @@
     "file_type" : "FRONTEND",
     "layer" : "SERVICE",
     "created_date" : "2024-07-30",
-    "updated_date" : "2024-07-30",
-    "status" : "PLANNED",
+    "updated_date" : "2026-08-02",
+    "status" : "VALIDATED",
     "description" : "Configures the global Axios instance with base URL and interceptors for auth tokens.",
     "public_functions" : [ ],
     "public_variables" : [ ],
@@ -2233,40 +2233,10 @@
       "description" : "Authenticates a user with provided credentials.",
       "access" : null
     } ],
-    "imports_from" : [ "frontend/src/context/AuthContext.tsx", "frontend/src/services/authService.ts" ],
+    "imports_from" : [ "frontend/src/context/AuthContext.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "auth-ui",
     "file_role" : "Custom hook for accessing authentication context and performing login/logout actions. It returns `isAuthenticated: boolean`, `user: User | null`, `token: string | null`, `login: (request: LoginRequest) => Promise<void>`, and `logout: () => void`.",
-    "change_required" : null
-  }, {
-    "file_name" : "authService.ts",
-    "file_path" : "frontend/src/services/authService.ts",
-    "file_type" : "FRONTEND",
-    "layer" : "SERVICE",
-    "created_date" : "2024-07-30",
-    "updated_date" : "2024-07-30",
-    "status" : "PLANNED",
-    "description" : "Service for making API calls to authentication-related endpoints.",
-    "public_functions" : [ {
-      "name" : "login",
-      "parameters" : [ "LoginRequest request" ],
-      "return_type" : "Promise<LoginResponse>",
-      "description" : "Sends a POST request to the backend login endpoint with user credentials."
-    } ],
-    "public_variables" : [ ],
-    "api_endpoints" : null,
-    "api_endpoints_consumed" : [ {
-      "method" : "POST",
-      "path" : "/api/v1/auth/login",
-      "request_body" : null,
-      "response_body" : null,
-      "description" : "Authenticates a user and returns a JWT token.",
-      "access" : null
-    } ],
-    "imports_from" : [ "frontend/src/api/client.ts", "frontend/src/types/auth.ts" ],
-    "depends_on" : [ ],
-    "feature_name" : "auth-ui",
-    "file_role" : "Service for making API calls to authentication-related endpoints. It exposes `login(request: LoginRequest): Promise<LoginResponse>`.",
     "change_required" : null
   }, {
     "file_name" : "auth.ts",
@@ -2274,8 +2244,8 @@
     "file_type" : "FRONTEND",
     "layer" : "UTIL",
     "created_date" : "2024-07-30",
-    "updated_date" : "2024-07-30",
-    "status" : "PLANNED",
+    "updated_date" : "2026-08-02",
+    "status" : "GENERATED",
     "description" : "TypeScript types and interfaces for authentication data structures.",
     "public_functions" : [ ],
     "public_variables" : [ {
@@ -2557,8 +2527,8 @@
     "file_type" : "FRONTEND",
     "layer" : "SERVICE",
     "created_date" : "2024-07-30",
-    "updated_date" : "2024-07-30",
-    "status" : "PLANNED",
+    "updated_date" : "2026-08-02",
+    "status" : "VALIDATED",
     "description" : "Provides functions for interacting with the menu-related API endpoints.",
     "public_functions" : [ {
       "name" : "getAllMenuItemCategories",
@@ -2599,8 +2569,8 @@
     "file_type" : "FRONTEND",
     "layer" : "UTIL",
     "created_date" : "2024-07-30",
-    "updated_date" : "2024-07-30",
-    "status" : "PLANNED",
+    "updated_date" : "2026-08-02",
+    "status" : "VALIDATED",
     "description" : "TypeScript types and interfaces for menu items and categories.",
     "public_functions" : null,
     "public_variables" : [ {
@@ -2717,8 +2687,8 @@
     "file_type" : "FRONTEND",
     "layer" : "SERVICE",
     "created_date" : "2024-07-30",
-    "updated_date" : "2024-07-30",
-    "status" : "PLANNED",
+    "updated_date" : "2026-08-02",
+    "status" : "VALIDATED",
     "description" : "Provides functions for interacting with the reservation-related API endpoints.",
     "public_functions" : [ {
       "name" : "createReservation",
@@ -2747,8 +2717,8 @@
     "file_type" : "FRONTEND",
     "layer" : "UTIL",
     "created_date" : "2024-07-30",
-    "updated_date" : "2024-07-30",
-    "status" : "PLANNED",
+    "updated_date" : "2026-08-02",
+    "status" : "VALIDATED",
     "description" : "TypeScript types and interfaces for reservation data.",
     "public_functions" : null,
     "public_variables" : [ {
@@ -2846,8 +2816,8 @@
     "file_type" : "FRONTEND",
     "layer" : "SERVICE",
     "created_date" : "2024-07-30",
-    "updated_date" : "2024-07-30",
-    "status" : "PLANNED",
+    "updated_date" : "2026-08-02",
+    "status" : "VALIDATED",
     "description" : "Provides functions for interacting with the order-related API endpoints.",
     "public_functions" : [ {
       "name" : "createOrder",
@@ -2888,8 +2858,8 @@
     "file_type" : "FRONTEND",
     "layer" : "UTIL",
     "created_date" : "2024-07-30",
-    "updated_date" : "2024-07-30",
-    "status" : "PLANNED",
+    "updated_date" : "2026-08-02",
+    "status" : "VALIDATED",
     "description" : "TypeScript types and interfaces for order data.",
     "public_functions" : null,
     "public_variables" : [ {
@@ -3041,8 +3011,8 @@
     "file_type" : "FRONTEND",
     "layer" : "SERVICE",
     "created_date" : "2024-07-30",
-    "updated_date" : "2024-07-30",
-    "status" : "PLANNED",
+    "updated_date" : "2026-08-02",
+    "status" : "VALIDATED",
     "description" : "Provides functions for interacting with the inquiry-related API endpoints.",
     "public_functions" : [ {
       "name" : "submitInquiry",
@@ -3071,8 +3041,8 @@
     "file_type" : "FRONTEND",
     "layer" : "UTIL",
     "created_date" : "2024-07-30",
-    "updated_date" : "2024-07-30",
-    "status" : "PLANNED",
+    "updated_date" : "2026-08-02",
+    "status" : "VALIDATED",
     "description" : "TypeScript types and interfaces for inquiry data.",
     "public_functions" : null,
     "public_variables" : [ {
@@ -3115,8 +3085,8 @@
     "file_type" : "FRONTEND",
     "layer" : "SERVICE",
     "created_date" : "2024-07-30",
-    "updated_date" : "2024-07-30",
-    "status" : "PLANNED",
+    "updated_date" : "2026-08-02",
+    "status" : "VALIDATED",
     "description" : "Provides functions for interacting with the event-related API endpoints.",
     "public_functions" : null,
     "public_variables" : null,
@@ -3133,8 +3103,8 @@
     "file_type" : "FRONTEND",
     "layer" : "UTIL",
     "created_date" : "2024-07-30",
-    "updated_date" : "2024-07-30",
-    "status" : "PLANNED",
+    "updated_date" : "2026-08-02",
+    "status" : "VALIDATED",
     "description" : "TypeScript types and interfaces for event and gallery data.",
     "public_functions" : null,
     "public_variables" : null,
@@ -3192,8 +3162,8 @@
     "file_type" : "FRONTEND",
     "layer" : "SERVICE",
     "created_date" : "2024-07-30",
-    "updated_date" : "2024-07-30",
-    "status" : "PLANNED",
+    "updated_date" : "2026-08-02",
+    "status" : "VALIDATED",
     "description" : "Service for making API calls to customer-related endpoints.",
     "public_functions" : [ {
       "name" : "getCustomerProfile",
@@ -3234,8 +3204,8 @@
     "file_type" : "FRONTEND",
     "layer" : "UTIL",
     "created_date" : "2024-07-30",
-    "updated_date" : "2024-07-30",
-    "status" : "PLANNED",
+    "updated_date" : "2026-08-02",
+    "status" : "VALIDATED",
     "description" : "TypeScript types for customer profile and related data.",
     "public_functions" : null,
     "public_variables" : [ {
@@ -3641,6 +3611,24 @@
     "feature_name" : "admin-portal",
     "file_role" : "COMPONENT layer — displays a data table for managing all customer inquiries, consuming data from the `useInquiries` hook.",
     "change_required" : null
+  }, {
+    "file_name" : "routes.ts",
+    "file_path" : "frontend/src/routes.ts",
+    "file_type" : "FRONTEND",
+    "layer" : "UTIL",
+    "created_date" : null,
+    "updated_date" : null,
+    "status" : "VALIDATED",
+    "description" : "Derived route registry — regenerated every attempt, never LLM-written",
+    "public_functions" : null,
+    "public_variables" : null,
+    "api_endpoints" : null,
+    "api_endpoints_consumed" : null,
+    "imports_from" : null,
+    "depends_on" : null,
+    "feature_name" : null,
+    "file_role" : null,
+    "change_required" : null
   } ],
   "features" : [ {
     "feature_name" : "shared-backend",
@@ -3718,7 +3706,7 @@
     "feature_name" : "auth-ui",
     "feature_display_name" : "Authentication UI",
     "feature_type" : "FRONTEND",
-    "file_paths" : [ "frontend/src/context/AuthContext.tsx", "frontend/src/hooks/useAuth.ts", "frontend/src/services/authService.ts", "frontend/src/types/auth.ts", "frontend/src/pages/LoginPage.tsx" ],
+    "file_paths" : [ "frontend/src/context/AuthContext.tsx", "frontend/src/hooks/useAuth.ts", "frontend/src/types/auth.ts", "frontend/src/pages/LoginPage.tsx" ],
     "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#800020] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b8952c] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-gray-50 (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-gray-700 leading-relaxed\n\nThis feature provides the core authentication functionality for the Farmaaish Restaurant application, enabling users (both customers and administrators) to log in and manage their sessions. It consists of a React Context (`AuthContext.tsx`) to hold the global authentication state, a custom hook (`useAuth.ts`) to interact with this context and perform login/logout actions, a service (`authService.ts`) to handle API calls to the backend authentication endpoints, and a type definition file (`auth.ts`) for data structures. The `LoginPage.tsx` provides the user interface for logging in.\n\n### AuthContext.tsx\nThis file defines the `AuthContext` using React's `createContext` and provides an `AuthProvider` component. The `AuthProvider` manages the authentication state, including `isAuthenticated` (boolean), `user` (User type), and `token` (string | null). It also exposes `login` and `logout` functions. The `token` is stored in `localStorage` under the key 'token' upon successful login and removed upon logout. The `user` object should contain `id`, `email`, and `role` properties. The `AuthProvider` should initialize its state by checking `localStorage` for an existing token and, if found, attempt to validate it (though for this feature, simply setting `isAuthenticated` to true and parsing basic user info from the token is sufficient).\n\n### useAuth.ts\nThis custom hook provides a convenient way for components to access the authentication context. It exports the `useAuth` function, which returns the `isAuthenticated`, `user`, `token`, `login`, and `logout` values from the `AuthContext`. The `login` function in `useAuth` will take `LoginRequest` (email, password) as input, call `authService.login(request)`, and if successful, update the `AuthContext` state with the received token and user information. It should store the token in `localStorage` using the key 'token'. The `logout` function will clear the token from `localStorage` and update the `AuthContext` state to reflect a logged-out user.\n\n### authService.ts\nThis service is responsible for making HTTP requests to the backend authentication API. It exports an `authService` object with a `login` method. The `login` method takes a `LoginRequest` (email, password) and sends a POST request to `/api/v1/auth/login`. On a successful response, it returns a `LoginResponse` containing the JWT token and user details. Error handling should be implemented to catch network errors or API errors (e.g., 401 Unauthorized) and throw appropriate exceptions or return a rejected promise. The `api/client.ts` should be used for making these requests, ensuring the interceptor correctly attaches the JWT token for subsequent authenticated requests.\n\n### auth.ts\nThis file defines the TypeScript interfaces for `User`, `LoginRequest`, and `LoginResponse`. The `User` interface should include `id: string`, `email: string`, and `role: 'CUSTOMER' | 'ADMIN'`. `LoginRequest` should have `email: string` and `password: string`. `LoginResponse` should contain `token: string` and `user: User`.\n\n### LoginPage.tsx\nThis page provides the user interface for logging in. It should use the `useAuth` hook to access the `login` function and the `isAuthenticated` state. If the user is already authenticated, they should be redirected to the home page (`/`). The page should display a form with fields for email and password, and a submit button. Upon successful login, the user should be redirected to the home page (`/`). The form should include basic validation and display error messages if login fails. The page should be wrapped in the `<Layout>` component from `@/components/Layout`.\n\n**Page Sections:**\n- **Login Form Section:** A central, elegant card with a heading \"Welcome Back to Farmaaish\" (text-[#36454F] font-bold text-3xl) and a sub-heading \"Savor the Royal Flavors\" (text-gray-600 text-lg). The form fields (email, password) should have clear labels and placeholder text like \"Enter your email\" and \"Enter your password\". The submit button should use the Primary CTA design token with text \"Login\". Include a link for \"Forgot Password?\" (text-[#D4AF37] hover:underline) below the form. The background of this section should be a subtle cream (#F5F5DC).\n\n**Styling:**\n- The main container for the login form should be centered on the page, perhaps with a `max-w-md` width and `mx-auto` for horizontal centering, and `py-16` for vertical padding.\n- The form itself should be within a `bg-white rounded-xl shadow-lg p-8` card.\n- Input fields should have `border border-gray-300 rounded-md p-3 w-full focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent` styling.\n- Error messages should be `text-red-500 text-sm mt-1`.\n- The page should use the `Layout` component from `core-ui`.\n\n**Redirect Logic:**\n- After successful login, redirect to `/`.\n- If `isAuthenticated` is true, redirect to `/`.\n",
     "depends_on_features" : [ ],
     "change_required" : true,
