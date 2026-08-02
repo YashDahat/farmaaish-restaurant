@@ -1269,13 +1269,53 @@
     "status" : "PLANNED",
     "description" : "Represents a customer inquiry for catering or private events.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the inquiry. Not null."
+    }, {
+      "name" : "customerName",
+      "type" : "String",
+      "description" : "Name of the customer. Not null, max 100 characters."
+    }, {
+      "name" : "customerEmail",
+      "type" : "String",
+      "description" : "Email of the customer. Not null, valid email format, max 100 characters."
+    }, {
+      "name" : "customerPhone",
+      "type" : "String",
+      "description" : "Phone number of the customer. Not null, max 20 characters."
+    }, {
+      "name" : "eventType",
+      "type" : "String",
+      "description" : "Type of event (e.g., 'Catering', 'Private Party'). Not null, max 100 characters."
+    }, {
+      "name" : "eventDate",
+      "type" : "LocalDate",
+      "description" : "Date of the event. Not null, future date."
+    }, {
+      "name" : "numberOfGuests",
+      "type" : "Integer",
+      "description" : "Expected number of guests. Not null, min 1."
+    }, {
+      "name" : "message",
+      "type" : "String",
+      "description" : "Customer's message or special requests. Max 1000 characters."
+    }, {
+      "name" : "inquiryDate",
+      "type" : "LocalDateTime",
+      "description" : "Timestamp when the inquiry was submitted. Not null."
+    }, {
+      "name" : "status",
+      "type" : "InquiryStatus",
+      "description" : "Current status of the inquiry (NEW, CONTACTED, CLOSED). Not null."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/model/InquiryStatus.java" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-management",
-    "file_role" : null,
+    "file_role" : "MODEL layer — represents a customer inquiry with fields for contact details, event information, and status.",
     "change_required" : null
   }, {
     "file_name" : "InquiryStatus.java",
@@ -1287,13 +1327,25 @@
     "status" : "PLANNED",
     "description" : "Enum for the status of an inquiry (e.g., NEW, CONTACTED, CLOSED).",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "NEW",
+      "type" : "InquiryStatus",
+      "description" : "The inquiry has just been submitted."
+    }, {
+      "name" : "CONTACTED",
+      "type" : "InquiryStatus",
+      "description" : "The restaurant has contacted the customer."
+    }, {
+      "name" : "CLOSED",
+      "type" : "InquiryStatus",
+      "description" : "The inquiry has been resolved or closed."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-management",
-    "file_role" : null,
+    "file_role" : "MODEL layer — defines the possible states for a customer inquiry.",
     "change_required" : null
   }, {
     "file_name" : "InquiryRepository.java",
@@ -1304,14 +1356,39 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Spring Data JPA repository for CRUD operations on Inquiry entities.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "save",
+      "parameters" : [ "Inquiry inquiry" ],
+      "return_type" : "Inquiry",
+      "description" : "Saves a given inquiry entity."
+    }, {
+      "name" : "findById",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "Optional<Inquiry>",
+      "description" : "Retrieves an inquiry by its ID."
+    }, {
+      "name" : "findAll",
+      "parameters" : [ ],
+      "return_type" : "List<Inquiry>",
+      "description" : "Retrieves all inquiry entities."
+    }, {
+      "name" : "deleteById",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "void",
+      "description" : "Deletes an inquiry by its ID."
+    }, {
+      "name" : "existsById",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "boolean",
+      "description" : "Checks if an inquiry with the given ID exists."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/model/Inquiry.java" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-management",
-    "file_role" : null,
+    "file_role" : "REPOSITORY layer — provides standard CRUD operations for `Inquiry` entities.",
     "change_required" : null
   }, {
     "file_name" : "InquiryService.java",
@@ -1322,14 +1399,39 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Handles business logic for managing catering and event inquiries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "createInquiry",
+      "parameters" : [ "InquiryDto inquiryDto" ],
+      "return_type" : "InquiryDto",
+      "description" : "Creates a new inquiry and sets its initial status to NEW."
+    }, {
+      "name" : "getAllInquiries",
+      "parameters" : [ ],
+      "return_type" : "List<InquiryDto>",
+      "description" : "Retrieves all inquiries."
+    }, {
+      "name" : "getInquiryById",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "InquiryDto",
+      "description" : "Retrieves a single inquiry by its ID, throwing ResourceNotFoundException if not found."
+    }, {
+      "name" : "updateInquiryStatus",
+      "parameters" : [ "UUID id", "InquiryStatus newStatus" ],
+      "return_type" : "InquiryDto",
+      "description" : "Updates the status of an existing inquiry, throwing ResourceNotFoundException if not found."
+    }, {
+      "name" : "deleteInquiry",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "void",
+      "description" : "Deletes an inquiry by its ID, throwing ResourceNotFoundException if not found."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/repository/InquiryRepository.java", "backend/src/main/java/com/farmaaishrestaurant/dto/InquiryDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-management",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — implements `createInquiry(InquiryDto): InquiryDto`, `getAllInquiries(): List<InquiryDto>`, `getInquiryById(UUID): InquiryDto`, `updateInquiryStatus(UUID, InquiryStatus): InquiryDto`, and `deleteInquiry(UUID): void`.",
     "change_required" : null
   }, {
     "file_name" : "InquiryController.java",
@@ -1340,14 +1442,26 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Public-facing REST controller for submitting new inquiries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "createInquiry",
+      "parameters" : [ "InquiryDto inquiryDto" ],
+      "return_type" : "ResponseEntity<InquiryDto>",
+      "description" : "Handles POST requests to create a new customer inquiry."
+    } ],
     "public_variables" : null,
-    "api_endpoints" : null,
+    "api_endpoints" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/inquiries",
+      "request_body" : "InquiryDto",
+      "response_body" : "InquiryDto",
+      "description" : "Submits a new customer inquiry for catering or private events.",
+      "access" : "public"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/service/InquiryService.java" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-management",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — exposes a public endpoint for submitting new inquiries via `createInquiry(InquiryDto): ResponseEntity<InquiryDto>`.",
     "change_required" : null
   }, {
     "file_name" : "AdminInquiryController.java",
@@ -1358,14 +1472,62 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Admin-only REST controller for viewing and managing all inquiries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getAllInquiries",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<List<InquiryDto>>",
+      "description" : "Retrieves all customer inquiries for administrators."
+    }, {
+      "name" : "getInquiryById",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "ResponseEntity<InquiryDto>",
+      "description" : "Retrieves a single inquiry by ID for administrators."
+    }, {
+      "name" : "updateInquiryStatus",
+      "parameters" : [ "UUID id", "InquiryStatus status" ],
+      "return_type" : "ResponseEntity<InquiryDto>",
+      "description" : "Updates the status of an inquiry for administrators."
+    }, {
+      "name" : "deleteInquiry",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "ResponseEntity<Void>",
+      "description" : "Deletes an inquiry by ID for administrators."
+    } ],
     "public_variables" : null,
-    "api_endpoints" : null,
+    "api_endpoints" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/admin/inquiries",
+      "request_body" : null,
+      "response_body" : "List<InquiryDto>",
+      "description" : "Retrieves a list of all customer inquiries.",
+      "access" : "admin"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/admin/inquiries/{id}",
+      "request_body" : null,
+      "response_body" : "InquiryDto",
+      "description" : "Retrieves a single inquiry by its ID.",
+      "access" : "admin"
+    }, {
+      "method" : "PUT",
+      "path" : "/api/v1/admin/inquiries/{id}/status",
+      "request_body" : null,
+      "response_body" : "InquiryDto",
+      "description" : "Updates the status of a specific inquiry.",
+      "access" : "admin"
+    }, {
+      "method" : "DELETE",
+      "path" : "/api/v1/admin/inquiries/{id}",
+      "request_body" : null,
+      "response_body" : "void",
+      "description" : "Deletes an inquiry by its ID.",
+      "access" : "admin"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/service/InquiryService.java" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-management",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — exposes admin-only endpoints for managing inquiries via `getAllInquiries(): ResponseEntity<List<InquiryDto>>`, `getInquiryById(UUID): ResponseEntity<InquiryDto>`, `updateInquiryStatus(UUID, InquiryStatus): ResponseEntity<InquiryDto>`, and `deleteInquiry(UUID): ResponseEntity<Void>`.",
     "change_required" : null
   }, {
     "file_name" : "InquiryDto.java",
@@ -1377,13 +1539,53 @@
     "status" : "PLANNED",
     "description" : "Data Transfer Object for inquiry data.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the inquiry. Read-only, generated by the system."
+    }, {
+      "name" : "customerName",
+      "type" : "String",
+      "description" : "Name of the customer. Not null, min 2, max 100 characters."
+    }, {
+      "name" : "customerEmail",
+      "type" : "String",
+      "description" : "Email of the customer. Not null, valid email format, max 100 characters."
+    }, {
+      "name" : "customerPhone",
+      "type" : "String",
+      "description" : "Phone number of the customer. Not null, min 10, max 20 characters."
+    }, {
+      "name" : "eventType",
+      "type" : "String",
+      "description" : "Type of event (e.g., 'Catering', 'Private Party'). Not null, min 2, max 100 characters."
+    }, {
+      "name" : "eventDate",
+      "type" : "LocalDate",
+      "description" : "Date of the event. Not null, must be a future date."
+    }, {
+      "name" : "numberOfGuests",
+      "type" : "Integer",
+      "description" : "Expected number of guests. Not null, min 1, max 500."
+    }, {
+      "name" : "message",
+      "type" : "String",
+      "description" : "Customer's message or special requests. Max 1000 characters."
+    }, {
+      "name" : "inquiryDate",
+      "type" : "LocalDateTime",
+      "description" : "Timestamp when the inquiry was submitted. Read-only, generated by the system."
+    }, {
+      "name" : "status",
+      "type" : "InquiryStatus",
+      "description" : "Current status of the inquiry (NEW, CONTACTED, CLOSED). Read-only for public submission, updatable by admin."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-management",
-    "file_role" : null,
+    "file_role" : "DTO layer — Data Transfer Object for inquiry data, used for requests and responses.",
     "change_required" : null
   }, {
     "file_name" : "Event.java",
@@ -2759,8 +2961,8 @@
     "feature_display_name" : "Inquiry Management (Backend)",
     "feature_type" : "BACKEND",
     "file_paths" : [ "backend/src/main/java/com/farmaaishrestaurant/model/Inquiry.java", "backend/src/main/java/com/farmaaishrestaurant/model/InquiryStatus.java", "backend/src/main/java/com/farmaaishrestaurant/repository/InquiryRepository.java", "backend/src/main/java/com/farmaaishrestaurant/service/InquiryService.java", "backend/src/main/java/com/farmaaishrestaurant/controller/InquiryController.java", "backend/src/main/java/com/farmaaishrestaurant/controller/AdminInquiryController.java", "backend/src/main/java/com/farmaaishrestaurant/dto/InquiryDto.java" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "This feature manages customer inquiries for catering and private events for Farmaaish Restaurant. It consists of a `Inquiry` entity, an `InquiryStatus` enum, a `InquiryRepository` for persistence, an `InquiryService` for business logic, and two controllers: `InquiryController` for public submission and `AdminInquiryController` for administrative management.\n\n### Inquiry Data Model\nThe `Inquiry` entity represents a customer inquiry and includes fields such as `id`, `customerName`, `customerEmail`, `customerPhone`, `eventType`, `eventDate`, `numberOfGuests`, `message`, `inquiryDate`, and `status`. The `status` field will be an `InquiryStatus` enum, which defines the lifecycle of an inquiry (e.g., NEW, CONTACTED, CLOSED).\n\n### Persistence Layer\nThe `InquiryRepository` extends `JpaRepository` and provides standard CRUD operations for `Inquiry` entities. No custom query methods are required for this feature.\n\n### Service Layer\nThe `InquiryService` class handles the core business logic:\n\n1.  **`createInquiry(InquiryDto inquiryDto): InquiryDto`**\n    -   Receives an `InquiryDto` containing the inquiry details.\n    -   Maps the `InquiryDto` to an `Inquiry` entity.\n    -   Sets the `inquiryDate` to the current timestamp and `status` to `InquiryStatus.NEW`.\n    -   Saves the `Inquiry` entity using `inquiryRepository.save()`.\n    -   Maps the saved `Inquiry` entity back to an `InquiryDto` and returns it.\n\n2.  **`getAllInquiries(): List<InquiryDto>`**\n    -   Retrieves all `Inquiry` entities from the database using `inquiryRepository.findAll()`.\n    -   Maps each `Inquiry` entity to an `InquiryDto`.\n    -   Returns a list of `InquiryDto`.\n\n3.  **`getInquiryById(UUID id): InquiryDto`**\n    -   Retrieves an `Inquiry` entity by its `id` using `inquiryRepository.findById(id)`.\n    -   If the inquiry is not found, throws a `ResourceNotFoundException`.\n    -   Maps the `Inquiry` entity to an `InquiryDto` and returns it.\n\n4.  **`updateInquiryStatus(UUID id, InquiryStatus newStatus): InquiryDto`**\n    -   Retrieves an `Inquiry` entity by its `id` using `inquiryRepository.findById(id)`.\n    -   If the inquiry is not found, throws a `ResourceNotFoundException`.\n    -   Updates the `status` of the inquiry to `newStatus`.\n    -   Saves the updated `Inquiry` entity using `inquiryRepository.save()`.\n    -   Maps the updated `Inquiry` entity to an `InquiryDto` and returns it.\n\n5.  **`deleteInquiry(UUID id): void`**\n    -   Checks if an `Inquiry` with the given `id` exists using `inquiryRepository.existsById(id)`.\n    -   If not found, throws a `ResourceNotFoundException`.\n    -   Deletes the `Inquiry` entity using `inquiryRepository.deleteById(id)`.\n\n### Controller Layer\n\n**`InquiryController`**\nThis controller exposes a public endpoint for submitting new inquiries.\n\n-   **`createInquiry(@RequestBody @Valid InquiryDto inquiryDto): ResponseEntity<InquiryDto>`**\n    -   Handles POST requests to `/api/v1/inquiries`.\n    -   Calls `inquiryService.createInquiry(inquiryDto)`.\n    -   Returns `201 Created` with the created `InquiryDto`.\n\n**`AdminInquiryController`**\nThis controller exposes admin-only endpoints for managing inquiries.\n\n-   **`getAllInquiries(): ResponseEntity<List<InquiryDto>>`**\n    -   Handles GET requests to `/api/v1/admin/inquiries`.\n    -   Calls `inquiryService.getAllInquiries()`.\n    -   Returns `200 OK` with a list of all `InquiryDto`.\n\n-   **`getInquiryById(@PathVariable UUID id): ResponseEntity<InquiryDto>`**\n    -   Handles GET requests to `/api/v1/admin/inquiries/{id}`.\n    -   Calls `inquiryService.getInquiryById(id)`.\n    -   Returns `200 OK` with the `InquiryDto`.\n    -   Throws `ResourceNotFoundException` if the inquiry is not found, which will be handled by `GlobalExceptionHandler` returning `404 Not Found`.\n\n-   **`updateInquiryStatus(@PathVariable UUID id, @RequestParam InquiryStatus status): ResponseEntity<InquiryDto>`**\n    -   Handles PUT requests to `/api/v1/admin/inquiries/{id}/status`.\n    -   Calls `inquiryService.updateInquiryStatus(id, status)`.\n    -   Returns `200 OK` with the updated `InquiryDto`.\n    -   Throws `ResourceNotFoundException` if the inquiry is not found, which will be handled by `GlobalExceptionHandler` returning `404 Not Found`.\n\n-   **`deleteInquiry(@PathVariable UUID id): ResponseEntity<Void>`**\n    -   Handles DELETE requests to `/api/v1/admin/inquiries/{id}`.\n    -   Calls `inquiryService.deleteInquiry(id)`.\n    -   Returns `204 No Content`.\n    -   Throws `ResourceNotFoundException` if the inquiry is not found, which will be handled by `GlobalExceptionHandler` returning `404 Not Found`.\n\n### Data Transfer Object\n`InquiryDto` is used for transferring inquiry data between the controller and service layers. It mirrors the `Inquiry` entity but includes validation annotations.\n\n### Error Handling\n`ResourceNotFoundException` will be thrown by the service layer when an inquiry is not found. This exception will be caught by the `GlobalExceptionHandler` (from `shared-backend` feature) and translated into an appropriate HTTP 404 Not Found response.",
+    "depends_on_features" : [ "shared-backend" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
