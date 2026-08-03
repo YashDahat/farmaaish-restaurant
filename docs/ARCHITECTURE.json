@@ -1643,14 +1643,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "The root component of the React application that sets up the router and global providers.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "App",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the main application structure, including routing, authentication context, and global toast notifications."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/context/AuthContext.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "shared-frontend",
-    "file_role" : null,
+    "file_role" : "The root component of the React application, responsible for setting up the router, global providers like AuthContext, and the main application layout.",
     "change_required" : null
   }, {
     "file_name" : "client.ts",
@@ -1661,14 +1666,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Configures the global Axios instance for making API requests, including interceptors for auth tokens.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "apiClient",
+      "parameters" : [ ],
+      "return_type" : "AxiosInstance",
+      "description" : "The pre-configured Axios instance with request and response interceptors for authentication and error handling."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "shared-frontend",
-    "file_role" : null,
+    "file_role" : "Configures the global Axios instance, `apiClient`, for making authenticated API requests by attaching the JWT token from local storage.",
     "change_required" : null
   }, {
     "file_name" : "siteConfig.ts",
@@ -2603,8 +2613,8 @@
     "feature_display_name" : "Shared Frontend Utilities",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/App.tsx", "frontend/src/api/client.ts" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "This feature provides core frontend utilities and the application's root component. `App.tsx` sets up the React Router, integrates the `AuthContext.Provider` from the `auth-ui` feature to manage global authentication state, and defines the main application layout including public and admin routes. It ensures that the `Toaster` component from `sonner` is available for displaying toast notifications across the application. The `client.ts` file configures a global Axios instance, `apiClient`, which is used for all backend API calls. This instance includes an interceptor that automatically attaches the JWT authentication token (stored in `localStorage` under the key 'token') to every outgoing request's `Authorization` header. It also handles API error responses by logging them and potentially redirecting to a login page if a 401 Unauthorized error occurs, ensuring a consistent approach to API communication and authentication across the frontend.",
+    "depends_on_features" : [ "auth-ui" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
