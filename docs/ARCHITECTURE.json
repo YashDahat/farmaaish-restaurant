@@ -1895,14 +1895,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Provides authentication state and functions (login, logout) to the entire application.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "AuthProvider",
+      "parameters" : [ "React.PropsWithChildren children" ],
+      "return_type" : "JSX.Element",
+      "description" : "Provides the authentication context to its children, managing login and logout."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/services/authService.ts" ],
     "depends_on" : [ ],
     "feature_name" : "auth-ui",
-    "file_role" : null,
+    "file_role" : "React Context provider for managing authentication state. It exposes `isAuthenticated: boolean`, `token: string | null`, `login: (credentials: LoginRequest) => Promise<void>`, and `logout: () => void` to its consumers.",
     "change_required" : null
   }, {
     "file_name" : "useAuth.ts",
@@ -1913,14 +1918,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Custom hook for easy consumption of the AuthContext.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "useAuth",
+      "parameters" : [ ],
+      "return_type" : "{ isAuthenticated: boolean; token: string | null; login: (credentials: LoginRequest) => Promise<void>; logout: () => void; }",
+      "description" : "Returns the authentication context value."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/context/AuthContext.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "auth-ui",
-    "file_role" : null,
+    "file_role" : "Custom React hook for convenient access to the authentication context, returning `isAuthenticated: boolean`, `token: string | null`, `login: (credentials: LoginRequest) => Promise<void>`, and `logout: () => void`.",
     "change_required" : null
   }, {
     "file_name" : "authService.ts",
@@ -1931,14 +1941,26 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Contains functions for making API calls to authentication-related endpoints.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "login",
+      "parameters" : [ "LoginRequest credentials" ],
+      "return_type" : "Promise<AuthResponse>",
+      "description" : "Sends a login request to the backend and returns authentication response."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/auth/login",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Authenticates user credentials and returns a JWT token.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/api/client.ts", "frontend/src/types/auth.ts" ],
     "depends_on" : [ ],
     "feature_name" : "auth-ui",
-    "file_role" : null,
+    "file_role" : "Frontend service for authenticating with the backend. It provides `login(credentials: LoginRequest): Promise<AuthResponse>` to handle user authentication.",
     "change_required" : null
   }, {
     "file_name" : "auth.ts",
@@ -1949,14 +1971,22 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "TypeScript types and interfaces for authentication data structures.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "LoginRequest",
+      "type" : "{ username: string; password: string; }",
+      "description" : "Interface for user login request payload."
+    }, {
+      "name" : "AuthResponse",
+      "type" : "{ token: string; expiresIn: number; }",
+      "description" : "Interface for authentication response containing JWT token and expiry."
+    } ],
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "auth-ui",
-    "file_role" : null,
+    "file_role" : "TypeScript types for authentication data structures.",
     "change_required" : null
   }, {
     "file_name" : "LoginPage.tsx",
@@ -1967,14 +1997,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A simple page with a form for administrators to log in.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "LoginPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the login form for administrators."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useAuth.ts" ],
     "depends_on" : [ ],
     "feature_name" : "auth-ui",
-    "file_role" : null,
+    "file_role" : "React page component for administrator login, consuming `useAuth` to handle authentication and redirect upon success.",
     "change_required" : null
   }, {
     "file_name" : "ProtectedRoute.tsx",
@@ -1985,14 +2020,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A wrapper component that restricts access to its children to authenticated users.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "ProtectedRoute",
+      "parameters" : [ "React.PropsWithChildren children" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders children only if the user is authenticated, otherwise redirects to login."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useAuth.ts" ],
     "depends_on" : [ ],
     "feature_name" : "auth-ui",
-    "file_role" : null,
+    "file_role" : "React component that protects routes by checking user authentication status via `useAuth` and redirecting unauthenticated users to the login page.",
     "change_required" : null
   }, {
     "file_name" : "AdminDashboardPage.tsx",
@@ -2675,8 +2715,8 @@
     "feature_display_name" : "Authentication UI",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/context/AuthContext.tsx", "frontend/src/hooks/useAuth.ts", "frontend/src/services/authService.ts", "frontend/src/types/auth.ts", "frontend/src/pages/LoginPage.tsx", "frontend/src/components/ProtectedRoute.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#800020] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b89a2e] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-gray-50 (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-gray-700 leading-relaxed\n\nThis feature provides the core authentication mechanism for the Farmaaish Restaurant application, enabling administrators to log in and access protected routes. It consists of a React Context (`AuthContext.tsx`) to manage authentication state, a custom hook (`useAuth.ts`) for easy consumption of this context, a service file (`authService.ts`) to interact with the backend authentication API, and a type definition file (`auth.ts`). Additionally, it includes a `LoginPage.tsx` for the administrator login interface and a `ProtectedRoute.tsx` component to guard routes requiring authentication.\n\n### `auth.ts`\nThis file defines the TypeScript interfaces for `LoginRequest` and `AuthResponse`. `LoginRequest` will have `username: string` and `password: string`. `AuthResponse` will contain `token: string` and `expiresIn: number`.\n\n### `authService.ts`\nThis service is responsible for making API calls to the backend's authentication endpoints. It will export an `async` function `login(credentials: LoginRequest): Promise<AuthResponse>` that sends a POST request to `/api/v1/auth/login`. Upon successful login, it should return the `AuthResponse` from the backend. It will use the `apiClient` from `@/api/client.ts` to make the HTTP request.\n\n### `AuthContext.tsx`\nThis file provides the `AuthContext` and `AuthProvider` components. The `AuthProvider` will manage the authentication state, including the user's JWT token. It will store the token in `localStorage` under the key `'token'` upon successful login and remove it upon logout. The context will expose `isAuthenticated: boolean`, `token: string | null`, `login: (credentials: LoginRequest) => Promise<void>`, and `logout: () => void`. The `login` function will call `authService.login`, store the token, and set `isAuthenticated` to `true`. The `logout` function will clear the token from `localStorage` and set `isAuthenticated` to `false`. The `AuthProvider` should initialize its state by checking for an existing token in `localStorage`.\n\n### `useAuth.ts`\nThis custom hook simplifies access to the `AuthContext`. It will export a `useAuth` function that returns the context value, allowing components to easily consume authentication state and functions.\n\n### `LoginPage.tsx`\nThis page provides the user interface for administrators to log in. It will consist of a form with input fields for username and password, and a submit button. Upon submission, it will call the `login` function from `useAuth`. If login is successful, the user should be redirected to the `/admin/dashboard` route. If there's an error, a toast notification should be displayed using `sonner` (ensure `<Toaster/>` is in `Layout.tsx`). The page should use the `Layout` component from `@/components/Layout`.\n\n**Page Sections:**\n- **Login Form Section:** A central, elegant card containing the login form. The card should have a `bg-white rounded-xl shadow-md border border-gray-100 p-8 max-w-md mx-auto`. The form inputs should have a `border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent` style. The submit button should use the `Primary CTA` design token.\n\n**Content:**\n- **Heading:** \"Admin Login\" (text-3xl font-bold text-center text-[#36454F])\n- **Subheading:** \"Access the Farmaaish Restaurant management portal.\" (text-gray-600 text-center mb-6)\n- **Username Label:** \"Username\"\n- **Password Label:** \"Password\"\n- **Login Button Text:** \"Login\"\n\n### `ProtectedRoute.tsx`\nThis component acts as a guard for routes that require authentication. It will receive `children` as props. It uses the `useAuth` hook to check if the user is authenticated. If not authenticated, it redirects the user to the `/login` page. Otherwise, it renders its `children`.\n",
+    "depends_on_features" : [ ],
     "change_required" : true,
     "change_instruction" : null
   }, {
