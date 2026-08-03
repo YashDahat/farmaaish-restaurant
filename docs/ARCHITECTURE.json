@@ -522,14 +522,54 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Represents a customer's table reservation.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "Long",
+      "description" : "Unique identifier for the reservation. Auto-generated."
+    }, {
+      "name" : "customerName",
+      "type" : "String",
+      "description" : "Name of the customer making the reservation. Not null, max 100 characters."
+    }, {
+      "name" : "customerPhone",
+      "type" : "String",
+      "description" : "Phone number of the customer. Not null, max 20 characters."
+    }, {
+      "name" : "customerEmail",
+      "type" : "String",
+      "description" : "Email address of the customer. Not null, max 100 characters, valid email format."
+    }, {
+      "name" : "partySize",
+      "type" : "Integer",
+      "description" : "Number of guests in the reservation. Not null, min 1."
+    }, {
+      "name" : "reservationDate",
+      "type" : "LocalDate",
+      "description" : "Date of the reservation. Not null, future date."
+    }, {
+      "name" : "reservationTime",
+      "type" : "LocalTime",
+      "description" : "Time of the reservation. Not null."
+    }, {
+      "name" : "specialRequests",
+      "type" : "String",
+      "description" : "Any special requests from the customer. Nullable, max 500 characters."
+    }, {
+      "name" : "status",
+      "type" : "ReservationStatus",
+      "description" : "Current status of the reservation (PENDING, CONFIRMED, CANCELLED, COMPLETED). Not null."
+    }, {
+      "name" : "createdAt",
+      "type" : "LocalDateTime",
+      "description" : "Timestamp when the reservation was created. Auto-generated."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/model/ReservationStatus.java" ],
     "depends_on" : [ ],
     "feature_name" : "reservation-system",
-    "file_role" : null,
+    "file_role" : "JPA Entity — represents a customer's table reservation with fields for customer details, date, time, and status.",
     "change_required" : null
   }, {
     "file_name" : "ReservationStatus.java",
@@ -540,14 +580,30 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Enum representing the status of a reservation (e.g., PENDING, CONFIRMED, CANCELLED).",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "PENDING",
+      "type" : "ReservationStatus",
+      "description" : "Reservation request has been submitted and is awaiting review."
+    }, {
+      "name" : "CONFIRMED",
+      "type" : "ReservationStatus",
+      "description" : "Reservation has been approved and confirmed."
+    }, {
+      "name" : "CANCELLED",
+      "type" : "ReservationStatus",
+      "description" : "Reservation has been cancelled by the customer or admin."
+    }, {
+      "name" : "COMPLETED",
+      "type" : "ReservationStatus",
+      "description" : "Reservation has been fulfilled (after the reservation time)."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "reservation-system",
-    "file_role" : null,
+    "file_role" : "Enum — defines the possible states for a table reservation.",
     "change_required" : null
   }, {
     "file_name" : "ReservationRepository.java",
@@ -558,14 +614,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Spring Data JPA repository for CRUD operations on Reservation entities.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "findByReservationDateBetweenOrderByReservationTimeAsc",
+      "parameters" : [ "LocalDate startDate", "LocalDate endDate" ],
+      "return_type" : "java.util.List<Reservation>",
+      "description" : "Retrieves all reservations within a specified date range, ordered by reservation time in ascending order."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/model/Reservation.java" ],
     "depends_on" : [ ],
     "feature_name" : "reservation-system",
-    "file_role" : null,
+    "file_role" : "REPOSITORY layer — provides CRUD operations for `Reservation` entities and a custom query to find reservations by date range.",
     "change_required" : null
   }, {
     "file_name" : "ReservationService.java",
@@ -576,14 +637,44 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Handles business logic for creating and managing table reservations.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "createReservation",
+      "parameters" : [ "CreateReservationRequest request" ],
+      "return_type" : "ReservationDto",
+      "description" : "Creates a new reservation with PENDING status and saves it to the database."
+    }, {
+      "name" : "getAllReservations",
+      "parameters" : [ ],
+      "return_type" : "java.util.List<ReservationDto>",
+      "description" : "Retrieves all reservations from the database."
+    }, {
+      "name" : "getReservationsByDateRange",
+      "parameters" : [ "LocalDate startDate", "LocalDate endDate" ],
+      "return_type" : "java.util.List<ReservationDto>",
+      "description" : "Retrieves reservations within a specified date range, ordered by time."
+    }, {
+      "name" : "getReservationById",
+      "parameters" : [ "Long id" ],
+      "return_type" : "ReservationDto",
+      "description" : "Retrieves a single reservation by its ID, or throws ResourceNotFoundException if not found."
+    }, {
+      "name" : "updateReservationStatus",
+      "parameters" : [ "Long id", "ReservationStatus newStatus" ],
+      "return_type" : "ReservationDto",
+      "description" : "Updates the status of an existing reservation, or throws ResourceNotFoundException if not found."
+    }, {
+      "name" : "deleteReservation",
+      "parameters" : [ "Long id" ],
+      "return_type" : "void",
+      "description" : "Deletes a reservation by its ID, or throws ResourceNotFoundException if not found."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/repository/ReservationRepository.java" ],
     "depends_on" : [ ],
     "feature_name" : "reservation-system",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — implements `createReservation(CreateReservationRequest): ReservationDto`, `getAllReservations(): List<ReservationDto>`, `getReservationsByDateRange(LocalDate, LocalDate): List<ReservationDto>`, `getReservationById(Long): ReservationDto`, `updateReservationStatus(Long, ReservationStatus): ReservationDto`, and `deleteReservation(Long): void`.",
     "change_required" : null
   }, {
     "file_name" : "ReservationController.java",
@@ -594,14 +685,26 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Public-facing REST controller for submitting new reservation requests.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "createReservation",
+      "parameters" : [ "CreateReservationRequest request" ],
+      "return_type" : "org.springframework.http.ResponseEntity<ReservationDto>",
+      "description" : "Handles POST requests to create a new reservation."
+    } ],
     "public_variables" : null,
-    "api_endpoints" : null,
+    "api_endpoints" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/reservations",
+      "request_body" : "CreateReservationRequest",
+      "response_body" : "ReservationDto",
+      "description" : "Submits a new table reservation request from a customer.",
+      "access" : "public"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/service/ReservationService.java", "backend/src/main/java/com/farmaaishrestaurant/dto/CreateReservationRequest.java" ],
     "depends_on" : [ ],
     "feature_name" : "reservation-system",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — exposes a public API endpoint for customers to submit new reservation requests.",
     "change_required" : null
   }, {
     "file_name" : "AdminReservationController.java",
@@ -612,14 +715,74 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Admin-only REST controller for viewing and managing all reservations.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getAllReservations",
+      "parameters" : [ ],
+      "return_type" : "org.springframework.http.ResponseEntity<java.util.List<ReservationDto>>",
+      "description" : "Retrieves all reservations."
+    }, {
+      "name" : "getReservationsByDateRange",
+      "parameters" : [ "LocalDate startDate", "LocalDate endDate" ],
+      "return_type" : "org.springframework.http.ResponseEntity<java.util.List<ReservationDto>>",
+      "description" : "Retrieves reservations within a specified date range."
+    }, {
+      "name" : "getReservationById",
+      "parameters" : [ "Long id" ],
+      "return_type" : "org.springframework.http.ResponseEntity<ReservationDto>",
+      "description" : "Retrieves a single reservation by its ID."
+    }, {
+      "name" : "updateReservationStatus",
+      "parameters" : [ "Long id", "ReservationStatus status" ],
+      "return_type" : "org.springframework.http.ResponseEntity<ReservationDto>",
+      "description" : "Updates the status of an existing reservation."
+    }, {
+      "name" : "deleteReservation",
+      "parameters" : [ "Long id" ],
+      "return_type" : "org.springframework.http.ResponseEntity<Void>",
+      "description" : "Deletes a reservation by its ID."
+    } ],
     "public_variables" : null,
-    "api_endpoints" : null,
+    "api_endpoints" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/admin/reservations",
+      "request_body" : null,
+      "response_body" : "List<ReservationDto>",
+      "description" : "Retrieves a list of all reservations.",
+      "access" : "admin"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/admin/reservations/by-date-range",
+      "request_body" : null,
+      "response_body" : "List<ReservationDto>",
+      "description" : "Retrieves reservations within a specified date range.",
+      "access" : "admin"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/admin/reservations/{id}",
+      "request_body" : null,
+      "response_body" : "ReservationDto",
+      "description" : "Retrieves a single reservation by its ID.",
+      "access" : "admin"
+    }, {
+      "method" : "PUT",
+      "path" : "/api/v1/admin/reservations/{id}/status",
+      "request_body" : null,
+      "response_body" : "ReservationDto",
+      "description" : "Updates the status of an existing reservation.",
+      "access" : "admin"
+    }, {
+      "method" : "DELETE",
+      "path" : "/api/v1/admin/reservations/{id}",
+      "request_body" : null,
+      "response_body" : "Void",
+      "description" : "Deletes a reservation by its ID.",
+      "access" : "admin"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/service/ReservationService.java", "backend/src/main/java/com/farmaaishrestaurant/dto/ReservationDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "reservation-system",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — exposes admin-only API endpoints for viewing and managing all reservations.",
     "change_required" : null
   }, {
     "file_name" : "CreateReservationRequest.java",
@@ -630,14 +793,42 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "DTO for capturing customer input when creating a new reservation.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "customerName",
+      "type" : "String",
+      "description" : "Name of the customer. Not null, min 2, max 100 characters."
+    }, {
+      "name" : "customerPhone",
+      "type" : "String",
+      "description" : "Phone number of the customer. Not null, min 10, max 20 characters, matches phone pattern."
+    }, {
+      "name" : "customerEmail",
+      "type" : "String",
+      "description" : "Email address of the customer. Not null, valid email format, max 100 characters."
+    }, {
+      "name" : "partySize",
+      "type" : "Integer",
+      "description" : "Number of guests. Not null, min 1, max 20."
+    }, {
+      "name" : "reservationDate",
+      "type" : "LocalDate",
+      "description" : "Date of the reservation. Not null, future date."
+    }, {
+      "name" : "reservationTime",
+      "type" : "LocalTime",
+      "description" : "Time of the reservation. Not null."
+    }, {
+      "name" : "specialRequests",
+      "type" : "String",
+      "description" : "Any special requests. Nullable, max 500 characters."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "reservation-system",
-    "file_role" : null,
+    "file_role" : "DTO — used for capturing customer input when creating a new reservation.",
     "change_required" : null
   }, {
     "file_name" : "ReservationDto.java",
@@ -648,14 +839,54 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "DTO for representing a Reservation in API responses.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "Long",
+      "description" : "Unique identifier for the reservation."
+    }, {
+      "name" : "customerName",
+      "type" : "String",
+      "description" : "Name of the customer."
+    }, {
+      "name" : "customerPhone",
+      "type" : "String",
+      "description" : "Phone number of the customer."
+    }, {
+      "name" : "customerEmail",
+      "type" : "String",
+      "description" : "Email address of the customer."
+    }, {
+      "name" : "partySize",
+      "type" : "Integer",
+      "description" : "Number of guests."
+    }, {
+      "name" : "reservationDate",
+      "type" : "LocalDate",
+      "description" : "Date of the reservation."
+    }, {
+      "name" : "reservationTime",
+      "type" : "LocalTime",
+      "description" : "Time of the reservation."
+    }, {
+      "name" : "specialRequests",
+      "type" : "String",
+      "description" : "Any special requests."
+    }, {
+      "name" : "status",
+      "type" : "ReservationStatus",
+      "description" : "Current status of the reservation."
+    }, {
+      "name" : "createdAt",
+      "type" : "LocalDateTime",
+      "description" : "Timestamp when the reservation was created."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "reservation-system",
-    "file_role" : null,
+    "file_role" : "DTO — used for representing a `Reservation` in API responses.",
     "change_required" : null
   }, {
     "file_name" : "Order.java",
@@ -1905,8 +2136,8 @@
     "feature_display_name" : "Reservation System (Backend)",
     "feature_type" : "BACKEND",
     "file_paths" : [ "backend/src/main/java/com/farmaaishrestaurant/model/Reservation.java", "backend/src/main/java/com/farmaaishrestaurant/model/ReservationStatus.java", "backend/src/main/java/com/farmaaishrestaurant/repository/ReservationRepository.java", "backend/src/main/java/com/farmaaishrestaurant/service/ReservationService.java", "backend/src/main/java/com/farmaaishrestaurant/controller/ReservationController.java", "backend/src/main/java/com/farmaaishrestaurant/controller/AdminReservationController.java", "backend/src/main/java/com/farmaaishrestaurant/dto/CreateReservationRequest.java", "backend/src/main/java/com/farmaaishrestaurant/dto/ReservationDto.java" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "The Reservation System (Backend) feature provides a robust API for managing table reservations at Farmaaish Restaurant. It allows customers to submit new reservation requests and provides administrators with comprehensive tools to view, confirm, and cancel reservations. The system is built around the `Reservation` entity, which tracks details such as customer name, contact, party size, date, time, and status.\n\n### Data Models\n\n- `Reservation.java`: This JPA entity represents a single reservation. It includes fields for `id`, `customerName`, `customerPhone`, `customerEmail`, `partySize`, `reservationDate`, `reservationTime`, `specialRequests`, `status` (an enum of type `ReservationStatus`), and `createdAt`.\n- `ReservationStatus.java`: An enum defining the possible states of a reservation: `PENDING`, `CONFIRMED`, `CANCELLED`, `COMPLETED`.\n\n### Data Transfer Objects (DTOs)\n\n- `CreateReservationRequest.java`: Used for public reservation submissions. It contains `customerName`, `customerPhone`, `customerEmail`, `partySize`, `reservationDate`, `reservationTime`, and `specialRequests`. All fields are mandatory except `specialRequests`.\n- `ReservationDto.java`: Used for API responses, providing a comprehensive view of a reservation. It includes `id`, `customerName`, `customerPhone`, `customerEmail`, `partySize`, `reservationDate`, `reservationTime`, `specialRequests`, `status`, and `createdAt`.\n\n### Persistence Layer\n\n- `ReservationRepository.java`: This Spring Data JPA repository extends `JpaRepository<Reservation, Long>` and provides standard CRUD operations for `Reservation` entities. It will also include a custom query method `findByReservationDateBetweenOrderByReservationTimeAsc` to retrieve reservations within a date range, ordered by time, for administrative viewing.\n\n### Service Layer\n\n- `ReservationService.java`: This service class encapsulates the business logic for reservations. It injects `ReservationRepository`.\n  - `createReservation(CreateReservationRequest request)`: This method takes a `CreateReservationRequest` DTO, maps it to a `Reservation` entity, sets the initial `status` to `PENDING`, saves it using `reservationRepository.save()`, and returns a `ReservationDto`.\n  - `getAllReservations()`: Retrieves all reservations from the database, maps them to `ReservationDto` objects, and returns a list.\n  - `getReservationsByDateRange(LocalDate startDate, LocalDate endDate)`: Retrieves reservations within the specified date range, ordered by time, maps them to `ReservationDto` objects, and returns a list. It uses `reservationRepository.findByReservationDateBetweenOrderByReservationTimeAsc()`.\n  - `getReservationById(Long id)`: Retrieves a single reservation by its ID. If not found, it throws a `ResourceNotFoundException`. It maps the entity to a `ReservationDto`.\n  - `updateReservationStatus(Long id, ReservationStatus newStatus)`: Updates the status of an existing reservation. It fetches the reservation by ID, updates its status, saves the changes, and returns the updated `ReservationDto`. Throws `ResourceNotFoundException` if the reservation is not found.\n  - `deleteReservation(Long id)`: Deletes a reservation by its ID. Throws `ResourceNotFoundException` if the reservation is not found.\n\n### Controller Layer\n\n- `ReservationController.java`: This public-facing REST controller handles customer reservation requests. It injects `ReservationService`.\n  - `createReservation(@RequestBody @Valid CreateReservationRequest request)`: Handles POST requests to `/api/v1/reservations`. It calls `reservationService.createReservation()` and returns a `ResponseEntity` with the created `ReservationDto` and HTTP status 201 (Created).\n\n- `AdminReservationController.java`: This admin-only REST controller provides endpoints for managing all reservations. It injects `ReservationService`.\n  - `getAllReservations()`: Handles GET requests to `/api/v1/admin/reservations`. It calls `reservationService.getAllReservations()` and returns a `ResponseEntity` with a list of `ReservationDto` objects and HTTP status 200 (OK).\n  - `getReservationsByDateRange(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate)`: Handles GET requests to `/api/v1/admin/reservations/by-date-range`. It calls `reservationService.getReservationsByDateRange()` and returns a `ResponseEntity` with a list of `ReservationDto` objects and HTTP status 200 (OK).\n  - `getReservationById(@PathVariable Long id)`: Handles GET requests to `/api/v1/admin/reservations/{id}`. It calls `reservationService.getReservationById()` and returns a `ResponseEntity` with the `ReservationDto` and HTTP status 200 (OK). Throws `ResourceNotFoundException` if not found, which is handled by `GlobalExceptionHandler` to return 404.\n  - `updateReservationStatus(@PathVariable Long id, @RequestParam ReservationStatus status)`: Handles PUT requests to `/api/v1/admin/reservations/{id}/status`. It calls `reservationService.updateReservationStatus()` and returns a `ResponseEntity` with the updated `ReservationDto` and HTTP status 200 (OK). Throws `ResourceNotFoundException` if not found.\n  - `deleteReservation(@PathVariable Long id)`: Handles DELETE requests to `/api/v1/admin/reservations/{id}`. It calls `reservationService.deleteReservation()` and returns a `ResponseEntity` with HTTP status 204 (No Content). Throws `ResourceNotFoundException` if not found.\n\nError Handling: The controllers will rely on the `GlobalExceptionHandler` from the `shared-backend` feature to handle `ResourceNotFoundException` (returning 404 Not Found) and other general exceptions (returning 500 Internal Server Error).",
+    "depends_on_features" : [ "shared-backend" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
