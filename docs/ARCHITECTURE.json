@@ -241,8 +241,8 @@
     "file_type" : "BACKEND",
     "layer" : "SERVICE",
     "created_date" : "2024-07-29",
-    "updated_date" : "2024-07-29",
-    "status" : "PLANNED",
+    "updated_date" : "2026-08-03",
+    "status" : "GENERATED",
     "description" : "Contains business logic for managing menu items and categories.",
     "public_functions" : [ {
       "name" : "getAllMenuItems",
@@ -634,8 +634,8 @@
     "file_type" : "BACKEND",
     "layer" : "SERVICE",
     "created_date" : "2024-07-29",
-    "updated_date" : "2024-07-29",
-    "status" : "PLANNED",
+    "updated_date" : "2026-08-03",
+    "status" : "GENERATED",
     "description" : "Handles business logic for creating and managing table reservations.",
     "public_functions" : [ {
       "name" : "createReservation",
@@ -1094,8 +1094,8 @@
     "file_type" : "BACKEND",
     "layer" : "SERVICE",
     "created_date" : "2024-07-29",
-    "updated_date" : "2024-07-29",
-    "status" : "PLANNED",
+    "updated_date" : "2026-08-03",
+    "status" : "GENERATED",
     "description" : "Handles business logic for creating and managing online orders, including payment integration.",
     "public_functions" : [ {
       "name" : "createOrder",
@@ -1460,8 +1460,8 @@
     "file_type" : "BACKEND",
     "layer" : "SERVICE",
     "created_date" : "2024-07-29",
-    "updated_date" : "2024-07-29",
-    "status" : "PLANNED",
+    "updated_date" : "2026-08-03",
+    "status" : "GENERATED",
     "description" : "Handles business logic for saving and managing catering inquiries.",
     "public_functions" : [ {
       "name" : "submitInquiry",
