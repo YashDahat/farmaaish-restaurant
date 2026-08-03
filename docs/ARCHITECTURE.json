@@ -2043,14 +2043,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "The main landing page for the admin panel, showing summary stats and navigation.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminDashboardPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the main admin dashboard with navigation links to other admin sections."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Admin panel landing page — provides navigation to other administrative features.",
     "change_required" : null
   }, {
     "file_name" : "menu.ts",
@@ -2724,8 +2729,8 @@
     "feature_display_name" : "Admin Portal",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/pages/AdminDashboardPage.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#36454F] text-[#D4AF37]\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b89a2e] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-gray-50 (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-gray-700 leading-relaxed\n\nThe Admin Portal feature provides a central dashboard for restaurant staff to manage various aspects of the Farmaaish Restaurant operations. The `AdminDashboardPage.tsx` serves as the main entry point after successful authentication, offering a summary of key operational metrics and navigation links to other administrative sections like menu management, reservation management, order management, and catering inquiry management. This page is designed to be accessible only to authenticated administrators, leveraging the `AdminLayout` component from `@/components/AdminLayout` for consistent navigation and styling. It will display a welcoming message and provide quick links to the various admin sub-features.\n\n### AdminDashboardPage.tsx\nThis page is the main landing page for the admin panel. It will display a greeting to the authenticated user and provide a set of navigation cards or links to other admin features. The page will be wrapped in the `AdminLayout` component to ensure consistent header, sidebar, and footer for the admin interface. It does not directly consume any backend APIs but provides navigation to pages that do.\n\n**Content Sections:**\n1.  **Welcome Section:** A prominent heading welcoming the administrator, e.g., \"Welcome to Farmaaish Admin Portal\".\n2.  **Overview Cards/Links:** A grid of cards or links, each representing a different administrative area (e.g., Menu Management, Reservations, Orders, Catering Inquiries). Each card should have a title, a brief description, and an icon, styled to match the Mughlai aesthetic with deep maroon and gold accents. These links will navigate to the respective admin pages using `react-router-dom`.\n\n**Styling:**\n-   The overall layout will use `AdminLayout` for consistent branding and navigation.\n-   Headings will use `text-4xl md:text-5xl font-bold text-[#36454F]`.\n-   Navigation cards will be styled with `bg-white rounded-xl shadow-md border border-gray-100 p-6` and feature `text-[#800020]` for titles and `text-[#D4AF37]` for accents or icons. Hover effects will be subtle, e.g., `hover:shadow-lg`.\n-   The main content area will be contained within `<div className=\"max-w-7xl mx-auto py-8 px-4\">`.",
+    "depends_on_features" : [ ],
     "change_required" : true,
     "change_instruction" : null
   }, {
