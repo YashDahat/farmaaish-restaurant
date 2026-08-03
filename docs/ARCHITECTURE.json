@@ -1690,13 +1690,17 @@
     "status" : "PLANNED",
     "description" : "Central configuration for site-wide content like brand name, navigation links, and footer details.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "siteConfig",
+      "type" : "{ brandName: string; navLinks: { name: string; href: string; }[]; footer: { address: string; phone: string; email: string; hours: string[]; socialLinks: { name: string; href: string; icon: JSX.Element; }[]; }; }",
+      "description" : "Object containing the restaurant's brand name, an array of navigation links with their names and hrefs, and footer details including address, phone, email, opening hours, and social media links."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Central configuration file defining global site content such as brand name, navigation links, and footer details, consumed by the shared Layout component.",
     "change_required" : null
   }, {
     "file_name" : "HomePage.tsx",
@@ -1707,14 +1711,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "The landing page featuring a regal hero section, featured dishes, ambiance gallery, and customer testimonials.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "HomePage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the home page, composed of HeroSection, FeaturedMenuSection, AmbianceGallerySection, and TestimonialsSection, wrapped in the shared Layout component."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/home/HeroSection.tsx", "frontend/src/components/home/FeaturedMenuSection.tsx", "frontend/src/components/home/AmbianceGallerySection.tsx", "frontend/src/components/home/TestimonialsSection.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "The main landing page of the restaurant website, orchestrating the display of hero, featured menu, ambiance gallery, and testimonials sections.",
     "change_required" : null
   }, {
     "file_name" : "HeroSection.tsx",
@@ -1725,14 +1734,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Full-bleed hero component with a high-quality background image, gold-accented headline, and primary CTAs.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "HeroSection",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the hero section with a background image, business name, a compelling headline and subheadline, and two call-to-action buttons: 'View Our Menu' and 'Book a Table'."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "A full-bleed hero component for the homepage, displaying a background image, a prominent headline, subheadline, and primary call-to-action buttons.",
     "change_required" : null
   }, {
     "file_name" : "FeaturedMenuSection.tsx",
@@ -1743,14 +1757,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Displays a curated grid of signature dishes with professional photography and brief descriptions.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "FeaturedMenuSection",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Fetches a limited number of menu items using `useMenu` and displays them in a grid, showcasing the restaurant's signature dishes. Each item includes an 'Add to Order' button."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useMenu.ts" ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Displays a curated grid of signature dishes on the homepage, fetching data via the `useMenu` hook and rendering each item with `MenuItemCard`.",
     "change_required" : null
   }, {
     "file_name" : "AmbianceGallerySection.tsx",
@@ -1761,14 +1780,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A visually rich section showcasing the restaurant's regal interior and dining experience.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AmbianceGallerySection",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a gallery of high-quality images depicting the restaurant's ambiance and interior, conveying a luxurious dining experience."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "A visually rich component for the homepage, showcasing the restaurant's interior and dining experience through a gallery of images.",
     "change_required" : null
   }, {
     "file_name" : "TestimonialsSection.tsx",
@@ -1779,14 +1803,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Carousel or grid of glowing customer reviews to build social proof.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "TestimonialsSection",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a section dedicated to customer testimonials, presenting them in an engaging format to highlight positive dining experiences."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "A component for the homepage that displays customer reviews in a carousel or grid format to build social proof.",
     "change_required" : null
   }, {
     "file_name" : "AboutPage.tsx",
@@ -1797,14 +1826,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Static page telling the story of Farmaaish, its culinary philosophy, and the heritage of Mughlai cuisine.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AboutPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the About Us page, providing narrative content about Farmaaish Restaurant's history, culinary approach, and the rich tradition of Mughlai cuisine, wrapped in the shared Layout component."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "A static page detailing the restaurant's story, culinary philosophy, and heritage, wrapped in the shared Layout component.",
     "change_required" : null
   }, {
     "file_name" : "ContactPage.tsx",
@@ -1815,14 +1849,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Provides contact details, a click-to-call button, opening hours, and an embedded interactive map.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ContactPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the Contact Us page, displaying the restaurant's address, phone number (with a click-to-call link), opening hours, and an embedded Google Map, wrapped in the shared Layout component."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "A static page displaying contact information, opening hours, a click-to-call button, and an embedded map, wrapped in the shared Layout component.",
     "change_required" : null
   }, {
     "file_name" : "NotFoundPage.tsx",
@@ -1833,14 +1872,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A user-friendly 404 page that guides users back to the main site.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "NotFoundPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a 404 Not Found page, providing a clear message and a call-to-action to navigate back to the home page, wrapped in the shared Layout component."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "A user-friendly 404 error page that guides users back to the home page, wrapped in the shared Layout component.",
     "change_required" : null
   }, {
     "file_name" : "AuthContext.tsx",
@@ -2622,8 +2666,8 @@
     "feature_display_name" : "Core UI & Static Pages",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/config/siteConfig.ts", "frontend/src/pages/HomePage.tsx", "frontend/src/components/home/HeroSection.tsx", "frontend/src/components/home/FeaturedMenuSection.tsx", "frontend/src/components/home/AmbianceGallerySection.tsx", "frontend/src/components/home/TestimonialsSection.tsx", "frontend/src/pages/AboutPage.tsx", "frontend/src/pages/ContactPage.tsx", "frontend/src/pages/NotFoundPage.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#800020] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b89a2f] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Secondary CTA: border border-[#D4AF37] text-[#D4AF37] font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-[#F5F5DC] (odd sections) / bg-white (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-[#36454F] leading-relaxed\n\nThis feature provides the core UI and static pages for the Farmaaish Restaurant website, establishing the brand identity and user experience. It includes a central configuration file (`siteConfig.ts`) for global site details, and several static pages: `HomePage.tsx`, `AboutPage.tsx`, `ContactPage.tsx`, and `NotFoundPage.tsx`. The `HomePage.tsx` is composed of several distinct components: `HeroSection.tsx`, `FeaturedMenuSection.tsx`, `AmbianceGallerySection.tsx`, and `TestimonialsSection.tsx`.\n\n`siteConfig.ts` will define the restaurant's name, navigation links, and footer content. These values will be consumed by the shared `Layout` component (from `shared-frontend`) to render the consistent header and footer across the site. The navigation links will include paths to `/`, `/menu`, `/reservations`, `/catering`, `/about`, and `/contact`.\n\n`HomePage.tsx` will serve as the landing page, orchestrating the display of its child components. It will use the `Layout` component for consistent header and footer rendering. The `HeroSection.tsx` will feature a full-bleed background image, a regal headline \"Experience the Royal Flavors of Farmaaish\" and a subheadline \"Where every dish tells a story of Mughlai heritage and culinary excellence.\" It will include two CTAs: a primary \"View Our Menu\" linking to `/menu` and a secondary \"Book a Table\" linking to `/reservations`. The `FeaturedMenuSection.tsx` will display a curated selection of signature dishes. It will use the `useMenu` hook (from `menu-display`) to fetch a limited number of menu items (e.g., 6-8 items) to showcase. Each featured dish will be rendered using a `MenuItemCard` component (from `menu-display`), which will include an \"Add to Order\" button that calls `useCart().addItem()` (from `cart`). The `AmbianceGallerySection.tsx` will present a grid or carousel of high-quality images showcasing the restaurant's interior. The `TestimonialsSection.tsx` will display customer reviews in a carousel or grid format.\n\n`AboutPage.tsx` will provide detailed information about Farmaaish Restaurant, its culinary philosophy, and the heritage of Mughlai cuisine. It will use the `Layout` component.\n\n`ContactPage.tsx` will display the restaurant's contact details, including the address, phone number, and opening hours, all sourced from the business context. It will feature a click-to-call button for the phone number and an embedded Google Map using the provided coordinates. It will use the `Layout` component.\n\n`NotFoundPage.tsx` will be a user-friendly 404 page, guiding users back to the home page with a prominent CTA. It will use the `Layout` component.\n\nAll pages and components will adhere strictly to the defined design tokens for colors, typography, and spacing to maintain a consistent and luxurious aesthetic.",
+    "depends_on_features" : [ "menu-display", "shared-frontend", "cart" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
