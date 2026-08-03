@@ -2432,13 +2432,25 @@
     "status" : "PLANNED",
     "description" : "TypeScript types for reservation data.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "ReservationStatus",
+      "type" : "enum",
+      "description" : "Enum for reservation statuses: PENDING, CONFIRMED, CANCELLED, COMPLETED."
+    }, {
+      "name" : "Reservation",
+      "type" : "interface",
+      "description" : "Interface for a reservation object. Fields: id: number, customerName: string, customerPhone: string, customerEmail: string, partySize: number, reservationDate: string (ISO date), reservationTime: string (HH:MM), specialRequests: string, status: ReservationStatus, createdAt: string (ISO datetime)."
+    }, {
+      "name" : "CreateReservationRequest",
+      "type" : "interface",
+      "description" : "Interface for creating a new reservation. Fields: customerName: string, customerPhone: string, customerEmail: string, partySize: number, reservationDate: string (ISO date), reservationTime: string (HH:MM), specialRequests?: string."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "reservation-booking",
-    "file_role" : null,
+    "file_role" : "TypeScript types for reservation data, mirroring backend DTOs for consistent frontend-backend contracts.",
     "change_required" : null
   }, {
     "file_name" : "reservationService.ts",
@@ -2449,14 +2461,62 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Provides functions to submit and manage reservations via the backend API.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "createReservation",
+      "parameters" : [ "CreateReservationRequest reservationData" ],
+      "return_type" : "Promise<Reservation>",
+      "description" : "Submits a new reservation to the backend."
+    }, {
+      "name" : "getAllReservations",
+      "parameters" : [ ],
+      "return_type" : "Promise<Reservation[]>",
+      "description" : "Fetches all reservations from the backend (admin access)."
+    }, {
+      "name" : "updateReservationStatus",
+      "parameters" : [ "number id", "ReservationStatus status" ],
+      "return_type" : "Promise<Reservation>",
+      "description" : "Updates the status of a specific reservation (admin access)."
+    }, {
+      "name" : "deleteReservation",
+      "parameters" : [ "number id" ],
+      "return_type" : "Promise<void>",
+      "description" : "Deletes a specific reservation (admin access)."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/reservations",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Endpoint for creating a new reservation.",
+      "access" : null
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/admin/reservations",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Endpoint for fetching all reservations (admin).",
+      "access" : null
+    }, {
+      "method" : "PUT",
+      "path" : "/api/v1/admin/reservations/{id}/status",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Endpoint for updating reservation status (admin).",
+      "access" : null
+    }, {
+      "method" : "DELETE",
+      "path" : "/api/v1/admin/reservations/{id}",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Endpoint for deleting a reservation (admin).",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/api/client.ts", "frontend/src/types/reservation.ts" ],
     "depends_on" : [ ],
     "feature_name" : "reservation-booking",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — provides functions to interact with the backend reservation API for creating, fetching, updating, and deleting reservations.",
     "change_required" : null
   }, {
     "file_name" : "useReservations.ts",
@@ -2467,14 +2527,34 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "React Query hook for creating and fetching reservation data.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "useCreateReservation",
+      "parameters" : [ ],
+      "return_type" : "{ mutate: (reservationData: CreateReservationRequest) => void; isLoading: boolean; isSuccess: boolean; isError: boolean; error: Error; }",
+      "description" : "Hook for creating a new reservation."
+    }, {
+      "name" : "useAllReservations",
+      "parameters" : [ ],
+      "return_type" : "{ data: Reservation[]; isLoading: boolean; error: Error; }",
+      "description" : "Hook for fetching all reservations."
+    }, {
+      "name" : "useUpdateReservationStatus",
+      "parameters" : [ ],
+      "return_type" : "{ mutate: (args: { id: number; status: ReservationStatus }) => void; isLoading: boolean; isSuccess: boolean; isError: boolean; error: Error; }",
+      "description" : "Hook for updating a reservation's status."
+    }, {
+      "name" : "useDeleteReservation",
+      "parameters" : [ ],
+      "return_type" : "{ mutate: (id: number) => void; isLoading: boolean; isSuccess: boolean; isError: boolean; error: Error; }",
+      "description" : "Hook for deleting a reservation."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/services/reservationService.ts", "frontend/src/types/reservation.ts" ],
     "depends_on" : [ ],
     "feature_name" : "reservation-booking",
-    "file_role" : null,
+    "file_role" : "React Query hook for creating, fetching, updating, and deleting reservation data, providing caching and state management.",
     "change_required" : null
   }, {
     "file_name" : "ReservationPage.tsx",
@@ -2485,14 +2565,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Page containing a simple, elegant form for booking a table.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ReservationPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the reservation booking page for customers."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/reservation/ReservationForm.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "reservation-booking",
-    "file_role" : null,
+    "file_role" : "PAGE layer — renders the customer-facing reservation booking form, including a hero section and the ReservationForm component.",
     "change_required" : null
   }, {
     "file_name" : "ReservationForm.tsx",
@@ -2503,14 +2588,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A form for users to input their details, party size, date, and time for a reservation.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ReservationForm",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the reservation booking form."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useReservations.ts" ],
     "depends_on" : [ ],
     "feature_name" : "reservation-booking",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — provides a form for users to input reservation details, using `useCreateReservation` to submit data.",
     "change_required" : null
   }, {
     "file_name" : "AdminReservationsPage.tsx",
@@ -2521,14 +2611,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Admin interface for viewing and managing all customer reservations.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminReservationsPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the admin page for managing reservations."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useReservations.ts", "frontend/src/components/reservation/ReservationsTable.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "reservation-booking",
-    "file_role" : null,
+    "file_role" : "PAGE layer — renders the administrative interface for viewing and managing all customer reservations, using `useAllReservations` and `ReservationsTable`.",
     "change_required" : null
   }, {
     "file_name" : "ReservationsTable.tsx",
@@ -2539,14 +2634,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A data table listing all reservations with options to confirm or cancel.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ReservationsTable",
+      "parameters" : [ "{ reservations: Reservation[] } props" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a table displaying a list of reservations with action buttons."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/types/reservation.ts" ],
     "depends_on" : [ ],
     "feature_name" : "reservation-booking",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — displays a data table of reservations with options to confirm, cancel, or delete, consuming `useUpdateReservationStatus` and `useDeleteReservation`.",
     "change_required" : null
   }, {
     "file_name" : "order.ts",
@@ -2950,8 +3050,8 @@
     "feature_display_name" : "Reservation Booking (Frontend)",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/types/reservation.ts", "frontend/src/services/reservationService.ts", "frontend/src/hooks/useReservations.ts", "frontend/src/pages/ReservationPage.tsx", "frontend/src/components/reservation/ReservationForm.tsx", "frontend/src/pages/AdminReservationsPage.tsx", "frontend/src/components/reservation/ReservationsTable.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#800020] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b89a2e] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-gray-50 (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-gray-700 leading-relaxed\n\nThis feature provides the frontend interface for customers to book reservations and for administrators to manage them. It consists of TypeScript types, a service layer for API interaction, React Query hooks for data fetching and mutation, and two main pages: `ReservationPage.tsx` for customer bookings and `AdminReservationsPage.tsx` for administrative management. Supporting components `ReservationForm.tsx` and `ReservationsTable.tsx` handle the UI for booking and displaying reservations respectively.\n\n### Data Structures (`reservation.ts`)\nThe `reservation.ts` file defines the TypeScript interfaces for `Reservation`, `CreateReservationRequest`, and `ReservationStatus` which mirror the backend `ReservationDto`, `CreateReservationRequest`, and `ReservationStatus` data shapes from the `reservation-system` feature. These types ensure strong typing throughout the frontend application.\n\n### API Service (`reservationService.ts`)\nThe `reservationService.ts` file encapsulates all direct API calls to the `reservation-system` backend. It uses the `apiClient` from `@/api/client.ts` to make HTTP requests. It provides the following asynchronous functions:\n\n1.  `createReservation(reservationData: CreateReservationRequest): Promise<Reservation>`\n    -   Sends a POST request to `/api/v1/reservations` with the `reservationData` to create a new reservation.\n    -   Returns the created `Reservation` object on success.\n    -   Throws an error if the API call fails.\n\n2.  `getAllReservations(): Promise<Reservation[]>`\n    -   Sends a GET request to `/api/v1/admin/reservations` to fetch all reservations.\n    -   Requires authentication (handled by `apiClient` interceptor).\n    -   Returns a list of `Reservation` objects.\n    -   Throws an error if the API call fails.\n\n3.  `updateReservationStatus(id: number, status: ReservationStatus): Promise<Reservation>`\n    -   Sends a PUT request to `/api/v1/admin/reservations/{id}/status` with the new `status`.\n    -   Requires authentication.\n    -   Returns the updated `Reservation` object.\n    -   Throws an error if the API call fails.\n\n4.  `deleteReservation(id: number): Promise<void>`\n    -   Sends a DELETE request to `/api/v1/admin/reservations/{id}`.\n    -   Requires authentication.\n    -   Returns nothing on successful deletion.\n    -   Throws an error if the API call fails.\n\n### React Query Hooks (`useReservations.ts`)\nThe `useReservations.ts` file provides React Query hooks for managing reservation data, offering caching, background refetching, and simplified state management. It depends on `reservationService.ts` for actual API interaction.\n\n1.  `useCreateReservation()`\n    -   Returns a mutation hook for creating reservations.\n    -   `mutate(reservationData: CreateReservationRequest)`: Calls `reservationService.createReservation`.\n    -   On success, it invalidates the `['reservations']` query to refetch the list of all reservations.\n\n2.  `useAllReservations()`\n    -   Returns a query hook for fetching all reservations.\n    -   `queryKey: ['reservations']`\n    -   `queryFn: reservationService.getAllReservations`\n\n3.  `useUpdateReservationStatus()`\n    -   Returns a mutation hook for updating reservation status.\n    -   `mutate({ id: number, status: ReservationStatus })`: Calls `reservationService.updateReservationStatus`.\n    -   On success, it invalidates the `['reservations']` query.\n\n4.  `useDeleteReservation()`\n    -   Returns a mutation hook for deleting reservations.\n    -   `mutate(id: number)`: Calls `reservationService.deleteReservation`.\n    -   On success, it invalidates the `['reservations']` query.\n\n### Customer Reservation Page (`ReservationPage.tsx`)\nThe `ReservationPage.tsx` renders the `ReservationForm` component within the main `Layout` from `@/components/Layout`. It presents a welcoming section with a hero image and a call to action for booking a table. The form itself is designed to be elegant and user-friendly, capturing all necessary details for a reservation.\n\n**Sections:**\n- **Hero Section:** A full-width hero image (Unsplash URL for restaurant) with a dark overlay. Contains a prominent `h1` with the business name \"Farmaaish Restaurant\" and a subheadline \"Experience the Grandeur of Mughlai Cuisine. Book Your Table Today.\". Text color is white.\n- **Reservation Form Section:** A section with a `bg-white` background. Contains a `div` with `max-w-3xl mx-auto` for content. A `h2` with text \"Reserve Your Table\" and a brief inviting paragraph. The `ReservationForm` component is rendered here.\n\n### Reservation Form Component (`ReservationForm.tsx`)\nThe `ReservationForm.tsx` component is a client-side form for submitting reservation details. It uses `react-hook-form` for form management and `zod` for validation. It consumes the `useCreateReservation` hook to submit the form data to the backend. Upon successful submission, it should display a success toast message (using `sonner`) and clear the form. On error, it should display an error toast.\n\n**Form Fields:**\n- `customerName`: Text input, required.\n- `customerPhone`: Text input, required, Indian phone number format.\n- `customerEmail`: Email input, required, valid email format.\n- `partySize`: Number input, required, minimum 1.\n- `reservationDate`: Date picker, required, future date only.\n- `reservationTime`: Time picker, required, within opening hours (11:00 AM to 11:00 PM).\n- `specialRequests`: Textarea, optional.\n\n**Styling:**\n- Uses Tailwind CSS for styling, adhering to the design tokens. Inputs should have a clean, modern look with focus states.\n- The submit button should use the `Primary CTA` design token.\n\n### Admin Reservations Page (`AdminReservationsPage.tsx`)\nThe `AdminReservationsPage.tsx` provides an administrative view of all reservations. It uses the `useAllReservations` hook to fetch reservation data and renders the `ReservationsTable` component to display them. This page is wrapped in `AdminLayout` from `@/components/AdminLayout`.\n\n**Sections:**\n- **Header Section:** Contains an `h1` with text \"Manage Reservations\" and a brief description.\n- **Reservations Table Section:** Displays the `ReservationsTable` component, showing all fetched reservations.\n\n### Reservations Table Component (`ReservationsTable.tsx`)\nThe `ReservationsTable.tsx` component displays a list of reservations in a tabular format. It receives reservation data as props and provides actions to update the status (e.g., confirm, cancel) or delete a reservation. It uses `useUpdateReservationStatus` and `useDeleteReservation` hooks for these actions. Each action should trigger a toast notification for success or failure.\n\n**Table Columns:**\n- `ID`\n- `Customer Name`\n- `Phone`\n- `Email`\n- `Party Size`\n- `Date` (formatted `DD/MM/YYYY`)\n- `Time` (formatted `HH:MM AM/PM`)\n- `Special Requests`\n- `Status` (with a visual indicator, e.g., badge)\n- `Created At` (formatted `DD/MM/YYYY HH:MM AM/PM`)\n- `Actions` (buttons for \"Confirm\", \"Cancel\", \"Delete\")\n\n**Styling:**\n- Uses Tailwind CSS for a clean, readable table. Status badges should use appropriate colors (e.g., gold for PENDING, green for CONFIRMED, red for CANCELLED).\n- Action buttons should be styled consistently with the admin portal theme.\n",
+    "depends_on_features" : [ "reservation-system", "shared-frontend", "auth-ui", "admin-portal" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
