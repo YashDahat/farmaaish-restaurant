@@ -2838,13 +2838,53 @@
     "status" : "PLANNED",
     "description" : "TypeScript types for catering inquiry data.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "number",
+      "description" : "Unique identifier for the inquiry."
+    }, {
+      "name" : "customerName",
+      "type" : "string",
+      "description" : "Name of the customer submitting the inquiry."
+    }, {
+      "name" : "customerEmail",
+      "type" : "string",
+      "description" : "Email of the customer."
+    }, {
+      "name" : "customerPhone",
+      "type" : "string",
+      "description" : "Phone number of the customer."
+    }, {
+      "name" : "eventType",
+      "type" : "string",
+      "description" : "Type of event (e.g., wedding, corporate)."
+    }, {
+      "name" : "eventDate",
+      "type" : "string",
+      "description" : "Date of the event in 'YYYY-MM-DD' format."
+    }, {
+      "name" : "numberOfGuests",
+      "type" : "number",
+      "description" : "Estimated number of guests."
+    }, {
+      "name" : "budget",
+      "type" : "number",
+      "description" : "Estimated budget for the event."
+    }, {
+      "name" : "specialRequests",
+      "type" : "string",
+      "description" : "Any special requests or notes from the customer."
+    }, {
+      "name" : "inquiryDate",
+      "type" : "string",
+      "description" : "Date and time the inquiry was submitted in ISO format."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-form",
-    "file_role" : null,
+    "file_role" : "Generated from the backend API contract — TypeScript types for catering inquiry data.",
     "change_required" : null
   }, {
     "file_name" : "inquiryService.ts",
@@ -2855,14 +2895,38 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Provides functions to submit and manage catering inquiries via the backend API.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "submitCateringInquiry",
+      "parameters" : [ "CateringInquiryDto inquiry" ],
+      "return_type" : "Promise<CateringInquiryDto>",
+      "description" : "Submits a new catering inquiry to the backend. Throws an error if the submission fails."
+    }, {
+      "name" : "getAllCateringInquiries",
+      "parameters" : [ ],
+      "return_type" : "Promise<CateringInquiryDto[]>",
+      "description" : "Fetches all catering inquiries from the backend. Throws an error if the fetch fails."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/inquiries/catering",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Submits a new catering inquiry.",
+      "access" : null
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/admin/inquiries/catering",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Fetches all catering inquiries.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/api/client.ts", "frontend/src/types/inquiry.ts" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-form",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — provides functions to submitCateringInquiry(inquiry: CateringInquiryDto): Promise<CateringInquiryDto> and getAllCateringInquiries(): Promise<CateringInquiryDto[]>.",
     "change_required" : null
   }, {
     "file_name" : "useInquiries.ts",
@@ -2873,14 +2937,24 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "React Query hook for creating and fetching catering inquiries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "useSubmitCateringInquiry",
+      "parameters" : [ ],
+      "return_type" : "{ mutate: (inquiry: CateringInquiryDto) => void; isLoading: boolean; isSuccess: boolean; isError: boolean; error: Error; }",
+      "description" : "React Query hook for submitting a new catering inquiry. Provides mutate function, loading, success, and error states."
+    }, {
+      "name" : "useAllCateringInquiries",
+      "parameters" : [ ],
+      "return_type" : "{ data: CateringInquiryDto[]; isLoading: boolean; error: Error; }",
+      "description" : "React Query hook for fetching all catering inquiries. Provides data, loading, and error states."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/services/inquiryService.ts", "frontend/src/types/inquiry.ts" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-form",
-    "file_role" : null,
+    "file_role" : "HOOK layer — provides React Query hooks useSubmitCateringInquiry() and useAllCateringInquiries() for managing catering inquiry data.",
     "change_required" : null
   }, {
     "file_name" : "CateringPage.tsx",
@@ -2891,14 +2965,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Page with information about catering services and a form for inquiries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "CateringPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the catering page with a hero section, service details, and the inquiry form."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/inquiry/CateringInquiryForm.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-form",
-    "file_role" : null,
+    "file_role" : "PAGE layer — renders the public-facing catering information and inquiry form.",
     "change_required" : null
   }, {
     "file_name" : "CateringInquiryForm.tsx",
@@ -2909,14 +2988,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A form for users to submit details for a catering or private event inquiry.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "CateringInquiryForm",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a form for catering inquiries, handles form submission, and displays toast messages."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useInquiries.ts" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-form",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — renders a form for users to submit catering inquiry details.",
     "change_required" : null
   }, {
     "file_name" : "AdminCateringInquiriesPage.tsx",
@@ -2927,14 +3011,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Admin interface for viewing and managing all catering inquiries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminCateringInquiriesPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the admin page for catering inquiries, displaying a table of all inquiries."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useInquiries.ts", "frontend/src/components/inquiry/InquiriesTable.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-form",
-    "file_role" : null,
+    "file_role" : "PAGE layer — renders the admin interface for viewing and managing catering inquiries.",
     "change_required" : null
   }, {
     "file_name" : "InquiriesTable.tsx",
@@ -2945,14 +3034,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A data table listing all catering inquiries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "InquiriesTable",
+      "parameters" : [ "{ inquiries: CateringInquiryDto[] } props" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a table displaying a list of catering inquiries with their details."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/types/inquiry.ts" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-form",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — displays a data table listing all catering inquiries.",
     "change_required" : null
   } ],
   "features" : [ {
@@ -3068,8 +3162,8 @@
     "feature_display_name" : "Inquiry Forms (Frontend)",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/types/inquiry.ts", "frontend/src/services/inquiryService.ts", "frontend/src/hooks/useInquiries.ts", "frontend/src/pages/CateringPage.tsx", "frontend/src/components/inquiry/CateringInquiryForm.tsx", "frontend/src/pages/AdminCateringInquiriesPage.tsx", "frontend/src/components/inquiry/InquiriesTable.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#800020] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b89a2f] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-gray-50 (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-gray-700 leading-relaxed\n\nThis feature provides a frontend interface for users to submit catering inquiries and for administrators to manage them. It consists of TypeScript types, a service for API interaction, a React Query hook for data management, a public-facing catering page with an inquiry form, an admin page to view inquiries, and a component to display inquiries in a table.\n\n`inquiry.ts` defines the `CateringInquiryDto` interface, which mirrors the backend DTO for catering inquiries. This ensures type safety across the frontend application.\n\n`inquiryService.ts` handles the communication with the backend API. It exports `submitCateringInquiry(inquiry: CateringInquiryDto): Promise<CateringInquiryDto>` for creating new inquiries and `getAllCateringInquiries(): Promise<CateringInquiryDto[]>` for fetching all inquiries. It uses the `apiClient` from `@/api/client` for making HTTP requests.\n\n`useInquiries.ts` provides React Query hooks built on top of `inquiryService.ts`. It exports `useSubmitCateringInquiry()` for submitting new inquiries and `useAllCateringInquiries()` for fetching all inquiries. These hooks manage loading states, error handling, and data caching, simplifying data management in components.\n\n`CateringPage.tsx` is the public-facing page where users can learn about Farmaaish Restaurant's catering services and submit an inquiry. It will feature a hero section with a relevant image and compelling copy, followed by sections detailing catering offerings. The page will include the `CateringInquiryForm` component. The page content should be wrapped in the `Layout` component from `@/components/Layout`.\n\n`CateringInquiryForm.tsx` is a reusable component that renders a form for users to input their catering inquiry details. It uses `react-hook-form` for form management and `useSubmitCateringInquiry()` from `useInquiries.ts` to submit the form data. Upon successful submission, it should display a success toast message (using `sonner`) and clear the form. The form fields include `customerName`, `customerEmail`, `customerPhone`, `eventType`, `eventDate`, `numberOfGuests`, `budget`, and `specialRequests`.\n\n`AdminCateringInquiriesPage.tsx` is an authenticated page for administrators to view and manage all submitted catering inquiries. It uses `useAllCateringInquiries()` from `useInquiries.ts` to fetch the data and renders the `InquiriesTable` component to display them. The page content should be wrapped in the `AdminLayout` component from `@/components/AdminLayout`.\n\n`InquiriesTable.tsx` is a presentational component that displays a list of `CateringInquiryDto` objects in a table format. It receives the inquiries as props and renders each inquiry's details, including `customerName`, `customerEmail`, `customerPhone`, `eventType`, `eventDate`, `numberOfGuests`, `budget` (formatted in INR), and `inquiryDate`.",
+    "depends_on_features" : [ "inquiry-management", "shared-frontend", "auth-ui" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
