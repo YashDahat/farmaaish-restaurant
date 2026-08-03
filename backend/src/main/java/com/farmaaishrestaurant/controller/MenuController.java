@@ -28,7 +28,7 @@ public class MenuController {
     }
 
     @GetMapping("/items/category/{categoryId}")
-    public ResponseEntity<List<MenuItemDto>> getMenuItemsByCategory(@PathVariable UUID categoryId) {
+    public ResponseEntity<List<MenuItemDto>> getMenuItemsByCategory(@PathVariable Long categoryId) {
         List<MenuItemDto> menuItems = menuService.getMenuItemsByCategory(categoryId);
         return ResponseEntity.ok(menuItems);
     }

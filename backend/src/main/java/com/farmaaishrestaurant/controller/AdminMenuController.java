@@ -46,13 +46,13 @@ public class AdminMenuController {
     }
 
     @PutMapping("/categories/{id}")
-    public ResponseEntity<MenuItemCategory> updateMenuItemCategory(@PathVariable UUID id, @Valid @RequestBody MenuItemCategory category) {
+    public ResponseEntity<MenuItemCategory> updateMenuItemCategory(@PathVariable Long id, @Valid @RequestBody MenuItemCategory category) {
         MenuItemCategory updatedCategory = menuService.updateMenuItemCategory(id, category);
         return ResponseEntity.ok(updatedCategory);
     }
 
     @DeleteMapping("/categories/{id}")
-    public ResponseEntity<Void> deleteMenuItemCategory(@PathVariable UUID id) {
+    public ResponseEntity<Void> deleteMenuItemCategory(@PathVariable Long id) {
         menuService.deleteMenuItemCategory(id);
         return ResponseEntity.noContent().build();
     }

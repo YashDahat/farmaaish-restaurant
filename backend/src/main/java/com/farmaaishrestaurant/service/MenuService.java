@@ -29,7 +29,7 @@ public class MenuService {
                 .collect(Collectors.toList());
     }
 
-    public List<MenuItemDto> getMenuItemsByCategory(UUID categoryId) {
+    public List<MenuItemDto> getMenuItemsByCategory(Long categoryId) {
         MenuItemCategory category = menuItemCategoryRepository.findById(categoryId)
                 .orElseThrow(() -> new ResourceNotFoundException("Category not found with ID: " + categoryId));
         return menuItemRepository.findByCategory(category).stream()
@@ -94,14 +94,14 @@ public class MenuService {
         return menuItemCategoryRepository.save(category);
     }
 
-    public MenuItemCategory updateMenuItemCategory(UUID id, MenuItemCategory category) {
+    public MenuItemCategory updateMenuItemCategory(Long id, MenuItemCategory category) {
         MenuItemCategory existingCategory = menuItemCategoryRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Category not found with ID: " + id));
         existingCategory.setName(category.getName());
         return menuItemCategoryRepository.save(existingCategory);
     }
 
-    public void deleteMenuItemCategory(UUID id) {
+    public void deleteMenuItemCategory(Long id) {
         if (!menuItemCategoryRepository.existsById(id)) {
             throw new ResourceNotFoundException("Category not found with ID: " + id);
         }

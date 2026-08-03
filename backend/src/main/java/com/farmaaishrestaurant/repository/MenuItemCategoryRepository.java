@@ -8,4 +8,4 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface MenuItemCategoryRepository extends JpaRepository<MenuItemCategory, UUID> {}
+public interface MenuItemCategoryRepository extends JpaRepository<MenuItemCategory, Long> {}

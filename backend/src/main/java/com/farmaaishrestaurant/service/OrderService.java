@@ -3,6 +3,7 @@ package com.farmaaishrestaurant.service;
 import com.farmaaishrestaurant.dto.CreateOrderRequest;
 import com.farmaaishrestaurant.dto.OrderItemRequest;
 import com.farmaaishrestaurant.dto.OrderResponse;
+import com.farmaaishrestaurant.dto.OrderItemResponse;
 import com.farmaaishrestaurant.dto.MenuItemDto;
 import com.farmaaishrestaurant.exception.ResourceNotFoundException;
 import com.farmaaishrestaurant.model.Order;
@@ -83,7 +84,7 @@ public class OrderService {
 
         PaymentOrderResponse paymentOrderResponse = paymentService.createOrder(createPaymentRequest);
 
-        savedOrder.setGatewayOrderId(paymentOrderResponse.getId());
+        savedOrder.setGatewayOrderId(paymentOrderResponse.getGatewayOrderId());
         orderRepository.save(savedOrder);
 
         return mapToOrderResponse(savedOrder, paymentOrderResponse);

@@ -8,4 +8,4 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface CateringInquiryRepository extends JpaRepository<CateringInquiry, UUID> {}
+public interface CateringInquiryRepository extends JpaRepository<CateringInquiry, Long> {}

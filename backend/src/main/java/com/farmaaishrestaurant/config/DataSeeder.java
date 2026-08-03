@@ -21,19 +21,13 @@ public class DataSeeder {
         return args -> {
             // Seed MenuItemCategory
             com.farmaaishrestaurant.model.MenuItemCategory mainCourseCategory = new com.farmaaishrestaurant.model.MenuItemCategory();
-            mainCourseCategory.setId(UUID.randomUUID());
             mainCourseCategory.setName("Main Course");
-            mainCourseCategory.setMenuItems(null); // Will be set by MenuItem
 
             com.farmaaishrestaurant.model.MenuItemCategory appetizerCategory = new com.farmaaishrestaurant.model.MenuItemCategory();
-            appetizerCategory.setId(UUID.randomUUID());
             appetizerCategory.setName("Appetizers");
-            appetizerCategory.setMenuItems(null);
 
             com.farmaaishrestaurant.model.MenuItemCategory dessertCategory = new com.farmaaishrestaurant.model.MenuItemCategory();
-            dessertCategory.setId(UUID.randomUUID());
             dessertCategory.setName("Desserts");
-            dessertCategory.setMenuItems(null);
 
             menuItemCategoryRepository.saveAll(Arrays.asList(mainCourseCategory, appetizerCategory, dessertCategory));
 
