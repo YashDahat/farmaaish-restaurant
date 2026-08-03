@@ -1,0 +1,98 @@
+# Project History
+
+This file tracks each generation attempt.
+
+## Attempt 1 — 2026-08-03 [IN PROGRESS]
+
+**Business:** Farmaaish Restaurant
+**Planned Files (88):**
+- backend/src/main/java/com/farmaaishrestaurant/exception/GlobalExceptionHandler.java
+- backend/src/main/java/com/farmaaishrestaurant/exception/ResourceNotFoundException.java
+- backend/src/main/java/com/farmaaishrestaurant/dto/ErrorResponse.java
+- backend/src/main/java/com/farmaaishrestaurant/config/DataSeeder.java
+- backend/src/main/java/com/farmaaishrestaurant/model/MenuItem.java
+- backend/src/main/java/com/farmaaishrestaurant/model/MenuItemCategory.java
+- backend/src/main/java/com/farmaaishrestaurant/repository/MenuItemRepository.java
+- backend/src/main/java/com/farmaaishrestaurant/repository/MenuItemCategoryRepository.java
+- backend/src/main/java/com/farmaaishrestaurant/service/MenuService.java
+- backend/src/main/java/com/farmaaishrestaurant/controller/MenuController.java
+- backend/src/main/java/com/farmaaishrestaurant/controller/AdminMenuController.java
+- backend/src/main/java/com/farmaaishrestaurant/dto/MenuItemDto.java
+- backend/src/main/java/com/farmaaishrestaurant/model/Reservation.java
+- backend/src/main/java/com/farmaaishrestaurant/model/ReservationStatus.java
+- backend/src/main/java/com/farmaaishrestaurant/repository/ReservationRepository.java
+- backend/src/main/java/com/farmaaishrestaurant/service/ReservationService.java
+- backend/src/main/java/com/farmaaishrestaurant/controller/ReservationController.java
+- backend/src/main/java/com/farmaaishrestaurant/controller/AdminReservationController.java
+- backend/src/main/java/com/farmaaishrestaurant/dto/CreateReservationRequest.java
+- backend/src/main/java/com/farmaaishrestaurant/dto/ReservationDto.java
+- backend/src/main/java/com/farmaaishrestaurant/model/Order.java
+- backend/src/main/java/com/farmaaishrestaurant/model/OrderItem.java
+- backend/src/main/java/com/farmaaishrestaurant/model/OrderStatus.java
+- backend/src/main/java/com/farmaaishrestaurant/repository/OrderRepository.java
+- backend/src/main/java/com/farmaaishrestaurant/repository/OrderItemRepository.java
+- backend/src/main/java/com/farmaaishrestaurant/service/OrderService.java
+- backend/src/main/java/com/farmaaishrestaurant/controller/OrderController.java
+- backend/src/main/java/com/farmaaishrestaurant/controller/AdminOrderController.java
+- backend/src/main/java/com/farmaaishrestaurant/dto/CreateOrderRequest.java
+- backend/src/main/java/com/farmaaishrestaurant/dto/OrderItemRequest.java
+- backend/src/main/java/com/farmaaishrestaurant/dto/OrderResponse.java
+- backend/src/main/java/com/farmaaishrestaurant/model/CateringInquiry.java
+- backend/src/main/java/com/farmaaishrestaurant/repository/CateringInquiryRepository.java
+- backend/src/main/java/com/farmaaishrestaurant/service/CateringInquiryService.java
+- backend/src/main/java/com/farmaaishrestaurant/controller/CateringInquiryController.java
+- backend/src/main/java/com/farmaaishrestaurant/controller/AdminCateringInquiryController.java
+- backend/src/main/java/com/farmaaishrestaurant/dto/CateringInquiryDto.java
+- frontend/src/App.tsx
+- frontend/src/api/client.ts
+- frontend/src/config/siteConfig.ts
+- frontend/src/pages/HomePage.tsx
+- frontend/src/components/home/HeroSection.tsx
+- frontend/src/components/home/FeaturedMenuSection.tsx
+- frontend/src/components/home/AmbianceGallerySection.tsx
+- frontend/src/components/home/TestimonialsSection.tsx
+- frontend/src/pages/AboutPage.tsx
+- frontend/src/pages/ContactPage.tsx
+- frontend/src/pages/NotFoundPage.tsx
+- frontend/src/context/AuthContext.tsx
+- frontend/src/hooks/useAuth.ts
+- frontend/src/services/authService.ts
+- frontend/src/types/auth.ts
+- frontend/src/pages/LoginPage.tsx
+- frontend/src/components/ProtectedRoute.tsx
+- frontend/src/pages/AdminDashboardPage.tsx
+- frontend/src/types/menu.ts
+- frontend/src/services/menuService.ts
+- frontend/src/hooks/useMenu.ts
+- frontend/src/pages/MenuPage.tsx
+- frontend/src/components/menu/MenuCategoryTabs.tsx
+- frontend/src/components/menu/MenuItemCard.tsx
+- frontend/src/pages/AdminMenuPage.tsx
+- frontend/src/components/menu/MenuTable.tsx
+- frontend/src/components/menu/MenuItemFormDialog.tsx
+- frontend/src/types/reservation.ts
+- frontend/src/services/reservationService.ts
+- frontend/src/hooks/useReservations.ts
+- frontend/src/pages/ReservationPage.tsx
+- frontend/src/components/reservation/ReservationForm.tsx
+- frontend/src/pages/AdminReservationsPage.tsx
+- frontend/src/components/reservation/ReservationsTable.tsx
+- frontend/src/types/order.ts
+- frontend/src/services/orderService.ts
+- frontend/src/hooks/useOrders.ts
+- frontend/src/pages/CheckoutPage.tsx
+- frontend/src/components/order/OrderSummary.tsx
+- frontend/src/components/order/DeliveryDetailsForm.tsx
+- frontend/src/components/order/PaymentSection.tsx
+- frontend/src/pages/OrderConfirmationPage.tsx
+- frontend/src/pages/AdminOrdersPage.tsx
+- frontend/src/components/order/OrdersTable.tsx
+- frontend/src/types/inquiry.ts
+- frontend/src/services/inquiryService.ts
+- frontend/src/hooks/useInquiries.ts
+- frontend/src/pages/CateringPage.tsx
+- frontend/src/components/inquiry/CateringInquiryForm.tsx
+- frontend/src/pages/AdminCateringInquiriesPage.tsx
+- frontend/src/components/inquiry/InquiriesTable.tsx
+
+---
