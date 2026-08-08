@@ -120,7 +120,7 @@ public class OrderService {
     }
 
     private OrderResponse mapToOrderResponse(Order order, String deliveryAddress, String contactPhone) {
-        List<OrderItemResponse> itemResponses = order.getOrderItems().stream()
+        List<com.farmaaishrestaurant.dto.OrderItemResponse> itemResponses = order.getOrderItems().stream()
                 .map(this::mapToOrderItemResponse)
                 .collect(Collectors.toList());
 
@@ -136,9 +136,9 @@ public class OrderService {
                 .build();
     }
 
-    private OrderItemResponse mapToOrderItemResponse(OrderItem orderItem) {
+    private com.farmaaishrestaurant.dto.OrderItemResponse mapToOrderItemResponse(OrderItem orderItem) {
         MenuItemDto menuItem = menuService.getMenuItemById(orderItem.getMenuItemId());
-        return OrderItemResponse.builder()
+        return com.farmaaishrestaurant.dto.OrderItemResponse.builder()
                 .id(orderItem.getId())
                 .menuItemId(orderItem.getMenuItemId())
                 .menuItemName(menuItem != null ? menuItem.getName() : "Unknown Item")
