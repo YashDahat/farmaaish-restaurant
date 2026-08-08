@@ -3238,14 +3238,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "The main dashboard for administrators, showing key stats and navigation to management pages.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminDashboardPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the admin dashboard with welcome message and navigation links."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Admin page — the main dashboard for administrators, providing an overview and navigation to other management sections.",
     "change_required" : null
   }, {
     "file_name" : "AdminLayout.tsx",
@@ -3256,14 +3261,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A layout component for the admin section, including a sidebar for navigation.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminLayout",
+      "parameters" : [ "React.PropsWithChildren<{}> props" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the admin layout with sidebar navigation and content area."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Layout component — provides a consistent header, sidebar navigation, and content area for all admin pages. Public function: AdminLayout(props: { children: React.ReactNode }).",
     "change_required" : null
   }, {
     "file_name" : "AdminMenuPage.tsx",
@@ -3274,14 +3284,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Admin page for managing the restaurant menu, composed of a menu table and item form.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminMenuPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the menu management page with a table of menu items and forms for creation/editing/deletion."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/components/admin/menu/MenuTable.tsx", "frontend/src/components/admin/menu/MenuItemForm.tsx", "frontend/src/components/admin/menu/DeleteMenuItemDialog.tsx", "frontend/src/hooks/useMenu.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Admin page — manages menu items, integrating MenuTable, MenuItemForm, and DeleteMenuItemDialog, and using the useMenu hook.",
     "change_required" : null
   }, {
     "file_name" : "MenuTable.tsx",
@@ -3292,14 +3307,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A table displaying all menu items with options to edit or delete.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "MenuTable",
+      "parameters" : [ "{ menuItems: MenuItemDto[]; onEdit: (item: MenuItemDto) => void; onDelete: (id: UUID) => void }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a table of menu items with edit and delete functionalities."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/types/menu.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Component — displays a table of menu items with edit and delete actions. Public function: MenuTable(props: { menuItems: MenuItemDto[]; onEdit: (item: MenuItemDto) => void; onDelete: (id: UUID) => void }).",
     "change_required" : null
   }, {
     "file_name" : "MenuItemForm.tsx",
@@ -3310,14 +3330,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A form (used in a dialog) for creating or editing a menu item.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "MenuItemForm",
+      "parameters" : [ "{ initialData: MenuItemDto | null; onSave: (item: MenuItemDto) => void; onCancel: () => void; isLoading: boolean }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a form for creating or editing menu items, including fields for name, description, price, image URL, vegetarian status, and category."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useMenu.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Component — a form for creating or editing a menu item. Public function: MenuItemForm(props: { initialData: MenuItemDto | null; onSave: (item: MenuItemDto) => void; onCancel: () => void; isLoading: boolean }).",
     "change_required" : null
   }, {
     "file_name" : "DeleteMenuItemDialog.tsx",
@@ -3328,14 +3353,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A confirmation dialog for deleting a menu item.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "DeleteMenuItemDialog",
+      "parameters" : [ "{ isOpen: boolean; onClose: () => void; onConfirm: (id: UUID) => void; itemToDelete: MenuItemDto | null; isLoading: boolean }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a confirmation dialog for deleting a menu item."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useMenu.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Component — a confirmation dialog for deleting a menu item. Public function: DeleteMenuItemDialog(props: { isOpen: boolean; onClose: () => void; onConfirm: (id: UUID) => void; itemToDelete: MenuItemDto | null; isLoading: boolean }).",
     "change_required" : null
   }, {
     "file_name" : "AdminReservationsPage.tsx",
@@ -3346,14 +3376,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Admin page for viewing and managing all customer reservations.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminReservationsPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the reservations management page with a table of reservations and a dialog for updating status."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/components/admin/reservations/ReservationsTable.tsx", "frontend/src/components/admin/reservations/UpdateReservationDialog.tsx", "frontend/src/hooks/useReservations.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Admin page — manages customer reservations, integrating ReservationsTable and UpdateReservationDialog, and using the useReservations hook.",
     "change_required" : null
   }, {
     "file_name" : "ReservationsTable.tsx",
@@ -3364,14 +3399,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A table displaying all reservations with filtering and status update options.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ReservationsTable",
+      "parameters" : [ "{ reservations: ReservationResponse[]; onUpdateStatus: (id: UUID, status: ReservationStatus) => void }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a table of reservations with filtering and status update options."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/types/reservation.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Component — displays a table of reservations with status update options. Public function: ReservationsTable(props: { reservations: ReservationResponse[]; onUpdateStatus: (id: UUID, status: ReservationStatus) => void }).",
     "change_required" : null
   }, {
     "file_name" : "UpdateReservationDialog.tsx",
@@ -3382,14 +3422,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A dialog for updating the status of a reservation (e.g., confirm, cancel).",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "UpdateReservationDialog",
+      "parameters" : [ "{ isOpen: boolean; onClose: () => void; onConfirm: (id: UUID, status: ReservationStatus) => void; reservationToUpdate: ReservationResponse | null; isLoading: boolean }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a dialog for updating the status of a reservation."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useReservations.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Component — a dialog for updating the status of a reservation. Public function: UpdateReservationDialog(props: { isOpen: boolean; onClose: () => void; onConfirm: (id: UUID, status: ReservationStatus) => void; reservationToUpdate: ReservationResponse | null; isLoading: boolean }).",
     "change_required" : null
   }, {
     "file_name" : "AdminOrdersPage.tsx",
@@ -3400,14 +3445,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Admin page for viewing and managing all customer food orders.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminOrdersPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the orders management page with a table of orders and a modal for order details and status updates."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/components/admin/orders/OrdersTable.tsx", "frontend/src/components/admin/orders/OrderDetailsModal.tsx", "frontend/src/hooks/useOrders.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Admin page — manages customer food orders, integrating OrdersTable and OrderDetailsModal, and using the useOrders hook.",
     "change_required" : null
   }, {
     "file_name" : "OrdersTable.tsx",
@@ -3418,14 +3468,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A table displaying all orders with filtering and status update options.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "OrdersTable",
+      "parameters" : [ "{ orders: OrderResponse[]; onViewDetails: (order: OrderResponse) => void; onUpdateStatus: (id: UUID, status: OrderStatus) => void }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a table of orders with filtering, detail viewing, and status update functionalities."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/types/order.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Component — displays a table of orders with filtering and status update options. Public function: OrdersTable(props: { orders: OrderResponse[]; onViewDetails: (order: OrderResponse) => void; onUpdateStatus: (id: UUID, status: OrderStatus) => void }).",
     "change_required" : null
   }, {
     "file_name" : "OrderDetailsModal.tsx",
@@ -3436,14 +3491,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A modal showing the detailed contents of an order and allowing status updates.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "OrderDetailsModal",
+      "parameters" : [ "{ isOpen: boolean; onClose: () => void; order: OrderResponse | null; onUpdateStatus: (id: UUID, status: OrderStatus) => void; isLoading: boolean }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a modal displaying order details and allowing status updates."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useOrders.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Component — a modal showing detailed order contents and allowing status updates. Public function: OrderDetailsModal(props: { isOpen: boolean; onClose: () => void; order: OrderResponse | null; onUpdateStatus: (id: UUID, status: OrderStatus) => void; isLoading: boolean }).",
     "change_required" : null
   }, {
     "file_name" : "AdminInquiriesPage.tsx",
@@ -3454,14 +3514,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Admin page for viewing and managing catering and event inquiries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminInquiriesPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the inquiries management page with a table of event inquiries."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/components/admin/inquiries/InquiriesTable.tsx", "frontend/src/hooks/useInquiries.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Admin page — manages catering and event inquiries, integrating InquiriesTable and using the useInquiries hook.",
     "change_required" : null
   }, {
     "file_name" : "InquiriesTable.tsx",
@@ -3472,14 +3537,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A table displaying all event inquiries with contact details and status.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "InquiriesTable",
+      "parameters" : [ "{ inquiries: EventInquiryResponse[] }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a table of event inquiries with contact details and status."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/types/inquiry.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Component — displays a table of event inquiries with contact details and status. Public function: InquiriesTable(props: { inquiries: EventInquiryResponse[] }).",
     "change_required" : null
   }, {
     "file_name" : "AdminGalleryPage.tsx",
@@ -3490,14 +3560,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Admin page for managing the photo gallery.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminGalleryPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the gallery management page with a grid of images and a form for uploading new ones."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/components/admin/gallery/GalleryGrid.tsx", "frontend/src/components/admin/gallery/UploadImageForm.tsx", "frontend/src/hooks/useGallery.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Admin page — manages the photo gallery, integrating GalleryGrid and UploadImageForm, and using the useGallery hook.",
     "change_required" : null
   }, {
     "file_name" : "GalleryGrid.tsx",
@@ -3508,14 +3583,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A grid of existing gallery images with an option to delete each one.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "GalleryGrid",
+      "parameters" : [ "{ images: GalleryImageDto[]; onDelete: (id: UUID) => void }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a grid of gallery images with delete functionality."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/types/gallery.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Component — displays a grid of existing gallery images with a delete option. Public function: GalleryGrid(props: { images: GalleryImageDto[]; onDelete: (id: UUID) => void }).",
     "change_required" : null
   }, {
     "file_name" : "UploadImageForm.tsx",
@@ -3526,14 +3606,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A form for uploading new images to the gallery.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "UploadImageForm",
+      "parameters" : [ "{ onUpload: (file: File, caption: string) => void; isLoading: boolean }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a form for uploading new images to the gallery with a file input and caption field."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useGallery.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Component — a form for uploading new images to the gallery. Public function: UploadImageForm(props: { onUpload: (file: File, caption: string) => void; isLoading: boolean }).",
     "change_required" : null
   }, {
     "file_name" : "ci.yml",
@@ -3676,8 +3761,8 @@
     "feature_display_name" : "Admin Portal",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/pages/AdminDashboardPage.tsx", "frontend/src/components/AdminLayout.tsx", "frontend/src/pages/AdminMenuPage.tsx", "frontend/src/components/admin/menu/MenuTable.tsx", "frontend/src/components/admin/menu/MenuItemForm.tsx", "frontend/src/components/admin/menu/DeleteMenuItemDialog.tsx", "frontend/src/pages/AdminReservationsPage.tsx", "frontend/src/components/admin/reservations/ReservationsTable.tsx", "frontend/src/components/admin/reservations/UpdateReservationDialog.tsx", "frontend/src/pages/AdminOrdersPage.tsx", "frontend/src/components/admin/orders/OrdersTable.tsx", "frontend/src/components/admin/orders/OrderDetailsModal.tsx", "frontend/src/pages/AdminInquiriesPage.tsx", "frontend/src/components/admin/inquiries/InquiriesTable.tsx", "frontend/src/pages/AdminGalleryPage.tsx", "frontend/src/components/admin/gallery/GalleryGrid.tsx", "frontend/src/components/admin/gallery/UploadImageForm.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#36454F] text-[#D4AF37]\n- Primary CTA: bg-[#D4AF37] hover:bg-[#C2A032] text-[#36454F] font-semibold rounded-lg px-6 py-3 transition-all duration-200\n- Secondary CTA: bg-[#800020] hover:bg-[#6A001A] text-white font-semibold rounded-lg px-6 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-[#F5F5DC] (odd sections) / bg-white (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-12 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-[#36454F] leading-relaxed\n- Admin Sidebar: bg-[#36454F] text-white\n- Admin Header: bg-white shadow-sm border-b border-gray-200\n- Admin Table Header: bg-gray-50 text-xs font-medium text-gray-500 uppercase tracking-wider\n- Admin Button Primary: bg-[#D4AF37] hover:bg-[#C2A032] text-[#36454F] font-medium rounded-md px-4 py-2\n- Admin Button Danger: bg-[#800020] hover:bg-[#6A001A] text-white font-medium rounded-md px-4 py-2\n\nThis feature provides the administrative interface for Farmaaish Restaurant, allowing staff to manage menu items, reservations, customer orders, event inquiries, and the restaurant's photo gallery. It consists of several pages, each dedicated to a specific management area, all wrapped within a consistent `AdminLayout` component that provides navigation and a unified look and feel.\n\n### AdminLayout.tsx\nThis component serves as the main layout for all admin pages. It includes a sidebar with navigation links to `AdminDashboardPage`, `AdminMenuPage`, `AdminReservationsPage`, `AdminOrdersPage`, `AdminInquiriesPage`, and `AdminGalleryPage`. The layout ensures a consistent header and content area for all administrative views. It accepts `children` as props to render the specific page content.\n\n### AdminDashboardPage.tsx\nThis page is the entry point for administrators, providing an overview of key operational metrics and quick links to other management sections. It will display placeholder content for now, such as \"Welcome to Farmaaish Admin Portal\" and navigation cards to the various management pages.\n\n### AdminMenuPage.tsx\nThis page allows administrators to manage the restaurant's menu. It integrates `MenuTable` to display existing menu items, `MenuItemForm` (rendered in a dialog) for creating or editing menu items, and `DeleteMenuItemDialog` for confirming deletions. It uses the `useMenu` hook to interact with the backend menu-management API. The page will fetch all menu items and categories on load.\n\n### MenuTable.tsx\nThis component displays a paginated and sortable table of `MenuItemDto` objects. Each row includes actions to edit or delete a menu item. It receives `menuItems: MenuItemDto[]`, `onEdit: (item: MenuItemDto) => void`, `onDelete: (id: UUID) => void` as props. Prices are displayed in Indian Rupees (₹) using `toLocaleString('en-IN', { style: 'currency', currency: 'INR' })`.\n\n### MenuItemForm.tsx\nThis component is a form for creating or updating a `MenuItemDto`. It takes `initialData: MenuItemDto | null`, `onSave: (item: MenuItemDto) => void`, `onCancel: () => void`, and `isLoading: boolean` as props. It includes fields for `name`, `description`, `price`, `imageUrl`, `vegetarian`, and `categoryId`. It will fetch available categories using `useMenu.useMenuCategories()` to populate a dropdown. Price input should handle `BigDecimal` values correctly.\n\n### DeleteMenuItemDialog.tsx\nThis component is a confirmation dialog for deleting a menu item. It takes `isOpen: boolean`, `onClose: () => void`, `onConfirm: (id: UUID) => void`, `itemToDelete: MenuItemDto | null`, and `isLoading: boolean` as props. It displays the name of the item to be deleted for confirmation.\n\n### AdminReservationsPage.tsx\nThis page enables administrators to view and manage customer reservations. It uses `ReservationsTable` to list reservations and `UpdateReservationDialog` (rendered in a dialog) to change reservation statuses. It interacts with the backend reservation-system API via the `useReservations` hook. The page will fetch all reservations on load.\n\n### ReservationsTable.tsx\nThis component displays a table of `ReservationResponse` objects, allowing filtering and sorting. Each row includes an option to update the reservation status. It receives `reservations: ReservationResponse[]`, `onUpdateStatus: (id: UUID, status: ReservationStatus) => void` as props. Reservation times are displayed in a user-friendly format.\n\n### UpdateReservationDialog.tsx\nThis dialog allows administrators to update the status of a reservation. It takes `isOpen: boolean`, `onClose: () => void`, `onConfirm: (id: UUID, status: ReservationStatus) => void`, `reservationToUpdate: ReservationResponse | null`, and `isLoading: boolean` as props. It provides a dropdown to select a new `ReservationStatus` (PENDING, CONFIRMED, CANCELLED, COMPLETED).\n\n### AdminOrdersPage.tsx\nThis page is for managing customer food orders. It uses `OrdersTable` to display orders and `OrderDetailsModal` to show detailed order information and allow status updates. It uses the `useOrders` hook to interact with the backend order-management API. The page will fetch all orders on load.\n\n### OrdersTable.tsx\nThis component displays a table of `OrderResponse` objects, with filtering and sorting capabilities. Each row includes an option to view order details and update its status. It receives `orders: OrderResponse[]`, `onViewDetails: (order: OrderResponse) => void`, `onUpdateStatus: (id: UUID, status: OrderStatus) => void` as props. Total amounts are displayed in Indian Rupees (₹).\n\n### OrderDetailsModal.tsx\nThis modal displays the detailed contents of an `OrderResponse`, including order items, total amount, delivery address, and contact phone. It also allows updating the order status. It takes `isOpen: boolean`, `onClose: () => void`, `order: OrderResponse | null`, `onUpdateStatus: (id: UUID, status: OrderStatus) => void`, and `isLoading: boolean` as props. Total amounts and item prices are displayed in Indian Rupees (₹).\n\n### AdminInquiriesPage.tsx\nThis page allows administrators to view and manage catering and event inquiries. It uses `InquiriesTable` to list inquiries and interacts with the backend inquiry-management API via the `useInquiries` hook. The page will fetch all inquiries on load.\n\n### InquiriesTable.tsx\nThis component displays a table of `EventInquiryResponse` objects, including customer details, event type, date, and status. It receives `inquiries: EventInquiryResponse[]` as props. Each row should allow viewing details and updating the inquiry status.\n\n### AdminGalleryPage.tsx\nThis page is for managing the restaurant's photo gallery. It uses `GalleryGrid` to display existing images and `UploadImageForm` to add new ones. It interacts with the backend gallery-management API via the `useGallery` hook. The page will fetch all gallery images on load.\n\n### GalleryGrid.tsx\nThis component displays a grid of `GalleryImageDto` objects. Each image includes an option to delete it. It receives `images: GalleryImageDto[]`, `onDelete: (id: UUID) => void` as props.\n\n### UploadImageForm.tsx\nThis component is a form for uploading new images to the gallery. It takes `onUpload: (file: File, caption: string) => void` and `isLoading: boolean` as props. It includes a file input and a text input for the image caption.",
+    "depends_on_features" : [ "menu-management", "reservation-system", "order-management", "inquiry-management", "gallery-management", "auth-ui" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
