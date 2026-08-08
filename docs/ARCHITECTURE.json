@@ -2981,13 +2981,29 @@
     "status" : "PLANNED",
     "description" : "TypeScript types for gallery images.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "string",
+      "description" : "Unique identifier for the gallery image."
+    }, {
+      "name" : "imageUrl",
+      "type" : "string",
+      "description" : "URL of the gallery image."
+    }, {
+      "name" : "caption",
+      "type" : "string",
+      "description" : "Descriptive caption for the image."
+    }, {
+      "name" : "uploadedAt",
+      "type" : "string",
+      "description" : "Timestamp when the image was uploaded (ISO 8601 string)."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "gallery-display",
-    "file_role" : null,
+    "file_role" : "TypeScript types for gallery images, derived from the backend API contract.",
     "change_required" : null
   }, {
     "file_name" : "galleryService.ts",
@@ -2998,14 +3014,26 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Provides functions for fetching and managing gallery images.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getAllGalleryImages",
+      "parameters" : [ ],
+      "return_type" : "Promise<GalleryImage[]>",
+      "description" : "Fetches all gallery images from the backend."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/gallery",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Fetches a list of all gallery images.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/api/client.ts", "frontend/src/types/gallery.ts" ],
     "depends_on" : [ ],
     "feature_name" : "gallery-display",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — provides `getAllGalleryImages(): Promise<GalleryImage[]>` by calling the backend gallery API.",
     "change_required" : null
   }, {
     "file_name" : "useGallery.ts",
@@ -3016,14 +3044,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "React Query hook for fetching gallery images.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "useGallery",
+      "parameters" : [ ],
+      "return_type" : "{ data: GalleryImage[] | undefined; isLoading: boolean; isError: boolean; error: Error | null; }",
+      "description" : "A React Query hook to fetch and manage the state of gallery images."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/services/galleryService.ts" ],
     "depends_on" : [ ],
     "feature_name" : "gallery-display",
-    "file_role" : null,
+    "file_role" : "REACT HOOK layer — provides `useGallery()` for fetching and caching gallery images using React Query.",
     "change_required" : null
   }, {
     "file_name" : "GalleryPage.tsx",
@@ -3034,14 +3067,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Displays a visually rich gallery of high-quality food and ambiance photography.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "GalleryPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "The main page component for displaying the restaurant's image gallery."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useGallery.ts" ],
     "depends_on" : [ ],
     "feature_name" : "gallery-display",
-    "file_role" : null,
+    "file_role" : "PAGE layer — displays a public gallery of restaurant images, using `useGallery` to fetch data.",
     "change_required" : null
   }, {
     "file_name" : "inquiry.ts",
@@ -3580,8 +3618,8 @@
     "feature_display_name" : "Gallery Display",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/types/gallery.ts", "frontend/src/services/galleryService.ts", "frontend/src/hooks/useGallery.ts", "frontend/src/pages/GalleryPage.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#800020] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b8942b] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-gray-50 (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-gray-700 leading-relaxed\n\nThis feature provides a public-facing gallery page for Farmaaish Restaurant, showcasing high-quality images of its dishes and ambiance. It consists of TypeScript types for gallery images (`gallery.ts`), a service for fetching these images from the backend (`galleryService.ts`), a React Query hook for data fetching and caching (`useGallery.ts`), and the main gallery page component (`GalleryPage.tsx`).\n\nThe `GalleryPage.tsx` will display a grid of images fetched using the `useGallery` hook. Each image will be presented with its caption. The page will be structured with a hero section, a main gallery grid, and will use the `Layout` component from `@/components/Layout` for consistent navigation and footer.\n\n`galleryService.ts` will interact with the `gallery-management` backend feature to retrieve gallery images. Specifically, it will call the `GET /api/v1/gallery` endpoint. The `useGallery.ts` hook will then wrap this service call using React Query to provide data fetching, caching, and loading/error states to `GalleryPage.tsx`.\n\nThe `GalleryPage.tsx` will render a visually appealing layout, adhering to the design tokens. It will feature a hero section with a relevant background image and a compelling headline. The main content area will display the gallery images in a responsive grid, with each image having a caption. Error and loading states will be handled gracefully, providing user feedback.\n\n### `gallery.ts`\nDefines the `GalleryImage` interface, which mirrors the `GalleryImageDto` data shape from the `gallery-management` backend feature.\n\n### `galleryService.ts`\nExports an asynchronous function `getAllGalleryImages()` that makes an HTTP GET request to `/api/v1/gallery` using the `apiClient` from `frontend/src/api/client.ts`. It returns a `Promise<GalleryImage[]>`.\n\n### `useGallery.ts`\nExports a custom React Query hook `useGallery()` that utilizes `react-query`'s `useQuery` to fetch gallery images. It calls `galleryService.getAllGalleryImages()` and provides `isLoading`, `isError`, `data`, and `error` states to consuming components. The query key for this hook should be `['galleryImages']`.\n\n### `GalleryPage.tsx`\nThis page component is responsible for rendering the entire gallery. It will:\n1. Import and use the `useGallery` hook to fetch gallery images.\n2. Render a `Layout` component from `@/components/Layout` to provide consistent header and footer.\n3. Implement a hero section with a background image (Unsplash URL for a restaurant ambiance: `https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1920&q=80`) and an overlay. The hero section will contain an `h1` with the text \"Our Culinary Journey\" and a `p` with the text \"A visual feast of Farmaaish Restaurant's exquisite dishes and inviting ambiance.\"\n4. Display loading and error states using conditional rendering based on the `useGallery` hook's return values.\n5. If data is successfully fetched, render a responsive grid of gallery images. Each image should be displayed within a card-like structure, showing the `imageUrl` and `caption` from the `GalleryImage` object. The images should be styled to be visually prominent and appealing.\n6. All text and background colors will adhere to the design tokens provided.",
+    "depends_on_features" : [ "gallery-management" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
