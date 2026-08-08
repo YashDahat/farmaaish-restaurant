@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import React, { useState } from 'react';
 import AdminLayout from '@/components/AdminLayout';
 import OrdersTable from '@/components/admin/orders/OrdersTable';

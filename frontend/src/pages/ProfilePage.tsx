@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { useMyOrders } from '@/hooks/useOrders';
 import OrderHistoryTable from '@/components/profile/OrderHistoryTable';

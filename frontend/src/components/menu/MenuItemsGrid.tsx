@@ -1,5 +1,6 @@
+import type { JSX } from 'react';
 import { MenuItemDto } from '@/types/menu';
-import { MenuItemCard } from './MenuItemCard';
+import MenuItemCard from './MenuItemCard';
 
 interface MenuItemsGridProps {
   items: MenuItemDto[];

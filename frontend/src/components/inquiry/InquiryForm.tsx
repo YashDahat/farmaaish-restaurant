@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -52,8 +53,13 @@ export default function InquiryForm(): JSX.Element {
 
   const onSubmit = (values: z.infer<typeof inquiryFormSchema>): void => {
     const request: CreateEventInquiryRequest = {
-      ...values,
+      customerName: values.customerName,
+      customerEmail: values.customerEmail,
+      customerPhone: values.customerPhone,
+      eventType: values.eventType,
       eventDate: values.eventDate.toISOString(),
+      numberOfGuests: values.numberOfGuests,
+      specialRequests: values.specialRequests ?? '',
     };
     submitInquiry(request);
   };

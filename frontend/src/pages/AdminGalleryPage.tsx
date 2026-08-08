@@ -1,3 +1,5 @@
+import { deleteGalleryImage } from '@/services/apiService';
+import type { JSX } from 'react';
 'use client';
 
 import React from 'react';
@@ -6,7 +8,7 @@ import AdminLayout from '@/components/AdminLayout';
 import GalleryGrid from '@/components/admin/gallery/GalleryGrid';
 import { UploadImageForm } from '@/components/admin/gallery/UploadImageForm';
 import { useGallery } from '@/hooks/useGallery';
-import { uploadGalleryImage, deleteGalleryImage } from '@/services/galleryService';
+import { uploadGalleryImage } from '@/services/galleryService';
 import { toast } from 'sonner';
 import { GalleryImageDto } from '@/types/gallery';
 

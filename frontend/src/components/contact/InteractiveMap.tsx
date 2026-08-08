@@ -1,11 +1,11 @@
+import type { JSX } from 'react';
 import React from 'react';
-import siteConfig from '@/config/siteConfig';
 
 export default function InteractiveMap(): React.JSX.Element {
-  const { mapCoordinates } = siteConfig.footer;
-  const { latitude, longitude } = mapCoordinates || { latitude: 0, longitude: 0 };
+  const latitude = 18.55557;
+  const longitude = 73.7749;
 
-  const mapSrc = `https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&q=${latitude},${longitude}`;
+  const mapSrc = `https://www.google.com/maps/embed/v1/place?key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY ?? ''}&q=${latitude},${longitude}`;
 
   return (
     <section className="py-16 px-4 bg-white">

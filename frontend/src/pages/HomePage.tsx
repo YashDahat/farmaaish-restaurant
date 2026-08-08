@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import HeroSection from '@/components/home/HeroSection';
 import FeaturedDishes from '@/components/home/FeaturedDishes';
 import Testimonials from '@/components/home/Testimonials';

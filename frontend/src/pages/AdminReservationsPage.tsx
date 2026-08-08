@@ -1,10 +1,10 @@
+import type { JSX } from 'react';
 import { useState } from 'react';
 import AdminLayout from '@/components/AdminLayout';
 import { ReservationsTable } from '@/components/admin/reservations/ReservationsTable';
 import UpdateReservationDialog from '@/components/admin/reservations/UpdateReservationDialog';
 import { useGetAllReservations, useUpdateReservationStatus } from '@/hooks/useReservations';
 import type { ReservationResponse, ReservationStatus, UpdateReservationStatusRequest } from '@/types/reservation';
-import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 
 export default function AdminReservationsPage(): JSX.Element {

@@ -1,9 +1,11 @@
+import type { JSX } from 'react';
 import * as React from 'react';
 import { useState } from 'react';
 import MenuCategoryTabs from '@/components/menu/MenuCategoryTabs';
 import { MenuItemsGrid } from '@/components/menu/MenuItemsGrid';
 import { useMenuCategories, useMenuItems, useMenuItemsByCategory } from '@/hooks/useMenu';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Card } from '@/components/ui/card';
 
 export default function MenuPage(): React.JSX.Element {
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);

@@ -43,8 +43,4 @@ export const siteConfig: SiteConfig = {
     textClass: 'text-white',
     accentClass: 'text-[#D4AF37]',
   },
-  mapCoordinates: {
-    latitude: 18.55557,
-    longitude: 73.7749,
-  },
 };

@@ -1,6 +1,7 @@
+import type { JSX } from 'react';
 import ContactDetails from '@/components/contact/ContactDetails';
 import InteractiveMap from '@/components/contact/InteractiveMap';
-import siteConfig from '@/config/siteConfig';
+import { siteConfig } from '@/config/siteConfig';
 
 export default function ContactPage(): JSX.Element {
   return (
@@ -22,7 +23,7 @@ export default function ContactPage(): JSX.Element {
                 style={{ border: 0 }}
                 loading="lazy"
                 allowFullScreen
-                src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&q=${siteConfig.footer.mapCoordinates?.latitude},${siteConfig.footer.mapCoordinates?.longitude}`}
+                src={`https://www.google.com/maps/embed/v1/place?key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY ?? ''}&q=18.55557,73.7749`}
                 title="Farmaaish Restaurant Location"
                 data-testid="contact-map-inline"
               ></iframe>

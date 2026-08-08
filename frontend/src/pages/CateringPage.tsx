@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import InquiryForm from '@/components/inquiry/InquiryForm';
 import CateringInfo from '@/components/inquiry/CateringInfo';
 

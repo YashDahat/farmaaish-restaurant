@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import AdminLayout from '@/components/AdminLayout';
 import InquiriesTable from '@/components/admin/inquiries/InquiriesTable';
 import { useAllInquiries } from '@/hooks/useInquiries';

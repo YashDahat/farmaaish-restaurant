@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import { useState } from 'react';
 import { OrderResponse, OrderStatus } from '@/types/order';
 import {

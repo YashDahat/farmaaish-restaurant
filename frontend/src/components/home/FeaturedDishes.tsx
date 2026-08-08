@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import { Link } from 'react-router-dom';
 import { useMenuItems } from '@/hooks/useMenu';
 import { ROUTES } from '@/routes';

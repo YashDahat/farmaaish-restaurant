@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import { useGallery } from '@/hooks/useGallery';
 import Layout from '@/components/Layout';
 import { SiteConfig } from '@/shell/types';
@@ -16,7 +17,7 @@ const siteConfig: SiteConfig = {
       { label: 'Gallery', href: '/gallery' },
       { label: 'Contact', href: '/contact' },
     ],
-    ctaButton: { label: 'Order Now' },
+    ctaButton: { label: 'Order Now', href: '/menu' },
   },
   footer: {
     brandName: 'Farmaaish Restaurant',

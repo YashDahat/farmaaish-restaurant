@@ -6,7 +6,7 @@ import { AuthProvider } from './context/AuthContext'
 import ProtectedRoute from './components/ProtectedRoute'
 import { CartProvider } from './cart/CartContext'
 import { SiteLayout } from '@/shell'
-import siteConfig from '@/config/siteConfig'
+import { siteConfig } from '@/config/siteConfig'
 
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';

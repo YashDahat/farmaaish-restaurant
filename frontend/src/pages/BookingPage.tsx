@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import React from 'react';
 import ReservationForm from '@/components/reservation/ReservationForm';
 import { useCreateReservation } from '@/hooks/useReservations';

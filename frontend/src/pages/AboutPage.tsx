@@ -1,6 +1,6 @@
 import { SiteConfig } from '@/shell/types';
 import Layout from '@/components/Layout';
-import siteConfig from '@/config/siteConfig';
+import { siteConfig } from '@/config/siteConfig';
 
 export default function AboutPage(): React.ReactElement {
   const config: SiteConfig = siteConfig;

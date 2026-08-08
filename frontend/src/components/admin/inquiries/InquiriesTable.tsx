@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import { EventInquiryResponse } from '@/types/inquiry';
 import {
   Table,

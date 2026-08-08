@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -31,7 +32,7 @@ const formSchema = z.object({
   description: z.string().optional(),
   price: z.coerce.number().min(0.01, 'Price must be greater than 0'),
   imageUrl: z.string().url('Must be a valid URL').optional().or(z.literal('')),
-  vegetarian: z.boolean().default(false),
+  vegetarian: z.boolean(),
   categoryId: z.string().min(1, 'Category is required'),
 });
 

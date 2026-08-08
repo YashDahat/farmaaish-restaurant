@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import { SiteConfig } from '@/shell/types';
 
 interface ContactDetailsProps {

@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import * as React from 'react';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { MenuItemCategoryDto } from '@/types/menu';
