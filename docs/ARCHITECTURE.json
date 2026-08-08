@@ -1956,14 +1956,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "The root component of the React application that sets up the router.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "App",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the main application with routing configured."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Root component that sets up the React Router and defines the main application routes, wrapping public pages with the `Layout` component.",
     "change_required" : null
   }, {
     "file_name" : "client.ts",
@@ -1974,14 +1979,14 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Configures and exports the shared Axios instance for all API calls.",
-    "public_functions" : null,
+    "public_functions" : [ ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Configures and exports a shared Axios instance for all API calls, including an interceptor for JWT token attachment from localStorage.",
     "change_required" : null
   }, {
     "file_name" : "siteConfig.ts",
@@ -1993,13 +1998,25 @@
     "status" : "PLANNED",
     "description" : "Central configuration for site-wide content like brand name, navigation links, and contact info.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "BRAND_NAME",
+      "type" : "string",
+      "description" : "The brand name of the restaurant: 'Farmaaish'."
+    }, {
+      "name" : "NAV_LINKS",
+      "type" : "Array<{ name: string; href: string }>",
+      "description" : "Array of navigation links for the main menu."
+    }, {
+      "name" : "CONTACT_INFO",
+      "type" : "{ address: string; phone: string; email: string; hours: string; coordinates: { lat: number; lng: number } }",
+      "description" : "Object containing the restaurant's address, phone, email, opening hours, and map coordinates."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Central configuration for site-wide content, including brand name, navigation links, and contact information, to be imported by other components.",
     "change_required" : null
   }, {
     "file_name" : "HomePage.tsx",
@@ -2010,14 +2027,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Landing page featuring a regal hero section, featured dishes, customer testimonials, and a reservation CTA.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "HomePage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the main home page with various sections."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/home/HeroSection.tsx", "frontend/src/components/home/FeaturedDishes.tsx", "frontend/src/components/home/Testimonials.tsx", "frontend/src/components/home/BookingCallToAction.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Landing page that orchestrates `HeroSection`, `FeaturedDishes`, `Testimonials`, and `BookingCallToAction` components to introduce the restaurant.",
     "change_required" : null
   }, {
     "file_name" : "HeroSection.tsx",
@@ -2028,14 +2050,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Full-bleed hero component with a high-quality background image and compelling headline.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "HeroSection",
+      "parameters" : [ "HeroSectionProps props" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a hero section with a background image, title, and subtitle."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Full-bleed hero component displaying a background image, title, and subtitle, designed to evoke the regality of Mughlai heritage.",
     "change_required" : null
   }, {
     "file_name" : "FeaturedDishes.tsx",
@@ -2046,14 +2073,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A curated grid of signature dishes to entice visitors.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "FeaturedDishes",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a section showcasing featured menu items."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useMenu.ts" ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Displays a curated grid of signature dishes by fetching data using the `useMenu` hook and formatting prices in INR.",
     "change_required" : null
   }, {
     "file_name" : "Testimonials.tsx",
@@ -2064,14 +2096,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Displays a rotating selection of positive customer reviews.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "Testimonials",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a section with customer testimonials."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Displays a rotating selection of positive customer reviews, reflecting the restaurant's warm and sophisticated tone.",
     "change_required" : null
   }, {
     "file_name" : "BookingCallToAction.tsx",
@@ -2082,14 +2119,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A prominent section encouraging users to book a table.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "BookingCallToAction",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a call-to-action section for booking reservations."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "A prominent call-to-action component encouraging users to book a table, with a button navigating to the reservations page.",
     "change_required" : null
   }, {
     "file_name" : "AboutPage.tsx",
@@ -2100,14 +2142,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Static page telling the story of Farmaaish, its heritage, and culinary philosophy.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AboutPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the About Us page content."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Static page detailing the restaurant's heritage and culinary philosophy, wrapped in the `Layout` component.",
     "change_required" : null
   }, {
     "file_name" : "ContactPage.tsx",
@@ -2118,14 +2165,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Contact page with address, phone, hours, and an interactive map.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ContactPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the Contact Us page with details and a map."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/contact/ContactDetails.tsx", "frontend/src/components/contact/InteractiveMap.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Page displaying contact information and an interactive map, integrating `ContactDetails` and `InteractiveMap` components.",
     "change_required" : null
   }, {
     "file_name" : "ContactDetails.tsx",
@@ -2136,14 +2188,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Displays address, click-to-call phone number, and opening hours.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ContactDetails",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the restaurant's contact information."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Displays the restaurant's address, clickable phone number, and opening hours, sourced from `siteConfig.ts`.",
     "change_required" : null
   }, {
     "file_name" : "InteractiveMap.tsx",
@@ -2154,14 +2211,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Embeds a Google Map showing the restaurant's location.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "InteractiveMap",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders an embedded Google Map of the restaurant's location."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Embeds a Google Map showing the restaurant's location, using coordinates from `siteConfig.ts`.",
     "change_required" : null
   }, {
     "file_name" : "NotFoundPage.tsx",
@@ -2172,14 +2234,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A user-friendly 404 page that guides users back to the main site.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "NotFoundPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the 404 Not Found page."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "User-friendly 404 page that guides users back to the main site with a clear message and a navigation button.",
     "change_required" : null
   }, {
     "file_name" : "auth.ts",
@@ -3231,8 +3298,8 @@
     "feature_display_name" : "Core UI & Pages",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/App.tsx", "frontend/src/api/client.ts", "frontend/src/config/siteConfig.ts", "frontend/src/pages/HomePage.tsx", "frontend/src/components/home/HeroSection.tsx", "frontend/src/components/home/FeaturedDishes.tsx", "frontend/src/components/home/Testimonials.tsx", "frontend/src/components/home/BookingCallToAction.tsx", "frontend/src/pages/AboutPage.tsx", "frontend/src/pages/ContactPage.tsx", "frontend/src/components/contact/ContactDetails.tsx", "frontend/src/components/contact/InteractiveMap.tsx", "frontend/src/pages/NotFoundPage.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#800020] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b89a2e] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-[#F5F5DC] (odd sections) / bg-white (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-[#36454F] leading-relaxed\n\nThis `core-ui` feature establishes the foundational structure and common pages for the Farmaaish Restaurant frontend application. It includes the main `App.tsx` router setup, a configured Axios instance for API calls (`client.ts`), and site-wide configuration (`siteConfig.ts`). It also provides the core static pages: `HomePage.tsx`, `AboutPage.tsx`, `ContactPage.tsx`, and `NotFoundPage.tsx`, along with their respective components.\n\n### `App.tsx`\nThis file is the root component, responsible for setting up the `react-router-dom` router. It defines the main routes for the application, including the home page, about page, contact page, and a 404 not found page. It uses the `Layout` component from `@/components/Layout` to provide a consistent header and footer across public pages.\n\n### `client.ts`\nThis file configures and exports a shared Axios instance. This instance is pre-configured with the base URL for the backend API (`/api/v1`) and includes an interceptor to attach the JWT token from `localStorage` (using the key 'token') to every outgoing request. This ensures that all authenticated API calls automatically include the necessary authorization header. It also handles basic error logging.\n\n### `siteConfig.ts`\nThis file centralizes all site-wide configuration. It exports constants for the brand name (\"Farmaaish\"), navigation links (Home, Menu, Reservations, About, Contact, Gallery, Catering), and contact information (address, phone, email, opening hours, map coordinates). All components and pages requiring this information should import it from `siteConfig.ts` to maintain consistency and ease of updates.\n\n### `HomePage.tsx`\nThis page serves as the landing page for the restaurant. It orchestrates several child components to present a compelling introduction to Farmaaish. It uses the `Layout` component. The page structure is as follows:\n1.  **Hero Section**: Renders `HeroSection.tsx` at the top, featuring a full-bleed background image, the restaurant name, and a captivating tagline.\n2.  **Featured Dishes**: Renders `FeaturedDishes.tsx`, showcasing a curated selection of signature dishes. This component will fetch menu items using the `useMenu` hook from the `menu-display` feature.\n3.  **Testimonials**: Renders `Testimonials.tsx`, displaying customer reviews to build trust and appeal.\n4.  **Booking Call to Action**: Renders `BookingCallToAction.tsx`, a prominent section encouraging users to make a reservation.\n\n### `HeroSection.tsx`\nThis component displays a full-bleed hero section. It receives `title` and `subtitle` as props. It uses a high-quality background image relevant to a Mughlai restaurant (e.g., https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1920&q=80) with a dark overlay. The title will be \"Farmaaish Restaurant\" and the subtitle will be \"Experience the Grandeur of Mughlai Cuisine.\"\n\n### `FeaturedDishes.tsx`\nThis component displays a grid of featured dishes. It uses the `useMenu` hook from the `menu-display` feature to fetch a list of `MenuItemDto` objects. It should display a maximum of 6 dishes. Each dish will be rendered using a card-like structure, showing its `name`, `description`, `price` (formatted in INR), and `imageUrl`. It should include a button to \"View Menu\" that navigates to the `/menu` route.\n\n### `Testimonials.tsx`\nThis component displays a rotating selection of customer testimonials. It should include at least three placeholder testimonials with customer names and ratings, reflecting the warm and sophisticated tone of the restaurant. Example testimonial: \"An unforgettable culinary journey! Farmaaish truly captures the essence of Mughlai dining. The biryani was divine!\" - Priya S.\n\n### `BookingCallToAction.tsx`\nThis component presents a prominent call to action for booking a table. It includes a compelling headline like \"Reserve Your Table for an Exquisite Dining Experience\" and a button labeled \"Book Now\" that navigates to the `/reservations` route.\n\n### `AboutPage.tsx`\nThis static page tells the story of Farmaaish. It uses the `Layout` component. It should include sections detailing the restaurant's heritage, culinary philosophy, and commitment to quality. The content should be warm, sophisticated, and inviting, using the brand accent color for key headings or phrases.\n\n### `ContactPage.tsx`\nThis page provides all contact information for Farmaaish. It uses the `Layout` component. It integrates `ContactDetails.tsx` to display the address, phone, and opening hours, and `InteractiveMap.tsx` to show the restaurant's location on a map.\n\n### `ContactDetails.tsx`\nThis component displays the restaurant's contact information, including the address (Kundan Garden, Baner Rd, Near Veritas Software, Baner, Pune, Maharashtra 411069), phone number (020 2729 1111, made clickable), and opening hours (e.g., \"Open Daily: 12:00 PM - 3:00 PM & 7:00 PM - 11:00 PM\").\n\n### `InteractiveMap.tsx`\nThis component embeds a Google Map showing the restaurant's location. It uses the coordinates (18.55557, 73.7749) from `siteConfig.ts` to center the map and place a marker. It should be a static map display, not requiring complex user interaction beyond basic pan and zoom.\n\n### `NotFoundPage.tsx`\nThis page is displayed for any unhandled routes (404 errors). It uses the `Layout` component. It provides a user-friendly message like \"Oops! The page you're looking for doesn't exist.\" and a prominent button to \"Go to Homepage\" that navigates to the `/` route.\n\nAll monetary values displayed (e.g., in `FeaturedDishes.tsx`) must be formatted using `toLocaleString('en-IN', { style: 'currency', currency: 'INR' })`.\n",
+    "depends_on_features" : [ "menu-display" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
