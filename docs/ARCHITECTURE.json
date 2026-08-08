@@ -3091,13 +3091,21 @@
     "status" : "PLANNED",
     "description" : "TypeScript types for catering and event inquiries.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "CreateEventInquiryRequest",
+      "type" : "{ customerName: string; customerEmail: string; customerPhone: string; eventType: string; eventDate: string; numberOfGuests: number; specialRequests?: string; }",
+      "description" : "Request body for creating a new event inquiry."
+    }, {
+      "name" : "EventInquiryResponse",
+      "type" : "{ id: string; customerName: string; customerEmail: string; customerPhone: string; eventType: string; eventDate: string; numberOfGuests: number; specialRequests?: string; inquiryDate: string; status: 'NEW' | 'CONTACTED' | 'CLOSED'; }",
+      "description" : "Response body for an event inquiry."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-form",
-    "file_role" : null,
+    "file_role" : "Generated from the backend API contract — defines TypeScript types for event inquiry requests and responses.",
     "change_required" : null
   }, {
     "file_name" : "inquiryService.ts",
@@ -3108,14 +3116,26 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Provides functions for submitting and managing event inquiries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "submitInquiry",
+      "parameters" : [ "CreateEventInquiryRequest request" ],
+      "return_type" : "Promise<EventInquiryResponse>",
+      "description" : "Submits a new event inquiry to the backend."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/inquiries",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Submits a new event inquiry.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/api/client.ts", "frontend/src/types/inquiry.ts" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-form",
-    "file_role" : null,
+    "file_role" : "Frontend service layer — provides `submitInquiry(request: CreateEventInquiryRequest): Promise<EventInquiryResponse>` for interacting with the backend inquiry API.",
     "change_required" : null
   }, {
     "file_name" : "useInquiries.ts",
@@ -3126,14 +3146,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "React Query hook for submitting and managing event inquiries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "useSubmitInquiry",
+      "parameters" : [ ],
+      "return_type" : "UseMutationResult<EventInquiryResponse, Error, CreateEventInquiryRequest>",
+      "description" : "A React Query mutation hook for submitting event inquiries."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/services/inquiryService.ts" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-form",
-    "file_role" : null,
+    "file_role" : "React Query hook — provides `useSubmitInquiry()` for components to submit event inquiries and manage their state.",
     "change_required" : null
   }, {
     "file_name" : "CateringPage.tsx",
@@ -3144,14 +3169,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Page detailing catering services and providing a form for private event inquiries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "CateringPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the catering services page with an inquiry form."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/inquiry/InquiryForm.tsx", "frontend/src/components/inquiry/CateringInfo.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-form",
-    "file_role" : null,
+    "file_role" : "Page component — displays catering information and hosts the `InquiryForm` for private event inquiries.",
     "change_required" : null
   }, {
     "file_name" : "InquiryForm.tsx",
@@ -3162,14 +3192,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A form for customers to submit inquiries about catering or private events.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "InquiryForm",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the inquiry submission form."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useInquiries.ts" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-form",
-    "file_role" : null,
+    "file_role" : "Component — provides a form for customers to submit inquiries about catering or private events, using `useSubmitInquiry` hook.",
     "change_required" : null
   }, {
     "file_name" : "CateringInfo.tsx",
@@ -3180,14 +3215,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A static component providing information about catering packages and options.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "CateringInfo",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders static information about catering services."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-form",
-    "file_role" : null,
+    "file_role" : "Component — displays static information about Farmaaish Restaurant's catering packages and options.",
     "change_required" : null
   }, {
     "file_name" : "AdminDashboardPage.tsx",
@@ -3627,8 +3667,8 @@
     "feature_display_name" : "Inquiry Form",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/types/inquiry.ts", "frontend/src/services/inquiryService.ts", "frontend/src/hooks/useInquiries.ts", "frontend/src/pages/CateringPage.tsx", "frontend/src/components/inquiry/InquiryForm.tsx", "frontend/src/components/inquiry/CateringInfo.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#800020] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b89a2f] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-gray-50 (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-gray-700 leading-relaxed\n\nThis feature provides a complete flow for customers to submit catering and private event inquiries to Farmaaish Restaurant. It includes TypeScript types for inquiry data, a service for interacting with the backend API, a React Query hook for managing inquiry state, and UI components for displaying catering information and collecting inquiry details.\n\n### `inquiry.ts`\nThis file defines the TypeScript interfaces for `CreateEventInquiryRequest` and `EventInquiryResponse`, mirroring the backend `inquiry-management` feature's DTOs. These types ensure strong typing throughout the frontend application when handling inquiry data.\n\n### `inquiryService.ts`\nThis service acts as an intermediary between the React application and the backend `inquiry-management` API. It exports an asynchronous function `submitInquiry` which takes a `CreateEventInquiryRequest` object and sends it to the `/api/v1/inquiries` endpoint using the `apiClient` from `@/api/client.ts`. It returns a `Promise<EventInquiryResponse>` upon successful submission.\n\n### `useInquiries.ts`\nThis React Query hook, `useSubmitInquiry`, provides a convenient way for components to interact with the `inquiryService.ts`. It uses `react-query`'s `useMutation` to handle the asynchronous submission of inquiry data, providing loading, error, and success states. Upon successful submission, it will display a success toast notification using `sonner` and navigate the user to the home page.\n\n### `CateringPage.tsx`\nThis page serves as the entry point for catering and private event inquiries. It uses the `Layout` component from `@/components/Layout` to maintain consistent navigation and branding. The page is structured into a hero section, a section for catering information (`CateringInfo` component), and a section containing the inquiry form (`InquiryForm` component). The hero section will feature a large, high-fidelity image relevant to catering, with a headline \"Experience the Grandeur of Farmaaish Catering\" and a subheadline \"Crafting Unforgettable Events with Authentic Mughlai Flavors.\"\n\n### `CateringInfo.tsx`\nThis static component displays detailed information about Farmaaish Restaurant's catering packages and options. It should present the information in an elegant, readable format, using the defined design tokens for typography and spacing. This component does not interact with any backend APIs.\n\n### `InquiryForm.tsx`\nThis component renders the form for customers to submit their inquiries. It utilizes `react-hook-form` for form management and validation. The form collects the following information:\n- `customerName`: String, required.\n- `customerEmail`: String, required, valid email format.\n- `customerPhone`: String, required, valid Indian phone number format.\n- `eventType`: String, required (e.g., \"Wedding\", \"Corporate Event\", \"Birthday\").\n- `eventDate`: Date, required, future date.\n- `numberOfGuests`: Integer, required, minimum 1.\n- `specialRequests`: String, optional.\n\nThe form will use the `useSubmitInquiry` hook from `useInquiries.ts` to handle form submission. Upon successful submission, it should clear the form and display a success message to the user. Error messages from validation or API calls should be displayed appropriately. All monetary values (if any were to be displayed here, though none are in this feature) would be formatted using `toLocaleString('en-IN', { style: 'currency', currency: 'INR' })`.\n",
+    "depends_on_features" : [ "inquiry-management" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
