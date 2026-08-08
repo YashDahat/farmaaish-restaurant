@@ -2461,13 +2461,21 @@
     "status" : "PLANNED",
     "description" : "TypeScript types for menu items and categories.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "MenuItem",
+      "type" : "{ id: string; name: string; description: string; price: number; imageUrl: string; vegetarian: boolean; categoryId: string; categoryName: string; }",
+      "description" : "Interface for a single menu item, mirroring MenuItemDto from the backend."
+    }, {
+      "name" : "MenuItemCategory",
+      "type" : "{ id: string; name: string; description: string; }",
+      "description" : "Interface for a menu item category, mirroring MenuItemCategoryDto from the backend."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "menu-display",
-    "file_role" : null,
+    "file_role" : "Generated from the backend API contract — defines TypeScript interfaces for menu items and categories.",
     "change_required" : null
   }, {
     "file_name" : "menuService.ts",
@@ -2478,14 +2486,50 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Provides functions for fetching menu data and for admin CRUD operations.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getMenuItems",
+      "parameters" : [ ],
+      "return_type" : "Promise<MenuItem[]>",
+      "description" : "Fetches all menu items from the backend."
+    }, {
+      "name" : "getMenuCategories",
+      "parameters" : [ ],
+      "return_type" : "Promise<MenuItemCategory[]>",
+      "description" : "Fetches all menu item categories from the backend."
+    }, {
+      "name" : "getMenuItemsByCategoryId",
+      "parameters" : [ "string categoryId" ],
+      "return_type" : "Promise<MenuItem[]>",
+      "description" : "Fetches menu items filtered by category ID from the backend."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/menu/items",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Fetches all menu items.",
+      "access" : null
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/menu/categories",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Fetches all menu item categories.",
+      "access" : null
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/menu/categories/{categoryId}/items",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Fetches menu items by category ID.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/api/client.ts", "frontend/src/types/menu.ts" ],
     "depends_on" : [ ],
     "feature_name" : "menu-display",
-    "file_role" : null,
+    "file_role" : "Provides functions for fetching menu data from the backend API. Exports `getMenuItems(): Promise<MenuItem[]>` and `getMenuCategories(): Promise<MenuItemCategory[]>` and `getMenuItemsByCategoryId(categoryId: string): Promise<MenuItem[]>`.",
     "change_required" : null
   }, {
     "file_name" : "useMenu.ts",
@@ -2496,14 +2540,29 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "React Query hook for fetching and managing menu data.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "useMenuItems",
+      "parameters" : [ ],
+      "return_type" : "UseQueryResult<MenuItem[], Error>",
+      "description" : "React Query hook to fetch and cache all menu items."
+    }, {
+      "name" : "useMenuCategories",
+      "parameters" : [ ],
+      "return_type" : "UseQueryResult<MenuItemCategory[], Error>",
+      "description" : "React Query hook to fetch and cache all menu categories."
+    }, {
+      "name" : "useMenuItemsByCategory",
+      "parameters" : [ "string categoryId" ],
+      "return_type" : "UseQueryResult<MenuItem[], Error>",
+      "description" : "React Query hook to fetch and cache menu items by category ID."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/services/menuService.ts", "frontend/src/types/menu.ts" ],
     "depends_on" : [ ],
     "feature_name" : "menu-display",
-    "file_role" : null,
+    "file_role" : "React Query hook for fetching and managing menu data. Exports `useMenuItems(): UseQueryResult<MenuItem[], Error>`, `useMenuCategories(): UseQueryResult<MenuItemCategory[], Error>`, and `useMenuItemsByCategory(categoryId: string): UseQueryResult<MenuItem[], Error>`.",
     "change_required" : null
   }, {
     "file_name" : "MenuPage.tsx",
@@ -2514,14 +2573,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Displays the full restaurant menu with category filters and add-to-cart functionality.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "MenuPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the main menu page with categories and items."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useMenu.ts", "frontend/src/components/menu/MenuCategoryTabs.tsx", "frontend/src/components/menu/MenuItemsGrid.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "menu-display",
-    "file_role" : null,
+    "file_role" : "Page component that displays the full restaurant menu, including category filters and integration with the cart system. It uses `useMenu` to fetch data and `MenuCategoryTabs` and `MenuItemsGrid` to render the UI.",
     "change_required" : null
   }, {
     "file_name" : "MenuCategoryTabs.tsx",
@@ -2532,14 +2596,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Renders interactive tabs for filtering the menu by category.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "MenuCategoryTabs",
+      "parameters" : [ "{ categories: MenuItemCategory[]; onSelectCategory: (categoryId: string | null) => void; selectedCategoryId: string | null; }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a list of clickable tabs for menu categories."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/types/menu.ts" ],
     "depends_on" : [ ],
     "feature_name" : "menu-display",
-    "file_role" : null,
+    "file_role" : "Component that renders interactive tabs for filtering menu items by category. It accepts `categories`, `onSelectCategory`, and `selectedCategoryId` as props.",
     "change_required" : null
   }, {
     "file_name" : "MenuItemsGrid.tsx",
@@ -2550,14 +2619,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Displays a grid of menu items for the selected category.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "MenuItemsGrid",
+      "parameters" : [ "{ items: MenuItem[]; }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a grid of menu item cards."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/menu/MenuItemCard.tsx", "frontend/src/types/menu.ts" ],
     "depends_on" : [ ],
     "feature_name" : "menu-display",
-    "file_role" : null,
+    "file_role" : "Component that displays a grid of `MenuItemCard` components. It accepts an array of `MenuItem` objects as props.",
     "change_required" : null
   }, {
     "file_name" : "MenuItemCard.tsx",
@@ -2568,14 +2642,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Card component for a single menu item, showing image, name, price, and an 'Add to Cart' button.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "MenuItemCard",
+      "parameters" : [ "{ item: MenuItem; }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a card for a single menu item with an add to cart button."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/types/menu.ts" ],
     "depends_on" : [ ],
     "feature_name" : "menu-display",
-    "file_role" : null,
+    "file_role" : "Component that displays a single menu item with its details and an 'Add to Cart' button. It accepts a `MenuItem` object as props and interacts with the `useCart` hook.",
     "change_required" : null
   }, {
     "file_name" : "reservation.ts",
@@ -3375,8 +3454,8 @@
     "feature_display_name" : "Menu Display",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/types/menu.ts", "frontend/src/services/menuService.ts", "frontend/src/hooks/useMenu.ts", "frontend/src/pages/MenuPage.tsx", "frontend/src/components/menu/MenuCategoryTabs.tsx", "frontend/src/components/menu/MenuItemsGrid.tsx", "frontend/src/components/menu/MenuItemCard.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#800020] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b8942e] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-gray-50 (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-[#36454F] leading-relaxed\n\nThis feature provides the frontend components and logic for displaying Farmaaish Restaurant's menu to customers, allowing them to browse dishes by category and add items to their cart. It interacts with the `menu-management` backend feature to fetch menu data and with the pre-scaffolded `src/cart` framework for cart operations. The `MenuPage.tsx` serves as the main entry point, orchestrating the display of menu categories and items. `MenuCategoryTabs.tsx` renders filterable tabs for menu categories, while `MenuItemsGrid.tsx` displays the actual dishes. Each dish is represented by a `MenuItemCard.tsx`, which includes an 'Add to Cart' button that utilizes the `useCart` hook from the `src/cart` framework.\n\n### `frontend/src/types/menu.ts`\nThis file defines the TypeScript interfaces for `MenuItem` and `MenuItemCategory`, mirroring the `MenuItemDto` and `MenuItemCategoryDto` data shapes from the `menu-management` backend feature. These types are used throughout the frontend for consistent data handling.\n\n### `frontend/src/services/menuService.ts`\nThis service provides asynchronous functions to interact with the `menu-management` backend API. It uses `apiClient` from `@/api/client` to make HTTP requests. It exposes `getMenuItems()` to fetch all menu items and `getMenuCategories()` to fetch all menu categories. It also includes `getMenuItemsByCategoryId(categoryId: string)` for filtering.\n\n### `frontend/src/hooks/useMenu.ts`\nThis React Query hook encapsulates the logic for fetching and caching menu data. It provides `useQuery` hooks for `useMenuItems()` and `useMenuCategories()`, which call the corresponding functions in `menuService.ts`. It also provides `useMenuItemsByCategory(categoryId: string)` to fetch items for a specific category. The hook manages loading states, errors, and data caching, making it easy for components to consume menu data.\n\n### `frontend/src/pages/MenuPage.tsx`\nThis page renders the complete menu for Farmaaish Restaurant. It uses the `Layout` component from `@/components/Layout` for consistent navigation and footer. The page displays a prominent hero section with a background image, the restaurant's name, and a welcoming message. Below the hero, it fetches and displays menu categories using `MenuCategoryTabs` and then renders the menu items for the selected category using `MenuItemsGrid`. The page manages the currently selected category state. All monetary values (prices) are displayed in Indian Rupees (₹) using `toLocaleString('en-IN', { style: 'currency', currency: 'INR' })`.\n\n**Page Sections:**\n1.  **Hero Section:** Full-width hero image (`https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1920&q=80`) with a dark overlay (`absolute inset-0 bg-black bg-opacity-50`). Contains a large, bold `h1` with the text \"Farmaaish Restaurant\" and a sub-headline \"Experience the Royal Flavors of Mughlai Cuisine.\" Both use `text-white`.\n2.  **Menu Categories Section:** A `Section container` (`py-16 px-4 max-w-7xl mx-auto`) with a `h2` \"Our Exquisite Menu\" (`text-3xl md:text-4xl font-bold text-[#36454F] mb-8 text-center`). This section contains the `MenuCategoryTabs` component.\n3.  **Menu Items Section:** A `Section container` (`py-16 px-4 max-w-7xl mx-auto`) that dynamically displays `MenuItemsGrid` based on the selected category. If no category is selected, it should display all items.\n\n### `frontend/src/components/menu/MenuCategoryTabs.tsx`\nThis component renders a set of clickable tabs, each representing a menu category. It receives `categories` (an array of `MenuItemCategory`) and `onSelectCategory` (a callback function) as props. When a tab is clicked, it calls `onSelectCategory` with the `id` of the selected category. The active tab should be visually distinct. The component uses `useMenu.useMenuCategories()` to fetch categories.\n\n**Props:**\n- `categories: MenuItemCategory[]`\n- `onSelectCategory: (categoryId: string | null) => void`\n- `selectedCategoryId: string | null`\n\n### `frontend/src/components/menu/MenuItemsGrid.tsx`\nThis component displays a responsive grid of `MenuItemCard` components. It receives an array of `MenuItem` objects as a prop. It iterates over the `items` array and renders a `MenuItemCard` for each item. If the `items` array is empty, it displays a message like \"No items found in this category.\" All monetary values (prices) are displayed in Indian Rupees (₹) using `toLocaleString('en-IN', { style: 'currency', currency: 'INR' })`.\n\n**Props:**\n- `items: MenuItem[]`\n\n### `frontend/src/components/menu/MenuItemCard.tsx`\nThis component renders a single menu item as a card. It receives a `MenuItem` object as a prop. The card displays the item's `imageUrl`, `name`, `description`, and `price`. It includes an 'Add to Cart' button that, when clicked, calls `useCart().addItem()` with the item's details (`id`, `name`, `unitPrice`, `imageUrl`). The price is displayed in Indian Rupees (₹) using `toLocaleString('en-IN', { style: 'currency', currency: 'INR' })`.\n\n**Props:**\n- `item: MenuItem`\n",
+    "depends_on_features" : [ "menu-management" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
