@@ -1310,8 +1310,8 @@
     "file_type" : "BACKEND",
     "layer" : "DTO",
     "created_date" : "2024-07-31",
-    "updated_date" : "2024-07-31",
-    "status" : "PLANNED",
+    "updated_date" : "2026-08-09",
+    "status" : "GENERATED",
     "description" : "DTO representing a single item within a CreateOrderRequest.",
     "public_functions" : null,
     "public_variables" : [ {
