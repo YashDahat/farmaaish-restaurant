@@ -3715,14 +3715,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A dedicated page for booking a table, featuring an interactive reservation form.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "BookingPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the reservation booking page, including the ReservationForm component."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/reservation/ReservationForm.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "reservation-flow",
-    "file_role" : null,
+    "file_role" : "PAGE layer — renders the main reservation form for customers to book a table.",
     "change_required" : null
   }, {
     "file_name" : "useReservations.ts",
@@ -3733,14 +3738,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "React Query hook for creating and managing reservation data.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "useCreateReservation",
+      "parameters" : [ ],
+      "return_type" : "{ mutate: (data: CreateReservationRequest) => void; isLoading: boolean; isError: boolean; isSuccess: boolean; error: Error | null; data: ReservationDto | undefined }",
+      "description" : "Provides a mutation function to create a new reservation, along with loading, error, and success states."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/services/reservationService.ts", "frontend/src/types/reservation.ts" ],
     "depends_on" : [ ],
     "feature_name" : "reservation-flow",
-    "file_role" : null,
+    "file_role" : "HOOK layer — provides a React Query mutation for creating new reservations, interacting with `reservationService.ts`.",
     "change_required" : null
   }, {
     "file_name" : "reservationService.ts",
@@ -3751,14 +3761,26 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Service for making API calls to reservation-related endpoints.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "createReservation",
+      "parameters" : [ "CreateReservationRequest request" ],
+      "return_type" : "Promise<ReservationDto>",
+      "description" : "Sends a POST request to create a new reservation."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/reservations",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Creates a new reservation in the backend system.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/api/client.ts", "frontend/src/types/reservation.ts" ],
     "depends_on" : [ ],
     "feature_name" : "reservation-flow",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — handles API calls related to reservations, specifically `createReservation(request: CreateReservationRequest): Promise<ReservationDto>`.",
     "change_required" : null
   }, {
     "file_name" : "reservation.ts",
@@ -3770,13 +3792,25 @@
     "status" : "PLANNED",
     "description" : "TypeScript types and interfaces for the Reservation domain.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "ReservationDto",
+      "type" : "{ id: string; customerName: string; customerEmail: string; customerPhone: string; numberOfGuests: number; reservationDate: string; reservationTime: string; specialRequests: string; status: ReservationStatus; createdAt: string; updatedAt: string; }",
+      "description" : "DTO for reservation details."
+    }, {
+      "name" : "CreateReservationRequest",
+      "type" : "{ customerName: string; customerEmail: string; customerPhone: string; numberOfGuests: number; reservationDate: string; reservationTime: string; specialRequests: string; }",
+      "description" : "Request body for creating a new reservation."
+    }, {
+      "name" : "ReservationStatus",
+      "type" : "enum",
+      "description" : "Enum for reservation statuses (e.g., PENDING, CONFIRMED, CANCELLED)."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "reservation-flow",
-    "file_role" : null,
+    "file_role" : "Generated from the backend API contract — defines TypeScript types for reservation-related data transfer objects and enums.",
     "change_required" : null
   }, {
     "file_name" : "ReservationForm.tsx",
@@ -3787,14 +3821,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A form for customers to select a date, time, and party size to book a table.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ReservationForm",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the reservation form with input fields for customer details, date, time, and number of guests."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useReservations.ts" ],
     "depends_on" : [ ],
     "feature_name" : "reservation-flow",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — provides an interactive form for users to input and submit reservation details, using `useCreateReservation`.",
     "change_required" : null
   }, {
     "file_name" : "OrderPage.tsx",
@@ -4810,8 +4849,8 @@
     "feature_display_name" : "Reservation Flow",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/pages/BookingPage.tsx", "frontend/src/hooks/useReservations.ts", "frontend/src/services/reservationService.ts", "frontend/src/types/reservation.ts", "frontend/src/components/reservation/ReservationForm.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#800020] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b89a2f] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-gray-50 (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-gray-700 leading-relaxed\n\n## Feature Instruction: Reservation Flow\n\nThis feature enables customers to book tables at Farmaaish Restaurant through a dedicated online reservation form. It consists of a `BookingPage.tsx` that hosts the `ReservationForm.tsx` component, which handles user input and submission. The `ReservationForm.tsx` interacts with the `useReservations.ts` React Query hook, which in turn uses `reservationService.ts` to communicate with the backend `reservation-system` API. All data structures are defined in `reservation.ts`.\n\n### `reservation.ts`\nThis file defines the TypeScript interfaces for `ReservationDto` and `CreateReservationRequest` based on the backend `reservation-system`'s `ReservationDto` and `CreateReservationRequest` data shapes. It also defines `ReservationStatus` enum.\n\n### `reservationService.ts`\nThis service provides an asynchronous function `createReservation` that makes a POST request to the backend `/api/v1/reservations` endpoint. It takes a `CreateReservationRequest` object as input and returns a `Promise<ReservationDto>`. It uses the shared `api/client.ts` for HTTP requests.\n\n### `useReservations.ts`\nThis React Query hook provides a `useCreateReservation` mutation. This mutation allows components to submit new reservation requests. It uses `reservationService.createReservation` to perform the API call. Upon successful creation, it should display a success toast notification (e.g., using `sonner`) and navigate the user to a confirmation page or the home page. In case of an error, it should display an error toast.\n\n### `ReservationForm.tsx`\nThis component renders an interactive form for customers to input their reservation details. It will include fields for `customerName`, `customerEmail`, `customerPhone`, `numberOfGuests`, `reservationDate`, `reservationTime`, and `specialRequests`. The form should use appropriate input types (e.g., date picker for `reservationDate`, time picker for `reservationTime`, number input for `numberOfGuests`).\n\n1.  **Form Structure**: The form should be visually appealing, aligning with the Mughlai heritage design. Use form elements that are easy to interact with.\n2.  **State Management**: Manage form input states using React's `useState` or a form library like React Hook Form.\n3.  **Validation**: Implement client-side validation for all fields. `customerName`, `customerEmail`, `customerPhone`, `numberOfGuests`, `reservationDate`, and `reservationTime` are mandatory. `customerEmail` and `customerPhone` should have format validation. `numberOfGuests` should be a positive integer.\n4.  **Submission**: On form submission, it calls the `mutate` function from `useCreateReservation` hook, passing the form data mapped to a `CreateReservationRequest` object.\n5.  **Loading and Error States**: Display a loading indicator when the form is submitting and show error messages for invalid inputs or failed submissions.\n6.  **Success Feedback**: Upon successful reservation, display a success message using a toast notification (e.g., from `sonner`) and clear the form or redirect the user.\n\n### `BookingPage.tsx`\nThis page serves as the entry point for table reservations. It wraps the `ReservationForm.tsx` component within the `Layout` component from `@/components/Layout`. The page should have a clear heading like \"Book Your Table at Farmaaish Restaurant\" and a brief, inviting description that aligns with the sophisticated tone, such as \"Experience the regal flavors of Mughlai cuisine. Reserve your table for an unforgettable dining experience.\"\n\n1.  **Layout**: Uses the `Layout` component for consistent navigation and footer.\n2.  **Content**: Contains a `div` with a `max-w-3xl mx-auto` for centering the form, a prominent `h1` heading (text-4xl md:text-5xl font-bold text-[#36454F] mb-6 text-center), and a `p` sub-heading (text-lg text-gray-600 mb-10 text-center).\n3.  **Component Inclusion**: Renders the `ReservationForm` component.\n\n## Inter-file Wiring\n- `BookingPage.tsx` imports and renders `ReservationForm.tsx`.\n- `ReservationForm.tsx` imports and uses the `useCreateReservation` mutation from `useReservations.ts`.\n- `useReservations.ts` imports and calls `reservationService.createReservation` from `reservationService.ts`.\n- `reservationService.ts` imports `CreateReservationRequest` and `ReservationDto` from `reservation.ts` and uses `api/client.ts` to make HTTP requests to the backend `reservation-system` feature.\n",
+    "depends_on_features" : [ "reservation-system" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
