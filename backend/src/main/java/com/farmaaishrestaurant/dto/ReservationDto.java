@@ -21,7 +21,7 @@ public class ReservationDto {
     private String customerPhone;
     private Integer numberOfGuests;
     private java.time.LocalDate reservationDate;
-    private LocalTime reservationTime;
+    private java.time.LocalTime reservationTime;
     private String specialRequests;
     private ReservationStatus status;
     private LocalDateTime createdAt;

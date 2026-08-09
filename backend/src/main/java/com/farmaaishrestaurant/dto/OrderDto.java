@@ -21,6 +21,6 @@ public class OrderDto {
     private java.math.BigDecimal totalAmount;
     private OrderStatus status;
     private String gatewayOrderId;
-    private Instant createdAt;
-    private Instant updatedAt;
+    private java.time.Instant createdAt;
+    private java.time.Instant updatedAt;
 }
