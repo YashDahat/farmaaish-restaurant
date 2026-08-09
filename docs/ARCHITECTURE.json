@@ -4522,14 +4522,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "The main landing page for the admin panel, showing key stats and navigation.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminDashboardPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the admin dashboard with an overview of the restaurant's operations."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Admin page — the main landing page for the admin panel, showing key stats and navigation.",
     "change_required" : null
   }, {
     "file_name" : "AdminMenuPage.tsx",
@@ -4540,14 +4545,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Admin page for managing the restaurant menu, composed of a data table and forms.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminMenuPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the menu management interface, including the menu item table and forms for creation/editing/deletion."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/components/admin/menu/MenuTable.tsx", "frontend/src/components/admin/menu/MenuItemForm.tsx", "frontend/src/components/admin/menu/DeleteMenuItemDialog.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Admin page — orchestrates the display and management of menu items using MenuTable, MenuItemForm, and DeleteMenuItemDialog.",
     "change_required" : null
   }, {
     "file_name" : "MenuTable.tsx",
@@ -4558,14 +4568,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A data table for displaying and managing all menu items.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "MenuTable",
+      "parameters" : [ "({ onEdit: (item: MenuItemDto) => void; onDelete: (itemId: UUID) => void }) props" ],
+      "return_type" : "JSX.Element",
+      "description" : "Displays a table of menu items, allowing administrators to view, edit, and delete them. Calls useMenu().getAllMenuItems()."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useMenu.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "React component — displays a data table for all menu items with actions for editing and deleting.",
     "change_required" : null
   }, {
     "file_name" : "MenuItemForm.tsx",
@@ -4576,14 +4591,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A form (used in a dialog) for creating or editing a menu item.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "MenuItemForm",
+      "parameters" : [ "({ initialData?: MenuItemDto; onSave: () => void; onCancel: () => void }) props" ],
+      "return_type" : "JSX.Element",
+      "description" : "Provides a form to create a new menu item or edit an existing one. Calls useMenu().createMenuItem() or useMenu().updateMenuItem()."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useMenu.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "React component — a form for creating or editing a menu item.",
     "change_required" : null
   }, {
     "file_name" : "DeleteMenuItemDialog.tsx",
@@ -4594,14 +4614,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A confirmation dialog for deleting a menu item.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "DeleteMenuItemDialog",
+      "parameters" : [ "({ itemId: UUID; itemName: string; onConfirm: () => void; onCancel: () => void }) props" ],
+      "return_type" : "JSX.Element",
+      "description" : "Displays a confirmation dialog before deleting a menu item. Calls useMenu().deleteMenuItem()."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useMenu.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "React component — a confirmation dialog for deleting a menu item.",
     "change_required" : null
   }, {
     "file_name" : "AdminReservationsPage.tsx",
@@ -4612,14 +4637,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Admin page for viewing and managing customer reservations.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminReservationsPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the reservation management interface, including the reservations table."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/components/admin/reservations/ReservationsTable.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Admin page — orchestrates the display and management of customer reservations using ReservationsTable.",
     "change_required" : null
   }, {
     "file_name" : "ReservationsTable.tsx",
@@ -4630,14 +4660,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A data table for displaying and managing all reservations.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ReservationsTable",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Displays a table of reservations, allowing administrators to view, update status, and delete them. Calls useReservations().getAllReservations() and useReservations().updateReservationStatus() and useReservations().deleteReservation()."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useReservations.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "React component — displays a data table for all reservations with actions for updating status and deleting.",
     "change_required" : null
   }, {
     "file_name" : "AdminOrdersPage.tsx",
@@ -4648,14 +4683,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Admin page for viewing and managing online orders.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminOrdersPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the online order management interface, including the orders table."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/components/admin/orders/OrdersTable.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Admin page — orchestrates the display and management of online orders using OrdersTable.",
     "change_required" : null
   }, {
     "file_name" : "OrdersTable.tsx",
@@ -4666,14 +4706,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A data table for displaying and managing all online orders.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "OrdersTable",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Displays a table of online orders, allowing administrators to view and update their status. Calls useOrders().getAllOrders() and useOrders().updateOrderStatus()."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useOrders.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "React component — displays a data table for all online orders with actions for updating status.",
     "change_required" : null
   }, {
     "file_name" : "AdminCateringInquiriesPage.tsx",
@@ -4684,14 +4729,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Admin page for viewing and managing catering inquiries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminCateringInquiriesPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the catering inquiry management interface, including the inquiries table."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/components/admin/inquiries/InquiriesTable.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Admin page — orchestrates the display and management of catering inquiries using InquiriesTable.",
     "change_required" : null
   }, {
     "file_name" : "InquiriesTable.tsx",
@@ -4702,14 +4752,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A data table for displaying and managing all catering inquiries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "InquiriesTable",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Displays a table of catering inquiries, allowing administrators to view and update their status. Calls useInquiries().getAllInquiries() and useInquiries().updateInquiryStatus()."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useInquiries.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "React component — displays a data table for all catering inquiries with actions for updating status.",
     "change_required" : null
   }, {
     "file_name" : "AdminBlogPage.tsx",
@@ -4720,14 +4775,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Admin page for creating, editing, and deleting blog posts.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminBlogPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the blog post management interface, including the posts table and forms for creation/editing."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/components/admin/blog/PostsTable.tsx", "frontend/src/components/admin/blog/PostForm.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Admin page — orchestrates the display and management of blog posts using PostsTable and PostForm.",
     "change_required" : null
   }, {
     "file_name" : "PostsTable.tsx",
@@ -4738,14 +4798,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A data table for displaying and managing all blog posts.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "PostsTable",
+      "parameters" : [ "({ onEdit: (post: PostDto) => void; onDelete: (postId: UUID) => void }) props" ],
+      "return_type" : "JSX.Element",
+      "description" : "Displays a table of blog posts, allowing administrators to view, edit, and delete them. Calls useBlog().getAllPosts()."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useBlog.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "React component — displays a data table for all blog posts with actions for editing and deleting.",
     "change_required" : null
   }, {
     "file_name" : "PostForm.tsx",
@@ -4756,14 +4821,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A form for creating or editing a blog post, with rich text editing capabilities.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "PostForm",
+      "parameters" : [ "({ initialData?: PostDto; onSave: () => void; onCancel: () => void }) props" ],
+      "return_type" : "JSX.Element",
+      "description" : "Provides a form to create a new blog post or edit an existing one. Calls useBlog().createPost() or useBlog().updatePost()."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useBlog.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "React component — a form for creating or editing a blog post.",
     "change_required" : null
   }, {
     "file_name" : "AdminGalleryPage.tsx",
@@ -4774,14 +4844,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Admin page for uploading and managing gallery images.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminGalleryPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the gallery image management interface, including the image grid and upload form."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/components/admin/gallery/GalleryGrid.tsx", "frontend/src/components/admin/gallery/ImageUploadForm.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Admin page — orchestrates the display and management of gallery images using GalleryGrid and ImageUploadForm.",
     "change_required" : null
   }, {
     "file_name" : "GalleryGrid.tsx",
@@ -4792,14 +4867,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A grid displaying all gallery images with options to delete.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "GalleryGrid",
+      "parameters" : [ "({ onDelete: (imageId: UUID) => void }) props" ],
+      "return_type" : "JSX.Element",
+      "description" : "Displays a grid of gallery images, allowing administrators to view and delete them. Calls useGallery().getAllGalleryImages() and useGallery().deleteGalleryImage()."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useGallery.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "React component — displays a grid of gallery images with options to delete.",
     "change_required" : null
   }, {
     "file_name" : "ImageUploadForm.tsx",
@@ -4810,14 +4890,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A form for uploading new images to the gallery.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ImageUploadForm",
+      "parameters" : [ "({ onUploadSuccess: () => void }) props" ],
+      "return_type" : "JSX.Element",
+      "description" : "Provides a form to upload new images to the gallery. Calls useGallery().uploadImage()."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useGallery.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "React component — a form for uploading new images to the gallery.",
     "change_required" : null
   }, {
     "file_name" : "AdminReviewsPage.tsx",
@@ -4828,14 +4913,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Admin page for managing customer reviews and syncing with Google.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminReviewsPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the customer review management interface, including the reviews table and sync button."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/components/admin/reviews/ReviewsTable.tsx", "frontend/src/components/admin/reviews/SyncReviewsButton.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Admin page — orchestrates the display and management of customer reviews using ReviewsTable and SyncReviewsButton.",
     "change_required" : null
   }, {
     "file_name" : "ReviewsTable.tsx",
@@ -4846,14 +4936,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A data table for displaying and managing customer reviews.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ReviewsTable",
+      "parameters" : [ "({ onToggleFeature: (reviewId: UUID, isFeatured: boolean) => void; onDelete: (reviewId: UUID) => void }) props" ],
+      "return_type" : "JSX.Element",
+      "description" : "Displays a table of customer reviews, allowing administrators to view, feature, and delete them. Calls useReviews().getAllReviews() and useReviews().updateReview() and useReviews().deleteReview()."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useReviews.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "React component — displays a data table for all customer reviews with actions for featuring and deleting.",
     "change_required" : null
   }, {
     "file_name" : "SyncReviewsButton.tsx",
@@ -4864,14 +4959,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A button to trigger the synchronization of reviews from Google Business Profile.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "SyncReviewsButton",
+      "parameters" : [ "({ onSyncSuccess: () => void }) props" ],
+      "return_type" : "JSX.Element",
+      "description" : "Provides a button to trigger the synchronization of reviews from Google Business Profile. Calls useReviews().syncReviewsFromGoogle()."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useReviews.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "React component — a button to trigger the synchronization of reviews from Google Business Profile.",
     "change_required" : null
   }, {
     "file_name" : "AdminOffersPage.tsx",
@@ -4882,14 +4982,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Admin page for creating and managing special offers and promotions.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminOffersPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the special offers management interface, including the offers table and forms for creation/editing."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/components/admin/offers/OffersTable.tsx", "frontend/src/components/admin/offers/OfferForm.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "Admin page — orchestrates the display and management of special offers using OffersTable and OfferForm.",
     "change_required" : null
   }, {
     "file_name" : "OffersTable.tsx",
@@ -4900,14 +5005,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A data table for displaying and managing all special offers.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "OffersTable",
+      "parameters" : [ "({ onEdit: (offer: SpecialOfferDto) => void; onDelete: (offerId: UUID) => void }) props" ],
+      "return_type" : "JSX.Element",
+      "description" : "Displays a table of special offers, allowing administrators to view, edit, and delete them. Calls useOffers().getAllSpecialOffers()."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useOffers.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "React component — displays a data table for all special offers with actions for editing and deleting.",
     "change_required" : null
   }, {
     "file_name" : "OfferForm.tsx",
@@ -4918,14 +5028,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A form for creating or editing a special offer.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "OfferForm",
+      "parameters" : [ "({ initialData?: SpecialOfferDto; onSave: () => void; onCancel: () => void }) props" ],
+      "return_type" : "JSX.Element",
+      "description" : "Provides a form to create a new special offer or edit an existing one. Calls useOffers().createSpecialOffer() or useOffers().updateSpecialOffer()."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useOffers.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : null,
+    "file_role" : "React component — a form for creating or editing a special offer.",
     "change_required" : null
   } ],
   "features" : [ {
@@ -5086,8 +5201,8 @@
     "feature_display_name" : "Admin Portal",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/pages/AdminDashboardPage.tsx", "frontend/src/pages/AdminMenuPage.tsx", "frontend/src/components/admin/menu/MenuTable.tsx", "frontend/src/components/admin/menu/MenuItemForm.tsx", "frontend/src/components/admin/menu/DeleteMenuItemDialog.tsx", "frontend/src/pages/AdminReservationsPage.tsx", "frontend/src/components/admin/reservations/ReservationsTable.tsx", "frontend/src/pages/AdminOrdersPage.tsx", "frontend/src/components/admin/orders/OrdersTable.tsx", "frontend/src/pages/AdminCateringInquiriesPage.tsx", "frontend/src/components/admin/inquiries/InquiriesTable.tsx", "frontend/src/pages/AdminBlogPage.tsx", "frontend/src/components/admin/blog/PostsTable.tsx", "frontend/src/components/admin/blog/PostForm.tsx", "frontend/src/pages/AdminGalleryPage.tsx", "frontend/src/components/admin/gallery/GalleryGrid.tsx", "frontend/src/components/admin/gallery/ImageUploadForm.tsx", "frontend/src/pages/AdminReviewsPage.tsx", "frontend/src/components/admin/reviews/ReviewsTable.tsx", "frontend/src/components/admin/reviews/SyncReviewsButton.tsx", "frontend/src/pages/AdminOffersPage.tsx", "frontend/src/components/admin/offers/OffersTable.tsx", "frontend/src/components/admin/offers/OfferForm.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#36454F] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b89a2f] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-gray-50 (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-gray-700 leading-relaxed\n\nThe Admin Portal feature provides a comprehensive web interface for Farmaaish Restaurant staff to manage various aspects of the business, including menu items, reservations, online orders, catering inquiries, blog posts, gallery images, customer reviews, and special offers. All pages within this feature are protected by authentication and require an 'admin' role, enforced by the `<AdminLayout>` component from `@/components/AdminLayout` which wraps all admin pages. This layout provides the necessary navigation and ensures only authorized users can access the administrative functions.\n\nEach administrative section (Menu, Reservations, Orders, Catering Inquiries, Blog, Gallery, Reviews, Offers) follows a consistent pattern: a main page (`AdminMenuPage.tsx`, `AdminReservationsPage.tsx`, etc.) that orchestrates the display of data in a table component (`MenuTable.tsx`, `ReservationsTable.tsx`, etc.) and provides functionality for creating, editing, and deleting entries through form and dialog components (`MenuItemForm.tsx`, `DeleteMenuItemDialog.tsx`, `PostForm.tsx`, `ImageUploadForm.tsx`, `OfferForm.tsx`, `SyncReviewsButton.tsx`).\n\nData fetching and manipulation for each section are handled by dedicated React Query hooks (e.g., `useMenu.ts`, `useReservations.ts`, `useOrders.ts`, `useInquiries.ts`, `useBlog.ts`, `useGallery.ts`, `useReviews.ts`, `useOffers.ts`). These hooks abstract away the direct API calls to the backend services (e.g., `menu-management`, `reservation-system`, `order-management`, `inquiry-management`, `blog-management`, `gallery-management`, `review-management`, `offer-management`) and provide a consistent interface for components to interact with data, including loading states, error handling, and data invalidation for UI updates. All monetary values displayed in the admin portal, such as `MenuItemDto.price`, `OrderDto.totalAmount`, `CateringInquiryDto.budget`, and `SpecialOfferDto.discountPercentage`, must be formatted in Indian Rupees (₹) using `toLocaleString('en-IN', { style: 'currency', currency: 'INR' })`.\n\n**AdminDashboardPage.tsx** serves as the entry point, displaying an overview of key metrics and quick navigation links to other admin sections. It should present a welcoming and informative dashboard for the restaurant's administrators.\n\n**AdminMenuPage.tsx** manages menu items. It renders `MenuTable.tsx` to list all menu items and provides buttons to trigger `MenuItemForm.tsx` for creating/editing and `DeleteMenuItemDialog.tsx` for deleting. `MenuTable.tsx` will display `MenuItemDto` objects, including `id`, `name`, `description`, `price` (formatted as ₹), `imageUrl`, `isVegetarian`, `isAvailable`, `categoryName`. `MenuItemForm.tsx` will allow creation and update of `MenuItemDto` objects, requiring fields like `name`, `description`, `price`, `imageUrl`, `isVegetarian`, `isAvailable`, and `categoryId`. The `categoryId` will be selected from a dropdown populated by `MenuCategoryDto` objects fetched via `useMenu().categories`. `DeleteMenuItemDialog.tsx` will confirm deletion of a `MenuItemDto` by its `id`.\n\n**AdminReservationsPage.tsx** manages customer reservations. It renders `ReservationsTable.tsx` to display `ReservationDto` objects, including `id`, `customerName`, `customerEmail`, `customerPhone`, `numberOfGuests`, `reservationDate`, `reservationTime`, `specialRequests`, `status`, `createdAt`, `updatedAt`. The table should allow updating the `status` of a reservation (e.g., to 'CONFIRMED', 'CANCELLED', 'COMPLETED') and deleting reservations. The `status` field will be an enum with values like 'PENDING', 'CONFIRMED', 'CANCELLED', 'COMPLETED', 'NO_SHOW'.\n\n**AdminOrdersPage.tsx** manages online orders. It renders `OrdersTable.tsx` to display `OrderDto` objects, including `id`, `userId`, `orderItems` (each with `menuItem.name`, `quantity`, `subTotal` formatted as ₹), `totalAmount` (formatted as ₹), `status`, `gatewayOrderId`, `createdAt`, `updatedAt`. The table should allow updating the `status` of an order (e.g., to 'PENDING', 'CONFIRMED', 'PREPARING', 'READY_FOR_DELIVERY', 'DELIVERED', 'CANCELLED').\n\n**AdminCateringInquiriesPage.tsx** manages catering inquiries. It renders `InquiriesTable.tsx` to display `CateringInquiryDto` objects, including `id`, `customerName`, `customerEmail`, `customerPhone`, `eventType`, `eventDate`, `numberOfGuests`, `budget` (formatted as ₹), `specialRequests`, `status`, `createdAt`, `updatedAt`. The table should allow updating the `status` of an inquiry (e.g., to 'NEW', 'CONTACTED', 'QUOTED', 'CLOSED').\n\n**AdminBlogPage.tsx** manages blog posts. It renders `PostsTable.tsx` to display `PostDto` objects, including `id`, `title`, `author`, `publishDate`, `imageUrl`. It provides buttons to trigger `PostForm.tsx` for creating/editing. `PostForm.tsx` will allow creation and update of `PostDto` objects, requiring `title`, `content`, `author`, `publishDate`, `imageUrl`. The `content` field should support rich text editing. Deletion of posts will also be handled.\n\n**AdminGalleryPage.tsx** manages gallery images. It renders `GalleryGrid.tsx` to display `GalleryImageDto` objects, including `id`, `imageUrl`, `caption`, `uploadDate`. It provides `ImageUploadForm.tsx` for uploading new images, requiring a `file` and `caption`. Deletion of images will also be handled.\n\n**AdminReviewsPage.tsx** manages customer reviews. It renders `ReviewsTable.tsx` to display `ReviewDto` objects, including `id`, `authorName`, `rating`, `comment`, `source`, `reviewDate`, `isFeatured`. It also includes `SyncReviewsButton.tsx` to trigger synchronization of reviews from Google Business Profile. The table should allow marking reviews as `isFeatured` and deleting reviews.\n\n**AdminOffersPage.tsx** manages special offers. It renders `OffersTable.tsx` to display `SpecialOfferDto` objects, including `id`, `title`, `description`, `discountPercentage`, `startDate`, `endDate`, `imageUrl`, `isActive`. It provides buttons to trigger `OfferForm.tsx` for creating/editing. `OfferForm.tsx` will allow creation and update of `SpecialOfferDto` objects, requiring `title`, `description`, `discountPercentage`, `startDate`, `endDate`, `imageUrl`, `isActive`. Deletion of offers will also be handled.\n\nAll data tables (`MenuTable`, `ReservationsTable`, `OrdersTable`, `InquiriesTable`, `PostsTable`, `ReviewsTable`, `OffersTable`) should implement basic pagination, sorting, and filtering capabilities where appropriate, using the data provided by their respective React Query hooks. Forms (`MenuItemForm`, `PostForm`, `ImageUploadForm`, `OfferForm`) should include client-side validation and provide user feedback using a toast notification system (e.g., `sonner`).\n\n**Authentication:** All API calls made by the hooks and services within this feature must include the JWT token retrieved from `localStorage.getItem('token')` in the `Authorization` header as a Bearer token. This ensures that only authenticated and authorized administrators can perform these operations.",
+    "depends_on_features" : [ "menu-management", "reservation-system", "order-management", "inquiry-management", "blog-management", "gallery-management", "review-management", "offer-management", "auth-ui" ],
     "change_required" : true,
     "change_instruction" : null
   } ]
