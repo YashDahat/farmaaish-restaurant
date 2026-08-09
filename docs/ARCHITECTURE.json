@@ -2166,14 +2166,54 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Represents a customer review, potentially synced from Google Business Profile.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the review, primary key."
+    }, {
+      "name" : "authorName",
+      "type" : "String",
+      "description" : "Name of the review author."
+    }, {
+      "name" : "rating",
+      "type" : "Integer",
+      "description" : "Rating given by the customer (1-5)."
+    }, {
+      "name" : "comment",
+      "type" : "String",
+      "description" : "Customer's review comment."
+    }, {
+      "name" : "source",
+      "type" : "String",
+      "description" : "Source of the review (e.g., 'Google', 'Website')."
+    }, {
+      "name" : "externalId",
+      "type" : "String",
+      "description" : "Unique identifier from an external review platform (e.g., Google Review ID)."
+    }, {
+      "name" : "reviewDate",
+      "type" : "LocalDate",
+      "description" : "Date when the review was made."
+    }, {
+      "name" : "isFeatured",
+      "type" : "boolean",
+      "description" : "Flag to indicate if the review should be featured on the public site."
+    }, {
+      "name" : "createdAt",
+      "type" : "LocalDateTime",
+      "description" : "Timestamp when the review record was created."
+    }, {
+      "name" : "updatedAt",
+      "type" : "LocalDateTime",
+      "description" : "Timestamp when the review record was last updated."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "review-management",
-    "file_role" : null,
+    "file_role" : "JPA Entity layer — defines the data structure for customer reviews in the database.",
     "change_required" : null
   }, {
     "file_name" : "ReviewRepository.java",
@@ -2184,14 +2224,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Spring Data JPA repository for CRUD operations on Review entities.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "findByIsFeatured",
+      "parameters" : [ "boolean isFeatured" ],
+      "return_type" : "List<Review>",
+      "description" : "Retrieves a list of reviews based on their featured status."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/model/Review.java" ],
     "depends_on" : [ ],
     "feature_name" : "review-management",
-    "file_role" : null,
+    "file_role" : "REPOSITORY layer — provides data access operations for Review entities, including a custom query for featured reviews.",
     "change_required" : null
   }, {
     "file_name" : "ReviewService.java",
@@ -2202,14 +2247,49 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Handles logic for fetching and syncing customer reviews from external sources like Google.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "getFeaturedReviews",
+      "parameters" : [ ],
+      "return_type" : "List<ReviewDto>",
+      "description" : "Retrieves all reviews marked as featured."
+    }, {
+      "name" : "getAllReviews",
+      "parameters" : [ ],
+      "return_type" : "List<ReviewDto>",
+      "description" : "Retrieves all customer reviews."
+    }, {
+      "name" : "getReviewById",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "ReviewDto",
+      "description" : "Retrieves a single review by its ID, throwing ResourceNotFoundException if not found."
+    }, {
+      "name" : "createReview",
+      "parameters" : [ "ReviewDto reviewDto" ],
+      "return_type" : "ReviewDto",
+      "description" : "Creates a new customer review."
+    }, {
+      "name" : "updateReview",
+      "parameters" : [ "UUID id", "ReviewDto reviewDto" ],
+      "return_type" : "ReviewDto",
+      "description" : "Updates an existing customer review by ID, throwing ResourceNotFoundException if not found."
+    }, {
+      "name" : "deleteReview",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "void",
+      "description" : "Deletes a customer review by ID, throwing ResourceNotFoundException if not found."
+    }, {
+      "name" : "syncReviewsFromGoogle",
+      "parameters" : [ ],
+      "return_type" : "void",
+      "description" : "Simulates syncing reviews from an external source like Google Business Profile."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/repository/ReviewRepository.java" ],
     "depends_on" : [ ],
     "feature_name" : "review-management",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — implements business logic for fetching, creating, updating, deleting, and syncing customer reviews. Exposes public methods: getFeaturedReviews(): List<ReviewDto>, getAllReviews(): List<ReviewDto>, getReviewById(UUID): ReviewDto, createReview(ReviewDto): ReviewDto, updateReview(UUID, ReviewDto): ReviewDto, deleteReview(UUID): void, syncReviewsFromGoogle(): void.",
     "change_required" : null
   }, {
     "file_name" : "ReviewController.java",
@@ -2220,14 +2300,26 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Public-facing REST controller for fetching featured customer reviews.",
-    "public_functions" : null,
-    "public_variables" : null,
-    "api_endpoints" : null,
+    "public_functions" : [ {
+      "name" : "getFeaturedReviews",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<List<ReviewDto>>",
+      "description" : "Handles GET requests to retrieve a list of featured reviews."
+    } ],
+    "public_variables" : [ ],
+    "api_endpoints" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/reviews/featured",
+      "request_body" : null,
+      "response_body" : "List<ReviewDto>",
+      "description" : "Retrieves a list of customer reviews marked as featured for public display.",
+      "access" : "public"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/service/ReviewService.java", "backend/src/main/java/com/farmaaishrestaurant/dto/ReviewDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "review-management",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — exposes public REST endpoints for fetching featured customer reviews. Exposes public method: getFeaturedReviews(): ResponseEntity<List<ReviewDto>>.",
     "change_required" : null
   }, {
     "file_name" : "AdminReviewController.java",
@@ -2238,14 +2330,86 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Admin-only REST controller for managing reviews and triggering syncs with Google.",
-    "public_functions" : null,
-    "public_variables" : null,
-    "api_endpoints" : null,
+    "public_functions" : [ {
+      "name" : "getAllReviews",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<List<ReviewDto>>",
+      "description" : "Handles GET requests to retrieve all customer reviews for admin view."
+    }, {
+      "name" : "getReviewById",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "ResponseEntity<ReviewDto>",
+      "description" : "Handles GET requests to retrieve a single review by ID for admin view."
+    }, {
+      "name" : "createReview",
+      "parameters" : [ "ReviewDto reviewDto" ],
+      "return_type" : "ResponseEntity<ReviewDto>",
+      "description" : "Handles POST requests to create a new review."
+    }, {
+      "name" : "updateReview",
+      "parameters" : [ "UUID id", "ReviewDto reviewDto" ],
+      "return_type" : "ResponseEntity<ReviewDto>",
+      "description" : "Handles PUT requests to update an existing review by ID."
+    }, {
+      "name" : "deleteReview",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "ResponseEntity<Void>",
+      "description" : "Handles DELETE requests to remove a review by ID."
+    }, {
+      "name" : "syncReviews",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<String>",
+      "description" : "Handles POST requests to trigger a synchronization of reviews from external sources."
+    } ],
+    "public_variables" : [ ],
+    "api_endpoints" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/admin/reviews",
+      "request_body" : null,
+      "response_body" : "List<ReviewDto>",
+      "description" : "Retrieves all customer reviews for administrative purposes.",
+      "access" : "admin"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/admin/reviews/{id}",
+      "request_body" : null,
+      "response_body" : "ReviewDto",
+      "description" : "Retrieves a single customer review by ID for administrative purposes.",
+      "access" : "admin"
+    }, {
+      "method" : "POST",
+      "path" : "/api/v1/admin/reviews",
+      "request_body" : "ReviewDto",
+      "response_body" : "ReviewDto",
+      "description" : "Creates a new customer review.",
+      "access" : "admin"
+    }, {
+      "method" : "PUT",
+      "path" : "/api/v1/admin/reviews/{id}",
+      "request_body" : "ReviewDto",
+      "response_body" : "ReviewDto",
+      "description" : "Updates an existing customer review by ID.",
+      "access" : "admin"
+    }, {
+      "method" : "DELETE",
+      "path" : "/api/v1/admin/reviews/{id}",
+      "request_body" : null,
+      "response_body" : "void",
+      "description" : "Deletes a customer review by ID.",
+      "access" : "admin"
+    }, {
+      "method" : "POST",
+      "path" : "/api/v1/admin/reviews/sync",
+      "request_body" : null,
+      "response_body" : "String",
+      "description" : "Triggers a synchronization of reviews from external sources like Google Business Profile.",
+      "access" : "admin"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/service/ReviewService.java" ],
     "depends_on" : [ ],
     "feature_name" : "review-management",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — exposes admin-only REST endpoints for managing reviews and triggering syncs. Exposes public methods: getAllReviews(): ResponseEntity<List<ReviewDto>>, getReviewById(UUID): ResponseEntity<ReviewDto>, createReview(ReviewDto): ResponseEntity<ReviewDto>, updateReview(UUID, ReviewDto): ResponseEntity<ReviewDto>, deleteReview(UUID): ResponseEntity<Void>, syncReviews(): ResponseEntity<String>.",
     "change_required" : null
   }, {
     "file_name" : "ReviewDto.java",
@@ -2256,14 +2420,42 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Data Transfer Object for representing Review entities in API responses.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the review."
+    }, {
+      "name" : "authorName",
+      "type" : "String",
+      "description" : "Name of the review author."
+    }, {
+      "name" : "rating",
+      "type" : "Integer",
+      "description" : "Rating given by the customer (1-5)."
+    }, {
+      "name" : "comment",
+      "type" : "String",
+      "description" : "Customer's review comment."
+    }, {
+      "name" : "source",
+      "type" : "String",
+      "description" : "Source of the review (e.g., 'Google', 'Website')."
+    }, {
+      "name" : "reviewDate",
+      "type" : "LocalDate",
+      "description" : "Date when the review was made."
+    }, {
+      "name" : "isFeatured",
+      "type" : "boolean",
+      "description" : "Flag to indicate if the review should be featured on the public site."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "review-management",
-    "file_role" : null,
+    "file_role" : "Data Transfer Object layer — defines the structure for review data exchanged via API.",
     "change_required" : null
   }, {
     "file_name" : "SpecialOffer.java",
@@ -4098,8 +4290,8 @@
     "feature_display_name" : "Review Management",
     "feature_type" : "BACKEND",
     "file_paths" : [ "backend/src/main/java/com/farmaaishrestaurant/model/Review.java", "backend/src/main/java/com/farmaaishrestaurant/repository/ReviewRepository.java", "backend/src/main/java/com/farmaaishrestaurant/service/ReviewService.java", "backend/src/main/java/com/farmaaishrestaurant/controller/ReviewController.java", "backend/src/main/java/com/farmaaishrestaurant/controller/AdminReviewController.java", "backend/src/main/java/com/farmaaishrestaurant/dto/ReviewDto.java" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "The Review Management feature handles the storage, retrieval, and synchronization of customer reviews for Farmaaish Restaurant. It provides public-facing endpoints to display featured reviews on the storefront and admin-only endpoints for managing reviews and triggering sync operations with external platforms like Google Business Profile.\n\n## Design Tokens\n- Navbar: bg-[#800020] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b89a2f] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-[#F5F5DC] (odd sections) / bg-white (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-[#36454F] leading-relaxed\n\n### Review.java\nThis JPA entity represents a customer review. It includes fields for `id` (UUID), `authorName` (String, not null), `rating` (Integer, 1-5), `comment` (String, nullable), `source` (String, e.g., \"Google\", not null), `externalId` (String, unique identifier from external source, nullable), `reviewDate` (LocalDate, not null), `createdAt` (LocalDateTime), and `updatedAt` (LocalDateTime).\n\n### ReviewRepository.java\nThis repository extends `JpaRepository<Review, UUID>` and provides standard CRUD operations. It also includes a custom query method `findByIsFeatured(boolean isFeatured)` to retrieve reviews marked as featured.\n\n### ReviewDto.java\nThis DTO mirrors the `Review` entity but is used for API communication. It includes `id`, `authorName`, `rating`, `comment`, `source`, `reviewDate`, and `isFeatured`.\n\n### ReviewService.java\nThis service class orchestrates the business logic for reviews. It injects `ReviewRepository`.\n\n- `public List<ReviewDto> getFeaturedReviews()`:\n  1. Calls `reviewRepository.findByIsFeatured(true)` to fetch all featured reviews.\n  2. Maps the `Review` entities to `ReviewDto`s.\n  3. Returns the list of `ReviewDto`s.\n\n- `public List<ReviewDto> getAllReviews()`:\n  1. Calls `reviewRepository.findAll()` to fetch all reviews.\n  2. Maps the `Review` entities to `ReviewDto`s.\n  3. Returns the list of `ReviewDto`s.\n\n- `public ReviewDto getReviewById(UUID id)`:\n  1. Calls `reviewRepository.findById(id)`.\n  2. If the review is not found, throws `ResourceNotFoundException`.\n  3. Maps the `Review` entity to a `ReviewDto`.\n  4. Returns the `ReviewDto`.\n\n- `public ReviewDto createReview(ReviewDto reviewDto)`:\n  1. Creates a new `Review` entity from the `reviewDto`.\n  2. Sets `createdAt` and `updatedAt` timestamps.\n  3. Saves the new `Review` entity using `reviewRepository.save()`.\n  4. Maps the saved `Review` entity back to a `ReviewDto`.\n  5. Returns the `ReviewDto`.\n\n- `public ReviewDto updateReview(UUID id, ReviewDto reviewDto)`:\n  1. Calls `reviewRepository.findById(id)`.\n  2. If the review is not found, throws `ResourceNotFoundException`.\n  3. Updates the existing `Review` entity with fields from `reviewDto` (authorName, rating, comment, source, reviewDate, isFeatured).\n  4. Sets `updatedAt` timestamp.\n  5. Saves the updated `Review` entity using `reviewRepository.save()`.\n  6. Maps the saved `Review` entity back to a `ReviewDto`.\n  7. Returns the `ReviewDto`.\n\n- `public void deleteReview(UUID id)`:\n  1. Calls `reviewRepository.findById(id)`.\n  2. If the review is not found, throws `ResourceNotFoundException`.\n  3. Deletes the `Review` entity using `reviewRepository.deleteById(id)`.\n\n- `public void syncReviewsFromGoogle()`:\n  1. This method will simulate syncing reviews from an external source. For now, it will log a message indicating a sync operation.\n  2. In a real implementation, this would involve calling an external API (e.g., Google Business Profile API) to fetch new reviews and update existing ones in the database. It should handle potential duplicates based on `externalId`.\n\n### ReviewController.java\nThis public-facing REST controller exposes endpoints for retrieving featured customer reviews. It injects `ReviewService`.\n\n- `public ResponseEntity<List<ReviewDto>> getFeaturedReviews()`:\n  1. Calls `reviewService.getFeaturedReviews()`.\n  2. Returns a `ResponseEntity` with a list of `ReviewDto`s and HTTP status 200 OK.\n\n### AdminReviewController.java\nThis admin-only REST controller provides endpoints for managing reviews and triggering syncs. It injects `ReviewService`.\n\n- `public ResponseEntity<List<ReviewDto>> getAllReviews()`:\n  1. Calls `reviewService.getAllReviews()`.\n  2. Returns a `ResponseEntity` with a list of `ReviewDto`s and HTTP status 200 OK.\n\n- `public ResponseEntity<ReviewDto> getReviewById(UUID id)`:\n  1. Calls `reviewService.getReviewById(id)`.\n  2. Returns a `ResponseEntity` with the `ReviewDto` and HTTP status 200 OK.\n  3. Throws `ResourceNotFoundException` if the review is not found, which will be handled by `GlobalExceptionHandler` returning HTTP status 404 NOT FOUND.\n\n- `public ResponseEntity<ReviewDto> createReview(ReviewDto reviewDto)`:\n  1. Calls `reviewService.createReview(reviewDto)`.\n  2. Returns a `ResponseEntity` with the created `ReviewDto` and HTTP status 201 CREATED.\n\n- `public ResponseEntity<ReviewDto> updateReview(UUID id, ReviewDto reviewDto)`:\n  1. Calls `reviewService.updateReview(id, reviewDto)`.\n  2. Returns a `ResponseEntity` with the updated `ReviewDto` and HTTP status 200 OK.\n  3. Throws `ResourceNotFoundException` if the review is not found, which will be handled by `GlobalExceptionHandler` returning HTTP status 404 NOT FOUND.\n\n- `public ResponseEntity<Void> deleteReview(UUID id)`:\n  1. Calls `reviewService.deleteReview(id)`.\n  2. Returns a `ResponseEntity` with HTTP status 204 NO CONTENT.\n  3. Throws `ResourceNotFoundException` if the review is not found, which will be handled by `GlobalExceptionHandler` returning HTTP status 404 NOT FOUND.\n\n- `public ResponseEntity<String> syncReviews()`:\n  1. Calls `reviewService.syncReviewsFromGoogle()`.\n  2. Returns a `ResponseEntity` with a success message and HTTP status 200 OK.",
+    "depends_on_features" : [ "shared-backend" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
