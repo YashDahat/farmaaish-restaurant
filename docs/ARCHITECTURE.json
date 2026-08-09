@@ -129,13 +129,45 @@
     "status" : "PLANNED",
     "description" : "Represents a single dish or beverage on the restaurant's menu.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the menu item. Not null."
+    }, {
+      "name" : "name",
+      "type" : "String",
+      "description" : "Name of the menu item. Not null, max 100 characters."
+    }, {
+      "name" : "description",
+      "type" : "String",
+      "description" : "Description of the menu item. Max 500 characters."
+    }, {
+      "name" : "price",
+      "type" : "BigDecimal",
+      "description" : "Price of the menu item. Not null, decimal(10,2)."
+    }, {
+      "name" : "imageUrl",
+      "type" : "String",
+      "description" : "URL of the image for the menu item. Max 255 characters."
+    }, {
+      "name" : "isVegetarian",
+      "type" : "boolean",
+      "description" : "Indicates if the item is vegetarian. Not null."
+    }, {
+      "name" : "isAvailable",
+      "type" : "boolean",
+      "description" : "Indicates if the item is currently available. Not null."
+    }, {
+      "name" : "category",
+      "type" : "MenuCategory",
+      "description" : "The category this menu item belongs to. Many-to-one relationship."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/model/MenuCategory.java" ],
     "depends_on" : [ ],
     "feature_name" : "menu-management",
-    "file_role" : null,
+    "file_role" : "JPA Entity — represents a single dish or beverage on the restaurant's menu, with fields for name, description, price, image, and dietary information.",
     "change_required" : null
   }, {
     "file_name" : "MenuCategory.java",
@@ -147,13 +179,25 @@
     "status" : "PLANNED",
     "description" : "Represents a category of menu items, such as 'Appetizers', 'Main Course', or 'Desserts'.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the menu category. Not null."
+    }, {
+      "name" : "name",
+      "type" : "String",
+      "description" : "Name of the menu category. Not null, max 50 characters."
+    }, {
+      "name" : "menuItems",
+      "type" : "List<MenuItem>",
+      "description" : "List of menu items belonging to this category. One-to-many relationship."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "menu-management",
-    "file_role" : null,
+    "file_role" : "JPA Entity — represents a category of menu items, such as 'Appetizers' or 'Main Course', and manages its associated menu items.",
     "change_required" : null
   }, {
     "file_name" : "MenuItemRepository.java",
@@ -164,14 +208,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Spring Data JPA repository for CRUD operations on MenuItem entities.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "findByCategoryId",
+      "parameters" : [ "UUID categoryId" ],
+      "return_type" : "List<MenuItem>",
+      "description" : "Finds all menu items belonging to a specific category ID."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/model/MenuItem.java" ],
     "depends_on" : [ ],
     "feature_name" : "menu-management",
-    "file_role" : null,
+    "file_role" : "Spring Data JPA repository — provides CRUD operations for MenuItem entities and custom queries to find items by category.",
     "change_required" : null
   }, {
     "file_name" : "MenuCategoryRepository.java",
@@ -182,14 +231,14 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Spring Data JPA repository for CRUD operations on MenuCategory entities.",
-    "public_functions" : null,
+    "public_functions" : [ ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/model/MenuCategory.java" ],
     "depends_on" : [ ],
     "feature_name" : "menu-management",
-    "file_role" : null,
+    "file_role" : "Spring Data JPA repository — provides CRUD operations for MenuCategory entities.",
     "change_required" : null
   }, {
     "file_name" : "MenuService.java",
@@ -200,14 +249,64 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Handles business logic for managing the menu, including creating, updating, and retrieving items and categories.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getAllMenuCategories",
+      "parameters" : [ ],
+      "return_type" : "List<MenuCategoryDto>",
+      "description" : "Retrieves all menu categories, each including its associated menu items."
+    }, {
+      "name" : "getMenuCategoryById",
+      "parameters" : [ "UUID categoryId" ],
+      "return_type" : "MenuCategoryDto",
+      "description" : "Retrieves a single menu category by its ID, including its associated menu items."
+    }, {
+      "name" : "getAllMenuItems",
+      "parameters" : [ ],
+      "return_type" : "List<MenuItemDto>",
+      "description" : "Retrieves all menu items."
+    }, {
+      "name" : "getMenuItemById",
+      "parameters" : [ "UUID itemId" ],
+      "return_type" : "MenuItemDto",
+      "description" : "Retrieves a single menu item by its ID."
+    }, {
+      "name" : "createMenuCategory",
+      "parameters" : [ "MenuCategoryDto categoryDto" ],
+      "return_type" : "MenuCategoryDto",
+      "description" : "Creates a new menu category."
+    }, {
+      "name" : "updateMenuCategory",
+      "parameters" : [ "UUID categoryId", "MenuCategoryDto categoryDto" ],
+      "return_type" : "MenuCategoryDto",
+      "description" : "Updates an existing menu category."
+    }, {
+      "name" : "deleteMenuCategory",
+      "parameters" : [ "UUID categoryId" ],
+      "return_type" : "void",
+      "description" : "Deletes a menu category by its ID."
+    }, {
+      "name" : "createMenuItem",
+      "parameters" : [ "MenuItemDto menuItemDto" ],
+      "return_type" : "MenuItemDto",
+      "description" : "Creates a new menu item."
+    }, {
+      "name" : "updateMenuItem",
+      "parameters" : [ "UUID itemId", "MenuItemDto menuItemDto" ],
+      "return_type" : "MenuItemDto",
+      "description" : "Updates an existing menu item."
+    }, {
+      "name" : "deleteMenuItem",
+      "parameters" : [ "UUID itemId" ],
+      "return_type" : "void",
+      "description" : "Deletes a menu item by its ID."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/repository/MenuItemRepository.java", "backend/src/main/java/com/farmaaishrestaurant/repository/MenuCategoryRepository.java", "backend/src/main/java/com/farmaaishrestaurant/exception/ResourceNotFoundException.java" ],
     "depends_on" : [ ],
     "feature_name" : "menu-management",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — implements business logic for managing menu items and categories, including create, read, update, and delete operations.",
     "change_required" : null
   }, {
     "file_name" : "MenuController.java",
@@ -218,14 +317,62 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Public-facing REST controller for fetching menu information.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getAllMenuCategories",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<List<MenuCategoryDto>>",
+      "description" : "Retrieves all menu categories with their associated menu items."
+    }, {
+      "name" : "getMenuCategoryById",
+      "parameters" : [ "UUID categoryId" ],
+      "return_type" : "ResponseEntity<MenuCategoryDto>",
+      "description" : "Retrieves a single menu category by ID with its associated menu items."
+    }, {
+      "name" : "getAllMenuItems",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<List<MenuItemDto>>",
+      "description" : "Retrieves all menu items."
+    }, {
+      "name" : "getMenuItemById",
+      "parameters" : [ "UUID itemId" ],
+      "return_type" : "ResponseEntity<MenuItemDto>",
+      "description" : "Retrieves a single menu item by ID."
+    } ],
     "public_variables" : null,
-    "api_endpoints" : null,
+    "api_endpoints" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/menu/categories",
+      "request_body" : null,
+      "response_body" : "List<MenuCategoryDto>",
+      "description" : "Get all menu categories, each including its menu items.",
+      "access" : "public"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/menu/categories/{categoryId}",
+      "request_body" : null,
+      "response_body" : "MenuCategoryDto",
+      "description" : "Get a specific menu category by ID, including its menu items.",
+      "access" : "public"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/menu/items",
+      "request_body" : null,
+      "response_body" : "List<MenuItemDto>",
+      "description" : "Get all menu items.",
+      "access" : "public"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/menu/items/{itemId}",
+      "request_body" : null,
+      "response_body" : "MenuItemDto",
+      "description" : "Get a specific menu item by ID.",
+      "access" : "public"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/service/MenuService.java", "backend/src/main/java/com/farmaaishrestaurant/dto/MenuItemDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "menu-management",
-    "file_role" : null,
+    "file_role" : "REST Controller — exposes public API endpoints for fetching menu categories and items for display on the storefront.",
     "change_required" : null
   }, {
     "file_name" : "AdminMenuController.java",
@@ -236,14 +383,86 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Admin-only REST controller for CRUD operations on menu items and categories.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "createMenuCategory",
+      "parameters" : [ "MenuCategoryDto categoryDto" ],
+      "return_type" : "ResponseEntity<MenuCategoryDto>",
+      "description" : "Creates a new menu category."
+    }, {
+      "name" : "updateMenuCategory",
+      "parameters" : [ "UUID categoryId", "MenuCategoryDto categoryDto" ],
+      "return_type" : "ResponseEntity<MenuCategoryDto>",
+      "description" : "Updates an existing menu category."
+    }, {
+      "name" : "deleteMenuCategory",
+      "parameters" : [ "UUID categoryId" ],
+      "return_type" : "ResponseEntity<Void>",
+      "description" : "Deletes a menu category by ID."
+    }, {
+      "name" : "createMenuItem",
+      "parameters" : [ "MenuItemDto menuItemDto" ],
+      "return_type" : "ResponseEntity<MenuItemDto>",
+      "description" : "Creates a new menu item."
+    }, {
+      "name" : "updateMenuItem",
+      "parameters" : [ "UUID itemId", "MenuItemDto menuItemDto" ],
+      "return_type" : "ResponseEntity<MenuItemDto>",
+      "description" : "Updates an existing menu item."
+    }, {
+      "name" : "deleteMenuItem",
+      "parameters" : [ "UUID itemId" ],
+      "return_type" : "ResponseEntity<Void>",
+      "description" : "Deletes a menu item by ID."
+    } ],
     "public_variables" : null,
-    "api_endpoints" : null,
+    "api_endpoints" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/admin/menu/categories",
+      "request_body" : "MenuCategoryDto",
+      "response_body" : "MenuCategoryDto",
+      "description" : "Create a new menu category.",
+      "access" : "admin"
+    }, {
+      "method" : "PUT",
+      "path" : "/api/v1/admin/menu/categories/{categoryId}",
+      "request_body" : "MenuCategoryDto",
+      "response_body" : "MenuCategoryDto",
+      "description" : "Update an existing menu category by ID.",
+      "access" : "admin"
+    }, {
+      "method" : "DELETE",
+      "path" : "/api/v1/admin/menu/categories/{categoryId}",
+      "request_body" : null,
+      "response_body" : "void",
+      "description" : "Delete a menu category by ID.",
+      "access" : "admin"
+    }, {
+      "method" : "POST",
+      "path" : "/api/v1/admin/menu/items",
+      "request_body" : "MenuItemDto",
+      "response_body" : "MenuItemDto",
+      "description" : "Create a new menu item.",
+      "access" : "admin"
+    }, {
+      "method" : "PUT",
+      "path" : "/api/v1/admin/menu/items/{itemId}",
+      "request_body" : "MenuItemDto",
+      "response_body" : "MenuItemDto",
+      "description" : "Update an existing menu item by ID.",
+      "access" : "admin"
+    }, {
+      "method" : "DELETE",
+      "path" : "/api/v1/admin/menu/items/{itemId}",
+      "request_body" : null,
+      "response_body" : "void",
+      "description" : "Delete a menu item by ID.",
+      "access" : "admin"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/service/MenuService.java", "backend/src/main/java/com/farmaaishrestaurant/dto/MenuItemDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "menu-management",
-    "file_role" : null,
+    "file_role" : "REST Controller — exposes admin-only API endpoints for full CRUD operations on menu items and categories.",
     "change_required" : null
   }, {
     "file_name" : "MenuItemDto.java",
@@ -255,13 +474,49 @@
     "status" : "PLANNED",
     "description" : "Data Transfer Object for representing MenuItem entities in API responses.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the menu item."
+    }, {
+      "name" : "name",
+      "type" : "String",
+      "description" : "Name of the menu item. @NotBlank, @Size(max = 100)."
+    }, {
+      "name" : "description",
+      "type" : "String",
+      "description" : "Description of the menu item. @Size(max = 500)."
+    }, {
+      "name" : "price",
+      "type" : "BigDecimal",
+      "description" : "Price of the menu item. @NotNull, @DecimalMin(\"0.01\")."
+    }, {
+      "name" : "imageUrl",
+      "type" : "String",
+      "description" : "URL of the image for the menu item. @Size(max = 255)."
+    }, {
+      "name" : "isVegetarian",
+      "type" : "boolean",
+      "description" : "Indicates if the item is vegetarian. @NotNull."
+    }, {
+      "name" : "isAvailable",
+      "type" : "boolean",
+      "description" : "Indicates if the item is currently available. @NotNull."
+    }, {
+      "name" : "categoryId",
+      "type" : "UUID",
+      "description" : "ID of the category this menu item belongs to. @NotNull."
+    }, {
+      "name" : "categoryName",
+      "type" : "String",
+      "description" : "Name of the category this menu item belongs to (read-only for display)."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "menu-management",
-    "file_role" : null,
+    "file_role" : "Data Transfer Object — used for representing MenuItem entities in API requests and responses, including validation rules.",
     "change_required" : null
   }, {
     "file_name" : "MenuCategoryDto.java",
@@ -273,13 +528,25 @@
     "status" : "PLANNED",
     "description" : "Data Transfer Object for representing MenuCategory entities, including their items.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the menu category."
+    }, {
+      "name" : "name",
+      "type" : "String",
+      "description" : "Name of the menu category. @NotBlank, @Size(max = 50)."
+    }, {
+      "name" : "menuItems",
+      "type" : "List<MenuItemDto>",
+      "description" : "List of menu items belonging to this category."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/dto/MenuItemDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "menu-management",
-    "file_role" : null,
+    "file_role" : "Data Transfer Object — used for representing MenuCategory entities in API requests and responses, including a list of associated menu items.",
     "change_required" : null
   }, {
     "file_name" : "Reservation.java",
@@ -2870,8 +3137,8 @@
     "feature_display_name" : "Menu Management",
     "feature_type" : "BACKEND",
     "file_paths" : [ "backend/src/main/java/com/farmaaishrestaurant/model/MenuItem.java", "backend/src/main/java/com/farmaaishrestaurant/model/MenuCategory.java", "backend/src/main/java/com/farmaaishrestaurant/repository/MenuItemRepository.java", "backend/src/main/java/com/farmaaishrestaurant/repository/MenuCategoryRepository.java", "backend/src/main/java/com/farmaaishrestaurant/service/MenuService.java", "backend/src/main/java/com/farmaaishrestaurant/controller/MenuController.java", "backend/src/main/java/com/farmaaishrestaurant/controller/AdminMenuController.java", "backend/src/main/java/com/farmaaishrestaurant/dto/MenuItemDto.java", "backend/src/main/java/com/farmaaishrestaurant/dto/MenuCategoryDto.java" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "The Menu Management feature provides a comprehensive backend system for managing the restaurant's menu items and categories. It includes models for `MenuItem` and `MenuCategory`, repositories for persistence, a service layer for business logic, and two controllers: `MenuController` for public access to menu data and `AdminMenuController` for administrative CRUD operations. This feature is designed to be consumed by both public-facing storefronts (e.g., `menu-display` feature) and internal admin tools (e.g., `admin-portal` feature).\n\n## Data Models\n\n**MenuItem.java** represents a single dish or beverage. It includes fields for `id`, `name`, `description`, `price`, `imageUrl`, `isVegetarian`, `isAvailable`, and a many-to-one relationship with `MenuCategory`.\n\n**MenuCategory.java** represents a category of menu items. It includes fields for `id`, `name`, and a one-to-many relationship with `MenuItem`.\n\n## Persistence Layer\n\n**MenuItemRepository.java** extends `JpaRepository` for `MenuItem` entities, providing standard CRUD operations and custom queries to find items by category.\n\n**MenuCategoryRepository.java** extends `JpaRepository` for `MenuCategory` entities, providing standard CRUD operations.\n\n## Service Layer\n\n**MenuService.java** orchestrates interactions between controllers and repositories. It defines methods for:\n\n1.  `getAllMenuCategories()`: Retrieves all menu categories, each including its associated menu items.\n    -   Returns: `List<MenuCategoryDto>`\n    -   Logic: Fetches all `MenuCategory` entities, then for each category, fetches its associated `MenuItem` entities. Maps these to `MenuCategoryDto` and `MenuItemDto` respectively.\n\n2.  `getMenuCategoryById(UUID categoryId)`: Retrieves a single menu category by its ID, including its associated menu items.\n    -   Parameters: `UUID categoryId`\n    -   Returns: `MenuCategoryDto`\n    -   Throws: `ResourceNotFoundException` if the category is not found.\n    -   Logic: Fetches the `MenuCategory` by ID. If found, fetches its associated `MenuItem` entities and maps them to `MenuCategoryDto` and `MenuItemDto`.\n\n3.  `getAllMenuItems()`: Retrieves all menu items.\n    -   Returns: `List<MenuItemDto>`\n    -   Logic: Fetches all `MenuItem` entities and maps them to `MenuItemDto`.\n\n4.  `getMenuItemById(UUID itemId)`: Retrieves a single menu item by its ID.\n    -   Parameters: `UUID itemId`\n    -   Returns: `MenuItemDto`\n    -   Throws: `ResourceNotFoundException` if the item is not found.\n    -   Logic: Fetches the `MenuItem` by ID and maps it to `MenuItemDto`.\n\n5.  `createMenuCategory(MenuCategoryDto categoryDto)`: Creates a new menu category.\n    -   Parameters: `MenuCategoryDto categoryDto`\n    -   Returns: `MenuCategoryDto`\n    -   Logic: Maps the DTO to a `MenuCategory` entity, saves it via `MenuCategoryRepository`, and maps the saved entity back to a `MenuCategoryDto`.\n\n6.  `updateMenuCategory(UUID categoryId, MenuCategoryDto categoryDto)`: Updates an existing menu category.\n    -   Parameters: `UUID categoryId`, `MenuCategoryDto categoryDto`\n    -   Returns: `MenuCategoryDto`\n    -   Throws: `ResourceNotFoundException` if the category is not found.\n    -   Logic: Fetches the existing `MenuCategory` by ID. Updates its fields from the DTO, saves it via `MenuCategoryRepository`, and maps the saved entity back to a `MenuCategoryDto`.\n\n7.  `deleteMenuCategory(UUID categoryId)`: Deletes a menu category by its ID.\n    -   Parameters: `UUID categoryId`\n    -   Throws: `ResourceNotFoundException` if the category is not found.\n    -   Logic: Fetches the `MenuCategory` by ID. If found, deletes it via `MenuCategoryRepository`.\n\n8.  `createMenuItem(MenuItemDto menuItemDto)`: Creates a new menu item.\n    -   Parameters: `MenuItemDto menuItemDto`\n    -   Returns: `MenuItemDto`\n    -   Throws: `ResourceNotFoundException` if the category specified in `menuItemDto` is not found.\n    -   Logic: Fetches the `MenuCategory` by the `categoryId` in the DTO. Maps the DTO to a `MenuItem` entity, sets its category, saves it via `MenuItemRepository`, and maps the saved entity back to a `MenuItemDto`.\n\n9.  `updateMenuItem(UUID itemId, MenuItemDto menuItemDto)`: Updates an existing menu item.\n    -   Parameters: `UUID itemId`, `MenuItemDto menuItemDto`\n    -   Returns: `MenuItemDto`\n    -   Throws: `ResourceNotFoundException` if the item or its specified category is not found.\n    -   Logic: Fetches the existing `MenuItem` by ID. Fetches the `MenuCategory` by the `categoryId` in the DTO. Updates the item's fields and category, saves it via `MenuItemRepository`, and maps the saved entity back to a `MenuItemDto`.\n\n10. `deleteMenuItem(UUID itemId)`: Deletes a menu item by its ID.\n    -   Parameters: `UUID itemId`\n    -   Throws: `ResourceNotFoundException` if the item is not found.\n    -   Logic: Fetches the `MenuItem` by ID. If found, deletes it via `MenuItemRepository`.\n\n## Controllers\n\n**MenuController.java** exposes public API endpoints for fetching menu categories and items. All endpoints return `MenuCategoryDto` or `MenuItemDto`.\n\n**AdminMenuController.java** exposes admin-only API endpoints for full CRUD operations on menu categories and items. These endpoints require authentication and authorization (admin role). All endpoints consume and produce `MenuCategoryDto` or `MenuItemDto`.\n\n## DTOs\n\n**MenuItemDto.java** is used for transferring menu item data between the service layer and controllers. It includes fields mirroring `MenuItem.java` but with appropriate validation annotations.\n\n**MenuCategoryDto.java** is used for transferring menu category data. It includes fields mirroring `MenuCategory.java` and a `List<MenuItemDto>` to represent the items within that category.\n",
+    "depends_on_features" : [ ],
     "change_required" : true,
     "change_instruction" : null
   }, {
