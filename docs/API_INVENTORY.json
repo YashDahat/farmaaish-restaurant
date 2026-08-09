@@ -1,0 +1,669 @@
+{
+  "endpoints" : [ {
+    "method" : "GET",
+    "path" : "/api/v1/admin/blog/posts",
+    "handler" : "getAllPosts",
+    "request" : null,
+    "response" : "PostDto[]"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/admin/blog/posts/{id}",
+    "handler" : "getPostById",
+    "request" : null,
+    "response" : "PostDto"
+  }, {
+    "method" : "POST",
+    "path" : "/api/v1/admin/blog/posts",
+    "handler" : "createPost",
+    "request" : "PostDto",
+    "response" : "PostDto"
+  }, {
+    "method" : "PUT",
+    "path" : "/api/v1/admin/blog/posts/{id}",
+    "handler" : "updatePost",
+    "request" : "PostDto",
+    "response" : "PostDto"
+  }, {
+    "method" : "DELETE",
+    "path" : "/api/v1/admin/blog/posts/{id}",
+    "handler" : "deletePost",
+    "request" : null,
+    "response" : null
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/blog/posts",
+    "handler" : "getAllPosts",
+    "request" : null,
+    "response" : "PostDto[]"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/blog/posts/{id}",
+    "handler" : "getPostById",
+    "request" : null,
+    "response" : "PostDto"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/admin/orders",
+    "handler" : "getAllOrders",
+    "request" : null,
+    "response" : "OrderDto[]"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/admin/orders/{orderId}",
+    "handler" : "getOrderById",
+    "request" : null,
+    "response" : "OrderDto"
+  }, {
+    "method" : "PUT",
+    "path" : "/api/v1/admin/orders/{orderId}/status",
+    "handler" : "updateOrderStatus",
+    "request" : null,
+    "response" : "OrderDto"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/reviews/featured",
+    "handler" : "getFeaturedReviews",
+    "request" : null,
+    "response" : "ReviewDto[]"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/gallery",
+    "handler" : "getAllGalleryImages",
+    "request" : null,
+    "response" : "GalleryImageDto[]"
+  }, {
+    "method" : "POST",
+    "path" : "/api/v1/orders",
+    "handler" : "createOrder",
+    "request" : "CreateOrderRequest",
+    "response" : "OrderDto"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/orders/{orderId}",
+    "handler" : "getOrderById",
+    "request" : null,
+    "response" : "OrderDto"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/orders/user/{userId}",
+    "handler" : "getOrdersByUserId",
+    "request" : null,
+    "response" : "OrderDto[]"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/menu/categories",
+    "handler" : "getAllMenuCategories",
+    "request" : null,
+    "response" : "MenuCategoryDto[]"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/menu/categories/{categoryId}",
+    "handler" : "getMenuCategoryById",
+    "request" : null,
+    "response" : "MenuCategoryDto"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/menu/items",
+    "handler" : "getAllMenuItems",
+    "request" : null,
+    "response" : "MenuItemDto[]"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/menu/items/{itemId}",
+    "handler" : "getMenuItemById",
+    "request" : null,
+    "response" : "MenuItemDto"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/admin/catering-inquiries",
+    "handler" : "getAllInquiries",
+    "request" : null,
+    "response" : "CateringInquiryDto[]"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/admin/catering-inquiries/{id}",
+    "handler" : "getInquiryById",
+    "request" : null,
+    "response" : "CateringInquiryDto"
+  }, {
+    "method" : "PUT",
+    "path" : "/api/v1/admin/catering-inquiries/{id}/status",
+    "handler" : "updateInquiryStatus",
+    "request" : null,
+    "response" : "CateringInquiryDto"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/admin/reservations",
+    "handler" : "getAllReservations",
+    "request" : null,
+    "response" : "ReservationDto[]"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/admin/reservations/{id}",
+    "handler" : "getReservationById",
+    "request" : null,
+    "response" : "ReservationDto"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/admin/reservations/by-date",
+    "handler" : "getReservationsByDate",
+    "request" : null,
+    "response" : "ReservationDto[]"
+  }, {
+    "method" : "PATCH",
+    "path" : "/api/v1/admin/reservations/{id}/status",
+    "handler" : "updateReservationStatus",
+    "request" : null,
+    "response" : "ReservationDto"
+  }, {
+    "method" : "DELETE",
+    "path" : "/api/v1/admin/reservations/{id}",
+    "handler" : "deleteReservation",
+    "request" : null,
+    "response" : null
+  }, {
+    "method" : "POST",
+    "path" : "/api/v1/reservations",
+    "handler" : "createReservation",
+    "request" : "CreateReservationRequest",
+    "response" : "ReservationDto"
+  }, {
+    "method" : "GET",
+    "path" : "/api/admin/reviews",
+    "handler" : "getAllReviews",
+    "request" : null,
+    "response" : "ReviewDto[]"
+  }, {
+    "method" : "GET",
+    "path" : "/api/admin/reviews/{id}",
+    "handler" : "getReviewById",
+    "request" : null,
+    "response" : "ReviewDto"
+  }, {
+    "method" : "POST",
+    "path" : "/api/admin/reviews",
+    "handler" : "createReview",
+    "request" : "ReviewDto",
+    "response" : "ReviewDto"
+  }, {
+    "method" : "PUT",
+    "path" : "/api/admin/reviews/{id}",
+    "handler" : "updateReview",
+    "request" : "ReviewDto",
+    "response" : "ReviewDto"
+  }, {
+    "method" : "DELETE",
+    "path" : "/api/admin/reviews/{id}",
+    "handler" : "deleteReview",
+    "request" : null,
+    "response" : null
+  }, {
+    "method" : "POST",
+    "path" : "/api/admin/reviews/sync",
+    "handler" : "syncReviews",
+    "request" : null,
+    "response" : "String"
+  }, {
+    "method" : "POST",
+    "path" : "/api/v1/catering-inquiries",
+    "handler" : "createInquiry",
+    "request" : "CreateInquiryRequest",
+    "response" : "CateringInquiryDto"
+  }, {
+    "method" : "GET",
+    "path" : "/api/admin/menu/categories",
+    "handler" : "getAllMenuCategories",
+    "request" : null,
+    "response" : "MenuCategoryDto[]"
+  }, {
+    "method" : "GET",
+    "path" : "/api/admin/menu/categories/{categoryId}",
+    "handler" : "getMenuCategoryById",
+    "request" : null,
+    "response" : "MenuCategoryDto"
+  }, {
+    "method" : "POST",
+    "path" : "/api/admin/menu/categories",
+    "handler" : "createMenuCategory",
+    "request" : "MenuCategoryDto",
+    "response" : "MenuCategoryDto"
+  }, {
+    "method" : "PUT",
+    "path" : "/api/admin/menu/categories/{categoryId}",
+    "handler" : "updateMenuCategory",
+    "request" : "MenuCategoryDto",
+    "response" : "MenuCategoryDto"
+  }, {
+    "method" : "DELETE",
+    "path" : "/api/admin/menu/categories/{categoryId}",
+    "handler" : "deleteMenuCategory",
+    "request" : null,
+    "response" : null
+  }, {
+    "method" : "GET",
+    "path" : "/api/admin/menu/items",
+    "handler" : "getAllMenuItems",
+    "request" : null,
+    "response" : "MenuItemDto[]"
+  }, {
+    "method" : "GET",
+    "path" : "/api/admin/menu/items/{itemId}",
+    "handler" : "getMenuItemById",
+    "request" : null,
+    "response" : "MenuItemDto"
+  }, {
+    "method" : "POST",
+    "path" : "/api/admin/menu/items",
+    "handler" : "createMenuItem",
+    "request" : "MenuItemDto",
+    "response" : "MenuItemDto"
+  }, {
+    "method" : "PUT",
+    "path" : "/api/admin/menu/items/{itemId}",
+    "handler" : "updateMenuItem",
+    "request" : "MenuItemDto",
+    "response" : "MenuItemDto"
+  }, {
+    "method" : "DELETE",
+    "path" : "/api/admin/menu/items/{itemId}",
+    "handler" : "deleteMenuItem",
+    "request" : null,
+    "response" : null
+  }, {
+    "method" : "POST",
+    "path" : "/api/v1/admin/gallery",
+    "handler" : "uploadGalleryImage",
+    "request" : null,
+    "response" : "GalleryImageDto"
+  }, {
+    "method" : "DELETE",
+    "path" : "/api/v1/admin/gallery/{id}",
+    "handler" : "deleteGalleryImage",
+    "request" : null,
+    "response" : null
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/public/offers/active",
+    "handler" : "getAllActiveSpecialOffers",
+    "request" : null,
+    "response" : "SpecialOfferDto[]"
+  }, {
+    "method" : "POST",
+    "path" : "/api/admin/special-offers",
+    "handler" : "createSpecialOffer",
+    "request" : "SpecialOfferDto",
+    "response" : "SpecialOfferDto"
+  }, {
+    "method" : "GET",
+    "path" : "/api/admin/special-offers",
+    "handler" : "getAllSpecialOffers",
+    "request" : null,
+    "response" : "SpecialOfferDto[]"
+  }, {
+    "method" : "GET",
+    "path" : "/api/admin/special-offers/{id}",
+    "handler" : "getSpecialOfferById",
+    "request" : null,
+    "response" : "SpecialOfferDto"
+  }, {
+    "method" : "PUT",
+    "path" : "/api/admin/special-offers/{id}",
+    "handler" : "updateSpecialOffer",
+    "request" : "SpecialOfferDto",
+    "response" : "SpecialOfferDto"
+  }, {
+    "method" : "DELETE",
+    "path" : "/api/admin/special-offers/{id}",
+    "handler" : "deleteSpecialOffer",
+    "request" : null,
+    "response" : null
+  } ],
+  "types" : {
+    "MenuCategory" : {
+      "fields" : {
+        "id" : "UUID",
+        "name" : "String",
+        "description" : "String",
+        "menuItems" : "List<MenuItem>"
+      }
+    },
+    "InquiryStatus" : {
+      "constants" : [ "NEW", "CONTACTED", "QUOTED", "CLOSED" ]
+    },
+    "ReservationStatus" : {
+      "constants" : [ "PENDING", "CONFIRMED", "CANCELLED", "COMPLETED", "NO_SHOW" ]
+    },
+    "OrderItem" : {
+      "fields" : {
+        "id" : "UUID",
+        "order" : "Order",
+        "menuItem" : "MenuItem",
+        "quantity" : "Integer",
+        "subTotal" : "BigDecimal"
+      }
+    },
+    "GalleryImage" : {
+      "fields" : {
+        "id" : "UUID",
+        "imageUrl" : "String",
+        "caption" : "String",
+        "uploadDate" : "LocalDateTime"
+      }
+    },
+    "SpecialOffer" : {
+      "fields" : {
+        "id" : "UUID",
+        "title" : "String",
+        "description" : "String",
+        "discountPercentage" : "BigDecimal",
+        "startDate" : "LocalDate",
+        "endDate" : "LocalDate",
+        "imageUrl" : "String",
+        "isActive" : "boolean"
+      }
+    },
+    "User" : {
+      "fields" : {
+        "id" : "Integer",
+        "firstName" : "String",
+        "lastName" : "String",
+        "email" : "String",
+        "password" : "String",
+        "role" : "Role"
+      }
+    },
+    "MenuItem" : {
+      "fields" : {
+        "id" : "UUID",
+        "name" : "String",
+        "description" : "String",
+        "price" : "BigDecimal",
+        "imageUrl" : "String",
+        "isVegetarian" : "boolean",
+        "isAvailable" : "boolean",
+        "category" : "MenuCategory"
+      }
+    },
+    "Order" : {
+      "fields" : {
+        "id" : "UUID",
+        "userId" : "UUID",
+        "totalAmount" : "BigDecimal",
+        "status" : "OrderStatus",
+        "orderDate" : "Instant",
+        "gatewayOrderId" : "String"
+      }
+    },
+    "OrderStatus" : {
+      "constants" : [ "PENDING_PAYMENT", "RECEIVED", "PREPARING", "OUT_FOR_DELIVERY", "DELIVERED", "CANCELLED" ]
+    },
+    "Reservation" : {
+      "fields" : {
+        "id" : "UUID",
+        "customerName" : "String",
+        "customerEmail" : "String",
+        "customerPhone" : "String",
+        "numberOfGuests" : "int",
+        "reservationDate" : "LocalDate",
+        "reservationTime" : "LocalTime",
+        "specialRequests" : "String",
+        "createdAt" : "LocalDateTime",
+        "updatedAt" : "LocalDateTime"
+      }
+    },
+    "owned" : {
+      "fields" : {
+        "id" : "Long",
+        "referenceId" : "String",
+        "gatewayOrderId" : "String",
+        "gatewayPaymentId" : "String",
+        "amount" : "BigDecimal",
+        "currency" : "String",
+        "status" : "PaymentStatus",
+        "createdAt" : "Instant"
+      }
+    },
+    "Role" : {
+      "constants" : [ "ADMIN", "USER" ]
+    },
+    "Post" : {
+      "fields" : {
+        "id" : "UUID",
+        "title" : "String",
+        "content" : "String",
+        "author" : "String",
+        "publishDate" : "LocalDate",
+        "imageUrl" : "String"
+      }
+    },
+    "Review" : {
+      "fields" : {
+        "id" : "UUID",
+        "authorName" : "String",
+        "rating" : "Integer",
+        "comment" : "String",
+        "source" : "String",
+        "externalId" : "String",
+        "reviewDate" : "LocalDate",
+        "createdAt" : "LocalDateTime",
+        "updatedAt" : "LocalDateTime"
+      }
+    },
+    "CateringInquiry" : {
+      "fields" : {
+        "id" : "UUID",
+        "customerName" : "String",
+        "customerEmail" : "String",
+        "customerPhone" : "String",
+        "eventType" : "String",
+        "eventDate" : "LocalDateTime",
+        "eventLocation" : "String",
+        "numberOfGuests" : "Integer",
+        "specialRequests" : "String",
+        "status" : "InquiryStatus",
+        "createdAt" : "LocalDateTime",
+        "updatedAt" : "LocalDateTime"
+      }
+    },
+    "PaymentStatus" : {
+      "constants" : [ "CREATED", "CAPTURED", "FAILED" ]
+    },
+    "OrderDto" : {
+      "fields" : {
+        "id" : "UUID",
+        "userId" : "Integer",
+        "orderItems" : "List<OrderItemDto>",
+        "totalAmount" : "java.math.BigDecimal",
+        "status" : "OrderStatus",
+        "gatewayOrderId" : "String",
+        "createdAt" : "java.time.Instant",
+        "updatedAt" : "java.time.Instant"
+      }
+    },
+    "MenuItemDto" : {
+      "fields" : {
+        "id" : "UUID",
+        "name" : "String",
+        "description" : "String",
+        "price" : "java.math.BigDecimal",
+        "imageUrl" : "String",
+        "isVegetarian" : "Boolean",
+        "isAvailable" : "Boolean",
+        "categoryId" : "UUID",
+        "categoryName" : "String"
+      }
+    },
+    "CreateReservationRequest" : {
+      "fields" : {
+        "customerName" : "String",
+        "customerEmail" : "String",
+        "customerPhone" : "String",
+        "numberOfGuests" : "Integer",
+        "reservationDate" : "java.time.LocalDate",
+        "reservationTime" : "java.time.LocalTime",
+        "specialRequests" : "String"
+      }
+    },
+    "SpecialOfferDto" : {
+      "fields" : {
+        "id" : "UUID",
+        "title" : "String",
+        "description" : "String",
+        "discountPercentage" : "java.math.BigDecimal",
+        "startDate" : "java.time.LocalDate",
+        "endDate" : "java.time.LocalDate",
+        "imageUrl" : "String",
+        "isActive" : "Boolean"
+      }
+    },
+    "AuthResponse" : {
+      "fields" : {
+        "token" : "String"
+      }
+    },
+    "OrderItemRequest" : {
+      "fields" : {
+        "menuItemId" : "UUID",
+        "quantity" : "Integer"
+      }
+    },
+    "CreatePaymentRequest" : {
+      "fields" : {
+        "amount" : "BigDecimal",
+        "currency" : "String",
+        "referenceId" : "String"
+      }
+    },
+    "AuthRequest" : {
+      "fields" : {
+        "username" : "String",
+        "password" : "String"
+      }
+    },
+    "CreateOrderRequest" : {
+      "fields" : {
+        "userId" : "Integer",
+        "items" : "List<OrderItemRequest>"
+      }
+    },
+    "PaymentVerificationResponse" : {
+      "fields" : {
+        "verified" : "boolean",
+        "status" : "String",
+        "referenceId" : "String"
+      }
+    },
+    "ErrorResponse" : {
+      "fields" : {
+        "timestamp" : "LocalDateTime",
+        "status" : "Integer",
+        "error" : "String",
+        "message" : "String",
+        "path" : "String"
+      }
+    },
+    "MenuCategoryDto" : {
+      "fields" : {
+        "id" : "UUID",
+        "name" : "String",
+        "menuItems" : "List<MenuItemDto>"
+      }
+    },
+    "GalleryImageDto" : {
+      "fields" : {
+        "id" : "UUID",
+        "imageUrl" : "String",
+        "caption" : "String",
+        "uploadDate" : "LocalDateTime"
+      }
+    },
+    "CateringInquiryDto" : {
+      "fields" : {
+        "id" : "UUID",
+        "customerName" : "String",
+        "customerEmail" : "String",
+        "customerPhone" : "String",
+        "eventType" : "String",
+        "eventDate" : "java.time.LocalDate",
+        "numberOfGuests" : "Integer",
+        "budget" : "java.math.BigDecimal",
+        "specialRequests" : "String",
+        "status" : "InquiryStatus",
+        "createdAt" : "LocalDateTime",
+        "updatedAt" : "LocalDateTime"
+      }
+    },
+    "ReviewDto" : {
+      "fields" : {
+        "id" : "UUID",
+        "authorName" : "String",
+        "rating" : "Integer",
+        "comment" : "String",
+        "source" : "String",
+        "reviewDate" : "java.time.LocalDate",
+        "isFeatured" : "Boolean"
+      }
+    },
+    "PaymentOrderResponse" : {
+      "fields" : {
+        "gatewayOrderId" : "String",
+        "gatewayKeyId" : "String",
+        "amount" : "int",
+        "currency" : "String",
+        "paymentRecordId" : "Long"
+      }
+    },
+    "VerifyPaymentRequest" : {
+      "fields" : {
+        "gatewayOrderId" : "String",
+        "gatewayPaymentId" : "String",
+        "signature" : "String"
+      }
+    },
+    "ReservationDto" : {
+      "fields" : {
+        "id" : "UUID",
+        "customerName" : "String",
+        "customerEmail" : "String",
+        "customerPhone" : "String",
+        "numberOfGuests" : "Integer",
+        "reservationDate" : "java.time.LocalDate",
+        "reservationTime" : "java.time.LocalTime",
+        "specialRequests" : "String",
+        "status" : "ReservationStatus",
+        "createdAt" : "LocalDateTime",
+        "updatedAt" : "LocalDateTime"
+      }
+    },
+    "PostDto" : {
+      "fields" : {
+        "id" : "UUID",
+        "title" : "String",
+        "content" : "String",
+        "author" : "String",
+        "publishDate" : "java.time.LocalDate",
+        "imageUrl" : "String"
+      }
+    },
+    "CreateInquiryRequest" : {
+      "fields" : {
+        "customerName" : "String",
+        "customerEmail" : "String",
+        "customerPhone" : "String",
+        "eventType" : "String",
+        "eventDate" : "java.time.LocalDate",
+        "numberOfGuests" : "Integer",
+        "budget" : "java.math.BigDecimal",
+        "specialRequests" : "String"
+      }
+    },
+    "OrderItemDto" : {
+      "fields" : {
+        "menuItemId" : "UUID",
+        "menuItemName" : "String",
+        "quantity" : "Integer",
+        "subTotal" : "BigDecimal"
+      }
+    }
+  }
+}
