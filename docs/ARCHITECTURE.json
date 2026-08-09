@@ -102,8 +102,8 @@
     "file_type" : "BACKEND",
     "layer" : "CONFIG",
     "created_date" : "2024-07-31",
-    "updated_date" : "2024-07-31",
-    "status" : "PLANNED",
+    "updated_date" : "2026-08-09",
+    "status" : "GENERATED",
     "description" : "Populates the database with initial domain data like menu categories and items on application startup.",
     "public_functions" : [ {
       "name" : "run",
