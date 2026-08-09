@@ -4092,14 +4092,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A page with information about catering services and a form for inquiries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "CateringPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the catering services page with a hero section, service details, and the inquiry form. All monetary values are displayed in Indian Rupees (₹) using the en-IN locale."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/components/inquiry/CateringInquiryForm.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-ui",
-    "file_role" : null,
+    "file_role" : "PAGE layer — renders the catering information and hosts the CateringInquiryForm component.",
     "change_required" : null
   }, {
     "file_name" : "useInquiries.ts",
@@ -4110,14 +4115,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "React Query hook for submitting and managing catering inquiry data.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "useCreateInquiry",
+      "parameters" : [ ],
+      "return_type" : "{ mutate: (data: CreateInquiryRequest) => void; isLoading: boolean; isError: boolean; isSuccess: boolean; error: Error | null; data: CateringInquiryDto | undefined }",
+      "description" : "Provides a mutation function to create a new catering inquiry, along with loading, error, and success states."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/services/inquiryService.ts", "frontend/src/types/inquiry.ts" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-ui",
-    "file_role" : null,
+    "file_role" : "HOOK layer — provides a React Query hook `useCreateInquiry` for submitting catering inquiry data by calling `inquiryService.createInquiry(CreateInquiryRequest): Promise<CateringInquiryDto>`.",
     "change_required" : null
   }, {
     "file_name" : "inquiryService.ts",
@@ -4128,14 +4138,26 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Service for making API calls to catering inquiry endpoints.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "createInquiry",
+      "parameters" : [ "CreateInquiryRequest request" ],
+      "return_type" : "Promise<CateringInquiryDto>",
+      "description" : "Submits a new catering inquiry to the backend API."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/inquiries/catering",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Endpoint to create a new catering inquiry.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/api/client.ts", "frontend/src/types/inquiry.ts" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-ui",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — handles API calls related to catering inquiries, exposing `createInquiry(CreateInquiryRequest): Promise<CateringInquiryDto>`.",
     "change_required" : null
   }, {
     "file_name" : "inquiry.ts",
@@ -4147,13 +4169,21 @@
     "status" : "PLANNED",
     "description" : "TypeScript types and interfaces for the CateringInquiry domain.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "CateringInquiryDto",
+      "type" : "interface",
+      "description" : "Represents a catering inquiry with fields mirroring the backend's CateringInquiryDto."
+    }, {
+      "name" : "CreateInquiryRequest",
+      "type" : "interface",
+      "description" : "Represents the request body for creating a new catering inquiry, mirroring the backend's CreateInquiryRequest."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-ui",
-    "file_role" : null,
+    "file_role" : "Generated from the backend API contract — defines TypeScript types for catering inquiry DTOs and request objects.",
     "change_required" : null
   }, {
     "file_name" : "CateringInquiryForm.tsx",
@@ -4164,14 +4194,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A form for customers to submit details for a catering or private event inquiry.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "CateringInquiryForm",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a form for catering inquiries, handles input validation, and submits data using the `useCreateInquiry` hook. All monetary values are displayed in Indian Rupees (₹) using the en-IN locale."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useInquiries.ts" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-ui",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — provides a form for customers to submit catering inquiry details, consuming `useInquiries().createInquiry`.",
     "change_required" : null
   }, {
     "file_name" : "BlogPage.tsx",
@@ -4935,8 +4970,8 @@
     "feature_display_name" : "Catering Inquiry UI",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/pages/CateringPage.tsx", "frontend/src/hooks/useInquiries.ts", "frontend/src/services/inquiryService.ts", "frontend/src/types/inquiry.ts", "frontend/src/components/inquiry/CateringInquiryForm.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#800020] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b89a30] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-gray-50 (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-gray-700 leading-relaxed\n\nThis feature provides a user interface for customers to inquire about catering services for events. It consists of a dedicated `CateringPage.tsx` that displays information about Farmaaish Restaurant's catering offerings and includes a `CateringInquiryForm.tsx` for submitting inquiries. The form collects customer details, event type, date, number of guests, budget, and special requests. The `CateringInquiryForm.tsx` component utilizes the `useInquiries.ts` React Query hook to handle form submission and manage the state of the inquiry. The `useInquiries.ts` hook, in turn, interacts with `inquiryService.ts` to make API calls to the backend's `/api/v1/inquiries/catering` endpoint for creating new inquiries. All data structures related to catering inquiries are defined in `inquiry.ts`.\n\n### `CateringPage.tsx`\nThis page serves as the entry point for catering inquiries. It will feature a hero section with a compelling image and headline, followed by sections detailing the catering services, and finally, the inquiry form. The page will use the `Layout` component from `@/components/Layout` for consistent navigation and footer.\n\n**Sections:**\n1.  **Hero Section:**\n    -   Background image: `https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1920&q=80` with a `bg-black bg-opacity-50` overlay.\n    -   Headline: \"Experience the Grandeur of Farmaaish Catering\"\n    -   Sub-headline: \"Bring the authentic taste of Mughlai cuisine to your special events.\"\n    -   Call to Action (Optional): A button linking to the inquiry form section.\n2.  **Catering Services Overview:**\n    -   Heading: \"Our Catering Services\"\n    -   Content: Describe the types of events catered (weddings, corporate, private parties), customization options, and the culinary experience. Emphasize the rich Mughlai flavors and premium service.\n3.  **Why Choose Farmaaish Catering:**\n    -   Heading: \"Why Choose Farmaaish for Your Event?\"\n    -   Content: Highlight unique selling points like authentic recipes, experienced chefs, bespoke menus, and impeccable service.\n4.  **Inquiry Form Section:**\n    -   Heading: \"Plan Your Event with Us\"\n    -   Sub-headline: \"Tell us about your event, and our team will get in touch to craft a memorable culinary experience.\"\n    -   Includes the `CateringInquiryForm` component.\n\n### `CateringInquiryForm.tsx`\nThis component renders a form for customers to submit catering inquiry details. It will use `react-hook-form` for form management and `zod` for validation. Upon successful submission, a toast notification (using `sonner`) will confirm the inquiry. The form fields will map directly to the `CreateInquiryRequest` DTO.\n\n**Form Fields:**\n-   `customerName`: Text input, required.\n-   `customerEmail`: Email input, required, valid email format.\n-   `customerPhone`: Text input, required, valid Indian phone number format.\n-   `eventType`: Select dropdown (e.g., \"Wedding\", \"Corporate Event\", \"Birthday Party\", \"Private Gathering\", \"Other\"), required.\n-   `eventDate`: Date picker, required, future date only.\n-   `numberOfGuests`: Number input, required, minimum 1.\n-   `budget`: Number input, optional, displayed in INR.\n-   `specialRequests`: Textarea, optional.\n\n**Form Submission:**\n1.  When the form is submitted, `CateringInquiryForm` calls `useInquiries().createInquiry.mutate(data)`. \n2.  On success, a success toast \"Your catering inquiry has been submitted successfully! We will contact you shortly.\" is displayed. \n3.  On error, an error toast \"Failed to submit inquiry. Please try again.\" is displayed.\n\n### `useInquiries.ts`\nThis React Query hook provides an interface for components to interact with catering inquiry data. It exports a `useCreateInquiry` hook for submitting new inquiries.\n\n**`useCreateInquiry` hook logic:**\n1.  Uses `react-query`'s `useMutation` to handle the asynchronous API call.\n2.  Calls `inquiryService.createInquiry(request)` with the provided `CreateInquiryRequest` data.\n3.  Manages loading, error, and success states for the mutation.\n\n### `inquiryService.ts`\nThis service handles the actual API communication with the backend for catering inquiries. It uses the `api` client from `frontend/src/api/client.ts`.\n\n**`createInquiry` function logic:**\n1.  Accepts a `CreateInquiryRequest` object.\n2.  Makes a `POST` request to `/api/v1/inquiries/catering` with the request body.\n3.  Returns a `Promise<CateringInquiryDto>`.\n4.  Handles potential network errors or API response errors.\n\n### `inquiry.ts`\nThis file defines the TypeScript interfaces for catering inquiry data transfer objects (DTOs) and request/response structures, mirroring the backend's `inquiry-management` feature data shapes.\n\n**Interfaces:**\n-   `CateringInquiryDto`: Represents a full catering inquiry, including its ID, status, and timestamps.\n-   `CreateInquiryRequest`: Represents the data required to create a new catering inquiry.",
+    "depends_on_features" : [ "inquiry-management" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
