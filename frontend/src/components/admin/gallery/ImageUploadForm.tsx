@@ -1,3 +1,5 @@
+import { File } from 'lucide-react';
+import type { JSX } from 'react';
 import { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { uploadGalleryImage } from '@/services/galleryService';

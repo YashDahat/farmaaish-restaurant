@@ -1,4 +1,4 @@
-import siteConfig from '@/config/siteConfig';
+import { googleMapsEmbedUrl } from '@/config/siteConfig';
 
 export default function LocationMap() {
   return (
@@ -7,7 +7,7 @@ export default function LocationMap() {
         <h2 className="text-2xl md:text-3xl font-semibold text-center mb-8 text-[#36454F]">Find Us Here</h2>
         <div className="aspect-w-16 aspect-h-9 w-full h-[400px] md:h-[500px] rounded-lg overflow-hidden shadow-lg">
           <iframe
-            src={siteConfig.googleMapsEmbedUrl}
+            src={googleMapsEmbedUrl}
             width="100%"
             height="100%"
             style={{ border: 0 }}

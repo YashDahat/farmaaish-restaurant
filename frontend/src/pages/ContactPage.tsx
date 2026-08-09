@@ -1,7 +1,7 @@
 import ContactDetails from '@/components/contact/ContactDetails';
 import LocationMap from '@/components/contact/LocationMap';
 import { SiteLayout } from '@/shell';
-import siteConfig from '@/config/siteConfig';
+import { siteConfig } from '@/config/siteConfig';
 
 export default function ContactPage() {
   return (

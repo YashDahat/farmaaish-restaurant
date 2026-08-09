@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import type { JSX } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import {
@@ -32,7 +32,7 @@ export default function InquiriesTable(): React.JSX.Element {
   });
 
   const updateStatusMutation = useMutation<CateringInquiryDto, Error, { id: string; status: InquiryStatus }>({
-    mutationFn: ({ id, status }) => updateInquiryStatus(id, { status }), // Assuming updateInquiryStatus takes an object with status
+    mutationFn: ({ id }) => updateInquiryStatus(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['cateringInquiries'] });
       toast.success('Inquiry status updated successfully.');

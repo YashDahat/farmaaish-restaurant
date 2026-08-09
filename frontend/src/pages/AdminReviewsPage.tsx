@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import AdminLayout from '@/components/AdminLayout';
 import ReviewsTable from '@/components/admin/reviews/ReviewsTable';
 import { SyncReviewsButton } from '@/components/admin/reviews/SyncReviewsButton';

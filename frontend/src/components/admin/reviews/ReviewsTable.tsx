@@ -1,5 +1,7 @@
+import { deleteReview } from '@/services/apiService';
 'use client';
 
+import type { JSX } from 'react';
 import { useState } from 'react';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { toast } from 'sonner';
@@ -22,10 +24,9 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { useReviews } from '@/hooks/useReviews';
-import { deleteReview, updateReview } from '@/services/reviewService';
+import { updateReview } from '@/services/reviewService';
 import type { ReviewDto } from '@/types/review';
 
 export default function ReviewsTable(): React.JSX.Element {

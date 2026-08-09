@@ -5,33 +5,46 @@ import { Button } from '@/components/ui/button';
 import { ROUTES } from '@/routes';
 import { useAllPosts } from '@/hooks/useBlog';
 import { useGallery } from '@/hooks/useGallery';
-import { useInquiries } from '@/hooks/useInquiries';
 import { useMenu } from '@/hooks/useMenu';
-import { useOffers } from '@/hooks/useOffers';
-import { useOrders } from '@/hooks/useOrders';
-import { useReservations } from '@/hooks/useReservations';
-import { useReviews } from '@/hooks/useReviews';
+
+import { useQuery } from '@tanstack/react-query';
+import { getAllInquiries } from '@/services/inquiryService';
+import { getAllReservations } from '@/services/reservationService';
+import { getAllOrders } from '@/services/orderService';
+import { getAllSpecialOffers } from '@/services/offerService';
+import { adminGetAllMenuItems } from '@/services/menuService';
+import { adminGetAllPosts } from '@/services/blogService';
+import { getAllGalleryImages } from '@/services/galleryService';
+import { getAllReviews } from '@/services/reviewService';
+import type { CateringInquiryDto } from '@/types/inquiry';
+import type { ReservationDto } from '@/types/reservation';
+import type { OrderDto } from '@/types/order';
+import type { SpecialOfferDto } from '@/types/offer';
+import type { MenuItemDto } from '@/types/menu';
+import type { PostDto } from '@/types/blog';
+import type { GalleryImageDto } from '@/types/gallery';
+import type { ReviewDto } from '@/types/review';
 import { Skeleton } from '@/components/ui/skeleton';
 
 const AdminDashboardPage = () => {
-  const { data: posts, isLoading: isLoadingPosts } = useAllPosts();
-  const { data: galleryImages, isLoading: isLoadingGallery } = useGallery();
-  const { data: inquiries, isLoading: isLoadingInquiries } = useInquiries();
-  const { data: menuItems, isLoading: isLoadingMenu } = useMenu();
-  const { data: offers, isLoading: isLoadingOffers } = useOffers();
-  const { data: orders, isLoading: isLoadingOrders } = useOrders();
-  const { data: reservations, isLoading: isLoadingReservations } = useReservations();
-  const { data: reviews, isLoading: isLoadingReviews } = useReviews();
+  const { data: posts, isLoading: isLoadingPosts } = useQuery<PostDto[], Error>({ queryKey: ['adminBlogPosts'], queryFn: adminGetAllPosts });
+  const { data: galleryImages, isLoading: isLoadingGallery } = useQuery<GalleryImageDto[], Error>({ queryKey: ['galleryImages'], queryFn: getAllGalleryImages });
+  const { data: inquiries, isLoading: isLoadingInquiries } = useQuery<CateringInquiryDto[], Error>({ queryKey: ['cateringInquiries'], queryFn: getAllInquiries });
+  const { data: menuItems, isLoading: isLoadingMenu } = useQuery<MenuItemDto[], Error>({ queryKey: ['adminMenuItems'], queryFn: adminGetAllMenuItems });
+  const { data: offers, isLoading: isLoadingOffers } = useQuery<SpecialOfferDto[], Error>({ queryKey: ['specialOffers'], queryFn: getAllSpecialOffers });
+  const { data: orders, isLoading: isLoadingOrders } = useQuery<OrderDto[], Error>({ queryKey: ['orders'], queryFn: getAllOrders });
+  const { data: reservations, isLoading: isLoadingReservations } = useQuery<ReservationDto[], Error>({ queryKey: ['reservations'], queryFn: getAllReservations });
+  const { data: reviews, isLoading: isLoadingReviews } = useQuery<ReviewDto[], Error>({ queryKey: ['allReviews'], queryFn: getAllReviews });
 
   const formatCurrency = (amount: number): string => {
     return amount.toLocaleString('en-IN', { style: 'currency', currency: 'INR' });
   };
 
-  const totalRevenue = orders?.reduce((sum, order) => sum + order.totalAmount, 0) ?? 0;
-  const pendingOrders = orders?.filter(order => order.status === 'PENDING_PAYMENT' || order.status === 'RECEIVED').length ?? 0;
-  const pendingReservations = reservations?.filter(res => res.status === 'PENDING').length ?? 0;
-  const newInquiries = inquiries?.filter(inq => inq.status === 'NEW').length ?? 0;
-  const activeOffers = offers?.filter(offer => offer.isActive).length ?? 0;
+  const totalRevenue = orders?.reduce((sum: number, order: OrderDto) => sum + order.totalAmount, 0) ?? 0;
+  const pendingOrders = orders?.filter((order: OrderDto) => order.status === 'PENDING_PAYMENT' || order.status === 'RECEIVED').length ?? 0;
+  const pendingReservations = reservations?.filter((res: ReservationDto) => res.status === 'PENDING').length ?? 0;
+  const newInquiries = inquiries?.filter((inq: CateringInquiryDto) => inq.status === 'NEW').length ?? 0;
+  const activeOffers = offers?.filter((offer: SpecialOfferDto) => offer.isActive).length ?? 0;
   const totalMenuItems = menuItems?.length ?? 0;
   const totalReviews = reviews?.length ?? 0;
   const totalPosts = posts?.length ?? 0;

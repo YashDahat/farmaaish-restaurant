@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useQueryClient } from '@tanstack/react-query';
+import type { JSX } from 'react';
+import { useQueryClient, useMutation, useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { toast } from 'sonner';
 
@@ -20,7 +20,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { OrderDto, OrderStatus } from '@/types/order';
 import { getAllOrders, updateOrderStatus } from '@/services/orderService';
-import { useMutation, useQuery } from '@tanstack/react-query';
 import { Skeleton } from '@/components/ui/skeleton';
 
 interface OrdersTableProps {

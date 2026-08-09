@@ -1,9 +1,9 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient, type UseMutateFunction } from '@tanstack/react-query';
 import { createInquiry } from '@/services/inquiryService';
 import type { CateringInquiryDto, CreateInquiryRequest } from '@/types/inquiry';
 
 export function useCreateInquiry(): {
-  mutate: (request: CreateInquiryRequest) => void;
+  mutate: UseMutateFunction<CateringInquiryDto, Error, CreateInquiryRequest>;
   isPending: boolean;
   isError: boolean;
   isSuccess: boolean;

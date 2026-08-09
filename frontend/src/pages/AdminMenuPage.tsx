@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import AdminLayout from '@/components/AdminLayout';
 import MenuTable from '@/components/admin/menu/MenuTable';
 import MenuItemForm from '@/components/admin/menu/MenuItemForm';

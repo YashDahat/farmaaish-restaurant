@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import type { JSX } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import {
@@ -44,7 +44,7 @@ export default function ReservationsTable(): React.JSX.Element {
   });
 
   const updateStatusMutation = useMutation<ReservationDto, Error, { id: string; status: ReservationStatus }>({
-    mutationFn: ({ id, status }) => updateReservationStatus(id, status),
+    mutationFn: ({ id }) => updateReservationStatus(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['reservations'] });
       toast.success('Reservation status updated successfully!');

@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
@@ -73,7 +74,7 @@ export default function PostsTable(): React.JSX.Element {
               <DialogTitle>{editingPost ? 'Edit Post' : 'Create New Post'}</DialogTitle>
             </DialogHeader>
             <PostForm
-              initialData={editingPost}
+              post={editingPost ?? undefined}
               onSuccess={() => {
                 setIsFormOpen(false);
                 setEditingPost(null);
@@ -117,7 +118,7 @@ export default function PostsTable(): React.JSX.Element {
                         <DialogTitle>Edit Post</DialogTitle>
                       </DialogHeader>
                       <PostForm
-                        initialData={post}
+                        post={post}
                         onSuccess={() => {
                           setIsFormOpen(false);
                           setEditingPost(null);

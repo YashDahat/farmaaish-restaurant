@@ -1,40 +1,40 @@
-# WebApp Foundation
+# Farmaaish Restaurant
 
-A production-ready Spring Boot 4 + React + TypeScript foundation that every generated website clones.
-The pipeline does a one-time package rename then generates only the business-specific layer on top.
+Auto-generated website for Farmaaish Restaurant — Mughlai restaurant, Kundan Garden, Baner Rd, Near Veritas Software, Baner, Pune, Maharashtra 411069.
 
-## What's included (deterministic scaffold — no LLM cost)
+## Tech Stack
 
-**Backend**
-- Spring Boot 4.x + JPA + PostgreSQL + Security
-- JWT authentication (AuthController, JwtUtil, JwtAuthFilter, SecurityConfig)
-- Admin user bootstrap via AdminInitializer (env: ADMIN_EMAIL / ADMIN_PASSWORD)
-- Full Razorpay payment spine (PaymentGateway interface + RazorpayPaymentGateway + DemoPaymentGateway fallback)
-- SPA fallback controller (serves React at all non-API routes, including nested paths)
-- Base package: `com.webappfoundation` → replaced by pipeline to `com.<businessslug>`
+- **backend**: Headless CMS (e.g., Sanity.io or Strapi) for easy menu and content management. Use a third-party platform API (e.g., Jhattse, UrbanPiper) for order and reservation management to avoid building complex logic from scratch.
+- **hosting**: Vercel for the frontend, with backend services hosted on their respective platforms.
+- **database**: Managed by the Headless CMS and third-party services. PostgreSQL if a small custom backend is needed.
+- **frontend**: Next.js with Tailwind CSS for a fast, SEO-friendly user experience.
 
-**Frontend**
-- Vite + React 19 + TypeScript (strict mode)
-- Tailwind CSS + shadcn/ui (25 components pre-installed)
-- Cart spine: CartContext, CartProvider, CartItem, useCheckout, pricing engine
-- AuthContext + ProtectedRoute shims at `@/context/`
-- Playwright config for e2e specs
-- All canonical configs: vite.config.ts, tsconfig.app.json, playwright.config.ts
+## Features
 
-## Pipeline usage
+- Integrated Online Reservation System (e.g., via Resy, OpenTable, or SevenRooms API)
+- Integrated Online Ordering System with payment gateway
+- High-quality, professional food photography
+- Mobile-first, responsive design
+- Schema markup for recipes, menus, and local business
+- Click-to-call and interactive map integration
+- Google Business Profile synchronization for hours and reviews
+
+## Running Locally
 
 ```bash
-# Pipeline clones this and renames packages
-git clone git@github.com:YashDahat/webapp-foundation.git <business-slug>
-find . -type f -name "*.java" -exec sed -i 's/com\.webappfoundation/com.<slug>/g' {} \;
-find . -type f -name "*.java" -exec sed -i 's/WebAppFoundation/<BusinessName>/g' {} \;
-# Then: LLM generates only entities, controllers, services, frontend pages/components
+docker-compose up --build
 ```
 
-## Running locally
+The app will be available at http://localhost:8080
 
+## Development
+
+**Backend:**
 ```bash
-cp .env.example .env   # fill in DB_URL, JWT_SECRET, etc.
-docker-compose up --build
-# → http://localhost:8080
+cd backend && mvn spring-boot:run
+```
+
+**Frontend:**
+```bash
+cd frontend && npm install && npm run dev
 ```

@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { PencilIcon, Trash2Icon } from 'lucide-react';

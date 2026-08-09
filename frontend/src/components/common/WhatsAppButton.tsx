@@ -1,9 +1,9 @@
-import siteConfig from '@/config/siteConfig';
+import { whatsappNumber } from '@/config/siteConfig';
 import { Button } from '@/components/ui/button';
 import { MessageCircle } from 'lucide-react';
 
 export default function WhatsAppButton() {
-  const whatsappLink = `https://wa.me/${siteConfig.whatsappNumber}`;
+  const whatsappLink = `https://wa.me/${whatsappNumber}`;
 
   return (
     <a

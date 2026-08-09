@@ -1,11 +1,11 @@
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
-import siteConfig from '@/config/siteConfig';
+import { siteConfig } from '@/config/siteConfig';
 
 export default function ContactDetails() {
   const { address, phone, email, openingHours } = siteConfig.footer;
 
   // Format phone number for Indian locale (e.g., +91 20 2729 1111)
-  const formatPhoneNumber = (num: string | undefined): string => {
+  const formatPhoneNumber = (num: string | null | undefined): string => {
     if (!num) return 'N/A';
     // Assuming the number is like '020 2729 1111' or '919876543210'
     // This is a basic formatter and might need more robust logic for various formats

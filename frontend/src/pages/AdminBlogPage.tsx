@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import AdminLayout from '@/components/AdminLayout';
 import PostsTable from '@/components/admin/blog/PostsTable';
 

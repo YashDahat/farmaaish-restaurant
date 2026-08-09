@@ -1,6 +1,6 @@
 import CateringInquiryForm from '@/components/inquiry/CateringInquiryForm';
 import { SiteLayout } from '@/shell';
-import siteConfig from '@/config/siteConfig';
+import { siteConfig } from '@/config/siteConfig';
 
 export default function CateringPage() {
   return (

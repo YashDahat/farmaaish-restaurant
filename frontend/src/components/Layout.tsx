@@ -1,5 +1,5 @@
 import SiteLayout from '@/shell/SiteLayout';
-import siteConfig from '@/config/siteConfig';
+import { siteConfig } from '@/config/siteConfig';
 import React from 'react';
 
 interface LayoutProps {

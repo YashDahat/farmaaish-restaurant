@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import MenuCategoryTabs from '@/components/menu/MenuCategoryTabs';
 import MenuItemsGrid from '@/components/menu/MenuItemsGrid';
 import { useMenu } from '@/hooks/useMenu';

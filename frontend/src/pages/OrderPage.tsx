@@ -6,15 +6,26 @@ import CartDrawer from '@/components/order/CartDrawer';
 import { Skeleton } from '@/components/ui/skeleton';
 
 export default function OrderPage() {
-  const { data: menuData, isLoading, error } = useMenu();
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const {
+    categories,
+    categoriesLoading,
+    categoriesError,
+    menuItems,
+    menuItemsLoading,
+    menuItemsError,
+    selectedCategory,
+    setSelectedCategory,
+  } = useMenu();
 
-  const categories = menuData?.categories || [];
-  const menuItems = menuData?.menuItems || [];
+  const isLoading = categoriesLoading || menuItemsLoading;
+  const error = categoriesError || menuItemsError;
+
+  const allItems = menuItems ?? [];
+  const allCategories = categories ?? [];
 
   const filteredItems = selectedCategory
-    ? menuItems.filter((item) => item.categoryId === selectedCategory)
-    : menuItems;
+    ? allItems.filter((item) => item.categoryId === selectedCategory)
+    : allItems;
 
   if (isLoading) {
     return (
@@ -67,7 +78,7 @@ export default function OrderPage() {
         </div>
 
         <MenuCategoryTabs
-          categories={categories}
+          categories={allCategories}
           selectedCategory={selectedCategory}
           onSelectCategory={setSelectedCategory}
         />

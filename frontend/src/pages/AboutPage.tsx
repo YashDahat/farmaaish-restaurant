@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import SiteLayout from '@/shell/SiteLayout';
-import siteConfig from '@/config/siteConfig';
+import { siteConfig } from '@/config/siteConfig';
 import { ROUTES } from '@/routes';
 
 export default function AboutPage() {

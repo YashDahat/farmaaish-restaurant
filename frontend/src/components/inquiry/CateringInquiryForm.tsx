@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -190,7 +191,6 @@ export default function CateringInquiryForm(): React.JSX.Element {
                     selected={field.value}
                     onSelect={field.onChange}
                     disabled={(date) => date < new Date()}
-                    initialFocus
                   />
                 </PopoverContent>
               </Popover>
@@ -218,7 +218,14 @@ export default function CateringInquiryForm(): React.JSX.Element {
             <FormItem>
               <FormLabel>Budget (INR)</FormLabel>
               <FormControl>
-                <Input type="number" placeholder="50000" {...field} data-testid="catering-budget-input" />
+                <Input
+                  type="number"
+                  placeholder="50000"
+                  {...field}
+                  value={field.value ?? ''}
+                  onChange={(e) => field.onChange(e.target.value === '' ? null : Number(e.target.value))}
+                  data-testid="catering-budget-input"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

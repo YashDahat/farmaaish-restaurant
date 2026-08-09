@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import AdminLayout from '@/components/AdminLayout';
 import ReservationsTable from '@/components/admin/reservations/ReservationsTable';
 

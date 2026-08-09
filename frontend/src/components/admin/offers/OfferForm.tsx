@@ -162,7 +162,6 @@ export default function OfferForm({ initialData, onSuccess }: OfferFormProps) {
                     mode="single"
                     selected={field.value}
                     onSelect={field.onChange}
-                    initialFocus
                   />
                 </PopoverContent>
               </Popover>
@@ -201,7 +200,6 @@ export default function OfferForm({ initialData, onSuccess }: OfferFormProps) {
                     mode="single"
                     selected={field.value}
                     onSelect={field.onChange}
-                    initialFocus
                   />
                 </PopoverContent>
               </Popover>

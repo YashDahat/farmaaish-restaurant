@@ -1,12 +1,12 @@
+import type { JSX } from 'react';
 import { useState } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
-import { Menu, X, LogOut } from 'lucide-react';
+import { Menu, LogOut } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { ROUTES, routeTable } from '@/routes';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Separator } from '@/components/ui/separator';
-import { cn } from '@/lib/utils';
 
 interface AdminLayoutProps {
   children?: React.ReactNode;
