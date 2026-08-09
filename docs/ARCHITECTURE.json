@@ -2467,13 +2467,45 @@
     "status" : "PLANNED",
     "description" : "Represents a special offer or promotion, such as a daily special or discount.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the special offer. Not null."
+    }, {
+      "name" : "title",
+      "type" : "String",
+      "description" : "Title of the special offer. Not null, max 255 characters."
+    }, {
+      "name" : "description",
+      "type" : "String",
+      "description" : "Detailed description of the offer. Max 1000 characters."
+    }, {
+      "name" : "discountPercentage",
+      "type" : "BigDecimal",
+      "description" : "Percentage discount offered (e.g., 10.00 for 10%). Precision 10, scale 2."
+    }, {
+      "name" : "startDate",
+      "type" : "LocalDate",
+      "description" : "The date from which the offer is valid. Not null."
+    }, {
+      "name" : "endDate",
+      "type" : "LocalDate",
+      "description" : "The date until which the offer is valid. Not null."
+    }, {
+      "name" : "imageUrl",
+      "type" : "String",
+      "description" : "URL of an image associated with the offer. Max 500 characters."
+    }, {
+      "name" : "isActive",
+      "type" : "boolean",
+      "description" : "Flag indicating if the offer is currently active."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "offer-management",
-    "file_role" : null,
+    "file_role" : "MODEL layer — defines the `SpecialOffer` entity with fields for promotions and discounts.",
     "change_required" : null
   }, {
     "file_name" : "SpecialOfferRepository.java",
@@ -2484,14 +2516,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Spring Data JPA repository for CRUD operations on SpecialOffer entities.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "findByIsActiveTrueAndEndDateAfter",
+      "parameters" : [ "LocalDate date" ],
+      "return_type" : "List<SpecialOffer>",
+      "description" : "Retrieves all special offers that are active and whose end date is after the given date."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/model/SpecialOffer.java" ],
     "depends_on" : [ ],
     "feature_name" : "offer-management",
-    "file_role" : null,
+    "file_role" : "REPOSITORY layer — provides data access operations for `SpecialOffer` entities.",
     "change_required" : null
   }, {
     "file_name" : "SpecialOfferService.java",
@@ -2502,14 +2539,44 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Handles business logic for managing special offers.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "createSpecialOffer",
+      "parameters" : [ "SpecialOfferDto offerDto" ],
+      "return_type" : "SpecialOfferDto",
+      "description" : "Creates a new special offer."
+    }, {
+      "name" : "getSpecialOfferById",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "SpecialOfferDto",
+      "description" : "Retrieves a special offer by its ID."
+    }, {
+      "name" : "getAllActiveSpecialOffers",
+      "parameters" : [ ],
+      "return_type" : "List<SpecialOfferDto>",
+      "description" : "Retrieves all currently active and unexpired special offers."
+    }, {
+      "name" : "getAllSpecialOffers",
+      "parameters" : [ ],
+      "return_type" : "List<SpecialOfferDto>",
+      "description" : "Retrieves all special offers, regardless of status or expiry."
+    }, {
+      "name" : "updateSpecialOffer",
+      "parameters" : [ "UUID id", "SpecialOfferDto offerDto" ],
+      "return_type" : "SpecialOfferDto",
+      "description" : "Updates an existing special offer."
+    }, {
+      "name" : "deleteSpecialOffer",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "void",
+      "description" : "Deletes a special offer by its ID."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/repository/SpecialOfferRepository.java" ],
     "depends_on" : [ ],
     "feature_name" : "offer-management",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — implements business logic for managing special offers, including CRUD operations and fetching active offers.",
     "change_required" : null
   }, {
     "file_name" : "SpecialOfferController.java",
@@ -2520,14 +2587,26 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Public-facing REST controller for fetching active special offers.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getAllActiveSpecialOffers",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<List<SpecialOfferDto>>",
+      "description" : "Handles GET requests to retrieve all active special offers."
+    } ],
     "public_variables" : null,
-    "api_endpoints" : null,
+    "api_endpoints" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/offers",
+      "request_body" : null,
+      "response_body" : "List<SpecialOfferDto>",
+      "description" : "Retrieves a list of all active and unexpired special offers.",
+      "access" : "public"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/service/SpecialOfferService.java", "backend/src/main/java/com/farmaaishrestaurant/dto/SpecialOfferDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "offer-management",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — exposes public REST endpoints for fetching active special offers.",
     "change_required" : null
   }, {
     "file_name" : "AdminSpecialOfferController.java",
@@ -2538,14 +2617,74 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Admin-only REST controller for CRUD operations on special offers.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "createSpecialOffer",
+      "parameters" : [ "SpecialOfferDto offerDto" ],
+      "return_type" : "ResponseEntity<SpecialOfferDto>",
+      "description" : "Handles POST requests to create a new special offer."
+    }, {
+      "name" : "getAllSpecialOffers",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<List<SpecialOfferDto>>",
+      "description" : "Handles GET requests to retrieve all special offers (admin only)."
+    }, {
+      "name" : "getSpecialOfferById",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "ResponseEntity<SpecialOfferDto>",
+      "description" : "Handles GET requests to retrieve a special offer by ID (admin only)."
+    }, {
+      "name" : "updateSpecialOffer",
+      "parameters" : [ "UUID id", "SpecialOfferDto offerDto" ],
+      "return_type" : "ResponseEntity<SpecialOfferDto>",
+      "description" : "Handles PUT requests to update an existing special offer."
+    }, {
+      "name" : "deleteSpecialOffer",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "ResponseEntity<Void>",
+      "description" : "Handles DELETE requests to remove a special offer by ID."
+    } ],
     "public_variables" : null,
-    "api_endpoints" : null,
+    "api_endpoints" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/admin/offers",
+      "request_body" : "SpecialOfferDto",
+      "response_body" : "SpecialOfferDto",
+      "description" : "Creates a new special offer.",
+      "access" : "admin"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/admin/offers",
+      "request_body" : null,
+      "response_body" : "List<SpecialOfferDto>",
+      "description" : "Retrieves a list of all special offers.",
+      "access" : "admin"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/admin/offers/{id}",
+      "request_body" : null,
+      "response_body" : "SpecialOfferDto",
+      "description" : "Retrieves a special offer by its ID.",
+      "access" : "admin"
+    }, {
+      "method" : "PUT",
+      "path" : "/api/v1/admin/offers/{id}",
+      "request_body" : "SpecialOfferDto",
+      "response_body" : "SpecialOfferDto",
+      "description" : "Updates an existing special offer.",
+      "access" : "admin"
+    }, {
+      "method" : "DELETE",
+      "path" : "/api/v1/admin/offers/{id}",
+      "request_body" : null,
+      "response_body" : "void",
+      "description" : "Deletes a special offer by its ID.",
+      "access" : "admin"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/farmaaishrestaurant/service/SpecialOfferService.java", "backend/src/main/java/com/farmaaishrestaurant/dto/SpecialOfferDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "offer-management",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — exposes admin-only REST endpoints for CRUD operations on special offers.",
     "change_required" : null
   }, {
     "file_name" : "SpecialOfferDto.java",
@@ -2557,13 +2696,45 @@
     "status" : "PLANNED",
     "description" : "Data Transfer Object for representing SpecialOffer entities in API responses.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the special offer."
+    }, {
+      "name" : "title",
+      "type" : "String",
+      "description" : "Title of the special offer. @NotNull, @Size(max = 255)."
+    }, {
+      "name" : "description",
+      "type" : "String",
+      "description" : "Detailed description of the offer. @Size(max = 1000)."
+    }, {
+      "name" : "discountPercentage",
+      "type" : "BigDecimal",
+      "description" : "Percentage discount offered. @DecimalMin(\"0.00\"), @DecimalMax(\"100.00\")."
+    }, {
+      "name" : "startDate",
+      "type" : "LocalDate",
+      "description" : "The date from which the offer is valid. @NotNull."
+    }, {
+      "name" : "endDate",
+      "type" : "LocalDate",
+      "description" : "The date until which the offer is valid. @NotNull."
+    }, {
+      "name" : "imageUrl",
+      "type" : "String",
+      "description" : "URL of an image associated with the offer. @Size(max = 500)."
+    }, {
+      "name" : "isActive",
+      "type" : "boolean",
+      "description" : "Flag indicating if the offer is currently active."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "offer-management",
-    "file_role" : null,
+    "file_role" : "DTO layer — Data Transfer Object for representing `SpecialOffer` entities in API requests and responses.",
     "change_required" : null
   }, {
     "file_name" : "App.tsx",
@@ -4299,8 +4470,8 @@
     "feature_display_name" : "Offer Management",
     "feature_type" : "BACKEND",
     "file_paths" : [ "backend/src/main/java/com/farmaaishrestaurant/model/SpecialOffer.java", "backend/src/main/java/com/farmaaishrestaurant/repository/SpecialOfferRepository.java", "backend/src/main/java/com/farmaaishrestaurant/service/SpecialOfferService.java", "backend/src/main/java/com/farmaaishrestaurant/controller/SpecialOfferController.java", "backend/src/main/java/com/farmaaishrestaurant/controller/AdminSpecialOfferController.java", "backend/src/main/java/com/farmaaishrestaurant/dto/SpecialOfferDto.java" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "The Offer Management feature provides a robust system for Farmaaish Restaurant to create, manage, and display special offers and promotions. This includes a backend API for both public consumption (fetching active offers) and administrative control (CRUD operations on offers). The feature is comprised of a `SpecialOffer` JPA entity, a `SpecialOfferRepository` for data access, a `SpecialOfferService` for business logic, and two controllers: `SpecialOfferController` for public access and `AdminSpecialOfferController` for authenticated administrative operations. A `SpecialOfferDto` is used for data transfer between the service layer and the controllers.\n\n### SpecialOffer.java\nThis is the JPA entity representing a special offer. It will have fields for `id` (UUID), `title` (String), `description` (String), `discountPercentage` (BigDecimal), `startDate` (LocalDate), `endDate` (LocalDate), `imageUrl` (String), and `isActive` (boolean). The `id` will be the primary key, and `title` will be a required field.\n\n### SpecialOfferRepository.java\nThis Spring Data JPA repository extends `JpaRepository<SpecialOffer, UUID>`. It will provide standard CRUD operations. Additionally, it will include a custom query method `findByIsActiveTrueAndEndDateAfter(LocalDate date)` to retrieve all active offers that have not yet expired.\n\n### SpecialOfferService.java\nThis service class encapsulates the business logic for special offers. It injects `SpecialOfferRepository`.\n\n**public SpecialOfferDto createSpecialOffer(SpecialOfferDto offerDto)**\n1. Validates the incoming `offerDto` (e.g., `title` is not null, `startDate` is before `endDate`).\n2. Converts the `SpecialOfferDto` to a `SpecialOffer` entity.\n3. Saves the `SpecialOffer` entity using `specialOfferRepository.save()`.\n4. Converts the saved `SpecialOffer` entity back to a `SpecialOfferDto` and returns it.\n5. Throws `IllegalArgumentException` if validation fails.\n\n**public SpecialOfferDto getSpecialOfferById(UUID id)**\n1. Retrieves a `SpecialOffer` entity by its `id` using `specialOfferRepository.findById()`.\n2. If the offer is not found, throws `ResourceNotFoundException`.\n3. Converts the `SpecialOffer` entity to a `SpecialOfferDto` and returns it.\n\n**public List<SpecialOfferDto> getAllActiveSpecialOffers()**\n1. Calls `specialOfferRepository.findByIsActiveTrueAndEndDateAfter(LocalDate.now())` to get all active and unexpired offers.\n2. Converts the list of `SpecialOffer` entities to a list of `SpecialOfferDto`s and returns it.\n\n**public List<SpecialOfferDto> getAllSpecialOffers()**\n1. Retrieves all `SpecialOffer` entities using `specialOfferRepository.findAll()`.\n2. Converts the list of `SpecialOffer` entities to a list of `SpecialOfferDto`s and returns it.\n\n**public SpecialOfferDto updateSpecialOffer(UUID id, SpecialOfferDto offerDto)**\n1. Retrieves the existing `SpecialOffer` entity by `id` using `specialOfferRepository.findById()`. If not found, throws `ResourceNotFoundException`.\n2. Validates the incoming `offerDto`.\n3. Updates the fields of the existing `SpecialOffer` entity with values from `offerDto`.\n4. Saves the updated `SpecialOffer` entity using `specialOfferRepository.save()`.\n5. Converts the updated `SpecialOffer` entity to a `SpecialOfferDto` and returns it.\n6. Throws `IllegalArgumentException` if validation fails.\n\n**public void deleteSpecialOffer(UUID id)**\n1. Checks if the `SpecialOffer` with the given `id` exists using `specialOfferRepository.existsById()`. If not found, throws `ResourceNotFoundException`.\n2. Deletes the `SpecialOffer` entity by `id` using `specialOfferRepository.deleteById()`.\n\n### SpecialOfferController.java\nThis REST controller exposes public endpoints for fetching special offers. It injects `SpecialOfferService`.\n\n**public ResponseEntity<List<SpecialOfferDto>> getAllActiveSpecialOffers()**\n1. Calls `specialOfferService.getAllActiveSpecialOffers()`.\n2. Returns the list of `SpecialOfferDto`s with HTTP status 200 OK.\n\n### AdminSpecialOfferController.java\nThis REST controller exposes admin-only endpoints for managing special offers. It injects `SpecialOfferService`.\n\n**public ResponseEntity<SpecialOfferDto> createSpecialOffer(@RequestBody SpecialOfferDto offerDto)**\n1. Calls `specialOfferService.createSpecialOffer(offerDto)`.\n2. Returns the created `SpecialOfferDto` with HTTP status 201 Created. Catches `IllegalArgumentException` and returns 400 Bad Request, and `ResourceNotFoundException` (if any internal lookup fails) returning 404 Not Found.\n\n**public ResponseEntity<List<SpecialOfferDto>> getAllSpecialOffers()**\n1. Calls `specialOfferService.getAllSpecialOffers()`.\n2. Returns the list of `SpecialOfferDto`s with HTTP status 200 OK.\n\n**public ResponseEntity<SpecialOfferDto> getSpecialOfferById(@PathVariable UUID id)**\n1. Calls `specialOfferService.getSpecialOfferById(id)`.\n2. Returns the `SpecialOfferDto` with HTTP status 200 OK. Catches `ResourceNotFoundException` and returns 404 Not Found.\n\n**public ResponseEntity<SpecialOfferDto> updateSpecialOffer(@PathVariable UUID id, @RequestBody SpecialOfferDto offerDto)**\n1. Calls `specialOfferService.updateSpecialOffer(id, offerDto)`.\n2. Returns the updated `SpecialOfferDto` with HTTP status 200 OK. Catches `IllegalArgumentException` and returns 400 Bad Request, and `ResourceNotFoundException` returning 404 Not Found.\n\n**public ResponseEntity<Void> deleteSpecialOffer(@PathVariable UUID id)**\n1. Calls `specialOfferService.deleteSpecialOffer(id)`.\n2. Returns HTTP status 204 No Content. Catches `ResourceNotFoundException` and returns 404 Not Found.\n\n### SpecialOfferDto.java\nThis DTO defines the structure for transferring special offer data between layers. It will mirror the `SpecialOffer` entity but will be used for API requests and responses.",
+    "depends_on_features" : [ "shared-backend" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
