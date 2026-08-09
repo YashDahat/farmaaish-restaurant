@@ -4401,14 +4401,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A page showcasing high-quality photos of food and ambiance in a masonry grid.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "GalleryPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the main gallery page with a hero section and an image grid."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useGallery.ts", "frontend/src/components/gallery/ImageGrid.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "gallery-ui",
-    "file_role" : null,
+    "file_role" : "PAGE layer — renders the public gallery page, fetching data via `useGallery` and displaying it with `ImageGrid`.",
     "change_required" : null
   }, {
     "file_name" : "useGallery.ts",
@@ -4419,14 +4424,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "React Query hook for fetching and managing gallery image data.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "useGallery",
+      "parameters" : [ ],
+      "return_type" : "{ data: GalleryImageDto[] | undefined; isLoading: boolean; error: Error | null }",
+      "description" : "Fetches a list of gallery images using React Query."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/services/galleryService.ts", "frontend/src/types/gallery.ts" ],
     "depends_on" : [ ],
     "feature_name" : "gallery-ui",
-    "file_role" : null,
+    "file_role" : "HOOK layer — provides the `useGallery` hook for fetching gallery images.",
     "change_required" : null
   }, {
     "file_name" : "galleryService.ts",
@@ -4437,14 +4447,26 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Service for making API calls to gallery-related endpoints.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getAllGalleryImages",
+      "parameters" : [ ],
+      "return_type" : "Promise<GalleryImageDto[]>",
+      "description" : "Fetches all gallery images from the backend."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/gallery",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Fetches a list of all gallery images.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/api/client.ts", "frontend/src/types/gallery.ts" ],
     "depends_on" : [ ],
     "feature_name" : "gallery-ui",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — provides `getAllGalleryImages()` for making API calls to the backend gallery endpoint.",
     "change_required" : null
   }, {
     "file_name" : "gallery.ts",
@@ -4456,13 +4478,17 @@
     "status" : "PLANNED",
     "description" : "TypeScript types and interfaces for the Gallery domain.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "GalleryImageDto",
+      "type" : "{ id: string; imageUrl: string; caption: string; uploadDate: string; }",
+      "description" : "Represents a single gallery image with its ID, URL, caption, and upload date."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "gallery-ui",
-    "file_role" : null,
+    "file_role" : "Generated from the backend API contract — defines TypeScript types for the Gallery domain.",
     "change_required" : null
   }, {
     "file_name" : "ImageGrid.tsx",
@@ -4473,14 +4499,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A responsive grid component for displaying gallery images.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ImageGrid",
+      "parameters" : [ "images: GalleryImageDto[]" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a responsive masonry-like grid of images."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "gallery-ui",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — displays a responsive grid of gallery images.",
     "change_required" : null
   }, {
     "file_name" : "AdminDashboardPage.tsx",
@@ -5046,8 +5077,8 @@
     "feature_display_name" : "Gallery UI",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/pages/GalleryPage.tsx", "frontend/src/hooks/useGallery.ts", "frontend/src/services/galleryService.ts", "frontend/src/types/gallery.ts", "frontend/src/components/gallery/ImageGrid.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#800020] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b89a2f] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-gray-50 (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-gray-700 leading-relaxed\n\n## Feature Instruction: Gallery UI\n\nThis feature provides a public-facing gallery page (`GalleryPage.tsx`) to showcase high-quality images of Farmaaish Restaurant's food and ambiance. It leverages a React Query hook (`useGallery.ts`) to fetch gallery data from the backend via `galleryService.ts`. The fetched images are then displayed in a responsive masonry grid component (`ImageGrid.tsx`). The `gallery.ts` file defines the TypeScript types for the gallery images.\n\n### `GalleryPage.tsx`\n\nThis page will render a visually stunning gallery of images, embodying the regality and richness of Mughlai heritage. It will use the `Layout` component from `@/components/Layout` for consistent navigation and footer. The page will consist of a hero section followed by the main image grid. It will fetch gallery images using the `useGallery` hook and pass the data to the `ImageGrid` component.\n\n1.  **Hero Section**: Display a large, high-fidelity hero image relevant to a restaurant (e.g., https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1920&q=80) with a dark overlay (`bg-black bg-opacity-50`). The headline should be \"Our Culinary Journey\" or \"A Glimpse into Farmaaish\" in `text-4xl md:text-6xl font-bold text-white`, and a sub-headline like \"Experience the Richness of Mughlai Cuisine and Ambiance\" in `text-xl md:text-2xl text-white mt-4`.\n2.  **Gallery Section**: Below the hero, render a section with a heading \"Moments from Farmaaish\" in `text-3xl font-bold text-[#36454F] mb-8`. This section will contain the `ImageGrid` component, displaying the images fetched from the `useGallery` hook.\n3.  **Loading and Error States**: While images are loading, display a loading indicator. If an error occurs during fetching, display a user-friendly error message.\n\n### `useGallery.ts`\n\nThis React Query hook will encapsulate the logic for fetching gallery images. It will use `galleryService.ts` to make the actual API call.\n\n1.  **`useGallery()` function**: This function will use `react-query`'s `useQuery` to fetch a list of `GalleryImageDto` objects.\n    *   **Query Key**: `['galleryImages']`\n    *   **Query Function**: `galleryService.getAllGalleryImages`\n    *   **Return Value**: An object containing `data` (list of `GalleryImageDto`), `isLoading`, and `error`.\n\n### `galleryService.ts`\n\nThis service will handle direct API communication with the backend's gallery endpoints. It will use the pre-scaffolded `api/client.ts` for making HTTP requests.\n\n1.  **`getAllGalleryImages()` function**: This asynchronous function will make a GET request to `/api/v1/gallery`.\n    *   **Method**: `GET`\n    *   **Path**: `/api/v1/gallery`\n    *   **Return Type**: `Promise<GalleryImageDto[]>`\n    *   **Error Handling**: Propagate any errors from the API client.\n\n### `gallery.ts`\n\nThis file will define the TypeScript interfaces for the gallery domain, mirroring the `GalleryImageDto` from the backend.\n\n1.  **`GalleryImageDto` interface**: This interface will define the structure of a single gallery image object, including `id` (string), `imageUrl` (string), `caption` (string), and `uploadDate` (string).\n\n### `ImageGrid.tsx`\n\nThis component will be responsible for rendering the gallery images in a responsive masonry-like grid layout. It will receive an array of `GalleryImageDto` as props.\n\n1.  **`ImageGrid` component**: This functional component will accept `images: GalleryImageDto[]` as props.\n2.  **Layout**: Use Tailwind CSS to create a responsive grid that adapts to different screen sizes, resembling a masonry layout. Consider using `grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4` with appropriate gap classes.\n3.  **Image Display**: For each `GalleryImageDto`, display the `imageUrl` within an `<img>` tag. Include the `caption` as an `alt` attribute and potentially as an overlay or caption below the image. Ensure images maintain aspect ratio and are styled with `rounded-lg shadow-md`.\n4.  **Accessibility**: Ensure `alt` attributes are correctly populated for all images.",
+    "depends_on_features" : [ "gallery-management" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
