@@ -3301,14 +3301,29 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Provides authentication state and functions (login, logout, user) to the entire application.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "AuthContextProvider",
+      "parameters" : [ "React.PropsWithChildren<{}> children" ],
+      "return_type" : "JSX.Element",
+      "description" : "Provides the authentication context to its children. Manages user and token state, and handles login/logout logic."
+    }, {
+      "name" : "login",
+      "parameters" : [ "LoginRequest credentials" ],
+      "return_type" : "Promise<AuthResponse>",
+      "description" : "Authenticates the user, stores the JWT, and updates the user state."
+    }, {
+      "name" : "logout",
+      "parameters" : [ ],
+      "return_type" : "void",
+      "description" : "Clears authentication state and removes the JWT from local storage."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "auth-ui",
-    "file_role" : null,
+    "file_role" : "React Context provider for managing global authentication state. It exposes `user`, `token`, `login(LoginRequest): Promise<AuthResponse>`, and `logout(): void`.",
     "change_required" : null
   }, {
     "file_name" : "useAuth.ts",
@@ -3319,14 +3334,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Custom hook for easy consumption of the AuthContext.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "useAuth",
+      "parameters" : [ ],
+      "return_type" : "{ user: User | null; token: string | null; login: (credentials: LoginRequest) => Promise<AuthResponse>; logout: () => void; }",
+      "description" : "Provides access to the authentication context values and functions."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/context/AuthContext.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "auth-ui",
-    "file_role" : null,
+    "file_role" : "Custom React hook for easily consuming the `AuthContext`. It exposes `user: User | null`, `token: string | null`, `login(LoginRequest): Promise<AuthResponse>`, and `logout(): void`.",
     "change_required" : null
   }, {
     "file_name" : "authService.ts",
@@ -3337,14 +3357,38 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Service for making API calls to authentication endpoints (login, register).",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "login",
+      "parameters" : [ "LoginRequest credentials" ],
+      "return_type" : "Promise<AuthResponse>",
+      "description" : "Sends a login request to the backend and returns the authentication response."
+    }, {
+      "name" : "register",
+      "parameters" : [ "RegisterRequest userData" ],
+      "return_type" : "Promise<AuthResponse>",
+      "description" : "Sends a registration request to the backend and returns the authentication response."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/auth/login",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Authenticates a user with email and password.",
+      "access" : null
+    }, {
+      "method" : "POST",
+      "path" : "/api/v1/auth/register",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Registers a new user with name, email, and password.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/api/client.ts", "frontend/src/types/auth.ts" ],
     "depends_on" : [ ],
     "feature_name" : "auth-ui",
-    "file_role" : null,
+    "file_role" : "Service layer for making API calls to authentication endpoints. It exposes `login(LoginRequest): Promise<AuthResponse>` and `register(RegisterRequest): Promise<AuthResponse>`.",
     "change_required" : null
   }, {
     "file_name" : "auth.ts",
@@ -3356,13 +3400,29 @@
     "status" : "PLANNED",
     "description" : "TypeScript types and interfaces for authentication (User, AuthResponse).",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "User",
+      "type" : "{ id: number; email: string; name: string; roles: string[]; }",
+      "description" : "Represents an authenticated user."
+    }, {
+      "name" : "LoginRequest",
+      "type" : "{ email: string; password: string; }",
+      "description" : "Request body for user login."
+    }, {
+      "name" : "RegisterRequest",
+      "type" : "{ name: string; email: string; password: string; }",
+      "description" : "Request body for user registration."
+    }, {
+      "name" : "AuthResponse",
+      "type" : "{ token: string; user: User; }",
+      "description" : "Response body after successful authentication."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "auth-ui",
-    "file_role" : null,
+    "file_role" : "TypeScript types and interfaces for authentication-related data.",
     "change_required" : null
   }, {
     "file_name" : "LoginPage.tsx",
@@ -3373,14 +3433,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A simple page with a form for users to log in to their accounts.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "LoginPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the login form and handles user authentication."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useAuth.ts" ],
     "depends_on" : [ ],
     "feature_name" : "auth-ui",
-    "file_role" : null,
+    "file_role" : "Page component for user login. It consumes `useAuth` for login functionality and redirects on success.",
     "change_required" : null
   }, {
     "file_name" : "ProfilePage.tsx",
@@ -3391,14 +3456,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Allows logged-in users to view their profile details and past order history.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "ProfilePage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Displays the user's profile information and a list of their past orders."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/profile/ProfileDetails.tsx", "frontend/src/components/profile/OrderHistory.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "auth-ui",
-    "file_role" : null,
+    "file_role" : "Page component for displaying the logged-in user's profile details and order history. It consumes `useAuth` to get user data and renders `ProfileDetails` and `OrderHistory`.",
     "change_required" : null
   }, {
     "file_name" : "ProfileDetails.tsx",
@@ -3409,14 +3479,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Component to display and potentially edit user profile information.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "ProfileDetails",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the current user's name and email."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useAuth.ts" ],
     "depends_on" : [ ],
     "feature_name" : "auth-ui",
-    "file_role" : null,
+    "file_role" : "Component for displaying the authenticated user's profile information. It consumes `useAuth` to retrieve user data.",
     "change_required" : null
   }, {
     "file_name" : "OrderHistory.tsx",
@@ -3427,14 +3502,26 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Component to display a list of the user's past orders.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "OrderHistory",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Fetches and displays a list of the logged-in user's past orders, showing order ID, total amount, status, and creation date."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/orders/user/{userId}",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Fetches a list of orders for a specific user ID.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/hooks/useOrders.ts" ],
     "depends_on" : [ ],
     "feature_name" : "auth-ui",
-    "file_role" : null,
+    "file_role" : "Component for displaying a list of the authenticated user's past orders. It consumes `useOrders` from the `order-flow` feature.",
     "change_required" : null
   }, {
     "file_name" : "ProtectedRoute.tsx",
@@ -3445,14 +3532,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A wrapper component that restricts access to certain routes based on user authentication and roles.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "ProtectedRoute",
+      "parameters" : [ "React.PropsWithChildren<{ roles?: string[] }> children" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders children only if the user is authenticated, otherwise redirects to the login page."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useAuth.ts" ],
     "depends_on" : [ ],
     "feature_name" : "auth-ui",
-    "file_role" : null,
+    "file_role" : "Wrapper component that restricts access to routes based on user authentication status. It consumes `useAuth` to check authentication.",
     "change_required" : null
   }, {
     "file_name" : "MenuPage.tsx",
@@ -4648,8 +4740,8 @@
     "feature_display_name" : "Authentication UI",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/context/AuthContext.tsx", "frontend/src/hooks/useAuth.ts", "frontend/src/services/authService.ts", "frontend/src/types/auth.ts", "frontend/src/pages/LoginPage.tsx", "frontend/src/pages/ProfilePage.tsx", "frontend/src/components/profile/ProfileDetails.tsx", "frontend/src/components/profile/OrderHistory.tsx", "frontend/src/components/ProtectedRoute.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#800020] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b89a30] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-gray-50 (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-gray-700 leading-relaxed\n\nThis feature provides the core authentication functionality and user profile management for Farmaaish Restaurant. It includes a React Context (`AuthContext.tsx`) to manage global authentication state, a custom hook (`useAuth.ts`) for easy consumption of this context, and a service (`authService.ts`) to interact with the backend authentication API. It defines TypeScript types for authentication-related data (`auth.ts`).\n\nThe user interface consists of a `LoginPage.tsx` for user login, a `ProfilePage.tsx` to display user details and order history, and `ProfileDetails.tsx` and `OrderHistory.tsx` components for the profile page. A `ProtectedRoute.tsx` component is provided to guard routes that require authentication.\n\n### AuthContext.tsx\nThis file defines the `AuthContext` using React's `createContext` and `AuthContextProvider` component. The context manages the `user` state (of type `User | null`) and `token` state (string or null). It provides `login` and `logout` functions. The `login` function takes `LoginRequest` (email, password), calls `authService.login`, stores the received JWT in `localStorage` under the key 'token', sets the `user` state, and returns the `AuthResponse`. The `logout` function clears the `user` and `token` states and removes the 'token' from `localStorage`. On initialization, `AuthContextProvider` attempts to read the 'token' from `localStorage` and, if present, fetches user details (not implemented in this feature, assumed to be part of a future user-management feature) to populate the `user` state. For now, it will simply set a placeholder user if a token exists.\n\n### useAuth.ts\nThis hook simplifies access to the `AuthContext`. It exports a `useAuth` function that returns the `AuthContext` value, allowing components to easily access `user`, `token`, `login`, and `logout`.\n\n### authService.ts\nThis service handles API calls to the backend authentication endpoints. It exports `login` and `register` functions. The `login` function takes `LoginRequest` and makes a POST request to `/api/v1/auth/login`, returning `AuthResponse`. The `register` function takes `RegisterRequest` and makes a POST request to `/api/v1/auth/register`, returning `AuthResponse`. Both functions use the `apiClient` from `frontend/src/api/client.ts`.\n\n### auth.ts\nThis file defines the TypeScript interfaces for `User`, `LoginRequest`, `RegisterRequest`, and `AuthResponse`.\n- `User` interface: `id: number`, `email: string`, `name: string`, `roles: string[]`.\n- `LoginRequest` interface: `email: string`, `password: string`.\n- `RegisterRequest` interface: `name: string`, `email: string`, `password: string`.\n- `AuthResponse` interface: `token: string`, `user: User`.\n\n### LoginPage.tsx\nThis page provides a login form. It uses the `useAuth` hook to access the `login` function. The form will have fields for `email` and `password`. On successful login, the user should be redirected to the home page or a previously intended private route. The page should include a link to a registration page (if one exists in the future). The layout should be centered, visually appealing, and consistent with the design tokens. The heading should be \"Welcome Back to Farmaaish\".\n\n### ProfilePage.tsx\nThis page displays the logged-in user's profile details and their past order history. It uses `useAuth` to get the current user. It renders the `ProfileDetails` component and the `OrderHistory` component. The page should be accessible only to authenticated users via `ProtectedRoute`. The heading should be \"Your Farmaaish Profile\".\n\n### ProfileDetails.tsx\nThis component displays the user's name and email, retrieved from the `useAuth` hook. It should present this information clearly and elegantly, consistent with the overall design. The component should display the user's name and email.\n\n### OrderHistory.tsx\nThis component fetches and displays a list of the user's past orders. It will use the `useOrders` hook (from the `order-flow` feature) to fetch orders for the currently logged-in user. Each order should display its `id`, `totalAmount` (formatted in INR), `status`, and `createdAt` date. The component should display a message if no orders are found. Monetary values must be formatted using `toLocaleString('en-IN', { style: 'currency', currency: 'INR' })`.\n\n### ProtectedRoute.tsx\nThis component acts as a wrapper for routes that require authentication. It uses the `useAuth` hook to check if a user is logged in. If not, it redirects the user to the `LoginPage`. If the user is logged in, it renders the children components. It can optionally take a `roles` prop (e.g., `['admin']`) to restrict access based on user roles, redirecting to a 403 page if the user doesn't have the required role. For now, only checks for general authentication.\n",
+    "depends_on_features" : [ "order-management" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
