@@ -2745,14 +2745,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "The root component of the React application that sets up the main router.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "App",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the main application structure and routes."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "The root component of the React application that sets up the main router, defining all public and authenticated routes.",
     "change_required" : null
   }, {
     "file_name" : "siteConfig.ts",
@@ -2764,13 +2769,57 @@
     "status" : "PLANNED",
     "description" : "Central configuration for site-wide content like brand name, navigation links, and footer details.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "businessName",
+      "type" : "string",
+      "description" : "The name of the restaurant: 'Farmaaish Restaurant'."
+    }, {
+      "name" : "tagline",
+      "type" : "string",
+      "description" : "The restaurant's tagline: 'Experience the Royal Flavors of Mughlai Cuisine'."
+    }, {
+      "name" : "description",
+      "type" : "string",
+      "description" : "A brief description of the restaurant."
+    }, {
+      "name" : "phone",
+      "type" : "string",
+      "description" : "The restaurant's phone number: '020 2729 1111'."
+    }, {
+      "name" : "email",
+      "type" : "string",
+      "description" : "The restaurant's email address: 'info@farmaaish.com'."
+    }, {
+      "name" : "address",
+      "type" : "string",
+      "description" : "The restaurant's physical address: 'Kundan Garden, Baner Rd, Near Veritas Software, Baner, Pune, Maharashtra 411069'."
+    }, {
+      "name" : "googleMapsEmbedUrl",
+      "type" : "string",
+      "description" : "URL for embedding Google Maps, using coordinates 18.55557, 73.77488."
+    }, {
+      "name" : "whatsappNumber",
+      "type" : "string",
+      "description" : "WhatsApp number for quick inquiries: '919876543210'."
+    }, {
+      "name" : "socialLinks",
+      "type" : "Array<{ name: string; href: string; icon: JSX.Element }>",
+      "description" : "Links to social media profiles."
+    }, {
+      "name" : "mainNav",
+      "type" : "Array<{ href: string; label: string }>",
+      "description" : "Main navigation links for the site."
+    }, {
+      "name" : "footerLinks",
+      "type" : "Array<{ title: string; links: Array<{ href: string; label: string }> }>",
+      "description" : "Links displayed in the footer, categorized."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Central configuration for site-wide content, exporting constants for business details, navigation, and social links.",
     "change_required" : null
   }, {
     "file_name" : "client.ts",
@@ -2782,13 +2831,17 @@
     "status" : "PLANNED",
     "description" : "Configures and exports the application-wide Axios instance for API communication.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "apiClient",
+      "type" : "AxiosInstance",
+      "description" : "The pre-configured Axios instance for making API requests. Includes an interceptor to add JWT token from localStorage ('token') to Authorization header."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Configures and exports the application-wide Axios instance for API communication, including a JWT interceptor.",
     "change_required" : null
   }, {
     "file_name" : "HomePage.tsx",
@@ -2799,14 +2852,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "The main landing page, featuring a rich hero section, featured dishes, testimonials, and a call to action for reservations.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "HomePage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the homepage with various content sections."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/home/HeroSection.tsx", "frontend/src/components/home/FeaturedMenuItems.tsx", "frontend/src/components/home/TestimonialsSection.tsx", "frontend/src/components/home/AboutSnippet.tsx", "frontend/src/components/home/CtaSection.tsx", "frontend/src/components/home/SpecialOffersSection.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "The main landing page, composed of several sections including a hero, featured menu items, testimonials, and calls to action.",
     "change_required" : null
   }, {
     "file_name" : "HeroSection.tsx",
@@ -2817,14 +2875,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A full-bleed, visually rich hero component for the homepage with brand messaging and primary CTAs.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "HeroSection",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the hero section with background image, headline, sub-headline, and CTAs."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "A full-bleed, visually rich hero component for the homepage with brand messaging and primary CTAs.",
     "change_required" : null
   }, {
     "file_name" : "FeaturedMenuItems.tsx",
@@ -2835,14 +2898,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Displays a curated grid of signature dishes on the homepage to entice visitors.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "FeaturedMenuItems",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a grid of featured menu items with their details and an add-to-cart button."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useMenu.ts" ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Displays a curated grid of signature dishes on the homepage, fetching data using `useMenu` and allowing items to be added to the cart.",
     "change_required" : null
   }, {
     "file_name" : "TestimonialsSection.tsx",
@@ -2853,14 +2921,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A section showcasing glowing customer reviews in an elegant carousel or grid format.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "TestimonialsSection",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a section displaying customer testimonials."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useReviews.ts" ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "A section showcasing glowing customer reviews, fetching data using `useReviews`.",
     "change_required" : null
   }, {
     "file_name" : "AboutSnippet.tsx",
@@ -2871,14 +2944,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A brief section on the homepage introducing the restaurant's heritage and culinary philosophy.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AboutSnippet",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a concise introduction to the restaurant."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "A brief section on the homepage introducing the restaurant's heritage and culinary philosophy.",
     "change_required" : null
   }, {
     "file_name" : "CtaSection.tsx",
@@ -2889,14 +2967,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A prominent call-to-action section, encouraging users to book a table or order online.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "CtaSection",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a call-to-action section with buttons for reservations and online ordering."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "A prominent call-to-action section, encouraging users to book a table or order online.",
     "change_required" : null
   }, {
     "file_name" : "SpecialOffersSection.tsx",
@@ -2907,14 +2990,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Displays current special offers and promotions in an engaging card-based layout.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "SpecialOffersSection",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a section displaying current special offers."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useOffers.ts" ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Displays current special offers and promotions in an engaging card-based layout, fetching data using `useOffers`.",
     "change_required" : null
   }, {
     "file_name" : "AboutPage.tsx",
@@ -2925,14 +3013,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A content page detailing the restaurant's story, culinary philosophy, and the heritage of Mughlai cuisine.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AboutPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the About Us page with detailed information about the restaurant."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "A content page detailing the restaurant's story, culinary philosophy, and the heritage of Mughlai cuisine.",
     "change_required" : null
   }, {
     "file_name" : "ContactPage.tsx",
@@ -2943,14 +3036,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Provides contact information, business hours, an interactive map, and a contact form.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ContactPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the Contact Us page with contact details and a map."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/contact/ContactDetails.tsx", "frontend/src/components/contact/LocationMap.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Provides contact information, business hours, and an interactive map, using `ContactDetails` and `LocationMap` components.",
     "change_required" : null
   }, {
     "file_name" : "ContactDetails.tsx",
@@ -2961,14 +3059,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Displays address, phone number (with click-to-call), email, and opening hours.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ContactDetails",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the restaurant's contact information."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Displays address, phone number (with click-to-call), email, and opening hours, sourced from `siteConfig.ts`.",
     "change_required" : null
   }, {
     "file_name" : "LocationMap.tsx",
@@ -2979,14 +3082,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Embeds an interactive Google Map showing the restaurant's location.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "LocationMap",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders an embedded Google Map of the restaurant's location."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Embeds an interactive Google Map showing the restaurant's location, using `siteConfig.ts` for the embed URL.",
     "change_required" : null
   }, {
     "file_name" : "NotFoundPage.tsx",
@@ -2997,14 +3105,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A user-friendly 404 page that helps users navigate back to main sections of the site.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "NotFoundPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the 404 Not Found page."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "A user-friendly 404 page that helps users navigate back to main sections of the site.",
     "change_required" : null
   }, {
     "file_name" : "WhatsAppButton.tsx",
@@ -3015,14 +3128,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "A floating action button that opens a WhatsApp chat for quick inquiries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "WhatsAppButton",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a floating WhatsApp chat button."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "A floating action button that opens a WhatsApp chat for quick inquiries, using `siteConfig.ts` for the WhatsApp number.",
     "change_required" : null
   }, {
     "file_name" : "useOffers.ts",
@@ -3033,14 +3151,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "React Query hook for fetching and managing special offer data.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "useOffers",
+      "parameters" : [ ],
+      "return_type" : "{ data: SpecialOfferDto[] | undefined; isLoading: boolean; error: Error | null }",
+      "description" : "Provides access to special offer data, loading state, and error state."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/services/offerService.ts", "frontend/src/types/offer.ts" ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "React Query hook for fetching and managing special offer data, calling `offerService.getAllActiveOffers()`.",
     "change_required" : null
   }, {
     "file_name" : "offerService.ts",
@@ -3051,14 +3174,26 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Service for making API calls to the special offer-related endpoints.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getAllActiveOffers",
+      "parameters" : [ ],
+      "return_type" : "Promise<SpecialOfferDto[]>",
+      "description" : "Fetches all active special offers from the backend."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/offers",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Fetches a list of all active special offers.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/api/client.ts", "frontend/src/types/offer.ts" ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Service for making API calls to the special offer-related endpoints, specifically `GET /api/v1/offers`.",
     "change_required" : null
   }, {
     "file_name" : "offer.ts",
@@ -3070,13 +3205,17 @@
     "status" : "PLANNED",
     "description" : "TypeScript types and interfaces for the SpecialOffer domain.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "SpecialOfferDto",
+      "type" : "{ id: string; title: string; description: string; discountPercentage: number; startDate: string; endDate: string; imageUrl: string; isActive: boolean; }",
+      "description" : "DTO for special offer data."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Generated from the backend API contract — TypeScript types and interfaces for the SpecialOffer domain.",
     "change_required" : null
   }, {
     "file_name" : "useReviews.ts",
@@ -3087,14 +3226,19 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "React Query hook for fetching and managing customer review data.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "useReviews",
+      "parameters" : [ ],
+      "return_type" : "{ data: ReviewDto[] | undefined; isLoading: boolean; error: Error | null }",
+      "description" : "Provides access to featured customer review data, loading state, and error state."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/services/reviewService.ts", "frontend/src/types/review.ts" ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "React Query hook for fetching and managing customer review data, calling `reviewService.getFeaturedReviews()`.",
     "change_required" : null
   }, {
     "file_name" : "reviewService.ts",
@@ -3105,14 +3249,26 @@
     "updated_date" : "2024-07-31",
     "status" : "PLANNED",
     "description" : "Service for making API calls to the review-related endpoints.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getFeaturedReviews",
+      "parameters" : [ ],
+      "return_type" : "Promise<ReviewDto[]>",
+      "description" : "Fetches featured customer reviews from the backend."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/reviews/featured",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Fetches a list of featured customer reviews.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/api/client.ts", "frontend/src/types/review.ts" ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Service for making API calls to the review-related endpoints, specifically `GET /api/v1/reviews/featured`.",
     "change_required" : null
   }, {
     "file_name" : "review.ts",
@@ -3124,13 +3280,17 @@
     "status" : "PLANNED",
     "description" : "TypeScript types and interfaces for the Review domain.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "ReviewDto",
+      "type" : "{ id: string; authorName: string; rating: number; comment: string; source: string; reviewDate: string; isFeatured: boolean; }",
+      "description" : "DTO for customer review data."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Generated from the backend API contract — TypeScript types and interfaces for the Review domain.",
     "change_required" : null
   }, {
     "file_name" : "AuthContext.tsx",
@@ -4479,8 +4639,8 @@
     "feature_display_name" : "Core UI & Pages",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/App.tsx", "frontend/src/config/siteConfig.ts", "frontend/src/api/client.ts", "frontend/src/pages/HomePage.tsx", "frontend/src/components/home/HeroSection.tsx", "frontend/src/components/home/FeaturedMenuItems.tsx", "frontend/src/components/home/TestimonialsSection.tsx", "frontend/src/components/home/AboutSnippet.tsx", "frontend/src/components/home/CtaSection.tsx", "frontend/src/components/home/SpecialOffersSection.tsx", "frontend/src/pages/AboutPage.tsx", "frontend/src/pages/ContactPage.tsx", "frontend/src/components/contact/ContactDetails.tsx", "frontend/src/components/contact/LocationMap.tsx", "frontend/src/pages/NotFoundPage.tsx", "frontend/src/components/common/WhatsAppButton.tsx", "frontend/src/hooks/useOffers.ts", "frontend/src/services/offerService.ts", "frontend/src/types/offer.ts", "frontend/src/hooks/useReviews.ts", "frontend/src/services/reviewService.ts", "frontend/src/types/review.ts" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#800020] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b8952c] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Secondary CTA: border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-[#F5F5DC] (odd sections) / bg-white (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\"> \n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-[#36454F] leading-relaxed\n\n## Core UI & Pages Feature Instruction\n\nThis feature provides the foundational UI structure and core public-facing pages for the Farmaaish Restaurant website. It includes the main application router, global site configuration, an Axios instance for API communication, and key pages like the Home, About, Contact, and 404 pages. It also includes shared components like a WhatsApp button and specific sections for the homepage.\n\n### `App.tsx`\nThis file sets up the main React Router, defining the routes for the entire application. It will include routes for the `HomePage`, `AboutPage`, `ContactPage`, `MenuPage` (from `menu-display`), `BookingPage` (from `reservation-flow`), `OrderPage` (from `order-flow`), `CheckoutPage` (from `order-flow`), `CateringPage` (from `inquiry-ui`), `BlogPage` (from `blog-ui`), `BlogDetailPage` (from `blog-ui`), `GalleryPage` (from `gallery-ui`), `LoginPage` (from `auth-ui`), `ProfilePage` (from `auth-ui`), and `NotFoundPage`. All public-facing routes will be wrapped by the `Layout` component from `@/components/Layout` (from `shared-ui`), and authenticated routes like `/profile` will use `ProtectedRoute` (from `auth-ui`).\n\n### `siteConfig.ts`\nThis file centralizes configuration for site-wide content. It exports constants for the `businessName` ('Farmaaish Restaurant'), `tagline` ('Experience the Royal Flavors of Mughlai Cuisine'), `description`, `phone` ('020 2729 1111'), `email` ('info@farmaaish.com'), `address` ('Kundan Garden, Baner Rd, Near Veritas Software, Baner, Pune, Maharashtra 411069'), `googleMapsEmbedUrl` (using coordinates 18.55557, 73.77488), `whatsappNumber` ('919876543210'), and `socialLinks` (e.g., Facebook, Instagram). It also defines the main navigation links, including `href` and `label` for Home, Menu, Reservations, Order Online, Catering, Blog, Gallery, About, and Contact. The `footerLinks` will include sections like 'Quick Links', 'Our Services', and 'Contact Us', each with relevant links.\n\n### `client.ts`\nThis file configures and exports a pre-configured Axios instance for all API calls. It sets the `baseURL` to `/api/v1` and includes an interceptor to attach the JWT token from `localStorage` (key: 'token') to the `Authorization` header for authenticated requests. It also handles basic error logging.\n\n### `HomePage.tsx`\nThis page serves as the main landing page. It will use the `Layout` component and comprise several sections:\n1.  **HeroSection**: A full-width hero with a background image, a prominent headline \"Farmaaish Restaurant: Experience the Royal Flavors of Mughlai Cuisine\", a sub-headline \"Where every dish tells a story of tradition and taste.\", and two CTAs: \"View Our Menu\" (linking to `/menu`) and \"Book a Table\" (linking to `/reservations`).\n2.  **AboutSnippet**: A brief introduction to Farmaaish Restaurant's heritage and culinary philosophy.\n3.  **FeaturedMenuItems**: Displays a curated selection of signature dishes, fetched using `useMenu().getFeaturedMenuItems()`. Each item will show `name`, `description`, `price` (formatted in INR), and `imageUrl`.\n4.  **SpecialOffersSection**: Showcases active promotions, fetched using `useOffers().getAllActiveSpecialOffers()`. Each offer will display `title`, `description`, `discountPercentage`, and `imageUrl`.\n5.  **TestimonialsSection**: Features customer reviews, fetched using `useReviews().getFeaturedReviews()`. Each testimonial will display `authorName`, `rating`, and `comment`.\n6.  **CtaSection**: A final call-to-action encouraging reservations or online orders.\n\n### `HeroSection.tsx`\nThis component renders the hero section for the `HomePage`. It will feature a large background image (e.g., `https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1920&q=80`) with a dark overlay (`bg-black bg-opacity-50`), the business name and tagline as a prominent `h1` and `p` element, and two call-to-action buttons styled with the primary and secondary CTA design tokens. The buttons will link to `/menu` and `/reservations` respectively.\n\n### `FeaturedMenuItems.tsx`\nThis component displays a grid of featured menu items. It will use the `useMenu` hook (from `menu-display` feature) to fetch `MenuItemDto` objects. Each menu item card will display the `name`, `description`, `price` (formatted in INR), and `imageUrl`. A button to add the item to the cart will be present on each card, calling `useCart().addItem()` (from `cart` feature).\n\n### `TestimonialsSection.tsx`\nThis component displays customer testimonials. It will use the `useReviews` hook to fetch `ReviewDto` objects. Each testimonial will be presented in a card-like format, showing the `authorName`, `rating` (as stars), and `comment`. It should be designed to be visually appealing, possibly as a carousel or a grid.\n\n### `AboutSnippet.tsx`\nThis component provides a concise introduction to Farmaaish Restaurant, highlighting its heritage and culinary philosophy. It will include placeholder text that aligns with the warm, sophisticated, and inviting tone, emphasizing authenticity and a passion for Mughlai cuisine.\n\n### `CtaSection.tsx`\nThis component renders a prominent call-to-action section. It will include a headline like \"Ready for a Royal Feast?\" and two buttons: \"Book Your Table\" (linking to `/reservations`) and \"Order Online Now\" (linking to `/order`). Both buttons will use the primary CTA design token.\n\n### `SpecialOffersSection.tsx`\nThis component displays current special offers. It will use the `useOffers` hook to fetch `SpecialOfferDto` objects. Each offer will be presented in a card-based layout, showing the `title`, `description`, `discountPercentage`, and `imageUrl`. Prices will be formatted in INR.\n\n### `AboutPage.tsx`\nThis page provides detailed information about Farmaaish Restaurant. It will use the `Layout` component and include sections on the restaurant's history, culinary philosophy, the authenticity of Mughlai cuisine, and perhaps a gallery snippet (linking to `/gallery`). The content will be rich with descriptive text, maintaining the warm and sophisticated tone.\n\n### `ContactPage.tsx`\nThis page provides all contact information. It will use the `Layout` component and include the `ContactDetails` component, the `LocationMap` component, and potentially a contact form (from `inquiry-ui` if a general contact form is implemented there, otherwise a simple email link). The business address, phone, and opening hours from `siteConfig.ts` will be displayed.\n\n### `ContactDetails.tsx`\nThis component displays the restaurant's contact information, including address, phone number (with a `tel:` link), email, and opening hours, all sourced from `siteConfig.ts`. The phone number will be formatted for Indian locale.\n\n### `LocationMap.tsx`\nThis component embeds an interactive Google Map showing the restaurant's location. It will use the `googleMapsEmbedUrl` from `siteConfig.ts` to render an `<iframe>` with the map.\n\n### `NotFoundPage.tsx`\nThis page is displayed for invalid URLs. It will use the `Layout` component and provide a user-friendly message like \"Oops! The page you're looking for doesn't exist.\" and a button to navigate back to the homepage, styled with the primary CTA design token.\n\n### `WhatsAppButton.tsx`\nThis is a floating action button that allows users to quickly initiate a WhatsApp chat. It will use the `whatsappNumber` from `siteConfig.ts` to construct the WhatsApp chat link.\n\n### `useOffers.ts`\nThis React Query hook provides functions to fetch special offer data. It will use `offerService.getAllActiveOffers()` to retrieve a list of `SpecialOfferDto` objects.\n\n### `offerService.ts`\nThis service handles API calls related to special offers. It uses the `apiClient` to make GET requests to `/api/v1/offers` to fetch all active special offers.\n\n### `offer.ts`\nThis file defines the TypeScript interfaces for `SpecialOfferDto` as derived from the backend `offer-management` feature's `SpecialOfferDto` data shape.\n\n### `useReviews.ts`\nThis React Query hook provides functions to fetch customer review data. It will use `reviewService.getFeaturedReviews()` to retrieve a list of `ReviewDto` objects.\n\n### `reviewService.ts`\nThis service handles API calls related to reviews. It uses the `apiClient` to make GET requests to `/api/v1/reviews/featured` to fetch featured reviews.\n\n### `review.ts`\nThis file defines the TypeScript interfaces for `ReviewDto` as derived from the backend `review-management` feature's `ReviewDto` data shape.\n\n### Inter-file Wiring\n- `App.tsx` imports and uses `HomePage`, `AboutPage`, `ContactPage`, `NotFoundPage`, and components/pages from other features like `menu-display`, `reservation-flow`, `order-flow`, `inquiry-ui`, `blog-ui`, `gallery-ui`, and `auth-ui` to define the application routes.\n- `HomePage` imports and renders `HeroSection`, `FeaturedMenuItems`, `TestimonialsSection`, `AboutSnippet`, `CtaSection`, and `SpecialOffersSection`.\n- `ContactPage` imports and renders `ContactDetails` and `LocationMap`.\n- `FeaturedMenuItems` uses the `useMenu` hook from `menu-display`.\n- `TestimonialsSection` uses the `useReviews` hook.\n- `SpecialOffersSection` uses the `useOffers` hook.\n- `useOffers` calls `offerService.getAllActiveOffers()`.\n- `offerService` uses the `apiClient` from `client.ts`.\n- `useReviews` calls `reviewService.getFeaturedReviews()`.\n- `reviewService` uses the `apiClient` from `client.ts`.\n- `ContactDetails`, `LocationMap`, and `WhatsAppButton` all consume configuration from `siteConfig.ts`.\n- `client.ts` reads the 'token' from `localStorage` for authentication, which is set by the `auth-ui` feature.\n\n### Error Handling\nAPI calls made via `client.ts` will handle network errors and propagate them to the respective hooks (e.g., `useOffers`, `useReviews`). These hooks should then manage loading and error states, which the components consuming them (`SpecialOffersSection`, `TestimonialsSection`) will display gracefully to the user.\n",
+    "depends_on_features" : [ "menu-display", "reservation-flow", "order-flow", "inquiry-ui", "blog-ui", "gallery-ui", "auth-ui", "offer-management", "review-management" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
